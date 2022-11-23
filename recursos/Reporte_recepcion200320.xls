@@ -1,0 +1,1089 @@
+
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Sexo</th>
+                <th>Edad</th>
+                <th>Embarazo</th>
+                <th>Semanas</th>
+                <th>Motivo consulta</th>
+                <th>Médico</th>
+                <th>Referencia</th>
+                <th>Sala</th>
+                <th>Observaciones</th>
+                <th>Capturo</th>
+                <th>Turno</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                            <td>2020-03-20 00:19:23</td>
+                            <td>FATIMA DANIELA SALINAS MARTINEZ</td>
+                            <td>Femenino</td>
+                            <td>18</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>DOLOR</td>
+                            <td>DR. GAYTAN</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 00:59:08</td>
+                            <td>CRISTINA MONSERRAT HERNANDEZ SILLER </td>
+                            <td>Femenino</td>
+                            <td>21</td>
+                            <td>SI</td>
+                            <td>24</td>
+                            <td>DOLOR</td>
+                            <td>DR. GAYTAN</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 01:06:59</td>
+                            <td>J. LUCIO VAZQUEZ FLORES</td>
+                            <td>Masculino</td>
+                            <td>89</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>PX LESIÓN DE COSTILLA POR CAÍDA</td>
+                            <td>R</td>
+                            <td></td>
+                            <td>TREACH</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 01:44:52</td>
+                            <td>JESUS RICO </td>
+                            <td>Masculino</td>
+                            <td>67</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>DOLOR EN PECHO</td>
+                            <td>R</td>
+                            <td></td>
+                            <td>TREACH</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 01:46:30</td>
+                            <td>GABRIELA ESQUIVEL TELLO </td>
+                            <td>Femenino</td>
+                            <td>18</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>DOLOR </td>
+                            <td>R</td>
+                            <td></td>
+                            <td>TREACH</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 01:56:30</td>
+                            <td>GALINDO AVILENE GUZMAN </td>
+                            <td>Femenino</td>
+                            <td>25</td>
+                            <td>SI</td>
+                            <td>35</td>
+                            <td>DOLOR</td>
+                            <td>DR. GAYTAN</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 02:02:52</td>
+                            <td>ROSSMARY JULIANA BECERRIL RUIZ</td>
+                            <td>Femenino</td>
+                            <td>17</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>DOLOR ABDOMINAL</td>
+                            <td>R</td>
+                            <td></td>
+                            <td>TREACH</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 03:03:46</td>
+                            <td>MARIA DE JESUS CISNEROS PEREZ</td>
+                            <td>Femenino</td>
+                            <td>0</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>DOLOR DE CABEZA Y CUERPO Y TEMPERATURA</td>
+                            <td>R</td>
+                            <td></td>
+                            <td>TREACH</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 07:25:01</td>
+                            <td>JAVIER BANDA CERVANTES</td>
+                            <td>Masculino</td>
+                            <td>45</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>CURACION DE AMPUTACION DE  PIE </td>
+                            <td>TREAGE </td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 07:46:40</td>
+                            <td>LUCIA MARIBEL RAMIREZ JUAREZ</td>
+                            <td>Femenino</td>
+                            <td>45</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>PIE  DIABETICO </td>
+                            <td>RESIDENTE / CIRUGIA</td>
+                            <td></td>
+                            <td>CLINICA  DE  HERIDAS</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:08:58</td>
+                            <td>ANA MARIA GUTIERREZ TREVIÑO </td>
+                            <td>Femenino</td>
+                            <td>19</td>
+                            <td>SI</td>
+                            <td>39</td>
+                            <td>DOLORES </td>
+                            <td>DR </td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:23:43</td>
+                            <td>JOSE LUIS ESCALANTE MARTINEZ</td>
+                            <td>Masculino</td>
+                            <td>73</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>ULCERA  EN  COXIS</td>
+                            <td>RESIDENTE  DE  CX</td>
+                            <td></td>
+                            <td>CLINICA  DE  HERIDAS</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:25:25</td>
+                            <td>MARIA DEL CARMEN RAMOS HERRERA </td>
+                            <td>Femenino</td>
+                            <td>60</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>VALORACION </td>
+                            <td>DR</td>
+                            <td></td>
+                            <td>TREAGE </td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:26:47</td>
+                            <td>RAFAEL OJEDA CADENA </td>
+                            <td>Masculino</td>
+                            <td>78</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>VALORACION </td>
+                            <td>TREAGE </td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:33:30</td>
+                            <td>JENNIFER MONSERRAT MARTINEZ SUAREZ</td>
+                            <td>Femenino</td>
+                            <td>21</td>
+                            <td>SI</td>
+                            <td>26</td>
+                            <td>DOLORES </td>
+                            <td>DR </td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:38:21</td>
+                            <td>GABRIELA LISBETH TORRES MARIN</td>
+                            <td>Femenino</td>
+                            <td>20</td>
+                            <td>SI</td>
+                            <td>41</td>
+                            <td>DOLORES </td>
+                            <td>DR </td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:40:10</td>
+                            <td>JESUS RICO </td>
+                            <td>Masculino</td>
+                            <td>67</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>DOLOR  EN PECHO</td>
+                            <td>ITZEL  RAMIREZ </td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:43:35</td>
+                            <td>MARIA ELDA ALVARADO BALDERAS </td>
+                            <td>Femenino</td>
+                            <td>65</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>ULCERAS  EN ESTOMAGO Y  DOLOR </td>
+                            <td>ITZEL RAMIREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 08:50:43</td>
+                            <td>ELISA MONSERRAT GARCIA GARCIA </td>
+                            <td>Femenino</td>
+                            <td>16</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>REVENTO  FUENTE </td>
+                            <td>DR </td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 09:03:28</td>
+                            <td>LILIANA SALAZAR HERNANDEZ </td>
+                            <td>Femenino</td>
+                            <td>26</td>
+                            <td>SI</td>
+                            <td>41</td>
+                            <td>DOLORES</td>
+                            <td>DR</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 09:08:03</td>
+                            <td>ROCIO DEYANIRA URREA CALDERON</td>
+                            <td>Femenino</td>
+                            <td>18</td>
+                            <td>SI</td>
+                            <td>41</td>
+                            <td>PROGRAMADA PARA  CESAREA </td>
+                            <td>DR </td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 09:21:40</td>
+                            <td>JUANA MARIA ELIZABETH GUERRERO PEREZ </td>
+                            <td>Femenino</td>
+                            <td>29</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>CEFALEA </td>
+                            <td>TREAGE </td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 09:24:16</td>
+                            <td>|LAHISA GUADALUPE ROJAS REYES </td>
+                            <td>Femenino</td>
+                            <td>18</td>
+                            <td>SI</td>
+                            <td>32</td>
+                            <td>DOLORES </td>
+                            <td>DR </td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 09:34:58</td>
+                            <td>ENRIQUE REYNA RAMIREZ </td>
+                            <td>Masculino</td>
+                            <td>57</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>DOLOR  DE  CABEZA Y  DOLOR  DE  BRAZO IZQUIERDO </td>
+                            <td>TREAGE </td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 09:37:41</td>
+                            <td>JUANA MARIA ALVAREZ ALVAREZ</td>
+                            <td>Femenino</td>
+                            <td>23</td>
+                            <td>SI</td>
+                            <td>38</td>
+                            <td>CONTRACCIONES </td>
+                            <td>DR </td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 09:52:51</td>
+                            <td>FERNANDA DE LA RIVA CANIZALES </td>
+                            <td>Femenino</td>
+                            <td>17</td>
+                            <td>SI</td>
+                            <td>4</td>
+                            <td>SANGRADO </td>
+                            <td>DR</td>
+                            <td>GIRASOL</td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 11:04:04</td>
+                            <td>JANIE ABIGAIL ALELY CISNEROS RIOS </td>
+                            <td>Femenino</td>
+                            <td>33</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>DOLOR </td>
+                            <td>TREAGE </td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 11:11:35</td>
+                            <td>DIANA DEL ROCIO HERNANDEZ MARQUEZ </td>
+                            <td>Femenino</td>
+                            <td>19</td>
+                            <td>SI</td>
+                            <td>0</td>
+                            <td>REVISION  DE  EMBARAZO </td>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>38</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 11:12:45</td>
+                            <td>GABRTIELA AIDE CABALLERO BAZALDUA </td>
+                            <td>Femenino</td>
+                            <td>33</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>RETIRO  DE PUNTOS  DE  CESAREA </td>
+                            <td>TREAGE </td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 11:46:23</td>
+                            <td>LUCERO ESTRELLA SOTO PINTOR </td>
+                            <td>Femenino</td>
+                            <td>26</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>CONTRACCIONES </td>
+                            <td>DR ZAPIAIN</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 11:48:55</td>
+                            <td>LIZBETH GONZALEZ NAVARRO </td>
+                            <td>Femenino</td>
+                            <td>21</td>
+                            <td>SI</td>
+                            <td>8</td>
+                            <td>DOLORES </td>
+                            <td>DR ZAPIAIN</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 11:51:32</td>
+                            <td>LUCERO ESTRELLA SOTO PINTOR </td>
+                            <td>Femenino</td>
+                            <td>26</td>
+                            <td>SI</td>
+                            <td>38</td>
+                            <td>DOLORES </td>
+                            <td>DR  ZAPIAIN</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 11:57:10</td>
+                            <td>MARTHA ELVA VALDES SANCHEZ </td>
+                            <td>Femenino</td>
+                            <td>64</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>TOS  AGUDA Y  DIFICULTAD  DE AIRE </td>
+                            <td>ITZEL RAMIREZ </td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 12:11:32</td>
+                            <td>GABRIELA ESQUIVEL TELLO </td>
+                            <td>Femenino</td>
+                            <td>18</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>POCO  MOVIMIENTO D E  BEEB</td>
+                            <td>DR  ZAPIAIN</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 12:12:46</td>
+                            <td>FRANCISCO JAVIER FLORES BAZALDUA </td>
+                            <td>Masculino</td>
+                            <td>56</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>FX  DE  CADERA </td>
+                            <td>ITZEL  RAMIREZ </td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 12:15:35</td>
+                            <td>YANETH GUADALUPE RAMIREZ FUENTES</td>
+                            <td>Femenino</td>
+                            <td>17</td>
+                            <td>SI</td>
+                            <td>41</td>
+                            <td>REVISION  DE  TERMINO  DE  EMBARAZO </td>
+                            <td>DR  ZAPAIIN</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 12:39:28</td>
+                            <td>JANIE ABIGAIL ALELY CISNEROS RIOS </td>
+                            <td>Femenino</td>
+                            <td>33</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>DOLOR  EN PIE </td>
+                            <td>ARACELY  SAUCEDO </td>
+                            <td></td>
+                            <td>2 </td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 12:52:21</td>
+                            <td>DULCE YAMILET RIVERA AGUIRRE</td>
+                            <td>Femenino</td>
+                            <td>17</td>
+                            <td>SI</td>
+                            <td>39</td>
+                            <td>DOLOR  Y  SALIDA  DE  LIQUIDO </td>
+                            <td>DR  ZAPIAIN</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 13:11:21</td>
+                            <td>MIGUEL ANGEL GARCIA VAZQUEZ </td>
+                            <td>Masculino</td>
+                            <td>38</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>REVISION  DE  LABORATORIOS Q</td>
+                            <td>ARACELY  SAUCEDO </td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 13:12:10</td>
+                            <td>MARIA GLORIA HERNANDEZ NAJERA </td>
+                            <td>Femenino</td>
+                            <td>69</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>TRANSFUSION  DE  SANGRE </td>
+                            <td>ITZEL  RAMIREZ </td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 13:19:01</td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ </td>
+                            <td>Femenino</td>
+                            <td>36</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>TOS  SECA, DOLOR  DE  CABEZA  Y GARGANTA </td>
+                            <td>DRA  ANA  LOZANO </td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 13:32:57</td>
+                            <td>HILDA REYES CRUZ</td>
+                            <td>Femenino</td>
+                            <td>65</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>TOS   SECA Y  DIFICULTAD PARA  RESPIRAR</td>
+                            <td>TREAGE</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 14:12:34</td>
+                            <td>AIDE DE LOS ANGELES LOPEZ MARTINEZ</td>
+                            <td>Femenino</td>
+                            <td>28</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>DOLOR  ABDOMINAL </td>
+                            <td>TREAGE</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>CLAUDIA GABRIELA JUAREZ GAMEZ</td>
+                            <td>MATUTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 14:48:21</td>
+                            <td>REYNA KARINA ESTRADA MORADO</td>
+                            <td>Femenino</td>
+                            <td>21</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>PICADURA DE INSECTO</td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 15:07:08</td>
+                            <td>NARDA JAZMIN CRUZ HERRERA</td>
+                            <td>Femenino</td>
+                            <td>25</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>CONTRACCIONES </td>
+                            <td>DRA. </td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 15:09:46</td>
+                            <td>EDUARDO CASTILLO RODRIGUEZ</td>
+                            <td>Masculino</td>
+                            <td>63</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>CAIDA </td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 15:24:36</td>
+                            <td>AARON ALEJANDRO BARRAGAN OLVERA</td>
+                            <td>Masculino</td>
+                            <td>31</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>DOLOR DE ESPALDA Y FIEBRE</td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 15:48:46</td>
+                            <td>LILIANA GUADALUPE COVARRUBIAS HERNANDEZ </td>
+                            <td>Femenino</td>
+                            <td>23</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>REVISION</td>
+                            <td>DRA.</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 15:55:18</td>
+                            <td>ZULMA EDIT MALACARA ALVARADO</td>
+                            <td>Femenino</td>
+                            <td>49</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>CAIDA </td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 16:10:52</td>
+                            <td>DORA ELIA SALINAS ESPINOZA</td>
+                            <td>Femenino</td>
+                            <td>51</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>SANGRADO</td>
+                            <td>DRA.</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 16:18:58</td>
+                            <td>JUANA MARIA ELIZABETH GUERRERO PEREZ </td>
+                            <td>Femenino</td>
+                            <td>29</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>REVISION DE ESTUDIOS</td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 16:35:47</td>
+                            <td>MA DE JESUS MENA MERCADO</td>
+                            <td>Femenino</td>
+                            <td>49</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>FIEBRE Y DOLOR </td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 17:47:57</td>
+                            <td>SANDRA MELENDEZ CONTRERAS</td>
+                            <td>Femenino</td>
+                            <td>43</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>DOLOR ABDOMINAL</td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 17:50:41</td>
+                            <td>MARTIN JULIAN AVALOS NIETO</td>
+                            <td>Masculino</td>
+                            <td>31</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>DOLOR TORACICO</td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 17:52:55</td>
+                            <td>ORLANDO HERNANDEZ VALERO</td>
+                            <td>Masculino</td>
+                            <td>19</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>FX DE PIERNA</td>
+                            <td>DR. ALAVAREZ</td>
+                            <td></td>
+                            <td>URG</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 18:21:07</td>
+                            <td>ESTEFANY AZUCENA JARAMILLO VALERIO</td>
+                            <td>Femenino</td>
+                            <td>15</td>
+                            <td>SI</td>
+                            <td>21</td>
+                            <td>REVISION</td>
+                            <td>DR.A</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 18:21:55</td>
+                            <td>GRACIELA GUADALUPE LOPEZ RAMOS</td>
+                            <td>Femenino</td>
+                            <td>16</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>RETIRO DE PUNTOS</td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 18:28:39</td>
+                            <td>ERIKA PAOLA FARIAS ESPINOZA </td>
+                            <td>Femenino</td>
+                            <td>15</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>REVISION</td>
+                            <td>DRA.</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 18:42:29</td>
+                            <td>LILIANA GUADALUPE COVARRUBIAS HERNANDEZ </td>
+                            <td>Femenino</td>
+                            <td>23</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>REVISION</td>
+                            <td>DRA.</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 18:49:28</td>
+                            <td>CLAUDIA YESENIA MAGALLAN DIAZ</td>
+                            <td>Femenino</td>
+                            <td>20</td>
+                            <td>SI</td>
+                            <td>38</td>
+                            <td>REVSION</td>
+                            <td>DRA.</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 19:02:01</td>
+                            <td>APOLONIO RODRIGUEZZ REYES</td>
+                            <td>Masculino</td>
+                            <td>56</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>DIFICULTAD RESPIRATORIA</td>
+                            <td>DR. PEREZ</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 19:19:12</td>
+                            <td>ANNIE VIANEY RODRIGUEZ MACIAS</td>
+                            <td>Femenino</td>
+                            <td>17</td>
+                            <td>SI</td>
+                            <td>2</td>
+                            <td>SNGRADO</td>
+                            <td>DRA.</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 19:38:54</td>
+                            <td>KEYLA SRAY RODRIGUEZ MENDOZA</td>
+                            <td>Femenino</td>
+                            <td>18</td>
+                            <td>SI</td>
+                            <td>35</td>
+                            <td>REVISION</td>
+                            <td>DRA.</td>
+                            <td></td>
+                            <td>3</td>
+                            <td></td>
+                            <td>ARIANNA CECILIA CORONADO ENCISO</td>
+                            <td>VESPERTINO</td>
+                        </tr><tr>
+                            <td>2020-03-20 20:27:56</td>
+                            <td>MANUEL MARTINEZ ARMENDARRIZ </td>
+                            <td>Masculino</td>
+                            <td>35</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>POLICONTUNDIDO SUFRIO CAIDA</td>
+                            <td>R</td>
+                            <td></td>
+                            <td>TREACH</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 20:43:10</td>
+                            <td>ELISA MONSERRAT GARCIA GARCIA </td>
+                            <td>Femenino</td>
+                            <td>16</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>DOLOR</td>
+                            <td>DRA. NAVARRO</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 20:50:55</td>
+                            <td>BEDRISKA DAVILA GARCIA </td>
+                            <td>Femenino</td>
+                            <td>62</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>PX FRACTURA CODO IZQUERDO</td>
+                            <td>R</td>
+                            <td></td>
+                            <td>TREACH</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 21:02:38</td>
+                            <td>TERESITA DE JESUS GLORIA MARTINEZ</td>
+                            <td>Femenino</td>
+                            <td>24</td>
+                            <td>SI</td>
+                            <td>14</td>
+                            <td>SANGRADO</td>
+                            <td>DRA.NAVARRO</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 22:22:38</td>
+                            <td>BERTHA ENCINA LEDEZMA</td>
+                            <td>Femenino</td>
+                            <td>38</td>
+                            <td>SI</td>
+                            <td>9</td>
+                            <td>DOLOR ABDOMINAL</td>
+                            <td>DRA. NAVARRO</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 22:32:58</td>
+                            <td>SUSANA ELIZABETH RAMOS RUIZ</td>
+                            <td>Femenino</td>
+                            <td>19</td>
+                            <td>SI</td>
+                            <td>20</td>
+                            <td>DESECHO Y DOLOR</td>
+                            <td>DRA. LEYVY</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 22:56:15</td>
+                            <td>DULCE YAMILET RIVERA AGUIRRE</td>
+                            <td>Femenino</td>
+                            <td>17</td>
+                            <td>SI</td>
+                            <td>39</td>
+                            <td>DOLOR Y DESECHO</td>
+                            <td>DRA. LEYVY</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 23:15:23</td>
+                            <td>JUSTINO ALEXIS NIÑO SUAREZ</td>
+                            <td>Masculino</td>
+                            <td>25</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>POLIOCNTUNDIDO</td>
+                            <td>DRA. VERASTEGUI</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 23:17:17</td>
+                            <td>CAROLINA QUIROZ ROMO</td>
+                            <td>Femenino</td>
+                            <td>26</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>POLIOCNTUNDIDA</td>
+                            <td>DRA. VERASTEGUI</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 23:19:16</td>
+                            <td>MARTHA EVANGELINA CISNEROS GONZALEZ </td>
+                            <td>Femenino</td>
+                            <td>32</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>DOLOR</td>
+                            <td>DRA. LEYVY</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 23:27:13</td>
+                            <td>AMAIRANY GUADALUPE OLVERA CASTILLO</td>
+                            <td>Femenino</td>
+                            <td>17</td>
+                            <td>SI</td>
+                            <td>40</td>
+                            <td>DOLOR</td>
+                            <td>DRA. LEYVY</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 23:43:13</td>
+                            <td>DULCE VALERIA LEZA CEPEDA</td>
+                            <td>Femenino</td>
+                            <td>24</td>
+                            <td>SI</td>
+                            <td>32</td>
+                            <td>DOLOR Y DESECHO</td>
+                            <td>DRA. LEYVY</td>
+                            <td></td>
+                            <td>2</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr><tr>
+                            <td>2020-03-20 23:51:57</td>
+                            <td>SONIA MICHEL ROSALES BAZALDUA</td>
+                            <td>Femenino</td>
+                            <td>15</td>
+                            <td>NO</td>
+                            <td>0</td>
+                            <td>DOLOR ARTICULACIONES Y DOLOR DE CABEZA DESDE EL DIA 17 MARZO </td>
+                            <td>DRA. VERASTEGUI</td>
+                            <td></td>
+                            <td>1</td>
+                            <td></td>
+                            <td>MARIA INES OSIRIS CERDA ARGUELLES</td>
+                            <td>NOCTURNO B</td>
+                        </tr>
+        </tbody>
+    </table>
+

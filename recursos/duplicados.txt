@@ -1,0 +1,18 @@
+
+==========================================================================
+===== BUSCAR DUPLICADOS EN MYSQL TABLA RECEPCIONES =====
+
+SELECT fechahorarecep, COUNT(*) Total
+FROM recepciones
+GROUP BY fechahorarecep
+HAVING COUNT(*) > 1
+
+==========================================================================
+===== BORRAR DUPLICADOS MYSQL TABLA RECEPCIONES =====
+
+DELETE FROM recepciones
+ WHERE idrecepcion NOT IN (SELECT * 
+                    FROM (SELECT MIN(n.idrecepcion)
+                            FROM recepciones n
+                        GROUP BY n.fechahorarecep) x)
+==========================================================================

@@ -1,0 +1,364 @@
+<?php
+
+ob_start();
+
+include "../extend/header.php";
+
+if (!isset($_SESSION['idusuario'])) {
+    header("Location:../../index.php");
+} else {
+
+    if ($_SESSION['idrol'] != 2) {
+        header("Location:../../index.php");
+    }
+
+    $idc = $_GET['idc'];
+    //$idrecepcion = $_GET['idr'];
+
+    //Agregar encabezado
+    $sql = "SELECT c.idconsulta, r.idrecepcion, r.edad, r.fechahorarecep, r.mtvoconsulta, p.idpaciente, p.expediente, p.nombre AS np, p.curp, p.fechanac, p.entidadnac, p.sexo, p.afiliacion, p.numafiliacion, p.domicilio, p.colonia, p.cp, p.municipio, p.localidad, p.entidaddom, p.telefono, u.nombre AS nu, u.turno, r.embarazo, r.semgesta, r.numgesta, r.medico, r.sala FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN usuarios u ON r.idusuario = u.idusuario INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE c.idconsulta = '$idc'";
+
+    $resultado = $con->query($sql);
+    $fila = $resultado->fetch_assoc();
+
+    //Agregar cuerpo
+    $cuerpo = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, u.nombre AS nm, u.curp, u.cedula, u.turno FROM consultas c INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE c.idconsulta = '$idc'";
+
+    $result = $con->query($cuerpo);
+    $consulta = $result->fetch_assoc();
+
+    //========================================================================================================
+
+    $fnac = date('d/m/Y', strtotime($fila['fechanac']));
+
+?>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <!--<div class="card text-left">-->
+                <!--<div class="card-header">-->
+                <div class="row">
+                    <div class="col-sm-9">
+                        <img src="../../public/img/urgencias.JPG" alt="logo SSC" width="500px">
+                    </div>
+
+                    <div class="col-sm-3">
+                        <span style="font-size: 10px">Recepción: <small><?php echo $fila['nu']; ?></small></span>
+                        <p><span style="font-size: 10px">Turno: <small><?php echo $fila['turno']; ?></small></span></p>
+                    </div>
+
+                    <input type="hidden" name="idpaciente" value="<?php echo $idpaciente; ?>">
+
+                    <div class="table-responsive">
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr class="encabezado">
+                                    <td style="width: 40em;"><strong>Nombre</strong></td>
+                                    <td style="width: 20em;"><strong>CURP</strong></td>
+                                    <td style="width: 10em;"><strong>Fecha Nac.</strong></td>
+                                    <td style="width: 20em;"><strong>Entidad Nacimiento</strong></td>
+                                    <td style="width: 5em;"><strong>Edad</strong></td>
+                                    <td style="width: 5em;"><strong>Sexo</strong></td>
+                                </tr>
+                                <!--DATOS-->
+                                <tr>
+                                    <td><?php echo $fila['np']; ?></td>
+                                    <td><?php echo $fila['curp']; ?></td>
+                                    <td><?php echo $fnac; ?></td>
+                                    <td><?php echo $fila['entidadnac']; ?></td>
+                                    <td><?php echo $fila['edad']; ?></td>
+                                    <td>
+                                        <?php
+                                        //CONDICION PARA IMPRIMIR F o M SEGUN EL GENERO o SEXO
+                                        if ($fila['sexo'] == 'Femenino') {
+                                            echo "F";
+                                        } elseif ($fila['sexo'] == 'Masculino') {
+                                            echo "M";
+                                        }
+                                        ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr class="encabezado">
+                                    <td style="width: 20em;"><strong>Afiliaci&oacute;n</strong></td>
+                                    <td style="width: 10em;"><strong>No. Afil.</strong></td>
+                                    <td style="width: 30em;"><strong>Calle</strong></td>
+                                    <td style="width: 30em;"><strong>Colonia</strong></td>
+                                    <td style="width: 10em;"><strong>C.P.</strong></td>
+                                </tr>
+                                <!--DATOS-->
+                                <tr>
+                                    <td><?php echo $fila['afiliacion']; ?></td>
+                                    <td><?php echo $fila['numafiliacion']; ?></td>
+                                    <td><?php echo $fila['domicilio']; ?></td>
+                                    <td><?php echo $fila['colonia']; ?></td>
+                                    <td><?php echo $fila['cp']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr class="encabezado">
+                                    <td style="width: 20em;"><strong>Entidad Domicilio</strong></td>
+                                    <td style="width: 25em;"><strong>Municipio</strong></td>
+                                    <td style="width: 25em;"><strong>Localidad</strong></td>
+                                    <td style="width: 10em;"><strong>Tel&eacute;fono</strong></td>
+                                    <td style="width: 15em;"><strong>Hora recepci&oacute;n</strong></td>
+                                    <td style="width: 5em;"><strong>Embarazo</strong></td>
+                                </tr>
+                                <!--DATOS-->
+                                <tr>
+                                    <td><?php echo $fila['entidaddom']; ?></td>
+                                    <td><?php echo $fila['municipio']; ?></td>
+                                    <td><?php echo $fila['localidad']; ?></td>
+                                    <td><?php echo $fila['telefono']; ?></td>
+                                    <td><strong><?php echo  date("d-m-Y H:i", strtotime($fila['fechahorarecep'])); ?></strong></td>
+                                    <td>
+                                        <?php
+                                        //CONDICION PARA IMPRIMIR SI ESTA EMBARAZADA SI ES FEMENINO
+                                        if ($fila['sexo'] == 'Femenino') {
+                                            echo $fila['embarazo'];
+                                        } else {
+                                            echo "";
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr class="encabezado">
+                                    <td style="width: 10em;"><strong>SDG</strong></td>
+                                    <td style="width: 10em;"><strong>Gesta</strong></td>
+                                    <td style="width: 15em;"><strong>M&eacute;dico</strong></td>
+                                    <td style="width: 40em;"><strong>Motivo Consulta</strong></td>
+                                    <td style="width: 25em;"><strong>Sala</strong></td>
+                                </tr>
+                                <!--DATOS-->
+                                <tr>
+                                    <td>
+                                        <?php
+                                        //CONDICION PARA IMPRIMIR LAS SDG SI ES FEMENINO
+                                        if ($fila['sexo'] == 'Femenino' && $fila['embarazo'] == 'SI') {
+                                            echo $fila['semgesta'];
+                                        } else {
+                                            echo "";
+                                        } ?></td>
+                                    <td>
+                                        <?php
+                                        //CONDICION PARA IMPRIMIR EL NUMERO DE GESTA SI ES FEMENINO
+                                        if ($fila['sexo'] == 'Femenino' && $fila['embarazo'] == 'SI') {
+                                            echo $fila['numgesta'];
+                                        } else {
+                                            echo "";
+                                        }
+                                        ?></td>
+                                    <td><?php echo $fila['medico']; ?></td>
+                                    <td><?php echo $fila['mtvoconsulta']; ?></td>
+                                    <td><?php echo $fila['sala']; ?></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="text-align: center; font-size: 15px">=== DATOS DE LA CONSULTA ===</p>
+
+                        <!-- DATOS DE LA CONSULTA -->
+                        <table class="content-table">
+                            <tbody>
+                                <tr class="encabezado">
+                                    <td style="width: 15em;"><strong>Att'n prehospitalaria</strong></td>
+                                    <td style="width: 20em;"><strong>Fecha y hora de ingreso</strong></td>
+                                    <td style="width: 15em;"><strong>Tipo de urgencia</strong></td>
+                                    <td style="width: 15em;"><strong>Tiempo traslado</strong></td>
+                                    <td style="width: 35em;"><strong>Nombre unidad</strong></td>
+                                </tr>
+                                <!--DATOS DE LA CONSULTA-->
+                                <tr>
+                                    <td><?php echo $consulta['atnprehosp']; ?></td>
+                                    <td><strong><?php echo  date("d-m-Y H:i", strtotime($consulta['fechaingreso'])); ?></strong></td>
+                                    <td><?php echo $consulta['tipourgencia']; ?></td>
+                                    <td><?php echo $consulta['tiempotraslado']; ?></td>
+                                    <td><?php echo $consulta['nombreunidad']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr class="encabezado">
+                                    <td style="width: 10em;"><strong>Tras. transitorio</strong></td>
+                                    <td style="width: 15em;"><strong>Motivo att'n</strong></td>
+                                    <td style="width: 15em;"><strong>Tipo de cama</strong></td>
+                                    <td style="width: 15em;"><strong>Fecha y hora de alta</strong></td>
+                                    <td style="width: 15em;"><strong>Alta por:</strong></td>
+                                    <td style="width: 15em;"><strong>Ministerio pub.</strong></td>
+                                    <td style="width: 15em;"><strong>Mujer edad fertil</strong></td>
+                                </tr>
+                                <!--DATOS DE LA CONSULTA-->
+                                <tr>
+                                    <td><?php echo $consulta['trastrans']; ?></td>
+                                    <td><?php echo $consulta['motivoatencion']; ?></td>
+                                    <td><?php echo $consulta['tipocama']; ?></td>
+                                    <td><strong><?php echo  date("d-m-Y H:i", strtotime($consulta['fechaalta'])); ?></strong></td>
+                                    <td><?php echo $consulta['altapor']; ?></td>
+                                    <td><?php echo $consulta['ministeriopublico']; ?></td>
+                                    <td><?php echo $consulta['mujeredadfertil']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="text-align: center; font-size: 15px">=== AFECCIONES TRATADAS ===</p>
+
+                        <!-- Afección principal -->
+                        <table class="content-table">
+                            <tbody>
+                                <tr class="encabezado">
+                                    <td style="width: 80em;"><strong>Afecciones</strong></td>
+                                    <td style="width: 20em;"><strong>Clave CIE-10</strong></td>
+                                </tr>
+                                <!--DATOS DE LA CONSULTA-->
+                                <tr>
+                                    <td><?php echo "PRINCIPAL: " . $consulta['afecprincipal']; ?></td>
+                                    <td style="background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80em;"><?php echo $consulta['comorbilidad1']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80em;"><?php echo $consulta['comorbilidad2']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80em;"><?php echo $consulta['comorbilidad3']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="text-align: center; font-size: 15px">=== INTERCONSULTA ===</p>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 35em;"><?php echo $consulta['interconsulta1']; ?></td>
+                                    <td style="width: 35em;"><?php echo $consulta['interconsulta2']; ?></td>
+                                    <td style="width: 30em;"><?php echo $consulta['interconsulta3']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="text-align: center; font-size: 15px">=== PROCEDIMIENTOS ===</p>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80em;"><?php echo $consulta['procedim1']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80em;"><?php echo $consulta['procedim2']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80em;"><?php echo $consulta['procedim3']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80em;"><?php echo $consulta['procedim4']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80em;"><?php echo $consulta['procedim5']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="text-align: center; font-size: 15px">=== MEDICAMENTOS ===</p>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 35em;"><?php echo $consulta['medicamento1']; ?></td>
+                                    <td style="width: 35em;"><?php echo $consulta['medicamento2']; ?></td>
+                                    <td style="width: 30em;"><?php echo $consulta['medicamento3']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="text-align: center; font-size: 15px">=== MEDICO RESPONSABLE ===</p>
+
+                        <table class="content-table">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 40em;"><?php echo "Nombre: " . $consulta['nm']; ?></td>
+                                    <td style="width: 20em;"><?php echo "CURP: " . $consulta['curp']; ?></td>
+                                    <td style="width: 15em;"><?php echo "Cédula: " . $consulta['cedula']; ?></td>
+                                    <td style="width: 25em;"><?php echo "Turno: " . $consulta['turno']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    </html>
+
+<?php
+}
+
+$con->close();
+
+ob_end_flush();
+?>

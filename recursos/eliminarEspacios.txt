@@ -1,0 +1,3 @@
+HACER COPIA DE LA BASE DE DATOS PRIMERO
+
+update pacientes set nombre= Replace(nombre, '  ', ' ')
