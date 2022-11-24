@@ -379,6 +379,5 @@ if (!isset($_SESSION['idusuario'])) {
 }
 
 $con->close();
-
 ob_end_flush();
 ?>
