@@ -59,6 +59,7 @@ if (!isset($_SESSION['idusuario'])) {
                             <a class="dropdown-item" href="../reportes/reporteConsultados.php">Consultas</a>
                             <a class="dropdown-item" href="../reportes/reporteNSP.php">Pacientes N.S.P.</a>
                             <a class="dropdown-item" href="../reportes/triageReporte.php">Triages</a>
+                            <a class="dropdown-item" href="../reportes/repCons1.php">Consulta pacientes C1</a>
                         </div>
                     </li>
                 </ul>
@@ -123,6 +124,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="../reportes/repCalidad.php">Dpto. Calidad</a>
+                                        <a class="dropdown-item" href="../reportes/repCons1.php">Consulta pacientes C1</a>
                                         <a class="dropdown-item" href="#">Otros reportes</a>
                                     </div>
                                 </li>
