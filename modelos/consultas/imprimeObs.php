@@ -32,6 +32,7 @@ if (!isset($_SESSION['idusuario'])) {
 
             <div class="form-group col-lg-8 col-md-8 col-sm-8">
                 <h3>HOSPITAL GENERAL DE SALTILLO</h3>
+                <h4>NOTA MEDICA DE INGRESO A URGENCIAS</h4>
             </div>
         </div>
 
@@ -99,42 +100,63 @@ if (!isset($_SESSION['idusuario'])) {
                 </table>
             </div>
 
-            <div class="col-sm-12">
-
-                <h3>NOTA MEDICA DE INGRESO A URGENCIAS</h3>
-                <p style="font-size: 20px;">
-                    <?php echo $fila['notaingresourg']; ?>
-                </p>
-
-            </div>
+            <!-- NOTA MEDICA -->
+            <table class="table table-striped table-bordered table-condensed table-hover" style="border-collapse: collapse; width: 100%; height: 36px; margin-bottom: 0px;" border="1">
+                <thead>
+                    <tr>
+                        <th>
+                            NOTA MEDICA DE INGRESO A URGENCIAS
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td style="border-collapse: collapse; font-size: 20px; text-align:justify; border: 2px solid black;"><?php echo $fila['notaingresourg']; ?></td>
+                </tbody>
+            </table>
 
             <!-- CONSULTA DE URGENCIAS -->
 
-            <div class="col-sm-12">
+            <table class="table table-striped table-bordered table-condensed table-hover" style="border-collapse: collapse; width: 100%; height: 36px; margin-bottom: 0px;" border="1">
+                <thead>
+                    <tr>
+                        <th>
+                            DIAGNOSTICOS
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td style="font-size: 20px;"><?php echo $fila['afecprincipal']; ?>- <?php echo $fila['comorbilidad1']; ?>- <?php echo $fila['comorbilidad2']; ?>- <?php echo $fila['comorbilidad3']; ?></td>
+                </tbody>
+            </table>
 
-                <h3>DIAGNOSTICOS</h3>
-                <p style="font-size: 20px;">
-                    <?php echo $fila['afecprincipal']; ?>- <?php echo $fila['comorbilidad1']; ?>- <?php echo $fila['comorbilidad2']; ?>- <?php echo $fila['comorbilidad3']; ?>
-                </p>
+            <!-- PROCEDIMIENTOS -->
+            <table class="table table-striped table-bordered table-condensed table-hover" style="border-collapse: collapse; width: 100%; height: 36px; margin-bottom: 0px;" border="1">
+                <thead>
+                    <tr>
+                        <th>
+                            PROCEDIMIENTOS
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td style="font-size: 20px;"><?php echo $fila['procedim1']; ?>- <?php echo $fila['procedim2']; ?>- <?php echo $fila['procedim3']; ?>- <?php echo $fila['procedim4']; ?>- <?php echo $fila['procedim5']; ?></td>
+                </tbody>
+            </table>
 
-            </div>
 
-            <div class="col-sm-12">
-
-                <h3>PROCEDIMIENTOS</h3>
-                <p style="font-size: 20px;">
-                    <?php echo $fila['procedim1']; ?>- <?php echo $fila['procedim2']; ?>- <?php echo $fila['procedim3']; ?>- <?php echo $fila['procedim4']; ?>- <?php echo $fila['procedim5']; ?>
-                </p>
-            </div>
-
-            <div class="col-sm-12">
-
-                <h3>MEDICAMENTOS</h3>
-                <p style="font-size: 20px;">
-                    <?php echo $fila['medicamento1']; ?>- <?php echo $fila['medicamento2']; ?>- <?php echo $fila['medicamento3']; ?>
-                </p>
-
-            </div>
+            <!-- MEDICAMENTOS -->
+            <table class="table table-striped table-bordered table-condensed table-hover" style="border-collapse: collapse; width: 100%; height: 36px; margin-bottom: 0px;" border="1">
+                <thead>
+                    <tr>
+                        <th>
+                            MEDICAMENTOS
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td style="font-size: 20px;"><?php echo $fila['medicamento1']; ?>- <?php echo $fila['medicamento2']; ?>- <?php echo $fila['medicamento3']; ?></td>
+                </tbody>
+            </table>
 
             <!-- DATOS DEL MEDICO -->
             <div class="table-responsive">
@@ -157,9 +179,9 @@ if (!isset($_SESSION['idusuario'])) {
                 </table>
             </div>
 
-            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <!-- <div class="form-group col-lg-12 col-md-12 col-sm-12">
                 <a href="index.php" type="button" class="btn btn-success"><i class='fa fa-reply' title='Regresar'> Regresar</i></a>
-            </div>
+            </div> -->
 
         </div>
     </div>

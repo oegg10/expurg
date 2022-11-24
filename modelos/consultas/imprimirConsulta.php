@@ -65,12 +65,12 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS-->
                                 <tr>
-                                    <td><?php echo $fila['np']; ?></td>
-                                    <td><?php echo $fila['curp']; ?></td>
-                                    <td><?php echo $fnac; ?></td>
-                                    <td><?php echo $fila['entidadnac']; ?></td>
-                                    <td><?php echo $fila['edad']; ?></td>
-                                    <td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['np']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['curp']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fnac; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['entidadnac']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['edad']; ?></td>
+                                    <td style="font-size: 1.3em;">
                                         <?php
                                         //CONDICION PARA IMPRIMIR F o M SEGUN EL GENERO o SEXO
                                         if ($fila['sexo'] == 'Femenino') {
@@ -94,11 +94,11 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS-->
                                 <tr>
-                                    <td><?php echo $fila['afiliacion']; ?></td>
-                                    <td><?php echo $fila['numafiliacion']; ?></td>
-                                    <td><?php echo $fila['domicilio']; ?></td>
-                                    <td><?php echo $fila['colonia']; ?></td>
-                                    <td><?php echo $fila['cp']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['afiliacion']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['numafiliacion']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['domicilio']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['colonia']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['cp']; ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -115,12 +115,12 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS-->
                                 <tr>
-                                    <td><?php echo $fila['entidaddom']; ?></td>
-                                    <td><?php echo $fila['municipio']; ?></td>
-                                    <td><?php echo $fila['localidad']; ?></td>
-                                    <td><?php echo $fila['telefono']; ?></td>
-                                    <td><strong><?php echo  date("d-m-Y H:i", strtotime($fila['fechahorarecep'])); ?></strong></td>
-                                    <td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['entidaddom']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['municipio']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['localidad']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['telefono']; ?></td>
+                                    <td style="font-size: 1.3em;"><strong><?php echo  date("d-m-Y H:i", strtotime($fila['fechahorarecep'])); ?></strong></td>
+                                    <td style="font-size: 1.3em;">
                                         <?php
                                         //CONDICION PARA IMPRIMIR SI ESTA EMBARAZADA SI ES FEMENINO
                                         if ($fila['sexo'] == 'Femenino') {
@@ -145,7 +145,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS-->
                                 <tr>
-                                    <td>
+                                    <td style="font-size: 1.3em;">
                                         <?php
                                         //CONDICION PARA IMPRIMIR LAS SDG SI ES FEMENINO
                                         if ($fila['sexo'] == 'Femenino' && $fila['embarazo'] == 'SI') {
@@ -153,7 +153,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         } else {
                                             echo "";
                                         } ?></td>
-                                    <td>
+                                    <td style="font-size: 1.3em;">
                                         <?php
                                         //CONDICION PARA IMPRIMIR EL NUMERO DE GESTA SI ES FEMENINO
                                         if ($fila['sexo'] == 'Femenino' && $fila['embarazo'] == 'SI') {
@@ -162,14 +162,14 @@ if (!isset($_SESSION['idusuario'])) {
                                             echo "";
                                         }
                                         ?></td>
-                                    <td><?php echo $fila['medico']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['medico']; ?></td>
                                     <td><?php echo $fila['mtvoconsulta']; ?></td>
-                                    <td><?php echo $fila['sala']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $fila['sala']; ?></td>
 
                                 </tr>
                             </tbody>
                         </table>
-                        <p style="text-align: center; font-size: 15px">=== DATOS DE LA CONSULTA ===</p>
+                        <!--<p style="text-align: center; font-size: 15px"><strong>=== DATOS DE LA CONSULTA ===</strong></p> -->
 
                         <!-- DATOS DE LA CONSULTA -->
                         <table class="content-table">
@@ -183,11 +183,11 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS DE LA CONSULTA-->
                                 <tr>
-                                    <td><?php echo $consulta['atnprehosp']; ?></td>
-                                    <td><strong><?php echo  date("d-m-Y H:i", strtotime($consulta['fechaingreso'])); ?></strong></td>
-                                    <td><?php echo $consulta['tipourgencia']; ?></td>
-                                    <td><?php echo $consulta['tiempotraslado']; ?></td>
-                                    <td><?php echo $consulta['nombreunidad']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['atnprehosp']; ?></td>
+                                    <td style="font-size: 1.3em;"><strong><?php echo  date("d-m-Y H:i", strtotime($consulta['fechaingreso'])); ?></strong></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['tipourgencia']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['tiempotraslado']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['nombreunidad']; ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -205,18 +205,18 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS DE LA CONSULTA-->
                                 <tr>
-                                    <td><?php echo $consulta['trastrans']; ?></td>
-                                    <td><?php echo $consulta['motivoatencion']; ?></td>
-                                    <td><?php echo $consulta['tipocama']; ?></td>
-                                    <td><strong><?php echo  date("d-m-Y H:i", strtotime($consulta['fechaalta'])); ?></strong></td>
-                                    <td><?php echo $consulta['altapor']; ?></td>
-                                    <td><?php echo $consulta['ministeriopublico']; ?></td>
-                                    <td><?php echo $consulta['mujeredadfertil']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['trastrans']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['motivoatencion']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['tipocama']; ?></td>
+                                    <td style="font-size: 1.3em;"><strong><?php echo  date("d-m-Y H:i", strtotime($consulta['fechaalta'])); ?></strong></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['altapor']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['ministeriopublico']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo $consulta['mujeredadfertil']; ?></td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <p style="text-align: center; font-size: 15px">=== AFECCIONES TRATADAS ===</p>
+                        <!-- <p style="text-align: center; font-size: 1em;"><strong>=== AFECCIONES TRATADAS ===</strong></p> -->
 
                         <!-- Afección principal -->
                         <table class="content-table">
@@ -227,7 +227,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS DE LA CONSULTA-->
                                 <tr>
-                                    <td><?php echo "PRINCIPAL: " . $consulta['afecprincipal']; ?></td>
+                                    <td style="font-size: 1.3em;"><?php echo "PRINCIPAL: " . $consulta['afecprincipal']; ?></td>
                                     <td style="background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
@@ -236,7 +236,7 @@ if (!isset($_SESSION['idusuario'])) {
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 80em;"><?php echo $consulta['comorbilidad1']; ?></td>
+                                    <td style="width: 61.5em; font-size: 1.3em;"><?php echo $consulta['comorbilidad1']; ?></td>
                                     <td style="width: 20em; background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
@@ -245,7 +245,7 @@ if (!isset($_SESSION['idusuario'])) {
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 80em;"><?php echo $consulta['comorbilidad2']; ?></td>
+                                    <td style="width: 61.5em; font-size: 1.3em;"><?php echo $consulta['comorbilidad2']; ?></td>
                                     <td style="width: 20em; background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
@@ -254,39 +254,30 @@ if (!isset($_SESSION['idusuario'])) {
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 80em;"><?php echo $consulta['comorbilidad3']; ?></td>
+                                    <td style="width: 61.5em; font-size: 1.3em;"><?php echo $consulta['comorbilidad3']; ?></td>
                                     <td style="width: 20em; background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <p style="text-align: center; font-size: 15px">=== INTERCONSULTA ===</p>
+                        <p>=== INTERCONSULTA ===</p>
 
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 35em;"><?php echo $consulta['interconsulta1']; ?></td>
-                                    <td style="width: 35em;"><?php echo $consulta['interconsulta2']; ?></td>
-                                    <td style="width: 30em;"><?php echo $consulta['interconsulta3']; ?></td>
+                                    <td style="width: 27em; font-size: 1.3em;"><?php echo $consulta['interconsulta1']; ?></td>
+                                    <td style="width: 25em; font-size: 1.3em;"><?php echo $consulta['interconsulta2']; ?></td>
+                                    <td style="width: 25em; font-size: 1.3em;"><?php echo $consulta['interconsulta3']; ?></td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <p style="text-align: center; font-size: 15px">=== PROCEDIMIENTOS ===</p>
+                        <p>=== PROCEDIMIENTOS ===</p>
 
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 80em;"><?php echo $consulta['procedim1']; ?></td>
-                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <table class="content-table">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 80em;"><?php echo $consulta['procedim2']; ?></td>
+                                    <td style="width: 61.5em; font-size: 1.3em;"><?php echo $consulta['procedim1']; ?></td>
                                     <td style="width: 20em; background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
@@ -295,7 +286,7 @@ if (!isset($_SESSION['idusuario'])) {
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 80em;"><?php echo $consulta['procedim3']; ?></td>
+                                    <td style="width: 61.5em; font-size: 1.3em;"><?php echo $consulta['procedim2']; ?></td>
                                     <td style="width: 20em; background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
@@ -304,7 +295,7 @@ if (!isset($_SESSION['idusuario'])) {
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 80em;"><?php echo $consulta['procedim4']; ?></td>
+                                    <td style="width: 61.5em; font-size: 1.3em;"><?php echo $consulta['procedim3']; ?></td>
                                     <td style="width: 20em; background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
@@ -313,33 +304,62 @@ if (!isset($_SESSION['idusuario'])) {
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 80em;"><?php echo $consulta['procedim5']; ?></td>
+                                    <td style="width: 61.5em; font-size: 1.3em;"><?php echo $consulta['procedim4']; ?></td>
                                     <td style="width: 20em; background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <p style="text-align: center; font-size: 15px">=== MEDICAMENTOS ===</p>
-
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 35em;"><?php echo $consulta['medicamento1']; ?></td>
-                                    <td style="width: 35em;"><?php echo $consulta['medicamento2']; ?></td>
-                                    <td style="width: 30em;"><?php echo $consulta['medicamento3']; ?></td>
+                                    <td style="width: 61.5em; font-size: 1.3em;"><?php echo $consulta['procedim5']; ?></td>
+                                    <td style="width: 20em; background-color: #f3f1f1;"></td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <p style="text-align: center; font-size: 15px">=== MEDICO RESPONSABLE ===</p>
+                        <!--<p>=== MEDICAMENTOS ===</p>-->
+
+                        <table class="content-table">
+                            <tbody>
+                            <tr class="encabezado">
+                                    <td style="width: 10em;"><strong>MEDICAMENTOS</strong></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 26em; font-size: 1.3em;"><?php echo $consulta['medicamento1']; ?></td>
+                                    <td style="width: 26em; font-size: 1.3em;"><?php echo $consulta['medicamento2']; ?></td>
+                                    <td style="width: 25em; font-size: 1.3em;"><?php echo $consulta['medicamento3']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!--<p>=== MEDICO RESPONSABLE ===</p>
 
                         <table class="content-table">
                             <tbody>
                                 <tr>
-                                    <td style="width: 40em;"><?php echo "Nombre: " . $consulta['nm']; ?></td>
-                                    <td style="width: 20em;"><?php echo "CURP: " . $consulta['curp']; ?></td>
-                                    <td style="width: 15em;"><?php echo "Cédula: " . $consulta['cedula']; ?></td>
-                                    <td style="width: 25em;"><?php echo "Turno: " . $consulta['turno']; ?></td>
+                                    <td style="width: 35em; font-size: 1.1em;"><?php echo "Nombre: " . $consulta['nm']; ?></td>
+                                    <td style="width: 20em; font-size: 1.1em;"><?php echo "CURP: " . $consulta['curp']; ?></td>
+                                    <td style="width: 15em; font-size: 1.1em;"><?php echo "Cédula: " . $consulta['cedula']; ?></td>
+                                    <td style="width: 21em; font-size: 1.1em;"><?php echo "Turno: " . $consulta['turno']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+
+                        <!-- TABLA DE MEDICO -->
+                        <table class="content-table">
+                            <tbody>
+                                <tr class="encabezado">
+                                    <td style="width: 10em;"><strong>MEDICO RESPONSABLE</strong></td>
+                                </tr>
+                                <!--DATOS DEL MEDICO-->
+                                <tr>
+                                <td style="width: 35em; font-size: 1.1em;"><?php echo "Nombre: " . $consulta['nm']; ?></td>
+                                    <td style="width: 20em; font-size: 1.1em;"><?php echo "CURP: " . $consulta['curp']; ?></td>
+                                    <td style="width: 15em; font-size: 1.1em;"><?php echo "Cédula: " . $consulta['cedula']; ?></td>
+                                    <td style="width: 21em; font-size: 1.1em;"><?php echo "Turno: " . $consulta['turno']; ?></td>
                                 </tr>
                             </tbody>
                         </table>

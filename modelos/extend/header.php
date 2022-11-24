@@ -29,8 +29,6 @@ if (!isset($_SESSION['idusuario'])) {
         }
     </style>
 
-    <link rel="stylesheet" href="../extend/estilos.css">
-
 </head>
 
 <body>
