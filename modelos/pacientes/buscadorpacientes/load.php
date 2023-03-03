@@ -1,10 +1,10 @@
 <?php
 
-//select p.idpaciente AS idpaciente,p.expediente AS expediente,p.nombre AS nombre,p.curp AS curp,date_format(from_days(to_days(current_timestamp()) - to_days(p.fechanac)),'%Y') + 0 AS edad,p.sexo AS sexo,p.fechanac AS fechanac,p.status AS status,p.fechaalta AS fechaalta, p.idusuario AS idusuario, u.nombre AS usuario from (expurg.pacientes p join expurg.usuarios u on(p.idusuario = u.idusuario)) order by p.idpaciente desc
+//select p.idpaciente AS idpaciente,p.expediente AS expediente,p.nombre AS nombre,p.curp AS curp,date_format(from_days(to_days(current_timestamp()) - to_days(p.fechanac)),'%Y') + 0 AS edad,p.sexo AS sexo,p.fechanac AS fechanac,p.estado AS estado,p.fechaalta AS fechaalta, p.idusuario AS idusuario, u.nombre AS usuario from (expurg.pacientes p join expurg.usuarios u on(p.idusuario = u.idusuario)) order by p.idpaciente desc
 
 require_once "config.php";
 
-$columns = ['idpaciente','expediente','nombre', 'curp', 'edad', 'sexo', 'fechanac','status','idusuario','usuario','fechaalta'];
+$columns = ['idpaciente','expediente','nombre', 'curp', 'edad', 'sexo', 'fechanac','estado','idusuario','usuario','fechaalta'];
 //Obtenemos los datos de la VISTA PACIENTES
 $table = "v_pacientes";
 $id = 'idpaciente';
@@ -79,9 +79,25 @@ if($num_rows > 0){
     $output['data'] .= '<td>'.$row['edad'].'</td>';
     $output['data'] .= '<td>'.$row['curp'].'</td>';
     $output['data'] .= '<td>'.date("d-m-Y", strtotime($row['fechanac'])).'</td>';
-    $output['data'] .= '<td>'.$row['status'].'</td>';
-    $output['data'] .= '<td>'.$row['usuario'].'</td>';
+    
+    if ($row['estado'] == 'Activo') {
+        $output['data'] .= '<td class="text-primary"><strong>'.$row["estado"].'</strong></td>';
+        //echo "<td><span class='text-primary'><strong>Activo</strong></span></td>";
+    } elseif ($row['estado'] == 'Depurado') {
+        $output['data'] .= '<td class="text-info"><strong>'.$row["estado"].'</strong></td>';
+        //echo "<td><span class='text-info'><strong>Depurado</strong></span></td>";
+    } elseif ($row['estado'] == 'Defunción') {
+        $output['data'] .= '<td class="text-danger"><strong>'.$row["estado"].'</strong></td>';
+        //echo "<td><span class='text-danger'><strong>Defunción</strong></span></td>";
+    } elseif ($row['estado'] == 'Depurado y nvo. número') {
+        $output['data'] .= '<td class="text-warning"><strong>'.$row["estado"].'</strong></td>';
+        //echo "<td><span class='text-warning'><strong>Depurado y nvo. número</strong></span></td>";
+    }
+
+    //$output['data'] .= '<td>'.$row['estado'].'</td>';
+    
     $output['data'] .= '<td>'.date("d-m-Y H:m:s", strtotime($row['fechaalta'])).'</td>';
+    $output['data'] .= '<td>'.$row['usuario'].'</td>';
     $output['data'] .= '<td><a href="../../modelos/recepcion/recepcion.php?id=' . $row[$id] . '" type="button" class="btn btn-success" title="Crear recepción"><i class="fa fa-check"></i></a></td>';
     $output['data'] .= '<td><a href="../../modelos/reportes/repPaciente.php?id=' . $row[$id] . '" type="button" class="btn btn-secundary" title="Historial del paciente"><i class="fa fa-address-book-o"></i></a></td>';
     $output['data'] .= '<td><a href="../pacientes/edit_paciente.php?id=' . $row[$id] . '" type="button" class="btn btn-warning" title="Editar paciente"><i class="fa fa-pencil"></i></a></td>';
@@ -138,3 +154,5 @@ echo json_encode($output, JSON_UNESCAPED_UNICODE);
 /* PAGINACION
 https://www.youtube.com/watch?v=NHF7RH3ALPM&t=129s
 */
+
+?>

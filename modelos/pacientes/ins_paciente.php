@@ -43,7 +43,7 @@ if (!isset($_SESSION['idusuario'])) {
         $entidaddom = mysqli_real_escape_string($con, $_POST['entidaddom']);
         $telefono = mysqli_real_escape_string($con, $_POST['telefono']);
         $observaciones = preg_replace('/\s\s+/', ' ', mysqli_real_escape_string($con, $_POST['observaciones']));
-        $status = mysqli_real_escape_string($con, $_POST['status']);
+        $estado = mysqli_real_escape_string($con, $_POST['estado']);
 
         $idusuario = $_SESSION['idusuario'];
 
@@ -135,7 +135,7 @@ if (!isset($_SESSION['idusuario'])) {
                 } else {
 
                     //Realizamos la inserción de los datos
-                    $sql = "INSERT INTO pacientes(nombre, expediente, curp, fechanac, entidadnac, sexo, edocivil, afiliacion, numafiliacion, domicilio, colonia, cp, municipio, localidad, entidaddom, telefono, observaciones, status, idusuario) VALUES ('$nombre','$expediente','$curp','$fechanac','$entidadnac','$sexo','$edocivil','$afiliacion','$numafiliacion','$domicilio','$colonia','$cp','$municipio','$localidad','$entidaddom','$telefono','$observaciones','$status','$idusuario')";
+                    $sql = "INSERT INTO pacientes(nombre, expediente, curp, fechanac, entidadnac, sexo, edocivil, afiliacion, numafiliacion, domicilio, colonia, cp, municipio, localidad, entidaddom, telefono, observaciones, estado, idusuario) VALUES ('$nombre','$expediente','$curp','$fechanac','$entidadnac','$sexo','$edocivil','$afiliacion','$numafiliacion','$domicilio','$colonia','$cp','$municipio','$localidad','$entidaddom','$telefono','$observaciones','$estado','$idusuario')";
 
                     $resultado = $con->query($sql);
 

@@ -239,7 +239,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Condición(*):</label>
-                                    <select class="form-control" name="status" id="status" required>
+                                    <select class="form-control" name="estado" id="estado" required>
                                         <option value="Activo">Activo</option>
                                         <option value="Depurado">Depurado</option>
                                         <option value="Defunción">Defunción</option>

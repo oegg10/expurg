@@ -57,8 +57,8 @@ if (!isset($_SESSION['idusuario'])) {
                         <th>CURP</th>
                         <th>Fecha nac.</th>
                         <th>Condición</th>
-                        <th>Registró</th>
                         <th>Fecha alta</th>
+                        <th>Registró</th>    
                         <th>Recepción</th>
                         <th>Historial</th>
                         <th>Editar</th>

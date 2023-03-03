@@ -13,7 +13,7 @@ if (!isset($_SESSION['idusuario'])) {
     }
 
     //Paginación
-    $paginacion = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.sexo, p.fechanac, p.estado, p.idusuario, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario ORDER BY idpaciente DESC";
+    $paginacion = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.sexo, p.fechanac, p.estado, p.fechaalta, p.idusuario, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario ORDER BY idpaciente DESC";
     $result_pag = $con->query($paginacion);
     //Sacar el numero de filas
     $row = mysqli_num_rows($result_pag);
@@ -33,7 +33,7 @@ if (!isset($_SESSION['idusuario'])) {
         $inicio = ($num_registros * $res);
     }
 
-    $pacientes = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.sexo, p.fechanac, p.estado, p.idusuario, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario ORDER BY idpaciente DESC LIMIT $inicio,$num_registros";
+    $pacientes = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.sexo, p.fechanac, p.estado, p.fechaalta, p.idusuario, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario ORDER BY idpaciente DESC LIMIT $inicio,$num_registros";
 
     $resultado = $con->query($pacientes);
 
@@ -83,7 +83,8 @@ if (!isset($_SESSION['idusuario'])) {
                                         <th>Edad</th>
                                         <th>CURP</th>
                                         <th>Fecha nac.</th>
-                                        <th>Condición</th>
+                                        <th>Estado</th>
+                                        <th>Fecha alta</th>
                                         <th>Registró</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -111,9 +112,9 @@ if (!isset($_SESSION['idusuario'])) {
                                             echo "<td><span class='text-warning'><strong>Depurado y nvo. número</strong></span></td>";
                                         }
 
-
                                         //<td>" . $reg['estado'] . "</td>
-                                        echo "<td>" . $reg['usuario'] . "</td>
+                                        echo "<td>" . $reg['fechaalta'] . "</td>
+                                                <td>" . $reg['usuario'] . "</td>
                                                 
                                                 <td class='btn-group'>
                                                     <a href='../../modelos/recepcion/recepcion.php?id=" . $reg['idpaciente'] . "' type='button' class='btn btn-success' title='Crear recepción'><i class='fa fa-check'></i></a>
@@ -132,7 +133,8 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Edad</th>
                                     <th>CURP</th>
                                     <th>Fecha nac.</th>
-                                    <th>Condición</th>
+                                    <th>Estado</th>
+                                    <th>Fecha alta</th>
                                     <th>Registró</th>
                                     <th>Opciones</th>
                                 </tfoot>

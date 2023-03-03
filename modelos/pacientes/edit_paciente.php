@@ -223,16 +223,17 @@ if (!isset($_SESSION['idusuario'])) {
                                     <input type="hidden" name="idpaciente" id="idpaciente" value="<?php echo $id; ?>">
                                 </div>
 
-                                 <!-- 12 -->
+                                <!-- 12 -->
 
                                 <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <label>Observaciones:</label>
-                                    <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="250" placeholder="Observaciones" onblur="may(this.value, this.id)">
+                                    <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="250" value="<?php echo $fila['observaciones']; ?>" placeholder="Observaciones" onblur="may(this.value, this.id)">
                                 </div>
 
                                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Condición(*):</label>
                                     <select class="form-control" name="estado" id="estado" required>
+                                        <option value="<?php echo $fila['estado']; ?>"><?php echo $fila['estado']; ?></option>
                                         <option value="Activo">Activo</option>
                                         <option value="Depurado">Depurado</option>
                                         <option value="Defunción">Defunción</option>
