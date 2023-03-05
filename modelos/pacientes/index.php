@@ -85,7 +85,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <th>Fecha nac.</th>
                                         <th>Estado</th>
                                         <th>Fecha alta</th>
-                                        <th>Registró</th>
+                                        <th>Registró/Modificó</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Fecha nac.</th>
                                     <th>Estado</th>
                                     <th>Fecha alta</th>
-                                    <th>Registró</th>
+                                    <th>Registró/Modificó</th>
                                     <th>Opciones</th>
                                 </tfoot>
                             </table>

@@ -110,35 +110,37 @@ if (!isset($_SESSION['idusuario'])) {
 
             //==========================================================================================
 
-            $existeExpediente = "SELECT idpaciente, expediente FROM pacientes WHERE (expediente LIKE '$expediente')";
+            $sql = "SELECT idpaciente, expediente FROM pacientes WHERE idpaciente LIKE '$idpaciente' AND expediente LIKE '$expediente'";
+            $res = $con->query($sql);
 
-            $existeExp = $con->query($existeExpediente);
-            $fila = $existeExp->num_rows;
+            while ($reg = $res->fetch_array(MYSQLI_BOTH)) {
 
-            if ($fila > 0) {
-                header('location:../extend/alerta.php?msj=EL paciente con el numero de expediente:' . $expediente . ' ya existe en la base de datos&c=pac&p=in&t=error');
-            } else {
+                $exp = $reg[1];
+            }
+
+            //VALIDACIÓN DEL NUMERO DE EXPEDIENTE
+            if ($expediente == $exp || $expediente == "") {
 
                 //Realizamos la inserción de los datos
                 $editar = "UPDATE pacientes SET expediente='$expediente',
-                                    nombre='$nombre',
-                                    curp='$curp',
-                                    fechanac='$fechanac',
-                                    entidadnac='$entidadnac',
-                                    sexo='$sexo',
-                                    edocivil='$edocivil',
-                                    afiliacion='$afiliacion',
-                                    numafiliacion='$numafiliacion',
-                                    domicilio='$domicilio',
-                                    colonia='$colonia',
-                                    cp='$cp',
-                                    municipio='$municipio',
-                                    localidad='$localidad',
-                                    entidaddom='$entidaddom',
-                                    telefono='$telefono',
-                                    observaciones='$observaciones',
-                                    estado='$estado',
-                                    idusuario='$idusuario' WHERE idpaciente = '$idpaciente'";
+                    nombre='$nombre',
+                    curp='$curp',
+                    fechanac='$fechanac',
+                    entidadnac='$entidadnac',
+                    sexo='$sexo',
+                    edocivil='$edocivil',
+                    afiliacion='$afiliacion',
+                    numafiliacion='$numafiliacion',
+                    domicilio='$domicilio',
+                    colonia='$colonia',
+                    cp='$cp',
+                    municipio='$municipio',
+                    localidad='$localidad',
+                    entidaddom='$entidaddom',
+                    telefono='$telefono',
+                    observaciones='$observaciones',
+                    estado='$estado',
+                    idusuario='$idusuario' WHERE idpaciente = '$idpaciente'";
 
                 $editado = $con->query($editar);
 
@@ -148,9 +150,56 @@ if (!isset($_SESSION['idusuario'])) {
 
                     header('location:../extend/alerta.php?msj=Error al actualizar paciente&c=pac&p=in&t=error');
                 }
+
+                $con->close();
+
+            }elseif ($expediente != $exp) {
+
+                $existeExpediente = "SELECT expediente FROM pacientes WHERE expediente LIKE '$expediente'";
+                $existeExp = $con->query($existeExpediente);
+                $fila = $existeExp->num_rows;
+
+                if ($fila > 0) {
+
+                    header('location:../extend/alerta.php?msj=EL paciente con el numero de expediente:' . $expediente . ' ya existe en la base de datos&c=pac&p=in&t=error');
+
+                } else {
+
+                    //Realizamos la inserción de los datos
+                    $editar = "UPDATE pacientes SET expediente='$expediente',
+                        nombre='$nombre',
+                        curp='$curp',
+                        fechanac='$fechanac',
+                        entidadnac='$entidadnac',
+                        sexo='$sexo',
+                        edocivil='$edocivil',
+                        afiliacion='$afiliacion',
+                        numafiliacion='$numafiliacion',
+                        domicilio='$domicilio',
+                        colonia='$colonia',
+                        cp='$cp',
+                        municipio='$municipio',
+                        localidad='$localidad',
+                        entidaddom='$entidaddom',
+                        telefono='$telefono',
+                        observaciones='$observaciones',
+                        estado='$estado',
+                        idusuario='$idusuario' WHERE idpaciente = '$idpaciente'";
+
+                    $editado = $con->query($editar);
+
+                    if ($editado > 0) {
+                        header('location:../extend/alerta.php?msj=EL paciente a sido actualizado&c=pac&p=in&t=success');
+                    } else {
+
+                        header('location:../extend/alerta.php?msj=Error al actualizar paciente&c=pac&p=in&t=error');
+                    }
+
+                    $con->close();
+
+                }
             }
 
-            $con->close();
         }
     }
 }

@@ -58,7 +58,7 @@ if (!isset($_SESSION['idusuario'])) {
                         <th>Fecha nac.</th>
                         <th>Condición</th>
                         <th>Fecha alta</th>
-                        <th>Registró</th>    
+                        <th>Registró/Modificó</th>    
                         <th>Recepción</th>
                         <th>Historial</th>
                         <th>Editar</th>

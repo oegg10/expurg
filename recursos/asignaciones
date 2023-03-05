@@ -7,7 +7,7 @@ sudo chmod 777 directorio/
 
 
 ===== VISTA PACIENTES =====
-CREATE VIEW v_pacientes AS select p.idpaciente AS idpaciente,p.expediente AS expediente,p.nombre AS nombre,p.curp AS curp,date_format(from_days(to_days(current_timestamp()) - to_days(p.fechanac)),'%Y') + 0 AS edad,p.sexo AS sexo,p.fechanac AS fechanac,p.status AS status,p.fechaalta AS fechaalta, p.idusuario AS idusuario, u.nombre AS usuario from (expurg.pacientes p join expurg.usuarios u on(p.idusuario = u.idusuario)) order by p.idpaciente desc
+CREATE VIEW v_pacientes AS select p.idpaciente AS idpaciente,p.expediente AS expediente,p.nombre AS nombre,p.curp AS curp,date_format(from_days(to_days(current_timestamp()) - to_days(p.fechanac)),'%Y') + 0 AS edad,p.sexo AS sexo,p.fechanac AS fechanac,p.estado AS estado,p.fechaalta AS fechaalta, p.idusuario AS idusuario, u.nombre AS usuario from (expurg.pacientes p join expurg.usuarios u on(p.idusuario = u.idusuario)) order by p.idpaciente desc
 
 
 

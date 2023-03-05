@@ -54,7 +54,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <th>CURP</th>
                                         <th>Fecha nac.</th>
                                         <th>Condición</th>
-                                        <th>Registró</th>
+                                        <th>Registró/Modificó</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -100,7 +100,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>CURP</th>
                                     <th>Fecha nac.</th>
                                     <th>Condición</th>
-                                    <th>Registró</th>
+                                    <th>Registró/Modificó</th>
                                     <th>Opciones</th>
                                 </tfoot>
                             </table>
