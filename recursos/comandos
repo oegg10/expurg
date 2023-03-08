@@ -1,0 +1,21 @@
+
+===== IMPORTAR BASE DE DATOS SQL =======
+cd /opt/lampp/bin
+./mysql -u root -p expurg
+source /home/cen/Escritorio/expurg.sql
+
+source /home/kike/Escritorio/expurg.sql
+========================================
+
+
+
+
+
+
+
+
+
+
+
+
+

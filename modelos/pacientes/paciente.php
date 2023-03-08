@@ -28,7 +28,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                         while ($reg = $res->fetch_array(MYSQLI_BOTH)) {
 
-                            echo "<h6>El último número de expediente otorgado es: <strong style='color: blue;'>". $reg[0]." <- Solo para archivo</strong></h6>" ;
+                            echo "<h6>El último número de expediente otorgado es: <strong style='color: blue;'>" . $reg[0] . " <- Solo para archivo</strong></h6>";
                         }
 
                         ?>
@@ -39,6 +39,11 @@ if (!isset($_SESSION['idusuario'])) {
                         <form action="ins_paciente.php" method="POST" autocomplete="off" onsubmit="return validar();">
                             <div class="row">
 
+                                <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label>No. Expediente | <small><strong style="color: red;">Solo para archivo</strong></small></label>
+                                    <input type="text" class="form-control" name="expediente" id="expediente" placeholder="Núm. expediente">
+                                </div>
+
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <label>CURP(*) | <small><strong style="color: red;">Capturar correctamente la CURP</strong></small></label>
                                     <input type="text" class="form-control" name="curp" id="curp" autofocus minlength="18" maxlength="18" placeholder="CURP" pattern="[A-Z]{4}[0-9]{6}[A-Z0-9]{8}" required onblur="may(this.value, this.id)" onkeyup="busqueda();">
@@ -47,11 +52,6 @@ if (!isset($_SESSION['idusuario'])) {
                                 <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                     <label>Nombre (*):</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre del paciente" required onblur="may(this.value, this.id)">
-                                </div>
-
-                                <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <label>No. Expediente | <small><strong style="color: red;">Solo para archivo</strong></small></label>
-                                    <input type="text" class="form-control" name="expediente" id="expediente" placeholder="Núm. expediente">
                                 </div>
 
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
