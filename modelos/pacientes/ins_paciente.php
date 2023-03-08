@@ -116,7 +116,8 @@ if (!isset($_SESSION['idusuario'])) {
 
             //==========================================================================================
 
-            $verpaciente = "SELECT idpaciente, curp FROM pacientes WHERE (expediente LIKE '$expediente' OR curp LIKE '$curp')";
+            $verpaciente = "SELECT idpaciente, curp FROM pacientes WHERE (
+                expediente LIKE '$expediente' OR curp LIKE '$curp'";
 
             $existepaciente = $con->query($verpaciente);
             $fila = $existepaciente->num_rows;

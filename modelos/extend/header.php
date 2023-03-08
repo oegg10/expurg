@@ -64,7 +64,9 @@ if (!isset($_SESSION['idusuario'])) {
                             <a class="dropdown-item" href="../reportes/reporteConsultados.php">Consultas</a>
                             <a class="dropdown-item" href="../reportes/reporteNSP.php">Pacientes N.S.P.</a>
                             <a class="dropdown-item" href="../reportes/triageReporte.php">Triages</a>
-                            <a class="dropdown-item" href="../reportes/repCons1.php">Consulta pacientes C1</a>
+                            <!-- <a class="dropdown-item" href="../reportes/repCons1.php">Consulta pacientes C1</a> -->
+
+                            <a class="dropdown-item" href="../reportes/repConsultasExcel.php">Consultas</a>
                         </div>
                     </li>
                 </ul>
@@ -97,12 +99,12 @@ if (!isset($_SESSION['idusuario'])) {
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="../pacientes/index.php"><b>Pacientes 1</b></a>
+                                <a class="nav-link" href="../pacientes/index.php"><b>Pacientes</b></a>
                             </li>
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="../pacientes/buscarPacienteAuto.php"><span style="color: red;">Pacientes 2</span></a>
-                            </li>
+                            </li> -->
 
                             <li class="nav-item">
                                 <a class="nav-link" href="../recepcion/index.php">Recepción</a>
@@ -115,6 +117,9 @@ if (!isset($_SESSION['idusuario'])) {
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../recepcion/consultorio1.php">Cons1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.curp-gratis.com.mx/consulta-curp" target="_blank">CURP</a>
                             </li>
                         </ul>
                         <!-- FIN MENU RECEPCIONISTA -->
@@ -172,14 +177,28 @@ if (!isset($_SESSION['idusuario'])) {
                                     </ul>
                                     <!-- FIN MENU ENFERMERIA -->
 
-                                <?php } ?>
+                            <?php } elseif ($_SESSION['idrol'] == 7) { ?>
+                                <!-- MENU ARCHIVO -->
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="../extend/inicio.php">Inicio <span class="sr-only"></span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="../archivo/index.php">Expedientes</a>
+                                        </li>
+                                    </ul>
+                                    <!-- FIN MENU ARCHIVO -->
 
-                                <!-- NOMBRE DEL USUARIO Y SALIDA -->
-                                <ul class="nav navbar-nav ml-auto">
-                                    <li style="padding-right: 3rem; color: white;"><span class="fa fa-user"></span> <?php echo $_SESSION['nombre'] ?></li>
-                                    <li style="padding-right: 3rem; color: white;"><?php echo $_SESSION['nivel'] ?></li>
-                                    <li><a href="../extend/salir.php" class="btn btn-dark btn-sm"><span class="fa fa-sign-out"></span> Salir</a></li>
-                                </ul>
 
-                                </div>
+                                    <?php } ?>
+
+                                    <!-- NOMBRE DEL USUARIO Y SALIDA -->
+                                    <ul class="nav navbar-nav ml-auto">
+                                        <li style="padding-right: 3rem; color: white;"><span class="fa fa-user"></span> <?php echo $_SESSION['nombre'] ?></li>
+                                        <li style="padding-right: 3rem; color: white;"><?php echo $_SESSION['nivel'] ?></li>
+                                        <li><a href="../extend/salir.php" class="btn btn-dark btn-sm"><span class="fa fa-sign-out"></span> Salir</a></li>
+                                    </ul>
+
+                                    </div>
     </nav>
