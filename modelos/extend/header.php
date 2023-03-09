@@ -188,6 +188,10 @@ if (!isset($_SESSION['idusuario'])) {
                                             <li class="nav-item">
                                                 <a class="nav-link" href="../archivo/index.php">Expedientes</a>
                                             </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="https://www.curp-gratis.com.mx/consulta-curp" target="_blank">CURP</a>
+                                            </li>
                                         </ul>
                                         <!-- FIN MENU ARCHIVO -->
 
@@ -214,9 +218,6 @@ if (!isset($_SESSION['idusuario'])) {
 
 
                                         <?php } ?>
-
-
-
 
 
 
