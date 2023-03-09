@@ -3,7 +3,10 @@
 cd /opt/lampp/bin
 ./mysql -u root -p expurg
 source /home/cen/Escritorio/expurg.sql
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1a43899f215252dea6367fd75c4e4adcca38f01d
 source /home/kike/Escritorio/expurg.sql
 ========================================
 
