@@ -18,192 +18,166 @@ if (!isset($_SESSION['idusuario'])) {
 
         $fechai = $_POST['fechai'];
         $fechaf = $_POST['fechaf'];
-
-        //header("Content-type: aplication/vnd.ms-excel");
-        //header("Content-Disposition: attachment;filename=Reporte_consultas.xls");
-
-        /*Agregar encabezado
-        $sql = "SELECT r.idrecepcion, u.idusuario,  FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN usuarios u ON r.idusuario = u.idusuario INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE c.idconsulta = '$idc'";
-
-        $resultado = $con->query($sql);
-        $fila = $resultado->fetch_assoc();*/
-
-        $consulta = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, p.idpaciente, p.nombre, r.idrecepcion, r.edad, r.fechahorarecep, r.mtvoconsulta, p.expediente, p.curp, p.fechanac, p.entidadnac, p.sexo, p.afiliacion, p.numafiliacion, p.domicilio, p.colonia, p.cp, p.municipio, p.localidad, p.entidaddom, p.telefono, r.embarazo, r.semgesta, r.numgesta, r.medico, r.sala, u.nombre AS nm, u.curp AS curpm, u.cedula, u.turno FROM consultas c INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE c.condicion = 1 AND DATE(c.fechaalta) >= '$fechai' AND DATE(c.fechaalta) <= '$fechaf'";
-
-        $resultado = $con->query($consulta);
-
-    } else {
-
-        $consulta = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, p.idpaciente, p.nombre, r.idrecepcion, r.edad, r.fechahorarecep, r.mtvoconsulta, p.expediente, p.curp, p.fechanac, p.entidadnac, p.sexo, p.afiliacion, p.numafiliacion, p.domicilio, p.colonia, p.cp, p.municipio, p.localidad, p.entidaddom, p.telefono, r.embarazo, r.semgesta, r.numgesta, r.medico, r.sala, u.nombre AS nm, u.curp AS curpm, u.cedula, u.turno FROM consultas c INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE c.condicion = 1 AND DATE(c.fechaalta) = CURDATE()";
-
-        $resultado = $con->query($consulta);
-
-        //select TIMESTAMPDIFF(MINUTE,fechaInicial,fechaFinal) as minutos from MiTabla
     }
 
 ?>
 
-<div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card text-left">
-                    <div class="card-header">
-                        <h5>Consultados</h5>
-                    </div>
-                    <div class="card-body">
+    <div class="container">
 
-                        <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST">
-                            <div class="row">
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <label>Fecha inicio (*):</label>
-                                    <input type="date" class="form-control" name="fechai" id="fechai" min="2019-09-30" value="<?php echo $fechai; ?>" required>
-                                </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Fecha recep.</th>
+                    <th>Fecha ingreso.</th>
+                    <th>Fecha alta.</th>
+                    <th>Tipo Urg.</th>
+                    <th>Attn prehosp.</th>
+                    <th>Traslado trans</th>
+                    <th>Nombre unidad</th>
+                    <th>Tiempo traslado</th>
+                    <th>Mvo. atencion</th>
+                    <th>Tipo cama</th>
+                    <th>MP</th>
+                    <th>Mujer fertil</th>
+                    <th>Afec. principal</th>
+                    <th>Comorb1</th>
+                    <th>Comorb2</th>
+                    <th>Comorb3</th>
+                    <th>Intercons1</th>
+                    <th>Intercons2</th>
+                    <th>Intercons3</th>
+                    <th>Preced1</th>
+                    <th>Preced2</th>
+                    <th>Preced3</th>
+                    <th>Preced4</th>
+                    <th>Preced5</th>
+                    <th>Med1</th>
+                    <th>Med2</th>
+                    <th>Med3</th>
+                    <th>Alta por</th>
+                    <th>Otra unidad</th>
+                    <th>Mtvo consulta</th>
+                    <th>Nombre Paciente</th>
+                    <th>Sexo</th>
+                    <th>Expediente</th>
+                    <th>Edad</th>
+                    <th>Curp</th>
+                    <th>Fecha nac</th>
+                    <th>Ent nac</th>
+                    <th>Afiliacion</th>
+                    <th>Num afil</th>
+                    <th>Domicilio</th>
+                    <th>Colonia</th>
+                    <th>CP</th>
+                    <th>Municipio</th>
+                    <th>Localidad</th>
+                    <th>Ent Dom</th>
+                    <th>Telefono</th>
+                    <th>Embarazo</th>
+                    <th>Sem gesta</th>
+                    <th>Num gesta</th>
+                    <th>sala</th>
+                    <th>Nombre medico</th>
+                    <th>Curp Medico</th>
+                    <th>Cedula</th>
+                    <th>Turno medico</th>
 
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <label>Fecha final (*):</label>
-                                    <input type="date" class="form-control" name="fechaf" id="fechaf" min="2019-09-30" value="<?php echo $fechaf; ?>" required>
-                                </div>
+                </tr>
+            </thead>
+            <tbody>
 
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <?php
 
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-archive"> Recargar tabla con fechas seleccionadas</i></button>
+                header("Content-type: aplication/vnd.ms-excel");
+                header("Content-Disposition: attachment;filename=Consultas_Excel-" . $fechai . "-" . $fechaf . ".xls");
 
-                                </div>
+                error_reporting(0);
 
-                            </div>
-                        </form>
+                $consulta = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, p.idpaciente, p.nombre, r.idrecepcion, r.edad, r.fechahorarecep, r.mtvoconsulta, p.expediente, p.curp, p.fechanac, p.entidadnac, p.sexo, p.afiliacion, p.numafiliacion, p.domicilio, p.colonia, p.cp, p.municipio, p.localidad, p.entidaddom, p.telefono, r.embarazo, r.semgesta, r.numgesta, r.sala, r.observaciones, u.nombre AS nm, u.curp AS curpm, u.cedula, u.turno FROM consultas c INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE c.condicion = 1 AND DATE(c.fechaalta) >= '$fechai' AND DATE(c.fechaalta) <= '$fechaf' ORDER BY c.fechaalta ASC";
 
-                        <hr>
-                        <div class="table-responsive display nowrap" id="listadoregistros">
-                            <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
-                                <thead style="background-color: #757579; color: white;">
-                                    <tr>
-                                        <th>Fecha recep.</th>
-                                        <th>Fecha ingreso.</th>
-                                        <th>Fecha alta.</th>
-                                        <th>fc</th>
-                                        <th>fr</th>
-                                        <th>ta</th>
-                                        <th>Temperatura</th>
-                                        <th>Glucosa</th>
-                                        <th>Talla</th>
-                                        <th>Peso</th>
-                                        <th>P_abdominal</th>
-                                        <th>imc</th>
-                                        <th>Nota Med.</th>
-                                        <th>Tipo Urg.</th>
-                                        <th>Attn prehosp.</th>
-                                        <th>Traslado trans</th>
-                                        <th>Nombre unidad</th>
-                                        <th>Tiempo traslado</th>
-                                        <th>Mvo. atencion</th>
-                                        <th>Tipo cama</th>
-                                        <th>MP</th>
-                                        <th>Mujer fertil</th>
-                                        <th>Afec. principal</th>
-                                        <th>Comorb1</th>
-                                        <th>Comorb2</th>
-                                        <th>Comorb3</th>
-                                        <th>Intercons1</th>
-                                        <th>Intercons2</th>
-                                        <th>Intercons3</th>
-                                        <th>Preced1</th>
-                                        <th>Preced2</th>
-                                        <th>Preced3</th>
-                                        <th>Preced4</th>
-                                        <th>Preced5</th>
-                                        <th>Med1</th>
-                                        <th>Med2</th>
-                                        <th>Med3</th>
-                                        <th>Alta por</th>
-                                        <th>Otra unidad</th>
-                                        <th>Mtvo consulta</th>
-                                        <th>Nombre Paciente</th>
-                                        <th>Sexo</th>
-                                        <th>Expediente</th>
-                                        <th>Edad</th>
-                                        <th>Curp</th>
-                                        <th>Fecha nac</th>
-                                        <th>Ent nac</th>
-                                        <th>Afiliacion</th>
-                                        <th>Num afil</th>
-                                        <th>Domicilio</th>
-                                        <th>Colonia</th>
-                                        <th>CP</th>
-                                        <th>Municipio</th>
-                                        <th>Localidad</th>
-                                        <th>Ent Dom</th>
-                                        <th>Telefono</th>
-                                        <th>Embarazo</th>
-                                        <th>Sem gesta</th>
-                                        <th>Num gesta</th>
-                                        <th>medico</th>
-                                        <th>sala</th>
-                                        <th>Nombre medico</th>
-                                        <th>Curp Medico</th>
-                                        <th>Cedula</th>
-                                        <th>Turno medico</th>
+                $resultado = $con->query($consulta);
 
-                                    </tr>
-                                </thead>
-                                <tbody>
 
-                                    <?php
-                                    while ($reg = $resultado->fetch_array(MYSQLI_BOTH)) {
+                while ($reg = $resultado->fetch_array(MYSQLI_BOTH)) {
 
-                                        //CONDICION PARA IMPRIMIR F o M SEGUN EL GENERO o SEXO
-                                        if ($reg['sexo'] == 'Femenino') {
+                    //CONDICION PARA IMPRIMIR F o M SEGUN EL GENERO o SEXO
+                    if ($reg['sexo'] == 'Femenino') {
 
-                                            $reg['sexo'] = "F";
+                        $reg['sexo'] = "F";
 
-                                            if ($reg['embarazo'] == 'NO') {
-                                                $reg['semgesta'] = "";
-                                            }
-                                            
-                                        } elseif ($reg['sexo'] == 'Masculino') {
+                        if ($reg['embarazo'] == 'NO') {
+                            $reg['semgesta'] = "";
+                        }
+                    } elseif ($reg['sexo'] == 'Masculino') {
 
-                                            $reg['sexo'] = "M";
-                                            $reg['embarazo'] = '';
-                                            $reg['semgesta'] = '';
-                                        }
+                        $reg['sexo'] = "M";
+                        $reg['embarazo'] = '';
+                        $reg['semgesta'] = '';
+                    }
 
-                                        echo "<tr>
-                                        <td>" . date("d-m-Y H:i:s", strtotime($reg['fechahorarecep'])) . "</td>
-                                        <td>" . $reg['nombre'] . "</td>
-                                        <td>" . $reg['sexo'] . "</td>
-                                        <td>" . $reg['edad'] . "</td>
-                                        <td>" . $reg['embarazo'] . "</td>
-                                        <td>" . $reg['semgesta'] . "</td>
-                                        <td>" . $reg['sala'] . "</td>
-                                        <td>" . $reg['mtvoconsulta'] . "</td>
-                                        <td>" . $reg['medico'] . "</td>
-                                        <td>" . $reg['observaciones'] . "</td>
-                                        </tr>";
-                                    }
-                                    ?>
+                    echo "<tr>
+                                        
+                            <td>" . date("d-m-Y H:i:s", strtotime($reg['fechahorarecep'])) . "</td>
+                            <td>" . date("d-m-Y H:i:s", strtotime($reg['fechaingreso'])) . "</td>
+                            <td>" . date("d-m-Y H:i:s", strtotime($reg['fechaalta'])) . "</td>
+                            <td>" . $reg['tipourgencia'] . "</td>
+                            <td>" . $reg['atnprehosp'] . "</td>
+                            <td>" . $reg['trastrans'] . "</td>
+                            <td>" . $reg['nombreunidad'] . "</td>
+                            <td>" . $reg['tiempotraslado'] . "</td>
+                            <td>" . $reg['motivoatencion'] . "</td>
+                            <td>" . $reg['tipocama'] . "</td>
+                            <td>" . $reg['ministeriopublico'] . "</td>
+                            <td>" . $reg['mujeredadfertil'] . "</td>
+                            <td>" . $reg['afecprincipal'] . "</td>
+                            <td>" . $reg['comorbilidad1'] . "</td>
+                            <td>" . $reg['comorbilidad2'] . "</td>
+                            <td>" . $reg['comorbilidad3'] . "</td>
+                            <td>" . $reg['interconsulta1'] . "</td>
+                            <td>" . $reg['interconsulta2'] . "</td>
+                            <td>" . $reg['interconsulta3'] . "</td>
+                            <td>" . $reg['procedim1'] . "</td>
+                            <td>" . $reg['procedim2'] . "</td>
+                            <td>" . $reg['procedim3'] . "</td>
+                            <td>" . $reg['procedim4'] . "</td>
+                            <td>" . $reg['procedim5'] . "</td>
+                            <td>" . $reg['medicamento1'] . "</td>
+                            <td>" . $reg['medicamento2'] . "</td>
+                            <td>" . $reg['medicamento3'] . "</td>
+                            <td>" . $reg['altapor'] . "</td>
+                            <td>" . $reg['otraunidad'] . "</td>
+                            <td>" . $reg['mtvoconsulta'] . "</td>
+                            <td>" . $reg['nombre'] . "</td>
+                            <td>" . $reg['sexo'] . "</td>
+                            <td>" . $reg['expediente'] . "</td>
+                            <td>" . $reg['edad'] . "</td>
+                            <td>" . $reg['curp'] . "</td>
+                            <td>" . $reg['fechanac'] . "</td>
+                            <td>" . $reg['entidadnac'] . "</td>
+                            <td>" . $reg['afiliacion'] . "</td>
+                            <td>" . $reg['numafiliacion'] . "</td>
+                            <td>" . $reg['domicilio'] . "</td>
+                            <td>" . $reg['colonia'] . "</td>
+                            <td>" . $reg['cp'] . "</td>
+                            <td>" . $reg['municipio'] . "</td>
+                            <td>" . $reg['localidad'] . "</td>
+                            <td>" . $reg['entidaddom'] . "</td>
+                            <td>" . $reg['telefono'] . "</td>
+                            <td>" . $reg['embarazo'] . "</td>
+                            <td>" . $reg['semgesta'] . "</td>
+                            <td>" . $reg['numgesta'] . "</td>
+                            <td>" . $reg['sala'] . "</td>
+                            <td>" . $reg['nm'] . "</td>
+                            <td>" . $reg['curpm'] . "</td>
+                            <td>" . $reg['cedula'] . "</td>
+                            <td>" . $reg['turno'] . "</td>
+                        </tr>";
+                }
+                ?>
 
-                                </tbody>
-                                <tfoot>
-                                    <th>Fecha</th>
-                                    <th>Nombre</th>
-                                    <th>Sexo</th>
-                                    <th>Edad</th>
-                                    <th>Embarazo</th>
-                                    <th>Semanas</th>
-                                    <th>Sala</th>
-                                    <th>Motivo consulta</th>
-                                    <th>Médico</th>
-                                    <th>Observaciones</th>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+            </tbody>
+        </table>
     </div>
-
 
 
     <?php include "../extend/footer.php"; ?>
@@ -218,4 +192,5 @@ if (!isset($_SESSION['idusuario'])) {
 $resultado = null;
 $con->close();
 ob_end_flush();
+
 ?>

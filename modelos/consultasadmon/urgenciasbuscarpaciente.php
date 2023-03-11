@@ -35,7 +35,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                         <div class="row">
                             <div class="col-sm-4">
-                                <a href="index.php" class="btn btn-primary">
+                                <a href="urgenciasindex.php" class="btn btn-primary">
                                     Regresar <span class="fa fa-plus-circle"></span>
                                 </a>
                             </div>

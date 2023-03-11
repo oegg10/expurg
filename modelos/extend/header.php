@@ -51,7 +51,8 @@ if (!isset($_SESSION['idusuario'])) {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="../pacientes/buscarPacienteAuto.php">Pacientes</a>
+                        <!--<a class="nav-link" href="../pacientes/buscarPacienteAuto.php">Pacientes</a>-->
+                        <a class="nav-link" href="../consultas/consultasExcel.php">Exportar consultas Excel C1</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -64,9 +65,8 @@ if (!isset($_SESSION['idusuario'])) {
                             <a class="dropdown-item" href="../reportes/reporteConsultados.php">Consultas</a>
                             <a class="dropdown-item" href="../reportes/reporteNSP.php">Pacientes N.S.P.</a>
                             <a class="dropdown-item" href="../reportes/triageReporte.php">Triages</a>
-                            <!-- <a class="dropdown-item" href="../reportes/repCons1.php">Consulta pacientes C1</a> -->
+                            <a class="dropdown-item" href="../reportes/repCons1.php">Consultas</a>
 
-                            <a class="dropdown-item" href="../reportes/repConsultasExcel.php">Consultas</a>
                         </div>
                     </li>
                 </ul>
