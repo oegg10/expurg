@@ -93,7 +93,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                 error_reporting(0);
 
-                $consulta = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, p.idpaciente, p.nombre, r.idrecepcion, r.edad, r.fechahorarecep, r.mtvoconsulta, p.expediente, p.curp, p.fechanac, p.entidadnac, p.sexo, p.afiliacion, p.numafiliacion, p.domicilio, p.colonia, p.cp, p.municipio, p.localidad, p.entidaddom, p.telefono, r.embarazo, r.semgesta, r.numgesta, r.sala, r.observaciones, u.nombre AS nm, u.curp AS curpm, u.cedula, u.turno FROM consultas c INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE c.condicion = 1 AND DATE(c.fechaalta) >= '$fechai' AND DATE(c.fechaalta) <= '$fechaf' ORDER BY c.fechaalta ASC";
+                $consulta = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, p.idpaciente, p.nombre, r.idrecepcion, r.edad, r.fechahorarecep, r.mtvoconsulta, p.expediente, p.curp, p.fechanac, p.entidadnac, p.sexo, p.afiliacion, p.numafiliacion, p.domicilio, p.colonia, p.cp, p.municipio, p.localidad, p.entidaddom, p.telefono, r.embarazo, r.semgesta, r.numgesta, r.sala, r.observaciones, u.nombre AS nm, u.curp AS curpm, u.cedula, u.turno FROM consultas c INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE c.condicion = 1 AND DATE(c.fechaalta) >= '$fechai' AND DATE(c.fechaalta) <= '$fechaf' ORDER BY c.fechaalta ASC";
 
                 $resultado = $con->query($consulta);
 
@@ -152,7 +152,7 @@ if (!isset($_SESSION['idusuario'])) {
                             <td>" . $reg['expediente'] . "</td>
                             <td>" . $reg['edad'] . "</td>
                             <td>" . $reg['curp'] . "</td>
-                            <td>" . $reg['fechanac'] . "</td>
+                            <td>" . date("d-m-Y", strtotime($reg['fechanac'])) . "</td>
                             <td>" . $reg['entidadnac'] . "</td>
                             <td>" . $reg['afiliacion'] . "</td>
                             <td>" . $reg['numafiliacion'] . "</td>
