@@ -18,6 +18,75 @@ if (!isset($_SESSION['idusuario'])) {
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
 
+    if (!empty($_POST)) {
+
+        //https://www.php.net/manual/es/function.preg-replace.php      
+        $idexpediente = mysqli_real_escape_string($con, $_POST['idexpediente']);
+        $nombrep = mysqli_real_escape_string($con, $_POST['nombrep']);
+        $curp = mysqli_real_escape_string($con, $_POST['curp']);
+        $tipopaciente = mysqli_real_escape_string($con, $_POST['tipopaciente']);
+        $estado = mysqli_real_escape_string($con, $_POST['estado']);
+        $observaciones = mysqli_real_escape_string($con, $_POST['observaciones']);
+
+        $idusuario = $_SESSION['idusuario'];
+
+        /*echo $nombrep . "<br>";
+        echo $curp . "<br>";
+        echo $tipopaciente . "<br>";
+        echo $estado . "<br>";
+        echo $observaciones . "<br>";*/
+
+        /* VALIDACION DE DATOS */
+        $validacion = array();
+
+        //CURP
+        if ($curp == "" && $tipopaciente == "Ninguno") {
+            array_push($validacion, "La CURP no puede estar vacía o incompleta y el tipo de paciente no puede ser NINGUNO");
+        }
+
+        if (substr($curp, 0, 4) == "XXXX") {
+            array_push($validacion, "El campo CURP no debe empezar con XXXX utilice la página CURPS que se encuentra en una de las pestañas para obtener la CURP");
+        }
+
+        //nombre
+        if ($nombrep == "" || strlen($nombrep) < 4 || strlen($nombrep) > 200) {
+            array_push($validacion, "El campo NOMBRE no debe estar vacío, o no cumple con las especificaciones");
+        }
+
+        //Conteo de validaciones
+        if (count($validacion) > 0) {
+            echo "<div class='error'>";
+            for ($i = 0; $i < count($validacion); $i++) {
+                echo "<li style = 'color: red;'>" . $validacion[$i] . "</li>";
+            }
+            echo "</div>";
+        } else {
+
+            //==========================================================================================
+
+
+            //Realizamos la inserción de los datos
+            $editar = "UPDATE exparchivo SET nombrep='$nombrep',
+                    curp='$curp',
+                    tipopaciente='$tipopaciente',
+                    estado='$estado',
+                    observaciones='$observaciones',
+                    idusuario='$idusuario',
+                    fechaalta=NOW() WHERE idexpediente = '$idexpediente'";
+
+            $editado = $con->query($editar);
+
+            if ($editado > 0) {
+                header('location:../extend/alerta.php?msj=EL registro a sido actualizado&c=exp&p=in&t=success');
+            } else {
+
+                header('location:../extend/alerta.php?msj=Error al actualizar registro&c=exp&p=in&t=error');
+            }
+
+            $con->close();
+        }
+    }
+
 ?>
 
     <div class="container-fluid">
@@ -29,7 +98,7 @@ if (!isset($_SESSION['idusuario'])) {
                     </div>
                     <div class="card-body">
 
-                        <form action="editar.php" method="POST" autocomplete="off">
+                        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                             <div class="row">
 
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -51,7 +120,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <label>Tipo de paciente (*):</label>
                                     <select class="form-control" name="tipopaciente" id="tipopaciente" required>
                                         <option value="<?php echo $fila['tipopaciente']; ?>"><?php echo $fila['tipopaciente']; ?></option>
-                                        <option value="Ninguno" disabled selected>Ninguno</option>
+                                        <option value="Ninguno">Ninguno</option>
                                         <option value="Sin Identidad">Sin Identidad</option>
                                         <option value="Desconocido">Desconocido</option>
                                         <option value="Extranjero">Extranjero</option>
