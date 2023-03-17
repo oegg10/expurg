@@ -15,7 +15,7 @@ if (!isset($_SESSION['idusuario'])) {
     $id = $_GET['id'];
     $idr = $_GET['idr'];
 
-    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre AS np, p.curp, p.fechanac, r.edad,p.sexo,r.mtvoconsulta, u.nombre AS nm, u.curp AS cm, u.cedula, u.turno FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE idconsulta = '$id' AND r.idrecepcion = '$idr'";
+    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre AS np, p.expediente, p.curp, p.fechanac, r.edad,p.sexo,r.mtvoconsulta, u.nombre AS nm, u.curp AS cm, u.cedula, u.turno FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE idconsulta = '$id' AND r.idrecepcion = '$idr'";
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
 
@@ -42,17 +42,19 @@ if (!isset($_SESSION['idusuario'])) {
                 <table class="table table-striped table-bordered table-condensed table-hover" style="border-collapse: collapse; width: 100%; height: 36px; margin-bottom: 0px;" border="1">
                     <tbody>
                         <tr style="height: 36px;">
-                            <td style="width: 50%; text-align: center; height: 36px;"><strong>Nombre</strong></td>
+                            <td style="width: 10%; text-align: center; height: 36px;"><strong>Expediente</strong></td>
+                            <td style="width: 42%; text-align: center; height: 36px;"><strong>Nombre</strong></td>
                             <td style="width: 20%; text-align: center; height: 36px;"><strong>CURP</strong></td>
-                            <td style="width: 16%; text-align: center; height: 36px;"><strong>Fecha nac.</strong></td>
+                            <td style="width: 14%; text-align: center; height: 36px;"><strong>Fecha nac.</strong></td>
                             <td style="width: 7%; text-align: center; height: 36px;"><strong>Edad</strong></td>
                             <td style="width: 7%; text-align: center; height: 36px;"><strong>Sexo</strong></td>
                         </tr>
                         <!--DATOS-->
                         <tr style="height: 18px;">
-                            <td style="width: 50%; height: 18px; font-size: 20px;"><?php echo $fila['np']; ?></td>
+                            <td style="width: 10%; height: 18px; font-size: 20px;"><?php echo $fila['expediente']; ?></td>
+                            <td style="width: 42%; height: 18px; font-size: 20px;"><?php echo $fila['np']; ?></td>
                             <td style="width: 20%; height: 18px; font-size: 20px;"><?php echo $fila['curp']; ?></td>
-                            <td style="width: 16%; height: 18px; text-align: center; font-size: 20px;"><?php echo $fnac; ?></td>
+                            <td style="width: 14%; height: 18px; text-align: center; font-size: 20px;"><?php echo $fnac; ?></td>
                             <td style="width: 7%; height: 18px; text-align: center; font-size: 20px;"><?php echo $fila['edad']; ?></td>
                             <td style="width: 7%; height: 18px; text-align: center; font-size: 20px;">
                                 <?php

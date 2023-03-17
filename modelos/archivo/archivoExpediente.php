@@ -12,6 +12,72 @@ if (!isset($_SESSION['idusuario'])) {
         header("Location:../../index.php");
     }
 
+    if (!empty($_POST)) {
+
+        //https://www.php.net/manual/es/function.preg-replace.php
+        $nombrep = preg_replace('/\s\s+/', ' ', mysqli_real_escape_string($con, $_POST['nombrep']));
+        $curp = mysqli_real_escape_string($con, $_POST['curp']);
+        $tipopaciente = mysqli_real_escape_string($con, $_POST['tipopaciente']);
+        $estado = mysqli_real_escape_string($con, $_POST['estado']);
+        $observaciones = mysqli_real_escape_string($con, $_POST['observaciones']);
+
+        $idusuario = $_SESSION['idusuario'];
+
+        /*echo $nombrep . "<br>";
+        echo $curp . "<br>";
+        echo $tipopaciente . "<br>";
+        echo $estado . "<br>";
+        echo $observaciones . "<br>";*/
+
+        /* VALIDACION DE DATOS */
+
+        $validacion = array();
+
+        //CURP
+
+        if ($curp == "" && $tipopaciente == "Ninguno") {
+            array_push($validacion, "La CURP no puede estar vacía o incompleta y el tipo de paciente no puede ser NINGUNO");
+        }
+
+        if (substr($curp, 0, 4) == "XXXX") {
+            array_push($validacion, "El campo CURP no debe empezar con XXXX utilice la página CURPS que se encuentra en una de las pestañas para obtener la CURP");
+        }
+
+        //nombre
+        if ($nombrep == "" || strlen($nombrep) < 4 || strlen($nombrep) > 200) {
+            array_push($validacion, "El campo NOMBRE no debe estar vacío, o no cumple con las especificaciones");
+        }
+
+        //Conteo de validaciones
+        if (count($validacion) > 0) {
+            echo "<div class='error'>";
+            for ($i = 0; $i < count($validacion); $i++) {
+                echo "<li style = 'color: red;'>" . $validacion[$i] . "</li>";
+            }
+            echo "</div>";
+        } else {
+
+            //==========================================================================================
+
+            //Realizamos la inserción de los datos
+
+            $sql = "INSERT INTO exparchivo(nombrep, curp, tipopaciente, estado, observaciones, idusuario, fechaalta) VALUES ('$nombrep','$curp','$tipopaciente','$estado','$observaciones','$idusuario', NOW())";
+
+            $resultado = $con->query($sql);
+
+            if ($resultado > 0) {
+
+                header('location:../extend/alerta.php?msj=EL paciente a sido registrado&c=exp&p=in&t=success');
+            } else {
+
+                header('location:../extend/alerta.php?msj=Error al registrar al paciente&c=exp&p=in&t=error');
+            }
+
+            $con->close();
+        }
+    }
+
+
 ?>
 
     <div class="container-fluid">
@@ -24,7 +90,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                     <div class="card-body">
 
-                        <form action="insExpediente.php" method="POST" autocomplete="off" onsubmit="return validar();">
+                        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                             <div class="row">
 
                                 <div class="form-group col-lg-7 col-md-7 col-sm-7 col-xs-12">
@@ -39,8 +105,8 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <label>Tipo de paciente (*):</label>
-                                    <select class="form-control" name="tipopaciente" id="tipopaciente" required>
-                                        <option value="Ninguno" disabled selected>Ninguno</option>
+                                    <select class="form-control" name="tipopaciente" id="tipopaciente">
+                                        <option value="Ninguno">Ninguno</option>
                                         <option value="Sin Identidad">Sin Identidad</option>
                                         <option value="Desconocido">Desconocido</option>
                                         <option value="Extranjero">Extranjero</option>
@@ -63,7 +129,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <label>Observaciones:</label>
                                     <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="250" placeholder="Observaciones" onblur="may(this.value, this.id)">
                                 </div>
-                                
+
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -19,12 +19,12 @@ if (!isset($_SESSION['idusuario'])) {
         $fechai = $_POST['fechai'];
         $fechaf = $_POST['fechaf'];
 
-        $consulta = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.observaciones, r.condicion, r.idusuario, c.idconsulta, c.fechaalta, c.idusuario, u.nombre AS nm FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON r.idrecepcion = c.idrecepcion INNER JOIN usuarios u ON u.idusuario = c.idusuario WHERE r.condicion = 2 AND DATE(r.fechahorarecep) >= '$fechai' AND DATE(r.fechahorarecep) <= '$fechaf'";
+        $consulta = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.observaciones, r.condicion, r.idusuario, c.idconsulta, c.fechaalta, c.idusuario AS idmedico, u.nombre AS nm FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON r.idrecepcion = c.idrecepcion INNER JOIN usuarios u ON u.idusuario = c.idusuario WHERE r.condicion = 2 AND DATE(r.fechahorarecep) >= '$fechai' AND DATE(r.fechahorarecep) <= '$fechaf'";
 
         $resultado = $con->query($consulta);
     } else {
 
-        $consulta = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.observaciones, r.condicion, r.idusuario, c.idconsulta, c.fechaalta, c.idusuario, u.nombre AS nm FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON r.idrecepcion = c.idrecepcion INNER JOIN usuarios u ON u.idusuario = c.idusuario WHERE r.condicion = 2 AND DATE(r.fechahorarecep) = CURDATE()";
+        $consulta = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.observaciones, r.condicion, r.idusuario, c.idconsulta, c.fechaalta, c.idusuario AS idmedico, u.nombre AS nm FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON r.idrecepcion = c.idrecepcion INNER JOIN usuarios u ON u.idusuario = c.idusuario WHERE r.condicion = 2 AND DATE(r.fechahorarecep) = CURDATE()";
 
         $resultado = $con->query($consulta);
     }

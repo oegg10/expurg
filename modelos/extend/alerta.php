@@ -37,6 +37,11 @@ include_once '../../conexion/conexion.php';
         case 'rec':
             $carpeta = '../recepcion/';
             break;
+
+        case 'exp':
+            $carpeta = '../archivo/';
+            break;
+            
     }
 
     switch ($p) {
