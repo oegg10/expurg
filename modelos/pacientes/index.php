@@ -33,7 +33,7 @@ if (!isset($_SESSION['idusuario'])) {
         $inicio = ($num_registros * $res);
     }
 
-    $pacientes = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.sexo, p.fechanac, p.estado, p.fechaalta, p.idusuario, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario ORDER BY idpaciente DESC LIMIT $inicio,$num_registros";
+    $pacientes = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.sexo, p.fechanac, p.estado, p.fechaalta, p.idusuario, p.condicion, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario ORDER BY idpaciente DESC LIMIT $inicio,$num_registros";
 
     $resultado = $con->query($pacientes);
 
@@ -101,8 +101,15 @@ if (!isset($_SESSION['idusuario'])) {
                                                 <td>" . $reg['curp'] . "</td>
                                                 <td>" . date("d-m-Y", strtotime($reg['fechanac'])) . "</td>";
 
-
-                                        if ($reg['estado'] == 'Activo') {
+                                        //==========CONDICION DEL PACIENTE=========
+                                        if ($reg['condicion'] == 1) {
+                                            echo "<td><span class='text-primary'><strong>Activo</strong></span></td>";
+                                        } elseif ($reg['condicion'] == 0) {
+                                            echo "<td><span class='text-danger'><strong>Desactivado</strong></span></td>";
+                                        }
+                                        
+                                        //=============ESTADO DEL EXPEDIENTE=========================
+                                        /*if ($reg['estado'] == 'Activo') {
                                             echo "<td><span class='text-primary'><strong>Activo</strong></span></td>";
                                         } elseif ($reg['estado'] == 'Depurado') {
                                             echo "<td><span class='text-info'><strong>Depurado</strong></span></td>";
@@ -110,7 +117,7 @@ if (!isset($_SESSION['idusuario'])) {
                                             echo "<td><span class='text-danger'><strong>Defunción</strong></span></td>";
                                         } elseif ($reg['estado'] == 'Depurado y nvo. número') {
                                             echo "<td><span class='text-warning'><strong>Depurado y nvo. número</strong></span></td>";
-                                        }
+                                        }*/
 
                                         //<td>" . $reg['estado'] . "</td>
                                         echo "<td>" . $reg['fechaalta'] . "</td>

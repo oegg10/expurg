@@ -103,9 +103,16 @@ if (!isset($_SESSION['idusuario'])) {
                                         echo "<tr>
                                                 <td><span class='text-dark'><strong>" . $reg['idexpediente'] . "</strong></span></td>
                                                 <td>" . $reg['nombrep'] . "</td>
-                                                <td>" . $reg['curp'] . "</td>
-                                                <td>" . $reg['tipopaciente'] . "</td>
-                                                <td>" . $reg['nombretrabajador'] . "</td>
+                                                <td>" . $reg['curp'] . "</td>";
+
+                                                if ($reg['tipopaciente'] != 'Ninguno') {
+                                                    echo "<td><span class='text-danger'><strong>".$reg['tipopaciente']."</strong></span></td>";
+                                                }else{
+                                                    echo "<td><span class='text-success'><strong>".$reg['tipopaciente']."</strong></span></td>";
+                                                }
+
+                                                //<td>" . $reg['tipopaciente'] . "</td>
+                                                echo "<td>" . $reg['nombretrabajador'] . "</td>
                                                 <td>" . $reg['otros'] . "</td>";
 
                                         if ($reg['estado'] == 'ACTIVO' || $reg['estado'] == '') {
