@@ -6,6 +6,9 @@ source /home/cen/Escritorio/expurg.sql
 
 source /home/kike/Escritorio/expurg.sql
 ========================================
+========== COMPARAR CURPS ========================
+SELECT p.nombre, p.curp, e.idexpediente, e.nombrep, e.curp FROM pacientes p INNER JOIN exparchivo e ON p.curp = e.curp ORDER BY e.idexpediente
+==================================================
 
 
 

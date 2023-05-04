@@ -7,8 +7,6 @@ $tmp = "";
 $sql = "SELECT idpaciente,nombre,curp,numafiliacion FROM pacientes LIMIT 1,3";
 
 if ($_POST["texto"] != "") {
-    
-    //$sql = "SELECT idpaciente,nombre,curp,numafiliacion FROM pacientes WHERE nombre LIKE '%".$_POST["texto"]."%' OR curp LIKE '%".$_POST["texto"]."%'";
 
     $sql = "SELECT idpaciente,nombre,curp,numafiliacion FROM pacientes WHERE curp LIKE '".$_POST["texto"]."%'";
 

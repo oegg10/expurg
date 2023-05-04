@@ -39,10 +39,10 @@ if (!isset($_SESSION['idusuario'])) {
                         <form action="ins_paciente.php" method="POST" autocomplete="off" onsubmit="return validar();">
                             <div class="row">
 
-                                <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <!--<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <label>No. Expediente | <small><strong style="color: red;">Solo para archivo</strong></small></label>
                                     <input type="text" class="form-control" name="expediente" id="expediente" placeholder="Núm. expediente">
-                                </div>
+                                </div>-->
 
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <label>CURP(*) | <small><strong style="color: red;">Capturar correctamente la CURP</strong></small></label>

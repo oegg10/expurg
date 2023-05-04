@@ -15,7 +15,8 @@
 
 include "../extend/header.php";
 
-date_default_timezone_set('America/Mexico_City'); //Establece la zona horaria en México
+date_default_timezone_set('America/Chihuahua'); //Establece la zona horaria en México
+//date_default_timezone_set('America/Mexico_City'); //Establece la zona horaria en México
 
 if (!isset($_SESSION['idusuario'])) {
     header("Location: ../../index.php");
@@ -26,6 +27,7 @@ if (!isset($_SESSION['idusuario'])) {
     }
 
     $id = $_GET['idrecep'];
+    //$fecha_inicio = date("Y-m-d h:i:s");
 
     $sql = "SELECT r.idrecepcion,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE r.idrecepcion = '$id'";
     $resultado = $con->query($sql);
@@ -293,7 +295,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <!-- ======= HOJA DE URGENCIAS =============-->
                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                         <!-- Este campo está oculto -->
-                                        <input type="hidden" class="form-control" name="fechaingreso" id="fechaingreso" value="<?php echo date("Y-m-d H:i:s"); ?>"> <!-- style="visibility:hidden" -->
+                                        <input type="hidden" class="form-control" name="fechaingreso" id="fechaingreso" value="<?php //echo $fecha_inicio; ?>">
 
                                         <label>Atención prehospitalaria (*):</label>
                                         <select class='form-control' name='atnprehosp' id='atnprehosp' required>
@@ -483,10 +485,6 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <!-- 12 -->
 
-                                    <!-- <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                    <label>Fecha de Alta (*):</label>
-                                    <input type="hidden" class="form-control" name="fechaalta" id="fechaalta" required> -->
-
 
                                 </div>
 
@@ -513,6 +511,15 @@ if (!isset($_SESSION['idusuario'])) {
     </main>
 
     <?php include "../extend/footer.php"; ?>
+
+    <script>
+        var today = new Date();
+        var date = today.toISOString().slice(0, 10);
+        var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+        var dateTime = date + ' ' + time;
+
+        document.getElementById('fechaingreso').value = dateTime;
+    </script>
 
     <script>
         function borra() {

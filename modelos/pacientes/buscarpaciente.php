@@ -18,7 +18,7 @@ if (!isset($_SESSION['idusuario'])) {
         header("location:index.php");
     }
 
-    $pacientes = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.fechanac, p.sexo, p.estado, p.idusuario, u.idusuario, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario WHERE (p.nombre LIKE '%$buscar%' OR p.curp LIKE '%$buscar%') ORDER BY curp ASC";
+    $pacientes = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.fechanac, p.sexo, p.estado, p.idusuario, p.condicion, u.idusuario, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario WHERE (p.nombre LIKE '%$buscar%' OR p.curp LIKE '%$buscar%') ORDER BY curp ASC";
 
     $resultado = $con->query($pacientes);
 
@@ -70,7 +70,15 @@ if (!isset($_SESSION['idusuario'])) {
                                                 <td>" . $reg['curp'] . "</td>
                                                 <td>" . $reg['fechanac'] . "</td>";
 
-                                                if ($reg['estado'] == 'Activo') {
+                                        //==========CONDICION DEL PACIENTE=========
+                                        if ($reg['condicion'] == 1) {
+                                            echo "<td><span class='text-primary'><strong>Activo</strong></span></td>";
+                                        } elseif ($reg['condicion'] == 0) {
+                                            echo "<td><span class='text-danger'><strong>Desactivado</strong></span></td>";
+                                        }
+
+                                        //=============ESTADO DEL EXPEDIENTE=========================
+                                        /*if ($reg['estado'] == 'Activo') {
                                                     echo "<td><span class='text-primary'><strong>Activo</strong></span></td>";
                                                 } elseif ($reg['estado'] == 'Depurado') {
                                                     echo "<td><span class='text-info'><strong>Depurado</strong></span></td>";
@@ -78,15 +86,24 @@ if (!isset($_SESSION['idusuario'])) {
                                                     echo "<td><span class='text-danger'><strong>Defunción</strong></span></td>";
                                                 } elseif ($reg['estado'] == 'Depurado y nvo. número') {
                                                     echo "<td><span class='text-warning'><strong>Depurado y nvo. número</strong></span></td>";
-                                                }
+                                                }*/
 
-                                                //<td>" . $reg['estado'] . "</td>
-                                                echo "<td>" . $reg['usuario'] . "</td>
+                                        //<td>" . $reg['estado'] . "</td>
+                                        echo "<td>" . $reg['usuario'] . "</td>
                                                 <td class='btn-group'>
                                                     <a href='../../modelos/recepcion/recepcion.php?id=" . $reg['idpaciente'] . "' type='button' class='btn btn-success' title='Crear recepción'><i class='fa fa-check'></i></a>
                                                     <a href='../../modelos/reportes/repPaciente.php?id=" . $reg['idpaciente'] . "' type='button' class='btn btn-secundary' title='Historial del paciente'><i class='fa fa-address-book-o'></i></a>
-                                                    <a href='../pacientes/edit_paciente.php?id=" . $reg['idpaciente'] . "' type='button' class='btn btn-warning' title='Editar paciente'><i class='fa fa-pencil'></i></a>
-                                                </td>
+                                                    <a href='../pacientes/edit_paciente.php?id=" . $reg['idpaciente'] . "' type='button' class='btn btn-warning' title='Editar paciente'><i class='fa fa-pencil'></i></a>";
+
+                                                    if ($reg['condicion'] == 1) {
+                                                        echo "<a href='../pacientes/desactivarPaciente.php?id=" . $reg['idpaciente'] . "' type='button' class='btn btn-danger' title='Desactivar paciente'><i class='fa fa-lock'></i></a>";
+                                                    } else {
+                                                        echo "<a href='../pacientes/activarPaciente.php?id=" . $reg['idpaciente'] . "' type='button' class='btn btn-dark' title='Activar paciente'><i class='fa fa-unlock'></i></a>";
+                                                    }
+
+                                                    //<a href='../pacientes/desactivarPaciente.php?id=" . $reg['idpaciente'] . "' type='button' class='btn btn-danger' title='Desactivar paciente'><i class='fa fa-ban'></i></a>
+
+                                                echo "</td>
                                             </tr>";
                                     }
                                     ?>

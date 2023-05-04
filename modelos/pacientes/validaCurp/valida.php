@@ -4,11 +4,12 @@ include_once "../../../conexion/conexion.php";
 
 $tmp = "";
 
-$sql = "SELECT idpaciente,nombre,curp,numafiliacion FROM pacientes LIMIT 1,3";
+$sql = "SELECT idpaciente,expediente,nombre,curp,estado,condicion FROM pacientes LIMIT 1,3";
+//$sql = "SELECT idpaciente,nombre,curp,numafiliacion FROM pacientes LIMIT 1,3";
 
 if ($_POST["texto"] != "") {
     
-    $sql = "SELECT idpaciente,expediente,nombre,curp,estado FROM pacientes WHERE curp LIKE '".$_POST["texto"]."%'";
+    $sql = "SELECT idpaciente,expediente,nombre,curp,estado,condicion FROM pacientes WHERE condicion = 1 AND curp LIKE '".$_POST["texto"]."%'";
 
 }
 
