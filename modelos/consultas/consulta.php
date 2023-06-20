@@ -15,7 +15,7 @@
 
 include "../extend/header.php";
 
-date_default_timezone_set('America/Chihuahua'); //Establece la zona horaria en México
+//date_default_timezone_set('America/Chihuahua'); //Establece la zona horaria en Chihuahua
 //date_default_timezone_set('America/Mexico_City'); //Establece la zona horaria en México
 
 if (!isset($_SESSION['idusuario'])) {
@@ -27,9 +27,10 @@ if (!isset($_SESSION['idusuario'])) {
     }
 
     $id = $_GET['idrecep'];
+    //FECHA Y HORA
     //$fecha_inicio = date("Y-m-d h:i:s");
 
-    $sql = "SELECT r.idrecepcion,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE r.idrecepcion = '$id'";
+    $sql = "SELECT r.idrecepcion,r.fechahorarecep,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE r.idrecepcion = '$id'";
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
 
@@ -40,6 +41,7 @@ if (!isset($_SESSION['idusuario'])) {
 
         $idrecepcion = isset($_POST["idrecepcion"]) ? mysqli_real_escape_string($con, $_POST['idrecepcion']) : "";
         $fechaingreso = isset($_POST["fechaingreso"]) ? mysqli_real_escape_string($con, $_POST['fechaingreso']) : "";
+        $fechaalta = isset($_POST["fechaalta"]) ? mysqli_real_escape_string($con, $_POST['fechaalta']) : "";
 
         //NOTA DE INGRESO DE URGENCIAS
         $fc = isset($_POST["fc"]) ? mysqli_real_escape_string($con, $_POST['fc']) : "";
@@ -80,50 +82,10 @@ if (!isset($_SESSION['idusuario'])) {
         $medicamento1 = isset($_POST["medicamento1"]) ? mysqli_real_escape_string($con, $_POST['medicamento1']) : "";
         $medicamento2 = isset($_POST["medicamento2"]) ? mysqli_real_escape_string($con, $_POST['medicamento2']) : "";
         $medicamento3 = isset($_POST["medicamento3"]) ? mysqli_real_escape_string($con, $_POST['medicamento3']) : "";
-        //$fechaalta = isset($_POST["fechaalta"]) ? mysqli_real_escape_string($con, $_POST['fechaalta']) : "";
 
         $notaingresourg = trim($notaingresourg);
         $idusuario = $_SESSION['idusuario'];
 
-        //VALIDACIÓN DE CAMPOS
-        $validacion = array();
-
-        if ($notaingresourg == "") {
-            array_push($validacion, "La nota de urgencias no puede estar vacía");
-        }
-
-        if ($atnprehosp == "") {
-            array_push($validacion, "La atención pre-hospitalaria no puede estar vacía");
-        }
-
-        if ($tipourgencia == "") {
-            array_push($validacion, "El tipo de urgencia no puede estar vacío");
-        }
-
-        if ($motivoatencion == "") {
-            array_push($validacion, "El motivo de atención no puede estar vacío");
-        }
-
-        if ($tipocama == "") {
-            array_push($validacion, "El tipo de cama no puede estar vacío");
-        }
-
-        if ($altapor == "") {
-            array_push($validacion, "Alta por: no puede estar vacío");
-        }
-
-        if ($afecprincipal == "") {
-            array_push($validacion, "La afección principal no puede estar vacía");
-        }
-
-        //Conteo de validaciones
-        if (count($validacion) > 0) {
-            echo "<div class='error'>";
-            for ($i = 0; $i < count($validacion); $i++) {
-                echo "<li>" . $validacion[$i] . "</li>";
-            }
-            echo "</div>";
-        }
 
         if ($altapor === 'Observación') {
 
@@ -143,7 +105,7 @@ if (!isset($_SESSION['idusuario'])) {
         } else {
 
             //Realizamos la inserción de los datos
-            $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', NOW(), '1', '$idusuario')";
+            $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$fechaalta', '1', '$idusuario')";
 
             $resins = $con->query($sql);
 
@@ -179,6 +141,9 @@ if (!isset($_SESSION['idusuario'])) {
 
                         <h5>CONSULTA DE URGENCIAS</h5>
                         <hr>
+                        <div style="color: red;">
+                            <h3>Favor de capturar la fecha y hora de ingreso y la fecha y hora de alta, en formato de 24 horas. Gracias.</h3>
+                        </div>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
 
@@ -214,14 +179,29 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <!-- 12 -->
 
-                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group col-lg-7 col-md-7 col-sm-7">
                                         <h6>NOTA MEDICA DE INGRESO A URGENCIAS:</h6>
+                                    </div>
+
+                                    <div class="form-group col-lg-5 col-md-5 col-sm-5">
+                                        <label for="fechahorarecep" style="color: blue;">Fecha y hora de recepción urgencias: </label>
+                                        <input type="text" style="background-color: aquamarine;" value="<?php echo date("d/m/Y - H:i", strtotime($fila['fechahorarecep'])); ?>" readonly>
                                     </div>
 
                                     <!-- 12 -->
 
-                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                         <h6>Signos vitales:</h6>
+                                    </div>
+
+                                    <div class="form-group col-lg-5 col-md-5 col-sm-5">
+                                        <label for="fechaingreso" style="color: red;">Fecha y hora de inicio de la consulta*: </label>
+                                        <input type="datetime-local" id="fechaingreso" name="fechaingreso" min="2023-06-01T00:00" required>
+                                    </div>
+
+                                    <div class="form-group col-lg-5 col-md-5 col-sm-5">
+                                        <label for="fechaalta" style="color: red;">Fecha y hora de alta*: </label>
+                                        <input type="datetime-local" id="fechaalta" name="fechaalta" min="2023-06-01T00:00" required>
                                     </div>
 
                                     <!-- 12 -->
@@ -281,7 +261,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <textarea name="notaingresourg" id="notaingresourg" rows="10" cols="150" placeholder="Agregar la nota medica del servicio de urgencias" onClick="borra()" onblur="may(this.value, this.id)" value="" required>
+                                        <textarea name="notaingresourg" id="notaingresourg" rows="10" cols="150" placeholder="Agregar la nota medica del servicio de urgencias" onblur="may(this.value, this.id)" value="" required>
                                         </textarea>
                                     </div>
 
@@ -294,9 +274,6 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <!-- ======= HOJA DE URGENCIAS =============-->
                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
-                                        <!-- Este campo está oculto -->
-                                        <input type="hidden" class="form-control" name="fechaingreso" id="fechaingreso" value="<?php //echo $fecha_inicio; ?>">
-
                                         <label>Atención prehospitalaria (*):</label>
                                         <select class='form-control' name='atnprehosp' id='atnprehosp' required>
                                             <option value='' disabled selected>Atención prehospitalaria</option>
@@ -415,7 +392,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                         <hr>
-                                        <h6><label>ESPECIALIDAD:</label></h6>
+                                        <h6><label>ESPECIALIDAD O INTERCONSULTAS:</label></h6>
                                         <input type="text" class="form-control" name="interconsulta1" id="interconsulta1" maxlength="50" placeholder="Especialidad" onblur="may(this.value, this.id)">
                                     </div>
 
@@ -485,10 +462,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <!-- 12 -->
 
-
                                 </div>
-
-
 
                                 <!-- 12 -->
 
@@ -496,38 +470,24 @@ if (!isset($_SESSION['idusuario'])) {
                                     <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" name="Guardar" id="Guardar"><i class="fa fa-save"> Guardar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
+                                </div>
+
+                            </form>
+
+                            <div id="error"></div>
+
                         </div>
                     </div>
-
-                    </form>
-
-                    <div id="error"></div>
-
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </main>
 
     <?php include "../extend/footer.php"; ?>
 
     <script>
-        var today = new Date();
-        var date = today.toISOString().slice(0, 10);
-        var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-        var dateTime = date + ' ' + time;
-
-        document.getElementById('fechaingreso').value = dateTime;
-    </script>
-
-    <script>
-        function borra() {
-            if (document.getElementById('notaingresourg').value == "                                        ")
-                document.getElementById('notaingresourg').value = "";
-        }
-
-        //document.getElementById('notaingresourg').trim();
+        document.getElementById("notaingresourg").value = "";
     </script>
 
     <script src="validacion.js"></script>

@@ -46,14 +46,10 @@ if (!isset($_SESSION['idusuario'])) {
     $totalMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones WHERE YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
     $respMes = $con->query($totalMes);
     /*==============================================================================*/
+
     /*========EMBARAZOS POR MES=========================================================*/
-
-    /*$embarazoMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE embarazo='SI' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
-    $embMes = $con->query($embarazoMes);*/
-
     $embarazoMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala='GINECOLOGIA' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
     $embMes = $con->query($embarazoMes);
-
     /*==============================================================================*/
 
     /*======== CONSULTORIO 1========================================================*/
@@ -70,11 +66,29 @@ if (!isset($_SESSION['idusuario'])) {
 
     /*==============================================================================*/
 
-
     /*========NO SE PRESENTO POR MES=========================================================*/
-
     $nosepresentoMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS nsp FROM recepciones WHERE condicion=3 AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
     $nspMes = $con->query($nosepresentoMes);
+    /*==============================================================================*/
+
+    /*========RECEPCIONES AÑO ACTUAL=========================================================*/
+    $rAa = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones WHERE YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
+    $recepcionesAnioActual = $con->query($rAa);
+    /*==============================================================================*/
+
+    /*======== RECEPCIONES POR AÑO =========================================================*/
+    $rPa = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
+    $recepcionesPorAnio = $con->query($rPa);
+    /*==============================================================================*/
+
+    /*======== RECEPCIONES POR AÑO EMBARAZO =========================================================*/
+    $rPaE = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones WHERE sala='GINECOLOGIA' GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
+    $recepcionesPorAnioEmbarazo = $con->query($rPaE);
+    /*==============================================================================*/
+
+    /*======== RECEPCIONES POR AÑO URGENCIAS =========================================================*/
+    $rPaU = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones WHERE sala<>'GINECOLOGIA' GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
+    $recepcionesPorAnioUrgencias = $con->query($rPaU);
     /*==============================================================================*/
 
 
@@ -103,9 +117,9 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="card-body text-success">
                                         <h5 class="card-title">Recepciones hoy</h5>
                                         <p class="card-text">
-                                            <h1>
-                                                <strong><?php echo $recepHoy['totalhoy']; ?></strong>
-                                            </h1>
+                                        <h1>
+                                            <strong><?php echo $recepHoy['totalhoy']; ?></strong>
+                                        </h1>
                                         </p>
                                     </div>
                                 </div>
@@ -115,9 +129,9 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="card-body text-info">
                                         <h5 class="card-title">Consultados hoy</h5>
                                         <p class="card-text">
-                                            <h1>
-                                                <strong><?php echo $cons_Hoy['conultashoy']; ?></strong>
-                                            </h1>
+                                        <h1>
+                                            <strong><?php echo $cons_Hoy['conultashoy']; ?></strong>
+                                        </h1>
                                         </p>
                                     </div>
                                 </div>
@@ -127,9 +141,9 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="card-body text-danger">
                                         <h5 class="card-title">N.S.P. hoy</h5>
                                         <p class="card-text">
-                                            <h1>
-                                                <strong><?php echo $nsp_Hoy['nsphoy']; ?></strong>
-                                            </h1>
+                                        <h1>
+                                            <strong><?php echo $nsp_Hoy['nsphoy']; ?></strong>
+                                        </h1>
                                         </p>
                                     </div>
                                 </div>
@@ -321,9 +335,146 @@ if (!isset($_SESSION['idusuario'])) {
                                 </table>
                             </div>
 
+                            <!--================ RECEPCIONES AÑO ACTUAL ====================-->
+                            <div class="table-responsive col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <h3>Recepciones año actual</h3>
+                                <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <thead style="background-color: #757579; color: white;">
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+                                        while ($reg = $recepcionesAnioActual->fetch_array(MYSQLI_BOTH)) {
+                                            //setlocale (LC_ALL, "es_MX");
+                                            echo "<tr>
+                                        <td>"  . $reg['anio'] . "</td>
+                                        <td>"  . $reg['total'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
                         </div>
 
                         <br><br>
+
+                        <div class="row">
+                            <!--================ RECEPCIONES POR AÑO ====================-->
+                            <div class="table-responsive col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <h3>Recepciones por año</h3>
+                                <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <thead style="background-color: #757579; color: white;">
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+                                        while ($reg = $recepcionesPorAnio->fetch_array(MYSQLI_BOTH)) {
+                                            //setlocale (LC_ALL, "es_MX");
+                                            echo "<tr>
+                                        <td>"  . $reg['anio'] . "</td>
+                                        <td>"  . $reg['total'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+
+                            <!--================ RECEPCIONES POR AÑO EMBARAZO ====================-->
+                            <div class="table-responsive col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <h3>Recepciones año embarazos</h3>
+                                <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <thead style="background-color: #757579; color: white;">
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+                                        while ($reg = $recepcionesPorAnioEmbarazo->fetch_array(MYSQLI_BOTH)) {
+                                            //setlocale (LC_ALL, "es_MX");
+                                            echo "<tr>
+                                        <td>"  . $reg['anio'] . "</td>
+                                        <td>"  . $reg['total'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <span style="color: red;">La división de consultorios se realizó a partir del 2022</span>
+                            </div>
+
+                            <!--================ RECEPCIONES POR AÑO URGENCIAS ====================-->
+                            <div class="table-responsive col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <h3>Recepciones año urgencias</h3>
+                                <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <thead style="background-color: #757579; color: white;">
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+                                        while ($reg = $recepcionesPorAnioUrgencias->fetch_array(MYSQLI_BOTH)) {
+                                            //setlocale (LC_ALL, "es_MX");
+                                            echo "<tr>
+                                        <td>"  . $reg['anio'] . "</td>
+                                        <td>"  . $reg['total'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <span style="color: red;">La división de consultorios se realizó a partir del 2022</span>
+                            </div>
+
+                        </div>
+
+                        <br><br>
+
 
                         <!--===========================================================
                         RECEPCIONES TOTAL
@@ -335,9 +486,9 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="card-body text-success">
                                         <h5 class="card-title">Total de recepciones</h5>
                                         <p class="card-text">
-                                            <h1>
-                                                <strong><?php echo $totalRecepciones['totrecepciones']; ?></strong>
-                                            </h1>
+                                        <h1>
+                                            <strong><?php echo $totalRecepciones['totrecepciones']; ?></strong>
+                                        </h1>
                                         </p>
                                     </div>
                                 </div>
@@ -347,21 +498,21 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="card-body text-info">
                                         <h5 class="card-title">Total de Consultas</h5>
                                         <p class="card-text">
-                                            <h1>
-                                                <strong><?php echo $totalConsultas['totconsultas']; ?></strong>
-                                            </h1>
+                                        <h1>
+                                            <strong><?php echo $totalConsultas['totconsultas']; ?></strong>
+                                        </h1>
                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="card border-danger col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <div class="card-header">Recepciónes</div>
+                                    <div class="card-header">Consultas N.S.P.</div>
                                     <div class="card-body text-danger">
                                         <h5 class="card-title">Total de N.S.P.</h5>
                                         <p class="card-text">
-                                            <h1>
-                                                <strong><?php echo $total_nsp['totnsp']; ?></strong>
-                                            </h1>
+                                        <h1>
+                                            <strong><?php echo $total_nsp['totnsp']; ?></strong>
+                                        </h1>
                                         </p>
                                     </div>
                                 </div>

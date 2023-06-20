@@ -1,5 +1,7 @@
 
 //Declaración de variables
+var fechaingreso = document.getElementById("fechaingreso");
+var fechaalta = document.getElementById("fechaalta");
 var notaingresourg = document.getElementById("notaingresourg");
 var atnprehosp = document.getElementById("atnprehosp");
 var tipourgencia = document.getElementById("tipourgencia");
@@ -11,15 +13,17 @@ var afecprincipal = document.getElementById("afecprincipal");
 var error = document.getElementById("error");
 error.style.color = "red";
 
-
 function enviarFormulario() {
 
     var mensajesError = [];
     
+    if (fechaingreso == "" || fechaalta == "" || fechaingreso >= fechaalta) {
+        mensajesError.push("La fecha de alta es menor o igual a la de ingreso o están vacías");
+    }
 
-    if (notaingresourg.value === null || notaingresourg.value === "") {
+    if (notaingresourg.value === null || notaingresourg.value === "" || notaingresourg.value === "                                        ") {
 
-        console.log("El textarea esta vacío");
+        //console.log("El textarea esta vacío");
         mensajesError.push("La nota de urgencias no puede estar vacía");
 
     }

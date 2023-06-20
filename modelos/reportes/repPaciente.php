@@ -16,7 +16,7 @@ if (!isset($_SESSION['idusuario'])) {
 
     $id = $_GET['id'];
 
-    $consulta = "SELECT p.idpaciente,p.nombre,p.sexo,r.idrecepcion,r.fechahorarecep,r.edad,r.mtvoconsulta,r.embarazo,r.semgesta,r.referencia,r.observaciones,r.condicion FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE p.idpaciente = '$id' ORDER BY r.fechahorarecep DESC";
+    $consulta = "SELECT p.idpaciente,p.nombre,p.sexo,r.idrecepcion,r.fechahorarecep,r.edad,r.mtvoconsulta,r.embarazo,r.semgesta,r.referencia,r.observaciones,r.sala,r.condicion FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE p.idpaciente = '$id' ORDER BY r.fechahorarecep DESC";
 
     $resultado = $con->query($consulta);
 
@@ -40,6 +40,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Embarazo</th>
                                     <th>SDG</th>
                                     <th>Referencia</th>
+                                    <th>Sala</th>
                                     <th>Observaciones</th>
                                     <th>Estado</th>
                                 </thead>
@@ -71,6 +72,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <td>" . $reg['embarazo'] . "</td>
                                         <td>" . $reg['semgesta'] . "</td>
                                         <td>" . $reg['referencia'] . "</td>
+                                        <td>" . $reg['sala'] . "</td>
                                         <td>" . $reg['observaciones'] . "</td>";
 
                                         if ($reg['condicion'] == 1) {
@@ -91,6 +93,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Embarazo</th>
                                     <th>SDG</th>
                                     <th>Referencia</th>
+                                    <th>Sala</th>
                                     <th>Observaciones</th>
                                     <th>Estado</th>
                                 </tfoot>
