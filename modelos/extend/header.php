@@ -27,6 +27,21 @@ if (!isset($_SESSION['idusuario'])) {
         .error {
             border: solid 2px #ff0000;
         }
+
+        .invalido {
+            border: solid 1px red;
+            box-shadow: 0 0 10px red;
+        }
+        
+        .valido{
+            border: solid 1px greenyellow;
+            box-shadow: 0 0 10px greenyellow;
+        }
+
+        .errorSpan {
+            color: red;
+            display: block;
+        }
     </style>
 
 </head>
@@ -104,10 +119,6 @@ if (!isset($_SESSION['idusuario'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="../pacientes/index.php"><b>Pacientes</b></a>
                     </li>
-
-                    <!-- <li class="nav-item">
-                                <a class="nav-link" href="../pacientes/buscarPacienteAuto.php"><span style="color: red;">Pacientes 2</span></a>
-                            </li> -->
 
                     <li class="nav-item">
                         <a class="nav-link" href="../recepcion/index.php">Recepción</a>
@@ -226,7 +237,39 @@ if (!isset($_SESSION['idusuario'])) {
             <!-- FIN MENU CONSULTA -->
 
 
+        <?php } elseif ($_SESSION['idrol'] == 9) { ?>
+
+            <!-- MENU REPORTEADOR -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../extend/inicio.php">Inicio <span class="sr-only"></span></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Reportes C1
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="../consultas/consultasExcel.php">Consultas C1</a>
+                            <a class="dropdown-item" href="#">Lesiones C1</a>
+
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- FIN MENU REPORTEADOR -->
+
+
         <?php } ?>
+
+
+
+
+
 
 
 

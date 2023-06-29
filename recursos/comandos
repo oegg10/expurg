@@ -10,6 +10,10 @@ source /home/kike/Escritorio/expurg.sql
 SELECT p.nombre, p.curp, e.idexpediente, e.nombrep, e.curp FROM pacientes p INNER JOIN exparchivo e ON p.curp = e.curp ORDER BY e.idexpediente
 ==================================================
 
+========== CREAR TABLA LESIONES ==================
+CREATE TABLE `expurg`.`lesiones` (`idlesion` INT NOT NULL AUTO_INCREMENT , `idrecepcion` INT NOT NULL , `idconsulta` INT NOT NULL , `escolaridad` VARCHAR(100) NOT NULL DEFAULT 'NINGUNA' , `discapacidad` VARCHAR(10) NOT NULL DEFAULT 'NO' , `referidopor` VARCHAR(60) NOT NULL , `nombre_unidad` VARCHAR(100) NULL , `fecha_ocurrencia` DATETIME NOT NULL , `diafestivo` VARCHAR(2) NOT NULL , `sitio_ocurrencia` VARCHAR(60) NOT NULL , `sitio_ocurrencia_otro` VARCHAR(100) NULL , `lesion_entidaddom` VARCHAR(100) NOT NULL DEFAULT 'COAHUILA' , `lesion_municipio` VARCHAR(100) NOT NULL DEFAULT 'SALTILLO' , `lesion_localidad` VARCHAR(100) NOT NULL DEFAULT 'SALTILLO' , `lesion_cp` VARCHAR(5) NOT NULL DEFAULT '99999' , `lesion_domicilio` VARCHAR(100) NOT NULL , `lesion_colonia` VARCHAR(100) NOT NULL , `intensionalidad` VARCHAR(30) NOT NULL , `agente_lesion` VARCHAR(100) NOT NULL , `agente_otro` VARCHAR(100) NOT NULL , `toxicomanias` VARCHAR(30) NOT NULL , `servicio` VARCHAR(60) NOT NULL , `tipoatencion` VARCHAR(60) NOT NULL , `areaanatomica` VARCHAR(100) NOT NULL , `consec_resultante` VARCHAR(100) NOT NULL , `causaexterna` VARCHAR(100) NOT NULL , PRIMARY KEY (`idlesion`)) ENGINE = InnoDB;
+==================================================
+
 
 
 

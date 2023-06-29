@@ -18,6 +18,11 @@ if (!isset($_SESSION['idusuario'])) {
 
     $resultado = $con->query($recepciones);
 
+    //Consulta para lesiones
+    $sqllesiones = "SELECT r.idrecepcion, r.idpaciente, p.nombre, r.edad, r.mtvoconsulta, c.idconsulta, c.fechaingreso, c.lesiones, c.cap_lesion FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente LEFT JOIN consultas c ON r.idrecepcion = c.idrecepcion WHERE c.lesiones = 'SI' AND c.cap_lesion = '2'";
+
+    $lesion = $con->query($sqllesiones);
+
 
     //Consulta a la tabla de consultas
     $consultas = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, p.nombre, r.edad, r.mtvoconsulta, c.altapor, c.condicion FROM consultas c INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON r.idpaciente = p.idpaciente WHERE c.altapor = 'Observación' AND c.condicion = 2";
@@ -95,7 +100,54 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tfoot>
                             </table>
                         </div>
-                    </div>
+                    </div><!-- FIN TABLA DE PACIENTES A CONSULTAR -->
+
+
+                    <!-- PACIENTES CON LESIONES -->
+                    <h5>Aquí aparecen los pacientes a los que se les realizará hoja de lesiones</h5>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive" id="listadoregistros">
+                            <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
+                                <thead style="background-color: #757579; color: white;">
+                                    <tr>
+                                        <th>Fecha consulta</th>
+                                        <th>Nombre</th>
+                                        <th>Edad</th>
+                                        <th>Motivo consulta</th>
+                                        <th>Opción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <?php
+                                    while ($filalesion = $lesion->fetch_array(MYSQLI_BOTH)) {
+                                        echo "<tr>
+                            <td>" . date("d-m-Y - H:i:s", strtotime($filalesion['fechaingreso'])) . "</td>
+                            <td>" . $filalesion['nombre'] . "</td>
+                            <td>" . $filalesion['edad'] . "</td>
+                            <td>" . $filalesion['mtvoconsulta'] . "</td>
+                            <td>
+                                <a href='../lesiones/lesiones.php?idc=" . $filalesion['idconsulta'] ."' type='button' class='btn btn-success' title='Hoja de lesiones'><i class='fa fa-file-text'></i></a>
+                            </td>
+                            </tr>";
+                                    }
+                                    ?>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Fecha ingreso</th>
+                                        <th>Nombre</th>
+                                        <th>Edad</th>
+                                        <th>Motivo consulta</th>
+                                        <th>Opción</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div><!-- FIN TABLA DE PACIENTES CON LESIONES -->
 
 
                     <!-- PACIENTES QUE SE ENCUENTRAN EN TRIAGE -->
@@ -146,14 +198,13 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tfoot>
                             </table>
                         </div>
-                    </div>
+                    </div><!-- FIN TABLA DE PACIENTES EN OBSERVACION -->
+
                     <?php include "../extend/footer.php"; ?>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 <?php
 }

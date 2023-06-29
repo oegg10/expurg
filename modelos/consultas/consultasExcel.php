@@ -8,7 +8,7 @@ if (!isset($_SESSION['idusuario'])) {
     header("Location:../../index.php");
 } else {
 
-    if ($_SESSION['idrol'] != 1) {
+    if ($_SESSION['idrol'] != 1 && $_SESSION['idrol'] != 9) {
         header("Location: ../../index.php");
     }
 
@@ -19,7 +19,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Consultados</h5>
+                        <h5>Consultados en consultorio 1</h5>
                     </div>
                     <div class="card-body">
 

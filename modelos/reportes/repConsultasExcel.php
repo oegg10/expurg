@@ -8,7 +8,7 @@ if (!isset($_SESSION['idusuario'])) {
     header("Location:../../index.php");
 } else {
 
-    if ($_SESSION['idrol'] != 1) {
+    if ($_SESSION['idrol'] != 1 && $_SESSION['idrol'] != 9) {
         header("Location: ../../index.php");
     }
 
@@ -30,6 +30,7 @@ if (!isset($_SESSION['idusuario'])) {
                     <th>Fecha recep.</th>
                     <th>Fecha ingreso.</th>
                     <th>Fecha alta.</th>
+                    <th>Nombre Paciente</th>
                     <th>Tipo Urg.</th>
                     <th>Attn prehosp.</th>
                     <th>Traslado trans</th>
@@ -57,7 +58,6 @@ if (!isset($_SESSION['idusuario'])) {
                     <th>Alta por</th>
                     <th>Otra unidad</th>
                     <th>Mtvo consulta</th>
-                    <th>Nombre Paciente</th>
                     <th>Sexo</th>
                     <th>Expediente</th>
                     <th>Edad</th>
@@ -120,6 +120,7 @@ if (!isset($_SESSION['idusuario'])) {
                             <td>" . date("d-m-Y H:i:s", strtotime($reg['fechahorarecep'])) . "</td>
                             <td>" . date("d-m-Y H:i:s", strtotime($reg['fechaingreso'])) . "</td>
                             <td>" . date("d-m-Y H:i:s", strtotime($reg['fechaalta'])) . "</td>
+                            <td>" . $reg['nombre'] . "</td>
                             <td>" . $reg['tipourgencia'] . "</td>
                             <td>" . $reg['atnprehosp'] . "</td>
                             <td>" . $reg['trastrans'] . "</td>
@@ -147,7 +148,6 @@ if (!isset($_SESSION['idusuario'])) {
                             <td>" . $reg['altapor'] . "</td>
                             <td>" . $reg['otraunidad'] . "</td>
                             <td>" . $reg['mtvoconsulta'] . "</td>
-                            <td>" . $reg['nombre'] . "</td>
                             <td>" . $reg['sexo'] . "</td>
                             <td>" . $reg['expediente'] . "</td>
                             <td>" . $reg['edad'] . "</td>
