@@ -19,7 +19,7 @@ if (!isset($_SESSION['idusuario'])) {
     $resultado = $con->query($recepciones);
 
     //Consulta para lesiones
-    $sqllesiones = "SELECT r.idrecepcion, r.idpaciente, p.nombre, r.edad, r.mtvoconsulta, c.idconsulta, c.fechaingreso, c.lesiones, c.cap_lesion FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente LEFT JOIN consultas c ON r.idrecepcion = c.idrecepcion WHERE c.lesiones = 'SI' AND c.cap_lesion = '2'";
+    $sqllesiones = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.curp, r.edad, r.mtvoconsulta, c.idconsulta, c.fechaingreso, c.lesiones, c.cap_lesion FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente LEFT JOIN consultas c ON r.idrecepcion = c.idrecepcion WHERE c.lesiones = 'SI' AND c.cap_lesion = '2'";
 
     $lesion = $con->query($sqllesiones);
 
@@ -62,7 +62,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <th>Edad</th>
                                         <th>Motivo consulta</th>
                                         <th>Observaciones</th>
-                                        <th>Opción</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,7 +95,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <th>Edad</th>
                                         <th>Motivo consulta</th>
                                         <th>Observaciones</th>
-                                        <th>Opción</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -114,9 +114,10 @@ if (!isset($_SESSION['idusuario'])) {
                                     <tr>
                                         <th>Fecha consulta</th>
                                         <th>Nombre</th>
+                                        <th>CURP</th>
                                         <th>Edad</th>
                                         <th>Motivo consulta</th>
-                                        <th>Opción</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -126,10 +127,13 @@ if (!isset($_SESSION['idusuario'])) {
                                         echo "<tr>
                             <td>" . date("d-m-Y - H:i:s", strtotime($filalesion['fechaingreso'])) . "</td>
                             <td>" . $filalesion['nombre'] . "</td>
+                            <td>" . $filalesion['curp'] . "</td>
                             <td>" . $filalesion['edad'] . "</td>
                             <td>" . $filalesion['mtvoconsulta'] . "</td>
-                            <td>
+                            <td class='btn-group'>
                                 <a href='../lesiones/lesiones.php?idc=" . $filalesion['idconsulta'] ."' type='button' class='btn btn-success' title='Hoja de lesiones'><i class='fa fa-file-text'></i></a>
+
+                                <a href='../lesiones/quitarLesion.php?idq=" . $filalesion['idconsulta'] ."' type='button' class='btn btn-dark' title='Quitar lesion'><i class='fa fa-trash'></i></a>
                             </td>
                             </tr>";
                                     }
@@ -140,9 +144,10 @@ if (!isset($_SESSION['idusuario'])) {
                                     <tr>
                                         <th>Fecha ingreso</th>
                                         <th>Nombre</th>
+                                        <th>CURP</th>
                                         <th>Edad</th>
                                         <th>Motivo consulta</th>
-                                        <th>Opción</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

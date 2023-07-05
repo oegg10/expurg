@@ -221,7 +221,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <!-- FECHA Y HORA DE RECEPCION DE URGENCIAS -->
                                     <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                         <label for="fechahorarecep" style="color: blue;">Fecha y hora de recepción urgencias: </label>
-                                        <input type="datetime-local" style="background-color: black; color:white;" id="fecharecepcion" value="<?php echo date("Y-m-d H:i:s", strtotime($fila['fechahorarecep'])); ?>" readonly>
+                                        <input type="datetime-local" style="background-color: black; color:white;" name="fecharecepcion" id="fecharecepcion" value="<?php echo date("Y-m-d H:i:s", strtotime($fila['fechahorarecep'])); ?>" readonly>
                                     </div>
 
                                     <!-- 12 -->
@@ -520,8 +520,8 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
                                         <label style="color: red;">Se realiza hoja de lesiones(*)?:</label>
-                                        <select class='form-control' name='lesiones' id='lesiones' required>
-                                            <option value="" disabled selected>Lesiones</option>
+                                        <select class='form-control' name='lesiones' id='lesiones'>
+                                            <option value="NO" disabled selected>Lesiones</option>
                                             <option value='NO'>NO</option>
                                             <option value='SI'>SI</option>
                                         </select>

@@ -51,7 +51,7 @@ sitioOcurrencia.addEventListener("blur", validarCamposVacios);
 lesionEntidad.addEventListener("blur", validarCamposVacios);
 lesionMunicipio.addEventListener("blur", validarCamposVacios);
 lesionLocalidad.addEventListener("blur", validarCamposVacios);
-lesionCp.addEventListener("blur", validarCamposVacios);
+//lesionCp.addEventListener("blur", validarCamposVacios);
 lesionDomicilio.addEventListener("blur", validarCamposVacios);
 lesionColonia.addEventListener("blur", validarCamposVacios);
 Intensionalidad.addEventListener("blur", validarCamposVacios);

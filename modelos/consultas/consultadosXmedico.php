@@ -19,14 +19,26 @@ if (!isset($_SESSION['idusuario'])) {
         $fechai = $_POST['fechai'];
         $fechaf = $_POST['fechaf'];
 
+        //CONSULTAS
         $consulta = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.observaciones, r.condicion, r.idusuario, c.idconsulta, c.fechaalta, c.idusuario FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON r.idrecepcion = c.idrecepcion WHERE r.condicion = 2 AND DATE(r.fechahorarecep) >= '$fechai' AND DATE(r.fechahorarecep) <= '$fechaf' AND c.idusuario = '$idusuario'";
 
         $resultado = $con->query($consulta);
+
+        //CONSULTA LESIONES
+        $lesiones = "SELECT l.idlesion,l.condicion,c.fechaingreso,p.nombre,p.curp,r.edad,r.mtvoconsulta FROM consultas c INNER JOIN lesiones l ON c.idconsulta = l.idconsulta INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON p.idpaciente = r.idpaciente WHERE l.condicion = 1 AND DATE(r.fechahorarecep) >= '$fechai' AND DATE(r.fechahorarecep) <= '$fechaf' AND c.idusuario = '$idusuario'";
+
+        $resLesiones = $con->query($lesiones);
+
     } else {
 
         $consulta = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.observaciones, r.condicion, r.idusuario, c.idconsulta, c.fechaalta, c.idusuario FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON r.idrecepcion = c.idrecepcion WHERE r.condicion = 2 AND DATE(r.fechahorarecep) = CURDATE() AND c.idusuario = '$idusuario'";
 
         $resultado = $con->query($consulta);
+
+        //CONSULTA LESIONES
+        $lesiones = "SELECT l.idlesion,l.condicion,c.fechaingreso,p.nombre,p.curp,r.edad,r.mtvoconsulta FROM consultas c INNER JOIN lesiones l ON c.idconsulta = l.idconsulta INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON p.idpaciente = r.idpaciente WHERE l.condicion = 1 AND DATE(r.fechahorarecep) = CURDATE() AND c.idusuario = '$idusuario'";
+
+        $resLesiones = $con->query($lesiones);
     }
 
 ?>
@@ -36,7 +48,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>CONSULTA GENERAL DE URGENCIAS Consultados</h5>
+                        <h5>CONSULTA GENERAL DE URGENCIAS</h5>
                     </div>
                     <div class="card-body">
 
@@ -64,6 +76,9 @@ if (!isset($_SESSION['idusuario'])) {
                         </form>
 
                         <hr>
+                        <div class="card-header">
+                            <h6>CONSULTADOS</h6>
+                        </div>
                         <div class="table-responsive display nowrap" id="listadoregistros">
                             <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
                                 <thead style="background-color: #757579; color: white;">
@@ -111,6 +126,58 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tfoot>
                             </table>
                         </div>
+
+                        <hr>
+                        <!-- ===== INICIO TABLA LESIONES ===== -->
+                        <div class="card-header">
+                            <h6>LESIONES</h6>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive" id="listadoregistros">
+                                <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
+                                    <thead style="background-color: #757579; color: white;">
+                                        <tr>
+                                            <th>Fecha consulta</th>
+                                            <th>Nombre</th>
+                                            <th>CURP</th>
+                                            <th>Edad</th>
+                                            <th>Motivo consulta</th>
+                                            <th>Opción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+                                        while ($filalesion = $resLesiones->fetch_array(MYSQLI_BOTH)) {
+                                            echo "<tr>
+                            <td>" . date("d-m-Y - H:i:s", strtotime($filalesion['fechaingreso'])) . "</td>
+                            <td>" . $filalesion['nombre'] . "</td>
+                            <td>" . $filalesion['curp'] . "</td>
+                            <td>" . $filalesion['edad'] . "</td>
+                            <td>" . $filalesion['mtvoconsulta'] . "</td>
+                            <td>
+                                <a href='../lesiones/editarLesiones.php?idl=" . $filalesion['idlesion'] . "' type='button' class='btn btn-warning' title='Editar lesión'><i class='fa fa-pencil-square-o'></i></a>
+                            </td>
+                            </tr>";
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Fecha ingreso</th>
+                                            <th>Nombre</th>
+                                            <th>CURP</th>
+                                            <th>Edad</th>
+                                            <th>Motivo consulta</th>
+                                            <th>Opción</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div><!-- FIN TABLA LESIONES -->
+
                     </div>
 
                 </div>
