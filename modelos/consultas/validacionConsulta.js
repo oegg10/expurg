@@ -14,6 +14,7 @@ var tipocama = document.getElementById("tipocama");
 var altapor = document.getElementById("altapor");
 var ministeriopublico = document.getElementById("ministeriopublico");
 var afecprincipal = document.getElementById("afecprincipal");
+var lesion_es = document.getElementById("lesion_es");
 var lesiones = document.getElementById("lesiones");
 
 //===============  FIN VARIABLES DE FORMULARIO ==============================
@@ -49,6 +50,7 @@ tipocama.addEventListener("blur", validarCamposVacios);
 altapor.addEventListener("blur", validarCamposVacios);
 ministeriopublico.addEventListener("blur", validarCamposVacios);
 afecprincipal.addEventListener("blur", validarCamposVacios);
+lesion_es.addEventListener("blur", validarCamposVacios);
 lesiones.addEventListener("blur", validarCamposVacios);
 
 //========= FIN CAMPOS A VALIDAR ======================================================
@@ -143,6 +145,12 @@ function enviarFormulario() {
     if (afecprincipal.value === null || afecprincipal.value === "") {
 
         mensajesError.push("La afección principal no puede estar vacía");
+
+    }
+
+    if (lesion_es.value === null || lesion_es.value === "") {
+
+        mensajesError.push("Se debe elegir la opción de si hay lesión");
 
     }
 

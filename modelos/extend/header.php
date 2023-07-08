@@ -65,9 +65,17 @@ if (!isset($_SESSION['idusuario'])) {
                         <a class="nav-link" href="../usuarios/index.php">Usuarios</a>
                     </li>
 
-                    <li class="nav-item">
-                        <!--<a class="nav-link" href="../pacientes/buscarPacienteAuto.php">Pacientes</a>-->
-                        <a class="nav-link" href="../consultas/consultasExcel.php">Exportar consultas Excel C1</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Reportes Excel C1
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="../consultas/consultasExcel.php">Consultas C1</a>
+                            <a class="dropdown-item" href="../lesiones/lesionesExcel.php">Lesiones C1</a>
+
+
+                        </div>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -248,32 +256,14 @@ if (!isset($_SESSION['idusuario'])) {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<<<<<<< HEAD
-                            Reportes C1
+                            Reportes Excel C1
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                             <a class="dropdown-item" href="../consultas/consultasExcel.php">Consultas C1</a>
-                            <a class="dropdown-item" href="#">Lesiones C1</a>
+                            <a class="dropdown-item" href="../lesiones/lesionesExcel.php">Lesiones C1</a>
 
 
-=======
-                            Reportes
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                            <a class="dropdown-item" href="../reportes/repCons1.php">Consultas C1</a>
-                            <a class="dropdown-item" href="#">Lesiones C1</a>
-
-
-
-                            <!--<a class="dropdown-item" href="../reportes/productividad.php">Productividad</a>
-                            <a class="dropdown-item" href="../reportes/reporteRecepcion.php">Reporte por Recepcionista</a>
-                            <a class="dropdown-item" href="../reportes/reporteConsultados.php">Consultas</a>
-                            <a class="dropdown-item" href="../reportes/reporteNSP.php">Pacientes N.S.P.</a>
-                            <a class="dropdown-item" href="../reportes/triageReporte.php">Triages</a>-->
-
->>>>>>> cb0794ebcbbd74b68ac393a36cfa12e88572cc95
                         </div>
                     </li>
 

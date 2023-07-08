@@ -23,7 +23,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Recepción Urgencias | <small><strong style="color: red;">YA SE PUEDEN EDITAR LAS RECEPCIONES CON EL BOTÓN AMARILLO CON ESTA FIGURA <a href='#' type='button' class='btn btn-warning' title='Eliminar'><i class='fa fa-pencil-square-o'></i></a></strong></small></h5>
+                        <h5>Recepción Urgencias | <small><strong style="color: red;">YA SE PUEDEN EDITAR LAS RECEPCIONES CON EL BOTÓN AMARILLO CON ESTA FIGURA <a href='#' type='button' class='btn btn-warning' title='Editar'><i class='fa fa-pencil-square-o'></i></a></strong></small></h5>
                         <a href="../pacientes/paciente.php" class="btn btn-primary">Registrar Pacientes</a>
                     </div>
                     <div class="card-body">

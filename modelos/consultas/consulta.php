@@ -71,54 +71,15 @@ if (!isset($_SESSION['idusuario'])) {
         $medicamento1 = isset($_POST["medicamento1"]) ? mysqli_real_escape_string($con, $_POST['medicamento1']) : "";
         $medicamento2 = isset($_POST["medicamento2"]) ? mysqli_real_escape_string($con, $_POST['medicamento2']) : "";
         $medicamento3 = isset($_POST["medicamento3"]) ? mysqli_real_escape_string($con, $_POST['medicamento3']) : "";
+        $lesion_es = isset($_POST["lesion_es"]) ? mysqli_real_escape_string($con, $_POST['lesion_es']) : "";
         $lesiones = isset($_POST["lesiones"]) ? mysqli_real_escape_string($con, $_POST['lesiones']) : "";
+        
 
         $notaingresourg = trim($notaingresourg);
         $idusuario = $_SESSION['idusuario'];
 
-        // VERIFICAR FECHAS
-        /*echo $fecharecepcion;
-        echo "<br>";
-        $fechaingreso3 = date_create($fechaingreso);
-        $fechaingreso2 = date_format($fechaingreso3, "Y-m-d H:i:s");
-        echo $fechaingreso2;
-        $fechaalta3 = date_create($fechaalta);
-        $fechaalta2 = date_format($fechaalta3, "Y-m-d H:i:s");
-        echo "<br>";
-        echo $fechaalta2;
-        echo "<br>";
-        echo $notaingresourg;
-
-
-        function verifica_fechas($fecharecepcion, $fechaingreso2, $fechaalta2)
-        {
-            $fecharecepcion = strtotime($fecharecepcion);
-            $fechaingreso2 = strtotime($fechaingreso2);
-            $fechaalta2 = strtotime($fechaalta2);
-
-            
-            if ($fechaingreso2 == "" || $fecharecepcion == "") {
-
-                return true;
-
-            }elseif($fechaingreso2 < $fecharecepcion) {//SI LA FECHA DE INGRESO ES MENOR A LA DE RECEPCION
-                
-                return true;
-
-            } elseif ($fechaalta2 < $fecharecepcion || $fechaalta2 < $fechaingreso2) {//SI LA FECHA DE ALTA ES MENOR A LA DE RECEPCION Y A LA DE INGRESO
-                return true;
-            }
-
-
-            return false;
-        }
-
-        if (verifica_fechas($fecharecepcion, $fechaingreso, $fechaalta)) {
-            echo '<div class="alert alert-danger">Hay errores en las fechas de inicio de consulta y de alta con respecto a la fecha de recepción de urgencias, favor de verificar.</div>';
-        } else {
-            echo '<div class="alert alert-success">Consulta guardada.</strong></div>';
-        }*/
-
+        //echo $lesion_es . "<br>";
+        //echo $lesiones . "<br>";
 
         //CAPTURA DE DATOS ==========================================================================
 
@@ -131,7 +92,7 @@ if (!isset($_SESSION['idusuario'])) {
             */
 
         //Realizamos la inserción de los datos si el tipo de cama es Observación
-        $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesiones', '2', NOW(), '2', '$idusuario')";
+        $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', NOW(), '2', '$idusuario')";
 
             $resins = $con->query($sql);
 
@@ -140,7 +101,7 @@ if (!isset($_SESSION['idusuario'])) {
         } else {
 
             //Realizamos la inserción de los datos
-            $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
+            $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
 
             $resins = $con->query($sql);
 
@@ -518,10 +479,23 @@ if (!isset($_SESSION['idusuario'])) {
                                         <input type="text" class="form-control" name="medicamento3" id="medicamento3" maxlength="40" placeholder="Medicamento 3" value="<?php if (!empty($_POST['medicamento3'])){echo $medicamento3;} else {echo '';} ?>" onblur="may(this.value, this.id)">
                                     </div>
 
+                                    <!-- 12 -->
+
+                                    <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
+                                        <label style="color: red;">Hay lesión, es 1ra vez o subsecuente?:</label>
+                                        <select class='form-control' name='lesion_es' id='lesion_es' required>
+                                            <option value="" disabled selected>Elija una opción</option>
+                                            <option value='NO HAY LESION'>NO HAY LESION</option>
+                                            <option value='PRIMERA VEZ'>PRIMERA VEZ</option>
+                                            <option value='SUBSECUENTE'>SUBSECUENTE</option>
+                                        </select>
+                                        <span></span>
+                                    </div>
+
                                     <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
                                         <label style="color: red;">Se realiza hoja de lesiones(*)?:</label>
-                                        <select class='form-control' name='lesiones' id='lesiones'>
-                                            <option value="NO" disabled selected>Lesiones</option>
+                                        <select class='form-control' name='lesiones' id='lesiones' required>
+                                            <option value="" disabled selected>Seleccione una opción</option>
                                             <option value='NO'>NO</option>
                                             <option value='SI'>SI</option>
                                         </select>
@@ -561,7 +535,31 @@ if (!isset($_SESSION['idusuario'])) {
             document.getElementById("fertil").style.color = "red";
         } else {
             document.getElementById("fertil").style.color = "black";
+            document.getElementById("mujeredadfertil").disabled=true;
         }
+
+        $("#lesion_es").change(function() {
+
+            if (document.getElementById("lesion_es").value == "SUBSECUENTE" || document.getElementById("lesion_es").value == "NO HAY LESION") {
+
+                //console.log($("#lesion_es").val());
+                $("#lesiones").val("NO");
+                $('#lesiones option:not(:selected)').attr('disabled',true);
+                //document.getElementById("lesiones").disabled=true;
+                //$("#lesiones").attr("readonly", true);
+                //$("#lesiones").disabled=true;
+            
+            }else if(document.getElementById("lesion_es").value == "PRIMERA VEZ"){
+                $("#lesiones").val("");
+                $('#lesiones option:not(:selected)').attr('disabled',false);
+                //document.getElementById("lesiones").disabled=false;
+                document.getElementById("lesiones").focus();
+            }
+            
+        });
+
+
+
     </script>
 
     <script src="validacionConsulta.js"></script>

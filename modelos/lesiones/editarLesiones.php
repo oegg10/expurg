@@ -751,7 +751,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" name="Guardar" id="Guardar"><i class="fa fa-save"> Modificar</i></button>
-                                    <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
+                                    <a href="../consultas/index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
                         </div>
 
