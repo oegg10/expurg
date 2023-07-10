@@ -20,8 +20,6 @@ if (!isset($_SESSION['idusuario'])) {
 
         //https://www.php.net/manual/es/function.preg-replace.php
         $idconsulta = isset($_POST["idconsulta"]) ? mysqli_real_escape_string($con, $_POST['idconsulta']) : "";
-        //$idrecepcion = isset($_POST["idrecepcion"]) ? mysqli_real_escape_string($con, $_POST['idrecepcion']) : "";
-        //$fechaingreso = isset($_POST["fechaingreso"]) ? mysqli_real_escape_string($con, $_POST['fechaingreso']) : "";
 
         //NOTA DE INGRESO DE URGENCIAS
         $fc = isset($_POST["fc"]) ? mysqli_real_escape_string($con, $_POST['fc']) : "";
@@ -62,6 +60,8 @@ if (!isset($_SESSION['idusuario'])) {
         $medicamento1 = isset($_POST["medicamento1"]) ? mysqli_real_escape_string($con, $_POST['medicamento1']) : "";
         $medicamento2 = isset($_POST["medicamento2"]) ? mysqli_real_escape_string($con, $_POST['medicamento2']) : "";
         $medicamento3 = isset($_POST["medicamento3"]) ? mysqli_real_escape_string($con, $_POST['medicamento3']) : "";
+        $lesion_es = isset($_POST["lesion_es"]) ? mysqli_real_escape_string($con, $_POST['lesion_es']) : "";
+        $lesiones = isset($_POST["lesiones"]) ? mysqli_real_escape_string($con, $_POST['lesiones']) : "";
 
         $notaingresourg = trim($notaingresourg);
 
@@ -102,6 +102,8 @@ if (!isset($_SESSION['idusuario'])) {
                                     medicamento1='$medicamento1',
                                     medicamento2='$medicamento2',
                                     medicamento3='$medicamento3',
+                                    lesion_es='$lesion_es',
+                                    lesiones='$lesiones',
                                     fechaalta=NOW(),
                                     idusuario='$idusuario' WHERE idconsulta = '$idconsulta'";
 

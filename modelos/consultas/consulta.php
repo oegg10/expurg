@@ -370,15 +370,32 @@ if (!isset($_SESSION['idusuario'])) {
                                         <span></span>
                                     </div>
 
-                                    <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
-                                        <label id="fertil">MUJER EN EDAD FERTIL:</label>
-                                        <select class='form-control' name='mujeredadfertil' id='mujeredadfertil'>
-                                            <option value="" disabled selected>Elija una opción</option>
-                                            <option value='No estaba embarazada ni en el puerperio'>No estaba embarazada ni en el puerperio</option>
-                                            <option value='Embarazo'>Embarazo</option>
-                                            <option value='Puerperio (de 0 a 42 días después del parto)'>Puerperio (de 0 a 42 días después del parto)</option>
+                                    <?php
+
+                                    if ($fila['sexo'] == "Masculino") {
+
+                                        echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label>MUJER EN EDAD FERTIL:</label>
+                                        <select class="form-control" name="mujeredadfertil" id="mujeredadfertil" disabled="true">
+                                            <option value=""></option>
                                         </select>
-                                    </div>
+                                    </div>';
+                                    
+                                    }else{
+
+                                        echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label>MUJER EN EDAD FERTIL:</label>
+                                        <select class="form-control" name="mujeredadfertil" id="mujeredadfertil">
+                                            <option value="<?php echo $fila["mujeredadfertil"]; ?>"><?php echo $fila["mujeredadfertil"]; ?></option>
+                                            <option value="No estaba embarazada ni en el puerperio">No estaba embarazada ni en el puerperio</option>
+                                            <option value="Embarazo">Embarazo</option>
+                                            <option value="Puerperio (de 0 a 42 días después del parto)">Puerperio (de 0 a 42 días después del parto)</option>
+                                        </select>
+                                    </div>';
+
+                                    }
+                                    
+                                    ?>
 
                                     <!-- 12 -->
 

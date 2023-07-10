@@ -15,8 +15,8 @@ if (!isset($_SESSION['idusuario'])) {
     $id = $_GET['idc'];
     $idr = $_GET['idr'];
 
-    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE idconsulta = '$id' AND r.idrecepcion = '$idr'";
-    
+    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.lesion_es, c.lesiones, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE idconsulta = '$id' AND r.idrecepcion = '$idr'";
+
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
 
@@ -210,8 +210,8 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
                                     <label style="color: red;">Alta por (*):</label>
-                                    <select class='form-control border-danger' name='altapor' id='altapor' disabled = 'true'>
-                                        <option value='Observación'>Observación</option>
+                                    <select class='form-control border-danger' name='altapor' id='altapor' disabled='true'>
+                                        <option value='<?php echo $fila['altapor']; ?>'><?php echo $fila['altapor']; ?></option>
                                     </select>
                                 </div>
 
@@ -220,15 +220,31 @@ if (!isset($_SESSION['idusuario'])) {
                                     <input type="text" class="form-control" name="otraunidad" id="otraunidad" maxlength="50" placeholder="Unidad de traslado" onblur="may(this.value, this.id)" value="<?php echo $fila['otraunidad']; ?>">
                                 </div>
 
-                                <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
+                                <?php
+
+                                if ($fila['sexo'] == "Masculino") {
+
+                                    echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <label>MUJER EN EDAD FERTIL:</label>
-                                    <select class='form-control' name='mujeredadfertil' id='mujeredadfertil'>
-                                        <option value="<?php echo $fila['mujeredadfertil']; ?>"><?php echo $fila['mujeredadfertil']; ?></option>
-                                        <option value='No estaba embarazada ni en el puerperio'>No estaba embarazada ni en el puerperio</option>
-                                        <option value='Embarazo'>Embarazo</option>
-                                        <option value='Puerperio (de 0 a 42 días después del parto)'>Puerperio (de 0 a 42 días después del parto)</option>
+                                    <select class="form-control" name="mujeredadfertil" id="mujeredadfertil" disabled="true">
+                                        <option value=""></option>
                                     </select>
-                                </div>
+                                </div>';
+                                } else {
+
+                                    echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label>MUJER EN EDAD FERTIL:</label>
+                                    <select class="form-control" name="mujeredadfertil" id="mujeredadfertil">
+                                        <option value="<?php echo $fila["mujeredadfertil"]; ?>"><?php echo $fila["mujeredadfertil"]; ?></option>
+                                        <option value="No estaba embarazada ni en el puerperio">No estaba embarazada ni en el puerperio</option>
+                                        <option value="Embarazo">Embarazo</option>
+                                        <option value="Puerperio (de 0 a 42 días después del parto)">Puerperio (de 0 a 42 días después del parto)</option>
+                                    </select>
+                                </div>';
+                                }
+
+                                ?>
+
 
                                 <!-- 12 -->
 
@@ -313,7 +329,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <hr>
                                     <h6><label>MEDICAMENTOS Y PRESENTACIÓN:</label></h6>
-                                    <input type="text" class="form-control" name="medicamento1" id="medicamento1" maxlength="40" placeholder="Medicamento 1" value="<?php echo $fila['medicamento1']; ?>" onblur="may(this.value, this.id)" required>
+                                    <input type="text" class="form-control" name="medicamento1" id="medicamento1" maxlength="40" placeholder="Medicamento 1" value="<?php echo $fila['medicamento1']; ?>" onblur="may(this.value, this.id)">
                                 </div>
 
                                 <!-- 12 -->
@@ -328,9 +344,30 @@ if (!isset($_SESSION['idusuario'])) {
                                     <input type="text" class="form-control" name="medicamento3" id="medicamento3" maxlength="40" placeholder="Medicamento 3" value="<?php echo $fila['medicamento3']; ?>" onblur="may(this.value, this.id)">
                                 </div>
 
+                                <!-- 12 -->
+
+                                <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
+                                    <label style="color: red;">Hay lesión, es 1ra vez o subsecuente?:</label>
+                                    <select class='form-control' name='lesion_es' id='lesion_es' required>
+                                        <option value="<?php echo $fila['lesion_es']; ?>" selected><?php echo $fila['lesion_es']; ?></option>
+                                        <option value='NO HAY LESION'>NO HAY LESION</option>
+                                        <option value='PRIMERA VEZ'>PRIMERA VEZ</option>
+                                        <option value='SUBSECUENTE'>SUBSECUENTE</option>
+                                    </select>
+                                    <span></span>
+                                </div>
+
+                                <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
+                                    <label style="color: red;">Se realiza hoja de lesiones(*)?:</label>
+                                    <select class='form-control' name='lesiones' id='lesiones' required>
+                                        <option value="<?php echo $fila['lesiones']; ?>" selected><?php echo $fila['lesiones']; ?></option>
+                                        <option value='NO'>NO</option>
+                                        <option value='SI'>SI</option>
+                                    </select>
+                                    <span></span>
+                                </div>
+
                             </div>
-
-
 
                             <!-- 12 -->
 
@@ -340,17 +377,42 @@ if (!isset($_SESSION['idusuario'])) {
 
                             </div>
 
+                        </form>
                     </div>
-
-                    </form>
                 </div>
             </div>
 
         </div>
     </div>
-    </div>
 
     <?php include "../extend/footer.php"; ?>
+
+    <script>
+        //document.getElementById("notaingresourg").trim();
+        /*if (document.getElementById("sexo").value == "Femenino") {
+            document.getElementById("fertil").style.color = "red";
+        } else {
+            document.getElementById("fertil").style.color = "black";
+            document.getElementById("mujeredadfertil").disabled = true;
+        }*/
+
+        $("#lesion_es").change(function() {
+
+            if (document.getElementById("lesion_es").value == "SUBSECUENTE" || document.getElementById("lesion_es").value == "NO HAY LESION") {
+
+                $("#lesiones").val("NO");
+                $('#lesiones option:not(:selected)').attr('disabled', true);
+
+            } else if (document.getElementById("lesion_es").value == "PRIMERA VEZ") {
+                $("#lesiones").val("");
+                $('#lesiones option:not(:selected)').attr('disabled', false);
+                document.getElementById("lesiones").focus();
+            }
+
+        });
+    </script>
+
+    <script src="validacionConsulta.js"></script>
 
     </body>
 
