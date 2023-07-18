@@ -98,7 +98,7 @@ if (!isset($_SESSION['idusuario'])) {
                 <?php
 
                 header("Content-type: aplication/vnd.ms-excel");
-                header("Content-Disposition: attachment;filename=Consultas_Excel-" . $fechai . "-" . $fechaf . ".xls");
+                header("Content-Disposition: attachment;filename=Lesiones_Excel-" . $fechai . "-" . $fechaf . ".xls");
 
                 error_reporting(0);
 

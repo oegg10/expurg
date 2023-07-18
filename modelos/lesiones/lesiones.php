@@ -77,9 +77,9 @@ if (!isset($_SESSION['idusuario'])) {
         $causaexterna = isset($_POST["causaexterna"]) ? mysqli_real_escape_string($con, $_POST['causaexterna']) : "";
 
 
-
         $idusuario = $_SESSION['idusuario'];
 
+        //echo $causaexterna . "<br>";
 
         //Realizamos la inserción de los datos
         $sql_lesiones = "INSERT INTO lesiones (idconsulta, escolaridad, leerescribir, discapacidad, referidopor, nombre_unidad, fecha_ocurrencia, diafestivo, sitio_ocurrencia, sitio_ocurrencia_otro, lesion_entidad, lesion_municipio, lesion_localidad, lesion_cp, lesion_domicilio, lesion_colonia, intensionalidad, agente_lesion, agente_otro, toxicomanias, otras_toxicomanias, lesionad_es, equipo_seguridad, que_eq_seguridad, otro_eq_seguridad, tipo_violencia, num_agresores, parentesco_afectado, sexo_agresor, edad_agresor, bajoefectos_agresor, evento_autoinflingido, servicio, otro_servicio, tipoatencion, otro_tipoatencion, areaanatomica, consec_resultante, causaexterna, condicion, idusuario) VALUES ('$idconsulta', '$escolaridad', '$leerescribir', '$discapacidad', '$referidopor', '$nombre_unidad', '$fecha_ocurrencia', '$diafestivo', '$sitio_ocurrencia', '$sitio_ocurrencia_otro', '$lesion_entidad', '$lesion_municipio', '$lesion_localidad', '$lesion_cp', '$lesion_domicilio', '$lesion_colonia', '$intensionalidad', '$agente_lesion', '$agente_otro', '$toxicomanias', '$otras_toxicomanias', '$lesionad_es', '$equipo_seguridad', '$que_eq_seguridad', '$otro_eq_seguridad', '$tipo_violencia', '$num_agresores', '$parentesco_afectado', '$sexo_agresor', '$edad_agresor', '$bajoefectos_agresor', '$evento_autoinflingido', '$servicio', '$otro_servicio', '$tipoatencion', '$otro_tipoatencion', '$areaanatomica', '$consec_resultante', '$causaexterna', '1', '$idusuario')";
@@ -713,7 +713,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <label>Descripción de la afección de causa externa(*):</label>
-                                        <input type="text" class="form-control" name="causaexterna" id="causaexterna" maxlength="200" placeholder="Especifique la descripción de la afección de causa externa" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="causaexterna" id="causaexterna" maxlength="200" placeholder="Especifique la descripción de la afección de causa externa" required onblur="may(this.value, this.id)">
                                         <span></span>
                                     </div>
 

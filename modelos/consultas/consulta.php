@@ -81,6 +81,18 @@ if (!isset($_SESSION['idusuario'])) {
         //echo $lesion_es . "<br>";
         //echo $lesiones . "<br>";
 
+        //VALIDAR QUE LESIONES NO VENGA VACIO
+        if ($lesion_es == "" || $lesion_es == NULL) {
+            $lesion_es = "NO HAY LESION";
+        }elseif ($lesiones == "" || $lesiones == NULL) {
+            $lesiones = "NO";
+        }elseif ($lesion_es == "NO HAY LESION" || $lesion_es == "SUBSECUENTE") {
+            $lesiones = "NO";
+        }else {
+            $lesion_es = $lesion_es;
+            $lesiones = $lesiones;
+        }
+
         //CAPTURA DE DATOS ==========================================================================
 
         if ($altapor === 'Observación') {
@@ -375,7 +387,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     if ($fila['sexo'] == "Masculino") {
 
                                         echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                        <label>MUJER EN EDAD FERTIL:</label>
+                                        <label id="fertil">MUJER EN EDAD FERTIL:</label>
                                         <select class="form-control" name="mujeredadfertil" id="mujeredadfertil" disabled="true">
                                             <option value=""></option>
                                         </select>
@@ -384,9 +396,9 @@ if (!isset($_SESSION['idusuario'])) {
                                     }else{
 
                                         echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                        <label>MUJER EN EDAD FERTIL:</label>
-                                        <select class="form-control" name="mujeredadfertil" id="mujeredadfertil">
-                                            <option value="<?php echo $fila["mujeredadfertil"]; ?>"><?php echo $fila["mujeredadfertil"]; ?></option>
+                                        <label id="fertil">MUJER EN EDAD FERTIL:</label>
+                                        <select class="form-control" name="mujeredadfertil" id="mujeredadfertil" required>
+                                            <option value="">Elija una opción</option>
                                             <option value="No estaba embarazada ni en el puerperio">No estaba embarazada ni en el puerperio</option>
                                             <option value="Embarazo">Embarazo</option>
                                             <option value="Puerperio (de 0 a 42 días después del parto)">Puerperio (de 0 a 42 días después del parto)</option>
@@ -550,7 +562,7 @@ if (!isset($_SESSION['idusuario'])) {
         document.getElementById("notaingresourg").value = "";
         if (document.getElementById("sexo").value == "Femenino") {
             document.getElementById("fertil").style.color = "red";
-        } else {
+        }else {
             document.getElementById("fertil").style.color = "black";
             document.getElementById("mujeredadfertil").disabled=true;
         }
