@@ -11,20 +11,7 @@ CREATE VIEW v_pacientes AS select p.idpaciente AS idpaciente,p.expediente AS exp
 
 
 
-UPDATE pacientes SET status = 'Activo', idusuario = ;
-
-/*
-if ($reg['status'] == 'Avtivo') {
-echo "<td><span class='text-primary'>Activo</span></td>";
-}elseif ($reg['status'] == 'Depurado') {
-echo "<td><span class='text-info'>Depurado</span></td>";
-}elseif ($reg['status'] == 'Defunción') {
-echo "<td><span class='text-danger'>Defunción</span></td>";
-}elseif ($reg['status'] == 'Depurado y nvo. número') {
-echo "<td><span class='text-warning'>Depurado y nvo. número</span></td>";
-}
-*/
-
+update pacientes join exparchivo on pacientes.curp=exparchivo.curp set pacientes.expediente=exparchivo.idexpediente;
 
 
 

@@ -23,14 +23,7 @@ if (!isset($_SESSION['idusuario'])) {
 
         $idusuario = $_SESSION['idusuario'];
 
-        /*echo $nombrep . "<br>";
-        echo $curp . "<br>";
-        echo $tipopaciente . "<br>";
-        echo $estado . "<br>";
-        echo $observaciones . "<br>";*/
-
         /* VALIDACION DE DATOS */
-
         $validacion = array();
 
         //CURP
@@ -57,13 +50,47 @@ if (!isset($_SESSION['idusuario'])) {
             echo "</div>";
         } else {
 
-            //==========================================================================================
+            //===================================================================================
 
-            //Realizamos la inserción de los datos
-
+            //Realizamos la inserción de los datos en la tabla de archivo
             $sql = "INSERT INTO exparchivo(nombrep, curp, tipopaciente, estado, observaciones, idusuario, fechaalta) VALUES ('$nombrep','$curp','$tipopaciente','$estado','$observaciones','$idusuario', NOW())";
 
             $resultado = $con->query($sql);
+
+            //===================================================================================
+
+            //AGREGAR NUM DE EXPEDIENTE A ADMICION DE URGENCIAS
+            //Capturamos el ultimo id que se registro
+            $sqlidExpediente = "SELECT idexpediente, curp FROM exparchivo ORDER BY idexpediente DESC LIMIT 1";
+            //$consulta_precio_seco = "SELECT * FROM mensajes";
+            $rslConsulta = mysqli_query($con, $sqlidExpediente);
+            $filaExp = mysqli_fetch_row($rslConsulta);
+
+            $idexpediente = $filaExp[0];
+            $curpp = $filaExp[1];
+
+            //echo $idexpediente . "<br>";
+            //echo $curpp . "<br>";
+
+            //BUSCAMOS SI LA CURP DEL PACIENTE COINCIDE CON RECEPCION DE URGENCIAS
+            $curpPaciente = "SELECT curp FROM pacientes WHERE curp = '$curpp'";
+            $rslCurpPac = mysqli_query($con, $curpPaciente);
+            $filaCurp = mysqli_fetch_row($rslCurpPac);
+            
+            //Editamos la tabla pacientes con el numero de expediente y la curp
+            if ($filaCurp > 0) {
+
+                $editarExp = "UPDATE pacientes SET expediente='$idexpediente'
+                            WHERE curp = '$curpp'";
+
+                $editarTabla = $con->query($editarExp);
+                
+            } else {
+                $con->close();
+            }
+
+
+            //MENSAJES DESBLOQUEAR AQUI==============================================
 
             if ($resultado > 0) {
 
@@ -85,7 +112,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Registrar Expediente</h5>
+                        <h5>Registrar expediente</h5>
                     </div>
 
                     <div class="card-body">

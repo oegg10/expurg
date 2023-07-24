@@ -20,18 +20,6 @@ if (!isset($_SESSION['idusuario'])) {
                 <div class="card text-left">
                     <div class="card-header">
                         <h5>Registrar Paciente</h5>
-
-                        <?php
-                        /*$sql = "SELECT expediente FROM pacientes ORDER BY expediente DESC LIMIT 1";
-
-                        $res = $con->query($sql);
-
-                        while ($reg = $res->fetch_array(MYSQLI_BOTH)) {
-
-                            echo "<h6>El último número de expediente otorgado es: <strong style='color: blue;'>" . $reg[0] . " <- Solo para archivo</strong></h6>";
-                        }*/
-
-                        ?>
                     </div>
 
                     <div class="card-body">
@@ -41,6 +29,9 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <label>CURP(*) | <small><strong style="color: red;">Capturar correctamente la CURP</strong></small></label>
+                                    <!-- num. de expediente oculto -->
+                                    <input type="hidden" name="expediente" id="expediente">
+                                    <!-- ============================================== -->
                                     <input type="text" class="form-control" name="curp" id="curp" autofocus minlength="18" maxlength="18" placeholder="CURP" pattern="[A-Z]{4}[0-9]{6}[A-Z0-9]{8}" required onblur="may(this.value, this.id)" onkeyup="busqueda();">
                                 </div>
 

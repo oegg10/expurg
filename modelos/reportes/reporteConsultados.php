@@ -13,14 +13,23 @@ if (!isset($_SESSION['idusuario'])) {
         $fechai = $_POST['fechai'];
         $fechaf = $_POST['fechaf'];
 
-        $recepciones = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.embarazo, r.medico, r.semgesta, r.sala, r.referencia, r.observaciones, r.condicion, r.idusuario FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente WHERE r.condicion = 2 AND DATE(r.fechahorarecep) >= '$fechai' AND DATE(r.fechahorarecep) <= '$fechaf'";
+        $recepciones = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.embarazo, r.medico, r.semgesta, r.sala, r.referencia, r.observaciones, r.condicion FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente WHERE r.condicion = 2 AND DATE(r.fechahorarecep) >= '$fechai' AND DATE(r.fechahorarecep) <= '$fechaf'";
 
         $resultado = $con->query($recepciones);
+
+        //LESIONES
+        $sqlLesiones = "SELECT p.nombre AS paciente, p.sexo, c.fechaingreso, r.edad, r.mtvoconsulta, u.nombre AS medico FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion INNER JOIN lesiones l ON l.idconsulta = c.idconsulta INNER JOIN usuarios u ON u.idusuario = c.idusuario WHERE DATE(c.fechaingreso) >= '$fechai' AND DATE(c.fechaingreso) <= '$fechaf'";
+
+        $lesiones = $con->query($sqlLesiones);
     } else {
 
-        $recepciones = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.embarazo, r.medico, r.semgesta, r.sala, r.referencia, r.observaciones, r.condicion, r.idusuario FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente WHERE r.condicion = 2 AND DATE(r.fechahorarecep) = CURDATE()";
+        $recepciones = "SELECT r.idrecepcion, r.idpaciente, p.nombre, p.sexo, DATE(r.fechahorarecep) as fecha, r.fechahorarecep, r.edad, r.mtvoconsulta, r.embarazo, r.medico, r.semgesta, r.sala, r.referencia, r.observaciones, r.condicion FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente WHERE r.condicion = 2 AND DATE(r.fechahorarecep) = CURDATE()";
 
         $resultado = $con->query($recepciones);
+
+        $sqlLesiones = "SELECT p.nombre AS paciente, p.sexo, c.fechaingreso, r.edad, r.mtvoconsulta, u.nombre AS medico FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion INNER JOIN lesiones l ON l.idconsulta = c.idconsulta INNER JOIN usuarios u ON u.idusuario = c.idusuario WHERE DATE(c.fechaingreso) = CURDATE()";
+
+        $lesiones = $con->query($sqlLesiones);
     }
 
 ?>
@@ -30,7 +39,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Consultados</h5>
+                        <h5>Reporte por fecha(s)</h5>
                     </div>
                     <div class="card-body">
 
@@ -58,6 +67,9 @@ if (!isset($_SESSION['idusuario'])) {
                         </form>
 
                         <hr>
+
+                        <!-- CONSULTAS -->
+                        <h6>Consultas</h6>
                         <div class="table-responsive display nowrap" id="listadoregistros">
                             <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
                                 <thead style="background-color: #757579; color: white;">
@@ -87,7 +99,6 @@ if (!isset($_SESSION['idusuario'])) {
                                             if ($reg['embarazo'] == 'NO') {
                                                 $reg['semgesta'] = "";
                                             }
-                                            
                                         } elseif ($reg['sexo'] == 'Masculino') {
 
                                             $reg['sexo'] = "M";
@@ -125,6 +136,64 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tfoot>
                             </table>
                         </div>
+
+                        <!-- LESIONES -->
+
+                        <hr>
+
+                        <h6>Lesiones</h6>
+                        <div class="table-responsive display nowrap" id="listadoregistros">
+                            <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
+                                <thead style="background-color: #757579; color: white;">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Nombre</th>
+                                        <th>Sexo</th>
+                                        <th>Edad</th>
+                                        <th>Motivo consulta</th>
+                                        <th>Médico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <?php
+                                    while ($lesion = $lesiones->fetch_array(MYSQLI_BOTH)) {
+
+                                        //CONDICION PARA IMPRIMIR F o M SEGUN EL GENERO o SEXO
+                                        if ($lesion['sexo'] == 'Femenino') {
+
+                                            $lesion['sexo'] = "F";
+                                        } elseif ($lesion['sexo'] == 'Masculino') {
+
+                                            $lesion['sexo'] = "M";
+                                        }
+
+                                        echo "<tr>
+                                        <td>" . date("d-m-Y H:i:s", strtotime($lesion['fechaingreso'])) . "</td>
+                                        <td>" . $lesion['paciente'] . "</td>
+                                        <td>" . $lesion['sexo'] . "</td>
+                                        <td>" . $lesion['edad'] . "</td>
+                                        <td>" . $lesion['mtvoconsulta'] . "</td>
+                                        <td>" . $lesion['medico'] . "</td>
+                                        </tr>";
+                                    }
+                                    ?>
+
+                                </tbody>
+                                <tfoot>
+                                    <th>Fecha</th>
+                                    <th>Nombre</th>
+                                    <th>Sexo</th>
+                                    <th>Edad</th>
+                                    <th>Motivo consulta</th>
+                                    <th>Médico</th>
+                                </tfoot>
+                            </table>
+                        </div>
+
+
+
+
                     </div>
 
                 </div>

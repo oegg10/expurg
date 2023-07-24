@@ -20,9 +20,6 @@ if (!isset($_SESSION['idusuario'])) {
 
     if (!empty($_POST)) {
 
-        //$expediente = mysqli_real_escape_string($con,$_POST['expediente']);
-        //$nombre = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', mysqli_real_escape_string($con, $_POST['nombre']));
-
         //https://www.php.net/manual/es/function.preg-replace.php
         $expediente = mysqli_real_escape_string($con, $_POST['expediente']);
         $nombre = preg_replace('/\s\s+/', ' ', mysqli_real_escape_string($con, $_POST['nombre']));
@@ -34,8 +31,6 @@ if (!isset($_SESSION['idusuario'])) {
         $afiliacion = mysqli_real_escape_string($con, $_POST['afiliacion']);
         $numafiliacion = mysqli_real_escape_string($con, $_POST['numafiliacion']);
         $domicilio = preg_replace('/\s\s+/', ' ', mysqli_real_escape_string($con, $_POST['domicilio']));
-        /*$domicilio = mysqli_real_escape_string($con, $_POST['domicilio']);
-        $colonia = mysqli_real_escape_string($con, $_POST['colonia']);*/
         $colonia = preg_replace('/\s\s+/', ' ', mysqli_real_escape_string($con, $_POST['colonia']));
         $cp = mysqli_real_escape_string($con, $_POST['cp']);
         $municipio = mysqli_real_escape_string($con, $_POST['municipio']);
@@ -115,9 +110,10 @@ if (!isset($_SESSION['idusuario'])) {
         } else {
 
             //==========================================================================================
-
-            $verpaciente = "SELECT idpaciente, curp FROM pacientes WHERE (
-                expediente LIKE '$expediente' OR curp LIKE '$curp'";
+            /**ASIGNAR CURPS A LOS PACIENTES DE ADMISION DE URGENCIAS
+             * update pacientes join exparchivo on pacientes.curp=exparchivo.curp set pacientes.expediente=exparchivo.idexpediente;
+             */
+            $verpaciente = "SELECT idpaciente, curp FROM pacientes WHERE curp LIKE '$curp'";
 
             $existepaciente = $con->query($verpaciente);
             $fila = $existepaciente->num_rows;
@@ -134,6 +130,26 @@ if (!isset($_SESSION['idusuario'])) {
                 if ($fila1 > 0) {
                     header('location:../extend/alerta.php?msj=EL paciente con el nombre y fecha escritos ya existe en la base de datos&c=pac&p=in&t=error');
                 } else {
+
+                    //BUSCAMOS SI EL PACIENTE TIENE NUMERO DE EXPEDIENTE EN ARCHIVO
+                    $pacienteConExpediente = "SELECT idexpediente, curp FROM exparchivo WHERE curp = '$curp'";
+
+                    $existeCURP = $con->query($pacienteConExpediente);
+                    $filaExp = $existeCURP->num_rows;
+
+                    if ($filaExp > 0) {
+
+                        while ($reg = $existeCURP->fetch_array(MYSQLI_BOTH)) {
+
+                            $expediente = $reg[0];
+                        }
+
+                    }else{
+                        $expediente = "";
+                    }
+
+                    //echo $expediente;
+
 
                     //Realizamos la inserción de los datos
                     $sql = "INSERT INTO pacientes(nombre, expediente, curp, fechanac, entidadnac, sexo, edocivil, afiliacion, numafiliacion, domicilio, colonia, cp, municipio, localidad, entidaddom, telefono, observaciones, estado, idusuario) VALUES ('$nombre','$expediente','$curp','$fechanac','$entidadnac','$sexo','$edocivil','$afiliacion','$numafiliacion','$domicilio','$colonia','$cp','$municipio','$localidad','$entidaddom','$telefono','$observaciones','$estado','$idusuario')";
