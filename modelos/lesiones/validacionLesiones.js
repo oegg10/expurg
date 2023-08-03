@@ -3,6 +3,7 @@ var escolaridad = document.getElementById("escolaridad");
 var leerescribir = document.getElementById("leerescribir");
 var discapacidad = document.getElementById("discapacidad");
 var referidopor = document.getElementById("referidopor");
+var fechainicio = document.getElementById("fechainicio");
 var fecha_ocurrencia = document.getElementById("fecha_ocurrencia");
 var diafestivo = document.getElementById("diafestivo");
 var sitio_ocurrencia = document.getElementById("sitio_ocurrencia");
@@ -69,6 +70,11 @@ error.style.color = "red";
 
 function enviarFormulario() {
 
+    /*var fechaInicio1 = new Date(fechainicio.value);
+    var fechaI = fechaInicio1.getTime();
+    var fechaOcurre1 = new Date(fecha_ocurrencia.value);
+    var fechaO = fechaOcurre1.getTime();*/
+
     var mensajesError = [];
 
     if (escolaridad.value == "") {
@@ -96,8 +102,16 @@ function enviarFormulario() {
     }
 
     if (fecha_ocurrencia == "") {
-        mensajesError.push("La fecha de no debe estar vacía");
+        mensajesError.push("La fecha de ocurrencia no debe estar vacía");
     }
+
+    /*if (fechaO > fechaI) {
+        mensajesError.push("La fecha de la ocurrencia no debe ser mayor a la de inicio de la consulta");
+        //alert("La fecha de la ocurrencia no debe ser mayor a la de inicio de la consulta.");
+        console.log("FechaO = " + fechaO);
+        console.log("FechaI = " + fechaI);
+    }*/
+
 
     if (diafestivo.value == "") {
 
@@ -185,9 +199,7 @@ function enviarFormulario() {
 
     if (causaexterna.value == "") {
 
-        alert("La causa externa no puede estar vacía");
         mensajesError.push("La causa externa no puede estar vacía");
-        //console.log("Causa externa = " . causaexterna);
 
     }
 

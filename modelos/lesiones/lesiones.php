@@ -12,7 +12,7 @@ if (!isset($_SESSION['idusuario'])) {
 
     $id = $_GET['idc'];
 
-    $sql = "SELECT r.idrecepcion, p.idpaciente, p.nombre, p.entidaddom, p.municipio, p.localidad, p.domicilio, p.colonia, p.cp, r.edad,p.sexo, r.mtvoconsulta, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3 FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE c.idconsulta = '$id'";
+    $sql = "SELECT r.idrecepcion, p.idpaciente, p.nombre, p.entidaddom, p.municipio, p.localidad, p.domicilio, p.colonia, p.cp, r.edad, p.sexo, r.mtvoconsulta, c.fechaingreso, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3 FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE c.idconsulta = '$id'";
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
 
@@ -24,6 +24,8 @@ if (!isset($_SESSION['idusuario'])) {
     $var_domicilio = $fila["domicilio"];
     $var_colonia = $fila["colonia"];
     $var_cp = $fila["cp"];
+
+    $fechaingreso = $fila["fechaingreso"];
 
     //========================================================================================
 
@@ -79,36 +81,130 @@ if (!isset($_SESSION['idusuario'])) {
 
         $idusuario = $_SESSION['idusuario'];
 
-        //echo $causaexterna . "<br>";
-
-        //Realizamos la inserción de los datos
-        $sql_lesiones = "INSERT INTO lesiones (idconsulta, escolaridad, leerescribir, discapacidad, referidopor, nombre_unidad, fecha_ocurrencia, diafestivo, sitio_ocurrencia, sitio_ocurrencia_otro, lesion_entidad, lesion_municipio, lesion_localidad, lesion_cp, lesion_domicilio, lesion_colonia, intensionalidad, agente_lesion, agente_otro, toxicomanias, otras_toxicomanias, lesionad_es, equipo_seguridad, que_eq_seguridad, otro_eq_seguridad, tipo_violencia, num_agresores, parentesco_afectado, sexo_agresor, edad_agresor, bajoefectos_agresor, evento_autoinflingido, servicio, otro_servicio, tipoatencion, otro_tipoatencion, areaanatomica, consec_resultante, causaexterna, condicion, idusuario) VALUES ('$idconsulta', '$escolaridad', '$leerescribir', '$discapacidad', '$referidopor', '$nombre_unidad', '$fecha_ocurrencia', '$diafestivo', '$sitio_ocurrencia', '$sitio_ocurrencia_otro', '$lesion_entidad', '$lesion_municipio', '$lesion_localidad', '$lesion_cp', '$lesion_domicilio', '$lesion_colonia', '$intensionalidad', '$agente_lesion', '$agente_otro', '$toxicomanias', '$otras_toxicomanias', '$lesionad_es', '$equipo_seguridad', '$que_eq_seguridad', '$otro_eq_seguridad', '$tipo_violencia', '$num_agresores', '$parentesco_afectado', '$sexo_agresor', '$edad_agresor', '$bajoefectos_agresor', '$evento_autoinflingido', '$servicio', '$otro_servicio', '$tipoatencion', '$otro_tipoatencion', '$areaanatomica', '$consec_resultante', '$causaexterna', '1', '$idusuario')";
-
-        $insLesiones = $con->query($sql_lesiones);
 
 
-        //Editamos la tabla consultas el campo cap_lesiones con valor 1
-        $sql_caplesion = "UPDATE consultas SET cap_lesion = '1' WHERE idconsulta = '$idconsulta'";
+        /* VALIDACION DE DATOS */
 
-        $caplesion = $con->query($sql_caplesion);
+        /*$error = array();
 
-
-        if ($insLesiones > 0 && $caplesion > 0) {
-            //NO HAY INDEX EN PAGINA DE LESIONES
-
-            echo "<script>
-            alert('La captura de lesiones se guardo con exito');
-            window.location = '../consultas/index.php';
-        </script>";
-        } else {
-
-            echo "<script>
-            alert('Error al guardar la captura de lesiones');
-            window.location = '../consultas/index.php';
-        </script>";
+        if ($escolaridad=="") {
+            $error[0]= "La escolaridad no debe ir vacía";
         }
 
-        $con->close();
+        if ($leerescribir=="") {
+            $error[1]= "Leer y escribir no debe ir vacío";
+        }
+
+        if ($discapacidad=="") {
+            $error[2]= "La discapacidad no debe ir vacía";
+        }
+
+        if ($referidopor=="") {
+            $error[3]= "Referido por no debe ir vacío";
+        }
+
+        if ($fecha_ocurrencia=="") {
+            $error[4]= "La fecha de ocurrencia no debe ir vacía";
+        }
+
+        if ($fecha_ocurrencia >= $fechaingreso) {
+            $error[5]= "La fecha de ocurrencia no debe ser mayor a la fecha de inicio de la consulta";
+        }
+
+        if ($diafestivo=="") {
+            $error[6]= "El día festivo no debe de ir vacío";
+        }
+
+        if ($sitio_ocurrencia=="") {
+            $error[7]= "El sitio de ocurrencia no debe ir vacío";
+        }
+
+        if ($lesion_entidad=="") {
+            $error[8]= "La entidad no debe ir vacía";
+        }
+
+        if ($lesion_municipio=="") {
+            $error[9]= "El municipio no debe ir vacío";
+        }
+
+        if ($lesion_localidad=="") {
+            $error[10]= "La localidad no debe ir vacía";
+        }
+
+        if ($lesion_domicilio=="") {
+            $error[11]= "El domicilio no debe ir vacío";
+        }
+
+        if ($lesion_colonia=="") {
+            $error[12]= "La colonia no debe ir vacía";
+        }
+
+        if ($intensionalidad=="") {
+            $error[13]= "La intensionalidad no debe ir vacía";
+        }
+
+        if ($agente_lesion=="") {
+            $error[14]= "El agente de la lesión no debe ir vacío";
+        }
+
+        if ($toxicomanias=="") {
+            $error[15]= "La sospecha que el paciente bajo efectos de: no puede estar vacía";
+        }
+
+        if ($servicio=="") {
+            $error[16]= "El servicio no debe ir vacío";
+        }
+
+        if ($tipoatencion=="") {
+            $error[17]= "El tipo de atención no debe ir vacío";
+        }
+
+        if ($areaanatomica=="") {
+            $error[18]= "El área anatómica no puede estar vacía";
+        }
+
+        if ($consec_resultante=="") {
+            $error[19]= "La consecuencia resultante no puede estar vacía";
+        }
+
+        if ($causaexterna=="") {
+            $error[20]= "La causa externa no debe ir vacía";
+        }
+
+        if (count($error)==0) {*/
+
+            //======= Realizamos la inserción de los datos =========
+            $sql_lesiones = "INSERT INTO lesiones (idconsulta, escolaridad, leerescribir, discapacidad, referidopor, nombre_unidad, fecha_ocurrencia, diafestivo, sitio_ocurrencia, sitio_ocurrencia_otro, lesion_entidad, lesion_municipio, lesion_localidad, lesion_cp, lesion_domicilio, lesion_colonia, intensionalidad, agente_lesion, agente_otro, toxicomanias, otras_toxicomanias, lesionad_es, equipo_seguridad, que_eq_seguridad, otro_eq_seguridad, tipo_violencia, num_agresores, parentesco_afectado, sexo_agresor, edad_agresor, bajoefectos_agresor, evento_autoinflingido, servicio, otro_servicio, tipoatencion, otro_tipoatencion, areaanatomica, consec_resultante, causaexterna, condicion, idusuario) VALUES ('$idconsulta', '$escolaridad', '$leerescribir', '$discapacidad', '$referidopor', '$nombre_unidad', '$fecha_ocurrencia', '$diafestivo', '$sitio_ocurrencia', '$sitio_ocurrencia_otro', '$lesion_entidad', '$lesion_municipio', '$lesion_localidad', '$lesion_cp', '$lesion_domicilio', '$lesion_colonia', '$intensionalidad', '$agente_lesion', '$agente_otro', '$toxicomanias', '$otras_toxicomanias', '$lesionad_es', '$equipo_seguridad', '$que_eq_seguridad', '$otro_eq_seguridad', '$tipo_violencia', '$num_agresores', '$parentesco_afectado', '$sexo_agresor', '$edad_agresor', '$bajoefectos_agresor', '$evento_autoinflingido', '$servicio', '$otro_servicio', '$tipoatencion', '$otro_tipoatencion', '$areaanatomica', '$consec_resultante', '$causaexterna', '1', '$idusuario')";
+
+            $insLesiones = $con->query($sql_lesiones);
+
+
+            //Editamos la tabla consultas el campo cap_lesiones con valor 1
+            $sql_caplesion = "UPDATE consultas SET cap_lesion = '1' WHERE idconsulta = '$idconsulta'";
+
+            $caplesion = $con->query($sql_caplesion);
+
+
+            if ($insLesiones > 0 && $caplesion > 0) {
+                //NO HAY INDEX EN PAGINA DE LESIONES
+
+                echo "<script>
+                alert('La captura de lesiones se guardo con exito');
+                window.location = '../consultas/index.php';
+            </script>";
+            } else {
+
+                echo "<script>
+                alert('Error al guardar la captura de lesiones');
+                window.location = '../consultas/index.php';
+            </script>";
+            }
+
+            $insLesiones->close();
+            $con->close();
+
+        //}
+        
     }
 
 ?>
@@ -191,9 +287,16 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <!-- LESIONES Y CAUSAS DE VIOLENCIA -->
 
-                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group col-lg-9 col-md-9 col-sm-9">
                                         <h6>LESIONES Y CAUSAS DE VIOLENCIA</h6>
                                     </div>
+
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                        <label for="fechainicio" style="color: red;">Fecha y hora de inicio de la consulta: </label>
+                                        <input type="datetime-local" style="background-color: black; color:white;" id="fechainicio" name="fechainicio" value="<?php echo date("Y-m-d H:i:s", strtotime($fechaingreso)); ?>" readonly>
+                                    </div>
+
+                                    <!-- 12 -->
 
                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                         <label>Escolaridad (*):</label>
@@ -396,7 +499,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                         <label>Intencionalidad(*):</label>
                                         <select class='form-control' name='intensionalidad' id='intensionalidad' onchange='mostrarViolencia(this.value);' required>
-                                            <option value='' disabled selected>Elija una opción</option>
+                                            <option value="" disabled selected>Elija una opción</option>
                                             <option value='ACCIDENTAL'>ACCIDENTAL</option>
                                             <option value='VIOLENCIA FAMILIAR'>VIOLENCIA FAMILIAR</option>
                                             <option value='VIOLENCIA NO FAMILIAR'>VIOLENCIA NO FAMILIAR</option>
@@ -409,7 +512,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-4 col-md-4 col-sm-4">
                                         <label>¿Agente de la lesión?(*):</label>
                                         <select class='form-control' name='agente_lesion' id='agente_lesion' onchange='mostrarAccidente(this.value);' required>
-                                            <option value='' disabled selected>Elija una opción</option>
+                                            <option value="" disabled selected>Elija una opción</option>
                                             <option value='FUEGO, FLAMA, SUSTANCIA CALIENTE/VAPOR'>FUEGO, FLAMA, SUSTANCIA CALIENTE/VAPOR</option>
                                             <option value='INTOXICACIÓN POR DROGAS O MEDICAMENTOS'>INTOXICACIÓN POR DROGAS O MEDICAMENTOS</option>
                                             <option value='PIE O MANO'>PIE O MANO</option>
@@ -448,16 +551,10 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <!-- 12 -->
 
-                                    <!--<div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <h6><strong>Atencíon prehospitalaria</strong></h6>
-                                    </div>-->
-
-                                    <!-- 12 -->
-
                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                         <label>Se sospecha que el paciente estaba bajo efectos de:(*):</label>
                                         <select class='form-control' name='toxicomanias' id='toxicomanias' required>
-                                            <option value='' disabled selected>Elija una opción</option>
+                                            <option value="" disabled selected>Elija una opción</option>
                                             <option value='ALCOHOL'>ALCOHOL</option>
                                             <option value='DROGA POR INDICACIÓN MEDICA'>DROGA POR INDICACIÓN MEDICA</option>
                                             <option value='DROGAS ILEGALES'>DROGAS ILEGALES</option>
@@ -483,7 +580,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                             <label>La/El Lesionada(o) es:</label>
                                             <select class='form-control' name='lesionad_es' id='lesionad_es'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='CONDUCTOR'>CONDUCTOR</option>
                                                 <option value='OCUPANTE'>OCUPANTE</option>
                                                 <option value='PEATÓN'>PEATÓN</option>
@@ -493,7 +590,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                             <label>Usó equipo de seguridad:</label>
                                             <select class='form-control' name='equipo_seguridad' id='equipo_seguridad' onchange='equipoSeguridad(this.value);'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='SI'>SI</option>
                                                 <option value='NO'>NO</option>
                                                 <option value='SE IGNORA'>SE IGNORA</option>
@@ -503,7 +600,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                             <label>¿Qué equipo de seguridad utilizó?:</label>
                                             <select class='form-control' name='que_eq_seguridad' id='que_eq_seguridad' onchange='otroEquipoSeguridad(this.value);'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='CINTURÓN DE SEGURIDAD'>CINTURÓN DE SEGURIDAD</option>
                                                 <option value='CASCO'>CASCO</option>
                                                 <option value='SILLÍN PORTA INFANTE'>SILLÍN PORTA INFANTE</option>
@@ -529,7 +626,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                             <label>Tipo de violencia:</label>
                                             <select class='form-control' name='tipo_violencia' id='tipo_violencia'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='VIOLENCIA FÍSICA'>VIOLENCIA FÍSICA</option>
                                                 <option value='VIOLENCIA SEXUAL'>VIOLENCIA SEXUAL</option>
                                                 <option value='VIOLENCIA PSICOLÓGICA'>VIOLENCIA PSICOLÓGICA</option>
@@ -541,7 +638,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                             <label>Num. de agresores:</label>
                                             <select class='form-control' name='num_agresores' id='num_agresores'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='UNICA(O)'>UNICA(O)</option>
                                                 <option value='MÁS DE UNA(O)'>MÁS DE UNA(O)</option>
                                             </select>
@@ -550,7 +647,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                             <label>Parentesco con la/el afectada(o):</label>
                                             <select class='form-control' name='parentesco_afectado' id='parentesco_afectado'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='NO ESPECIFICADO'>NO ESPECIFICADO</option>
                                                 <option value='PADRE'>PADRE</option>
                                                 <option value='MADRE'>MADRE</option>
@@ -567,7 +664,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                             <label>Sexo del/la agresor(a):</label>
                                             <select class='form-control' name='sexo_agresor' id='sexo_agresor'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='HOMBRE'>HOMBRE</option>
                                                 <option value='MUJER'>MUJER</option>
                                                 <option value='INTERSEXUAL'>INTERSEXUAL</option>
@@ -580,13 +677,13 @@ if (!isset($_SESSION['idusuario'])) {
 
                                         <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                             <label>Edad del/la agresor(a):</label>
-                                            <input type="text" class="form-control" name="edad_agresor" id="edad_agresor" maxlength="3" placeholder="Edad" pattern="[0-9]{1,3}">
+                                            <input type="text" class="form-control" name="edad_agresor" id="edad_agresor" maxlength="3" value="<?php echo isset($leerescribir)?$leerescribir:""; ?>" placeholder="Edad" pattern="[0-9]{1,3}">
                                         </div>
 
                                         <div class="form-group col-lg-4 col-md-4 col-sm-4">
                                             <label>El/la agreso(a) se sospecha que actuó bajo los efectos de:</label>
                                             <select class='form-control' name='bajoefectos_agresor' id='bajoefectos_agresor'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='ALCOHOL'>ALCOHOL</option>
                                                 <option value='DROGA POR INDICACIÓN MÉDICA'>DROGA POR INDICACIÓN MÉDICA</option>
                                                 <option value='DROGAS ILEGALES'>DROGAS ILEGALES</option>
@@ -598,7 +695,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <div class="form-group col-lg-4 col-md-4 col-sm-4">
                                             <label>En caso de evento autoinfligido, el evento ocurrió:</label>
                                             <select class='form-control' name='evento_autoinflingido' id='evento_autoinflingido'>
-                                                <option value='' disabled selected>Elija una opción</option>
+                                                <option value="" disabled selected>Elija una opción</option>
                                                 <option value='ÚNICA VEZ'>ÚNICA VEZ</option>
                                                 <option value='REPETIDO'>REPETIDO</option>
                                             </select>
@@ -616,7 +713,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                         <label>Servicio que otorgó la atención:(*):</label>
                                         <select class='form-control' name='servicio' id='servicio' onchange='otroServicio(this.value);' required>
-                                            <option value='' disabled selected>Elija una opción</option>
+                                            <option value="" disabled selected>Elija una opción</option>
                                             <option value='URGENCIAS'>URGENCIAS</option>
                                             <option value='CONSULTA EXTERNA'>CONSULTA EXTERNA</option>
                                             <option value='HOSPITALIZACIÓN'>HOSPITALIZACIÓN</option>
@@ -634,7 +731,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                         <label>Tipo de atención:(*):</label>
                                         <select class='form-control' name='tipoatencion' id='tipoatencion' required>
-                                            <option value='' disabled selected>Elija una opción</option>
+                                            <option value="" disabled selected>Elija una opción</option>
                                             <option value='TRATAMIENTO MÉDICO'>TRATAMIENTO MÉDICO</option>
                                             <option value='TRATAMIENTO PSICOLÓGICO'>TRATAMIENTO PSICOLÓGICO</option>
                                             <option value='TRATAMIENTO QUIRÚRGICO'>TRATAMIENTO QUIRÚRGICO</option>
@@ -745,8 +842,42 @@ if (!isset($_SESSION['idusuario'])) {
     <?php include "../extend/footer.php"; ?>
 
     <script>
-        //$(document).ready(function() {
-        //})
+
+        //======== VALIDA FECHAS ====================
+        var fechainicio = document.getElementById("fechainicio");
+        var fecha_ocurrencia = document.getElementById("fecha_ocurrencia");
+        
+        fecha_ocurrencia.addEventListener("blur", function () {
+            
+            //console.log("saliste del campo de fecha de ocurrencia");
+
+            var fechaInicio1 = new Date(fechainicio.value);
+            var fechaI = fechaInicio1.getTime();
+            var fechaOcurre1 = new Date(fecha_ocurrencia.value);
+            var fechaO = fechaOcurre1.getTime();
+
+            //console.log("FechaO = " + fechaO);
+            //console.log("FechaI = " + fechaI);
+
+            //FECHA DE OCURRENCIA MAYOR A LA DE LA CONSULTA
+            if (fechaO > fechaI) {
+            alert("La fecha de la ocurrencia no debe ser mayor a la de inicio de la consulta.");
+
+            fecha_ocurrencia.value = '';
+
+            }
+
+            /*if (fechaO > fechaI) {
+            alert("La fecha de la ocurrencia no debe ser mayor a la de inicio de la consulta.");
+
+            fecha_ocurrencia.value = '';
+
+            }*/
+
+
+
+        });
+        //========= FIN VALIDA FECHAS ===============
 
         //========= VARIABLES DE DOMICILIO ==========
         var l_entidaddom = '<?php echo $var_entidaddom; ?>';

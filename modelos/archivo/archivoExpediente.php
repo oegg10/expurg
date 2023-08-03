@@ -59,6 +59,15 @@ if (!isset($_SESSION['idusuario'])) {
 
             //===================================================================================
 
+            /*$yaGuardado = "SELECT curp FROM exparchivo WHERE curp LIKE '$curp'";
+
+            $regExist = $con->query($yaGuardado);
+            $existeReg = $regExist->num_rows;
+
+            if ($existeReg > 0) {
+                $con->close();
+            }*/
+
             //AGREGAR NUM DE EXPEDIENTE A ADMICION DE URGENCIAS
             //Capturamos el ultimo id que se registro
             $sqlidExpediente = "SELECT idexpediente, curp FROM exparchivo ORDER BY idexpediente DESC LIMIT 1";
