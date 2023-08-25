@@ -105,6 +105,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
 
+
         //CAPTURA DE DATOS ==========================================================================
 
         if ($altapor === 'Observación') {
