@@ -71,7 +71,7 @@ if (!isset($_SESSION['idusuario'])) {
             //AGREGAR NUM DE EXPEDIENTE A ADMICION DE URGENCIAS
             //Capturamos el ultimo id que se registro
             $sqlidExpediente = "SELECT idexpediente, curp FROM exparchivo ORDER BY idexpediente DESC LIMIT 1";
-            //$consulta_precio_seco = "SELECT * FROM mensajes";
+            
             $rslConsulta = mysqli_query($con, $sqlidExpediente);
             $filaExp = mysqli_fetch_row($rslConsulta);
 
@@ -104,6 +104,7 @@ if (!isset($_SESSION['idusuario'])) {
             if ($resultado > 0) {
 
                 header('location:../extend/alerta.php?msj=EL paciente a sido registrado&c=exp&p=in&t=success');
+                $con->close();
             } else {
 
                 header('location:../extend/alerta.php?msj=Error al registrar al paciente&c=exp&p=in&t=error');

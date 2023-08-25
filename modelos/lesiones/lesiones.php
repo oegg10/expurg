@@ -810,7 +810,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <label>Descripción de la afección de causa externa(*):</label>
-                                        <input type="text" class="form-control" name="causaexterna" id="causaexterna" maxlength="200" placeholder="Especifique la descripción de la afección de causa externa" required onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="causaexterna" id="causaexterna" maxlength="200" placeholder="Ejemplo: Caída de su propia altura o Agresión por pareja" required onblur="may(this.value, this.id)">
                                         <span></span>
                                     </div>
 

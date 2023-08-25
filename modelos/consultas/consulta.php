@@ -81,17 +81,29 @@ if (!isset($_SESSION['idusuario'])) {
         //echo $lesion_es . "<br>";
         //echo $lesiones . "<br>";
 
-        //VALIDAR QUE LESIONES NO VENGA VACIO
+        //VALIDAR QUE LESIONES NO VENGA VACIO ===================
         if ($lesion_es == "" || $lesion_es == NULL) {
             $lesion_es = "NO HAY LESION";
-        }elseif ($lesiones == "" || $lesiones == NULL) {
+        }
+        if ($lesiones == "" || $lesiones == NULL) {
             $lesiones = "NO";
-        }elseif ($lesion_es == "NO HAY LESION" || $lesion_es == "SUBSECUENTE") {
+        }
+        if ($lesion_es == "NO HAY LESION" || $lesion_es == "SUBSECUENTE") {
             $lesiones = "NO";
         }else {
             $lesion_es = $lesion_es;
             $lesiones = $lesiones;
         }
+
+        //VALIDAR MINISTERIO PUBLICO ===================
+        if ($ministeriopublico == "") {
+            $ministeriopublico = "NO";
+        }
+
+        if ($mujeredadfertil == "") {
+            $mujeredadfertil = "No estaba embarazada ni en el puerperio";
+        }
+
 
         //CAPTURA DE DATOS ==========================================================================
 

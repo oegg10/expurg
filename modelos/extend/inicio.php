@@ -47,7 +47,7 @@ if (!isset($_SESSION['idusuario'])) {
     $respMes = $con->query($totalMes);
     /*==============================================================================*/
 
-    /*========EMBARAZOS POR MES=========================================================*/
+    /*========GINECOLOGIA POR MES=========================================================*/
     $embarazoMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala='GINECOLOGIA' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
     $embMes = $con->query($embarazoMes);
     /*==============================================================================*/
@@ -81,7 +81,7 @@ if (!isset($_SESSION['idusuario'])) {
     $recepcionesPorAnio = $con->query($rPa);
     /*==============================================================================*/
 
-    /*======== RECEPCIONES POR AÑO EMBARAZO =========================================================*/
+    /*======== RECEPCIONES POR AÑO GINECOLOGIA =========================================================*/
     $rPaE = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones WHERE sala='GINECOLOGIA' GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
     $recepcionesPorAnioEmbarazo = $con->query($rPaE);
     /*==============================================================================*/
@@ -227,15 +227,15 @@ if (!isset($_SESSION['idusuario'])) {
                                 </table>
                             </div>
 
-                            <!--================ EMBARAZOS POR MES ===================================-->
+                            <!--================ GINECOLOGIA POR MES ===================================-->
                             <div class="table-responsive col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <h3>Embarazos por MES</h3>
+                                <h3>Ginecología por MES</h3>
                                 <table class="table table-striped table-bordered table-condensed table-hover">
                                     <thead style="background-color: #757579; color: white;">
                                         <tr>
                                             <th>Mes</th>
                                             <th>Año</th>
-                                            <th>Embarazos</th>
+                                            <th>Ginecología</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -257,7 +257,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <tr>
                                             <th>Mes</th>
                                             <th>Año</th>
-                                            <th>Embarazos</th>
+                                            <th>Ginecología</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -407,7 +407,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                             <!--================ RECEPCIONES POR AÑO EMBARAZO ====================-->
                             <div class="table-responsive col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <h3>Recepciones año embarazos</h3>
+                                <h3>Recepciones año Ginecología</h3>
                                 <table class="table table-striped table-bordered table-condensed table-hover">
                                     <thead style="background-color: #757579; color: white;">
                                         <tr>
