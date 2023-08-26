@@ -8,14 +8,14 @@ if (!isset($_SESSION['idusuario'])) {
     header("Location:../../index.php");
 } else {
 
-    if ($_SESSION['idrol'] != 4 && $_SESSION['idrol'] != 1) {
+    if ($_SESSION['idrol'] != 4 && $_SESSION['idrol'] != 1 && $_SESSION['idrol'] != 8) {
         header("Location:../../index.php");
     }
 
     $idc = $_GET['idc'];
     //$idr = $_GET['idr'];
 
-    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE idconsulta = '$idc'";
+    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, r.idrecepcion, p.idpaciente, p.nombre, r.edad, p.sexo, r.mtvoconsulta, u.nombre AS nombreMedico, u.curp AS curpMedico, u.cedula, u.turno FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE idconsulta = '$idc'";
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
 
@@ -313,6 +313,11 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <input type="text" class="form-control" name="medicamento3" id="medicamento3" value="<?php echo $fila['medicamento3']; ?>" disabled>
+                                </div>
+                                <!-- 12 -->
+
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <input type="text" class="form-control" name="nombreMedico" id="nombreMedico" value="<?php echo $fila['nombreMedico']."-CURP: ".$fila['curpMedico']."-Cedula: ".$fila['cedula']."-Turno: ".$fila['turno']; ?>" disabled>
                                 </div>
 
                             </div>

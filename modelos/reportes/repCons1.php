@@ -8,7 +8,7 @@ if (!isset($_SESSION['idusuario'])) {
     header("Location:../../index.php");
 } else {
 
-    if ($_SESSION['idrol'] != 4 && $_SESSION['idrol'] != 1) {
+    if ($_SESSION['idrol'] != 4 && $_SESSION['idrol'] != 1 && $_SESSION['idrol'] != 8) {
         header("Location: ../../index.php");
     }
 

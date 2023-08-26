@@ -240,6 +240,10 @@ if (!isset($_SESSION['idusuario'])) {
                         <a class="nav-link" href="../consultasadmon/archivoindex.php">Expedientes</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="../reportes/repCons1.php">Consultorio1</a>
+                    </li>
+
                 </ul>
             </div>
             <!-- FIN MENU CONSULTA -->
