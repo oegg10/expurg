@@ -28,7 +28,7 @@ if (!isset($_SESSION['idusuario'])) {
 
         //CURP
 
-        if ($curp == "" && $tipopaciente == "Ninguno") {
+        if ($curp === "" && $tipopaciente === "Ninguno") {
             array_push($validacion, "La CURP no puede estar vacía o incompleta y el tipo de paciente no puede ser NINGUNO");
         }
 
@@ -37,7 +37,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         //nombre
-        if ($nombrep == "" || strlen($nombrep) < 4 || strlen($nombrep) > 200) {
+        if ($nombrep === "" || strlen($nombrep) < 4 || strlen($nombrep) > 200) {
             array_push($validacion, "El campo NOMBRE no debe estar vacío, o no cumple con las especificaciones");
         }
 
@@ -58,15 +58,6 @@ if (!isset($_SESSION['idusuario'])) {
             $resultado = $con->query($sql);
 
             //===================================================================================
-
-            /*$yaGuardado = "SELECT curp FROM exparchivo WHERE curp LIKE '$curp'";
-
-            $regExist = $con->query($yaGuardado);
-            $existeReg = $regExist->num_rows;
-
-            if ($existeReg > 0) {
-                $con->close();
-            }*/
 
             //AGREGAR NUM DE EXPEDIENTE A ADMICION DE URGENCIAS
             //Capturamos el ultimo id que se registro
@@ -89,13 +80,15 @@ if (!isset($_SESSION['idusuario'])) {
             //Editamos la tabla pacientes con el numero de expediente y la curp
             if ($filaCurp > 0) {
 
-                $editarExp = "UPDATE pacientes SET expediente='$idexpediente'
+                $editarPaciente = "UPDATE pacientes SET expediente='$idexpediente'
                             WHERE curp = '$curpp'";
 
-                $editarTabla = $con->query($editarExp);
+                $editarTabla = $con->query($editarPaciente);
                 
             } else {
+
                 $con->close();
+                $con = null;
             }
 
 
@@ -105,12 +98,14 @@ if (!isset($_SESSION['idusuario'])) {
 
                 header('location:../extend/alerta.php?msj=EL paciente a sido registrado&c=exp&p=in&t=success');
                 $con->close();
+                $con = null;
             } else {
 
                 header('location:../extend/alerta.php?msj=Error al registrar al paciente&c=exp&p=in&t=error');
             }
 
             $con->close();
+            $con = null;
         }
     }
 

@@ -28,6 +28,7 @@ if (!isset($_SESSION['idusuario'])) {
         $lesiones = "SELECT l.idlesion,l.condicion,c.fechaingreso,p.nombre,p.curp,r.edad,r.mtvoconsulta FROM consultas c INNER JOIN lesiones l ON c.idconsulta = l.idconsulta INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON p.idpaciente = r.idpaciente WHERE l.condicion = 1 AND DATE(r.fechahorarecep) >= '$fechai' AND DATE(r.fechahorarecep) <= '$fechaf' AND c.idusuario = '$idusuario'";
 
         $resLesiones = $con->query($lesiones);
+        $con->close();
 
     } else {
 
@@ -39,6 +40,7 @@ if (!isset($_SESSION['idusuario'])) {
         $lesiones = "SELECT l.idlesion,l.condicion,c.fechaingreso,p.nombre,p.curp,r.edad,r.mtvoconsulta FROM consultas c INNER JOIN lesiones l ON c.idconsulta = l.idconsulta INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON p.idpaciente = r.idpaciente WHERE l.condicion = 1 AND DATE(r.fechahorarecep) = CURDATE() AND c.idusuario = '$idusuario'";
 
         $resLesiones = $con->query($lesiones);
+        $con->close();
     }
 
 ?>
@@ -195,6 +197,6 @@ if (!isset($_SESSION['idusuario'])) {
 }
 
 $resultado = null;
-$con->close();
+//$con->close();
 ob_end_flush();
 ?>

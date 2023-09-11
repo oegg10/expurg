@@ -82,13 +82,13 @@ if (!isset($_SESSION['idusuario'])) {
         //echo $lesiones . "<br>";
 
         //VALIDAR QUE LESIONES NO VENGA VACIO ===================
-        if ($lesion_es == "" || $lesion_es == NULL) {
+        if ($lesion_es === "" || $lesion_es == NULL) {
             $lesion_es = "NO HAY LESION";
         }
-        if ($lesiones == "" || $lesiones == NULL) {
+        if ($lesiones === "" || $lesiones == NULL) {
             $lesiones = "NO";
         }
-        if ($lesion_es == "NO HAY LESION" || $lesion_es == "SUBSECUENTE") {
+        if ($lesion_es === "NO HAY LESION" || $lesion_es === "SUBSECUENTE") {
             $lesiones = "NO";
         }else {
             $lesion_es = $lesion_es;
@@ -96,15 +96,20 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         //VALIDAR MINISTERIO PUBLICO ===================
-        if ($ministeriopublico == "") {
+        if ($ministeriopublico === "") {
             $ministeriopublico = "NO";
+        }else{
+            $ministeriopublico = $ministeriopublico;
         }
 
-        if ($mujeredadfertil == "") {
+        //VALIDAR MUJER EN EDAD FERTIL =================
+        if ($fila['sexo'] === "Femenino" && $mujeredadfertil === "") {
             $mujeredadfertil = "No estaba embarazada ni en el puerperio";
+        }elseif ($fila['sexo'] === "Masculino") {
+            $mujeredadfertil = "";
+        }else{
+            $mujeredadfertil = $mujeredadfertil;
         }
-
-
 
         //CAPTURA DE DATOS ==========================================================================
 
@@ -123,6 +128,7 @@ if (!isset($_SESSION['idusuario'])) {
 
             $recepcion = "UPDATE recepciones SET condicion = 2 WHERE idrecepcion = '$id'";
             $consultado = $con->query($recepcion);
+            
         } else {
 
             //Realizamos la inserción de los datos
@@ -132,24 +138,31 @@ if (!isset($_SESSION['idusuario'])) {
 
             $recepcion = "UPDATE recepciones SET condicion = 2 WHERE idrecepcion = '$id'";
             $consultado = $con->query($recepcion);
+            
         }
 
 
         if ($resins > 0 && $consultado > 0) {
 
             echo "<script>
-            alert('La consulta se guardo con exito');
-            window.location = 'index.php';
-        </script>";
+                alert('La consulta se guardo con exito');
+                window.location = 'index.php';
+            </script>";
+            $con->close();
+            $con = null;
+
         } else {
 
             echo "<script>
-            alert('Error al guardar la consulta');
-            window.location = 'index.php';
-        </script>";
+                alert('Error al guardar la consulta');
+                window.location = 'index.php';
+            </script>";
+            $con->close();
+            $con = null;
         }
 
         $con->close();
+        $con = null;
     }
 
 ?>
@@ -397,7 +410,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <?php
 
-                                    if ($fila['sexo'] == "Masculino") {
+                                    if ($fila['sexo'] === "Masculino") {
 
                                         echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                         <label id="fertil">MUJER EN EDAD FERTIL:</label>
@@ -555,9 +568,8 @@ if (!isset($_SESSION['idusuario'])) {
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
+                            </form>
                         </div>
-
-                        </form>
 
                         <div id="error"></div>
 
@@ -565,7 +577,6 @@ if (!isset($_SESSION['idusuario'])) {
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </main>
 
