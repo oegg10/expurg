@@ -149,7 +149,7 @@ if (!isset($_SESSION['idusuario'])) {
                 window.location = 'index.php';
             </script>";
             $con->close();
-            $con = null;
+            $recepcion = null;
 
         } else {
 
@@ -157,12 +157,11 @@ if (!isset($_SESSION['idusuario'])) {
                 alert('Error al guardar la consulta');
                 window.location = 'index.php';
             </script>";
-            $con->close();
-            $con = null;
+        
         }
 
         $con->close();
-        $con = null;
+        $recepcion = null;
     }
 
 ?>
