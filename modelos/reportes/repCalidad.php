@@ -22,6 +22,7 @@ if (!isset($_SESSION['idusuario'])) {
         $consulta = "SELECT r.idrecepcion, r.idpaciente, r.fechahorarecep, r.edad, r.mtvoconsulta, r.observaciones, r.condicion, p.idpaciente, p.nombre, p.sexo, p.fechanac, c.fechaingreso, c.fechaalta, c.idusuario, u.nombre AS medico, TIMESTAMPDIFF(MINUTE,fechahorarecep,fechaingreso) as difRecepIniConsulta, TIMESTAMPDIFF(MINUTE,c.fechaingreso,c.fechaalta) as difIniFinConsulta FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON r.idrecepcion = c.idrecepcion INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE r.condicion = 2 AND DATE(r.fechahorarecep) >= '$fechai' AND DATE(r.fechahorarecep) <= '$fechaf'";
 
         $resultado = $con->query($consulta);
+
     } else {
 
         $consulta = "SELECT r.idrecepcion, r.idpaciente, r.fechahorarecep, r.edad, r.mtvoconsulta, r.observaciones, r.condicion, p.idpaciente, p.nombre, p.sexo, p.fechanac, c.fechaingreso, c.fechaalta, c.idusuario, u.nombre AS medico, TIMESTAMPDIFF(MINUTE,fechahorarecep,fechaingreso) as difRecepIniConsulta, TIMESTAMPDIFF(MINUTE,c.fechaingreso,c.fechaalta) as difIniFinConsulta FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente INNER JOIN consultas c ON r.idrecepcion = c.idrecepcion INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE r.condicion = 2 AND DATE(r.fechahorarecep) = CURDATE()";
@@ -139,7 +140,7 @@ if (!isset($_SESSION['idusuario'])) {
 <?php
 }
 
-$resultado = null;
 $con->close();
+$resultado = null;
 ob_end_flush();
 ?>

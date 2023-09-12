@@ -179,7 +179,7 @@ if (!isset($_SESSION['idusuario'])) {
                             <h3>Favor de capturar la fecha y hora de ingreso y la fecha y hora de alta, en formato de 24 horas y en la parte de abajo si se realiza hoja de LESIONES. Gracias.</h3>
                         </div>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
+                            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" id="formConsulta" autocomplete="off">
 
                                 <div class="row">
 
@@ -583,7 +583,50 @@ if (!isset($_SESSION['idusuario'])) {
     <?php include "../extend/footer.php"; ?>
 
     <script>
+
         document.getElementById("notaingresourg").value = "";
+
+        var formulario = document.getElementById("formConsulta");
+        var fecharecepcion = document.getElementById("fecharecepcion");
+        var fechaingreso = document.getElementById("fechaingreso");
+        var fechaalta = document.getElementById("fechaalta");
+
+        formulario.addEventListener("blur", rojoValidaFechasInicio, true);
+
+        //VALIDAR FECHA RECEPCION Y FECHA DE INICIO DE LA CONSULTA
+        function rojoValidaFechasInicio() {
+            var fecharecepcion1 = new Date(fecharecepcion.value);
+            var fechaR = fecharecepcion1.getTime();
+
+            var fechaingreso1 = new Date(fechaingreso.value);
+            var fechaI = fechaingreso1.getTime();
+
+            var fechaalta1 = new Date(fechaalta.value);
+            var fechaA = fechaalta1.getTime();
+
+            if (fechaI <= fechaR) {
+
+                document.getElementById("fechaingreso").style.backgroundColor = "red";
+                document.getElementById("fecharecepcion").style.backgroundColor = "red";
+                document.getElementById("fechaingreso").focus();
+                //console.log(fechaR);
+                //console.log(fechaI);
+
+            }else if (fechaA <= fechaI) {
+
+                document.getElementById("fechaalta").style.backgroundColor = "red";
+                document.getElementById("fechaingreso").style.backgroundColor = "red";
+                document.getElementById("fechaalta").focus();
+
+            }else{
+
+                document.getElementById("fechaingreso").style.backgroundColor = "white";
+                document.getElementById("fecharecepcion").style.backgroundColor = "black";
+                document.getElementById("fechaalta").style.backgroundColor = "white";
+            }
+
+        }
+        
         if (document.getElementById("sexo").value == "Femenino") {
             document.getElementById("fertil").style.color = "red";
         }else {
@@ -595,12 +638,8 @@ if (!isset($_SESSION['idusuario'])) {
 
             if (document.getElementById("lesion_es").value == "SUBSECUENTE" || document.getElementById("lesion_es").value == "NO HAY LESION") {
 
-                //console.log($("#lesion_es").val());
                 $("#lesiones").val("NO");
                 $('#lesiones option:not(:selected)').attr('disabled',true);
-                //document.getElementById("lesiones").disabled=true;
-                //$("#lesiones").attr("readonly", true);
-                //$("#lesiones").disabled=true;
             
             }else if(document.getElementById("lesion_es").value == "PRIMERA VEZ"){
                 $("#lesiones").val("");
@@ -611,9 +650,8 @@ if (!isset($_SESSION['idusuario'])) {
             
         });
 
-
-
     </script>
+
 
     <script src="validacionConsulta.js"></script>
     </body>

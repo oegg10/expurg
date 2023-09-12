@@ -80,7 +80,7 @@ function enviarFormulario() {
         //console.log(fechaI);
     }
 
-    if (fechaalta.value == null || fechaalta.value == "") {
+    if (fechaalta.value === null || fechaalta.value === "") {
         mensajesError.push("La fecha de alta no debe estar vacía");
     }
 
