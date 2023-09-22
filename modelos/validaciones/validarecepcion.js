@@ -1,7 +1,7 @@
 function validar() {
 
     //variables para almacenar los datos que se ingresan en los campos
-    var mtvoconsulta, sala, medico, referencia, observaciones;
+    let mtvoconsulta, sala, medico, referencia, observaciones;
     //Guardar el dato en las variables
     mtvoconsulta = document.getElementById("mtvoconsulta").value;
     sala = document.getElementById("sala");

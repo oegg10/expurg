@@ -1,29 +1,29 @@
 //https://www.youtube.com/watch?v=h_nl7mHCL5c
 //Declaración de variables
-var sexo = document.getElementById("sexo");
-var mujeredadfertil = document.getElementById("mujeredadfertil");
-var fecharecepcion = document.getElementById("fecharecepcion");
-var fechaingreso = document.getElementById("fechaingreso");
-var fechaalta = document.getElementById("fechaalta");
-var notaingresourg = document.getElementById("notaingresourg");
-var atnprehosp = document.getElementById("atnprehosp");
-var tipourgencia = document.getElementById("tipourgencia");
-var trastrans = document.getElementById("trastrans");
-var motivoatencion = document.getElementById("motivoatencion");
-var tipocama = document.getElementById("tipocama");
-var altapor = document.getElementById("altapor");
-var ministeriopublico = document.getElementById("ministeriopublico");
-var afecprincipal = document.getElementById("afecprincipal");
-var lesion_es = document.getElementById("lesion_es");
-var lesiones = document.getElementById("lesiones");
+let sexo = document.getElementById("sexo");
+let mujeredadfertil = document.getElementById("mujeredadfertil");
+let fecharecepcion = document.getElementById("fecharecepcion");
+let fechaingreso = document.getElementById("fechaingreso");
+let fechaalta = document.getElementById("fechaalta");
+let notaingresourg = document.getElementById("notaingresourg");
+let atnprehosp = document.getElementById("atnprehosp");
+let tipourgencia = document.getElementById("tipourgencia");
+let trastrans = document.getElementById("trastrans");
+let motivoatencion = document.getElementById("motivoatencion");
+let tipocama = document.getElementById("tipocama");
+let altapor = document.getElementById("altapor");
+let ministeriopublico = document.getElementById("ministeriopublico");
+let afecprincipal = document.getElementById("afecprincipal");
+let lesion_es = document.getElementById("lesion_es");
+let lesiones = document.getElementById("lesiones");
 
 //===============  FIN VARIABLES DE FORMULARIO ==============================
 
 //VALIDACION CAMPOS VACIOS
 const validarCamposVacios = (e) => {
 
-    var campo = e.target;
-    var valorcampo = e.target.value;
+    let campo = e.target;
+    let valorcampo = e.target.value;
 
     if (valorcampo.trim().length == 0) {
         campo.classList.add("invalido");
@@ -55,20 +55,20 @@ lesiones.addEventListener("blur", validarCamposVacios);
 
 //========= FIN CAMPOS A VALIDAR ======================================================
 
-var error = document.getElementById("error");
+let error = document.getElementById("error");
 error.style.color = "red";
 
 
 function enviarFormulario() {
 
-    var mensajesError = [];
+    let mensajesError = [];
 
-    var fecharecepcion1 = new Date(fecharecepcion.value);
-    var fechaR = fecharecepcion1.getTime();
-    var fechaingreso1 = new Date(fechaingreso.value);
-    var fechaI = fechaingreso1.getTime();
-    var fechaalta1 = new Date(fechaalta.value);
-    var fechaA = fechaalta1.getTime();
+    let fecharecepcion1 = new Date(fecharecepcion.value);
+    let fechaR = fecharecepcion1.getTime();
+    let fechaingreso1 = new Date(fechaingreso.value);
+    let fechaI = fechaingreso1.getTime();
+    let fechaalta1 = new Date(fechaalta.value);
+    let fechaA = fechaalta1.getTime();
 
     if (fechaingreso.value == null || fechaingreso.value == "") {
         mensajesError.push("La fecha de inicio no debe estar vacía");

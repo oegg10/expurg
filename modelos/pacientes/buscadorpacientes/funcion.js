@@ -1,7 +1,7 @@
 function busqueda(){
 
-    var texto = document.getElementById("nombre").value;
-    var parametros = {
+    let texto = document.getElementById("nombre").value;
+    let parametros = {
 
         "texto" : texto
 

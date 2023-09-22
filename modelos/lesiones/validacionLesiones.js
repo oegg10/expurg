@@ -1,31 +1,31 @@
 //Declaración de variables
-var escolaridad = document.getElementById("escolaridad");
-var leerescribir = document.getElementById("leerescribir");
-var discapacidad = document.getElementById("discapacidad");
-var referidopor = document.getElementById("referidopor");
-var fechainicio = document.getElementById("fechainicio");
-var fecha_ocurrencia = document.getElementById("fecha_ocurrencia");
-var diafestivo = document.getElementById("diafestivo");
-var sitio_ocurrencia = document.getElementById("sitio_ocurrencia");
-var lesion_entidad = document.getElementById("lesion_entidad");
-var lesion_municipio = document.getElementById("lesion_municipio");
-var lesion_localidad = document.getElementById("lesion_localidad");
-var lesion_domicilio = document.getElementById("lesion_domicilio");
-var lesion_colonia = document.getElementById("lesion_colonia");
-var intensionalidad = document.getElementById("intensionalidad");
-var agente_lesion = document.getElementById("agente_lesion");
-var toxicomanias = document.getElementById("toxicomanias");
-var servicio = document.getElementById("servicio");
-var tipoatencion = document.getElementById("tipoatencion");
-var areaanatomica = document.getElementById("areaanatomica");
-var consec_resultante = document.getElementById("consec_resultante");
-var causaexterna = document.getElementById("causaexterna");
+let escolaridad = document.getElementById("escolaridad");
+let leerescribir = document.getElementById("leerescribir");
+let discapacidad = document.getElementById("discapacidad");
+let referidopor = document.getElementById("referidopor");
+let fechainicio = document.getElementById("fechainicio");
+let fecha_ocurrencia = document.getElementById("fecha_ocurrencia");
+let diafestivo = document.getElementById("diafestivo");
+let sitio_ocurrencia = document.getElementById("sitio_ocurrencia");
+let lesion_entidad = document.getElementById("lesion_entidad");
+let lesion_municipio = document.getElementById("lesion_municipio");
+let lesion_localidad = document.getElementById("lesion_localidad");
+let lesion_domicilio = document.getElementById("lesion_domicilio");
+let lesion_colonia = document.getElementById("lesion_colonia");
+let intensionalidad = document.getElementById("intensionalidad");
+let agente_lesion = document.getElementById("agente_lesion");
+let toxicomanias = document.getElementById("toxicomanias");
+let servicio = document.getElementById("servicio");
+let tipoatencion = document.getElementById("tipoatencion");
+let areaanatomica = document.getElementById("areaanatomica");
+let consec_resultante = document.getElementById("consec_resultante");
+let causaexterna = document.getElementById("causaexterna");
 
 //VALIDACION CON EVENTOS
 const validarCamposVacios = (e) => {
 
-    var campo = e.target;
-    var valorcampo = e.target.value;
+    let campo = e.target;
+    let valorcampo = e.target.value;
 
     if (valorcampo.trim().length == 0) {
         campo.classList.add("invalido");
@@ -65,17 +65,17 @@ causaexterna.addEventListener("blur", validarCamposVacios);
 //causaexterna = $.trim(causaexterna);
 
 
-var error = document.getElementById("error");
+let error = document.getElementById("error");
 error.style.color = "red";
 
 function enviarFormulario() {
 
-    /*var fechaInicio1 = new Date(fechainicio.value);
-    var fechaI = fechaInicio1.getTime();
-    var fechaOcurre1 = new Date(fecha_ocurrencia.value);
-    var fechaO = fechaOcurre1.getTime();*/
+    /*let fechaInicio1 = new Date(fechainicio.value);
+    let fechaI = fechaInicio1.getTime();
+    let fechaOcurre1 = new Date(fecha_ocurrencia.value);
+    let fechaO = fechaOcurre1.getTime();*/
 
-    var mensajesError = [];
+    let mensajesError = [];
 
     if (escolaridad.value == "") {
 
