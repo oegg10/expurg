@@ -86,6 +86,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <option value="GINECOLOGIA">GINECOLOGIA</option>
                                         <option value="URGENCIAS | ENCAMADOS">URGENCIAS | ENCAMADOS</option>
                                         <option value="CONTROL TERMICO">CONTROL TERMICO</option>
+                                        <option value="CLINICA DE HERIDAS">CLINICA DE HERIDAS</option>
                                         <option value="TRIAGE">TRIAGE</option>
                                     </select>
                                 </div>

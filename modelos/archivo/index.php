@@ -15,8 +15,6 @@ if (!isset($_SESSION['idusuario'])) {
     //Paginación
     $paginacion = "SELECT e.idexpediente, e.nombrep, e.curp, e.tipopaciente, e.nombretrabajador, e.estado, e.observaciones, e.obs1, e.obs2, e.obs3, e.idusuario, e.fechaalta, u.nombre FROM exparchivo e INNER JOIN usuarios u ON e.idusuario=u.idusuario ORDER BY e.idexpediente DESC";
 
-    //$paginacion = "SELECT p.idpaciente, p.expediente, p.nombre, p.curp, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(p.fechanac)), '%Y')+0 AS edad, p.sexo, p.fechanac, p.estado, p.fechaalta, p.idusuario, u.nombre AS usuario FROM pacientes p INNER JOIN usuarios u ON p.idusuario=u.idusuario ORDER BY idpaciente DESC";
-
     $result_pag = $con->query($paginacion);
     //Sacar el numero de filas
     $row = mysqli_num_rows($result_pag);

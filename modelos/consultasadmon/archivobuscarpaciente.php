@@ -18,7 +18,7 @@ if (!isset($_SESSION['idusuario'])) {
         header("location:index.php");
     }
 
-    $pacientes = "SELECT e.idexpediente, e.nombrep, e.curp, e.tipopaciente, e.nombretrabajador, e.otros, e.estado, e.observaciones, e.obs1, e.obs2, e.obs3, e.idusuario, e.fechaalta, u.nombre AS usuario FROM exparchivo e INNER JOIN usuarios u ON e.idusuario=u.idusuario WHERE (e.nombrep LIKE '%$buscar%' OR e.curp LIKE '%$buscar%') ORDER BY e.idexpediente DESC";
+    $pacientes = "SELECT e.idexpediente, e.nombrep, e.curp, e.tipopaciente, e.nombretrabajador, e.otros, e.estado, e.observaciones, e.obs1, e.obs2, e.obs3, e.idusuario, e.fechaalta, u.nombre AS usuario FROM exparchivo e INNER JOIN usuarios u ON e.idusuario=u.idusuario WHERE (e.nombrep LIKE '%$buscar%' OR e.curp LIKE '%$buscar%' OR e.idexpediente LIKE '%$buscar%') ORDER BY e.idexpediente DESC";
 
     $resultado = $con->query($pacientes);
 

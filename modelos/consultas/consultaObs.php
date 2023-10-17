@@ -186,7 +186,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <!-- 12 -->
 
-                                <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
+                                <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
                                     <label>Motivo de atención (*):</label>
                                     <select class='form-control' name='motivoatencion' id='motivoatencion' required>
                                         <option value="<?php echo $fila['motivoatencion']; ?>"><?php echo $fila['motivoatencion']; ?></option>
@@ -221,9 +221,18 @@ if (!isset($_SESSION['idusuario'])) {
                                     </select>
                                 </div>
 
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                     <label>Nombre de la unidad:</label>
                                     <input type="text" class="form-control" name="otraunidad" id="otraunidad" maxlength="50" placeholder="Unidad de traslado" onblur="may(this.value, this.id)" value="<?php echo $fila['otraunidad']; ?>">
+                                </div>
+
+                                <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
+                                    <label>Ministerio público*:</label>
+                                    <select class='form-control' name='ministeriopublico' id='ministeriopublico' required>
+                                    <option value="<?php echo $fila['ministeriopublico']; ?>"><?php echo $fila['ministeriopublico']; ?></option>
+                                        <option value='NO'>NO</option>
+                                        <option value='SI'>SI</option>
+                                    </select>
                                 </div>
 
                                 <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>

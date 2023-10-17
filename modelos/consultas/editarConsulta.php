@@ -67,6 +67,36 @@ if (!isset($_SESSION['idusuario'])) {
 
         $idusuario = $_SESSION['idusuario'];
 
+        //VALIDAR MINISTERIO PUBLICO ===================
+        if ($ministeriopublico === "") {
+            $ministeriopublico = "NO";
+        }else{
+            $ministeriopublico = $ministeriopublico;
+        }
+
+        //VALIDAR MUJER EN EDAD FERTIL =================
+        if ($fila['sexo'] === "Femenino" && $mujeredadfertil === "") {
+            $mujeredadfertil = "No estaba embarazada ni en el puerperio";
+        }elseif ($fila['sexo'] === "Masculino") {
+            $mujeredadfertil = "";
+        }else{
+            $mujeredadfertil = $mujeredadfertil;
+        }
+
+        //VALIDAR QUE LESIONES NO VENGA VACIO ===================
+        if ($lesion_es === "" || $lesion_es == NULL) {
+            $lesion_es = "NO HAY LESION";
+        }
+        if ($lesiones === "" || $lesiones == NULL) {
+            $lesiones = "NO";
+        }
+        if ($lesion_es === "NO HAY LESION" || $lesion_es === "SUBSECUENTE") {
+            $lesiones = "NO";
+        }else {
+            $lesion_es = $lesion_es;
+            $lesiones = $lesiones;
+        }
+
         $editar = "UPDATE consultas SET fc='$fc',
                                     fr='$fr',
                                     ta='$ta',
@@ -111,6 +141,7 @@ if (!isset($_SESSION['idusuario'])) {
 
         if ($editado > 0) {
             header('location:../extend/alerta.php?msj=Consulta actualizada&c=pac&p=in&t=success');
+            $con->close();
         } else {
 
             header('location:../extend/alerta.php?msj=Error al actualizar consulta&c=pac&p=in&t=error');

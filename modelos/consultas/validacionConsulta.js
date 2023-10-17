@@ -1,8 +1,8 @@
 //https://www.youtube.com/watch?v=h_nl7mHCL5c
 //Declaración de variables
-let sexo = document.getElementById("sexo");
+/*let sexo = document.getElementById("sexo");
 let mujeredadfertil = document.getElementById("mujeredadfertil");
-let fecharecepcion = document.getElementById("fecharecepcion");
+//let fecharecepcion = document.getElementById("fecharecepcion");
 let fechaingreso = document.getElementById("fechaingreso");
 let fechaalta = document.getElementById("fechaalta");
 let notaingresourg = document.getElementById("notaingresourg");
@@ -165,4 +165,4 @@ function enviarFormulario() {
 
     return false;
 
-}
+}*/

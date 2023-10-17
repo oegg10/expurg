@@ -1,3 +1,4 @@
+/*
 //Declaración de variables
 let escolaridad = document.getElementById("escolaridad");
 let leerescribir = document.getElementById("leerescribir");
@@ -50,7 +51,6 @@ sitio_ocurrencia.addEventListener("blur", validarCamposVacios);
 lesion_entidad.addEventListener("blur", validarCamposVacios);
 lesion_municipio.addEventListener("blur", validarCamposVacios);
 lesion_localidad.addEventListener("blur", validarCamposVacios);
-//lesionCp.addEventListener("blur", validarCamposVacios);
 lesion_domicilio.addEventListener("blur", validarCamposVacios);
 lesion_colonia.addEventListener("blur", validarCamposVacios);
 intensionalidad.addEventListener("blur", validarCamposVacios);
@@ -75,7 +75,7 @@ function enviarFormulario() {
     let fechaOcurre1 = new Date(fecha_ocurrencia.value);
     let fechaO = fechaOcurre1.getTime();*/
 
-    let mensajesError = [];
+    /*let mensajesError = [];
 
     if (escolaridad.value == "") {
 
@@ -104,14 +104,6 @@ function enviarFormulario() {
     if (fecha_ocurrencia == "") {
         mensajesError.push("La fecha de ocurrencia no debe estar vacía");
     }
-
-    /*if (fechaO > fechaI) {
-        mensajesError.push("La fecha de la ocurrencia no debe ser mayor a la de inicio de la consulta");
-        //alert("La fecha de la ocurrencia no debe ser mayor a la de inicio de la consulta.");
-        console.log("FechaO = " + fechaO);
-        console.log("FechaI = " + fechaI);
-    }*/
-
 
     if (diafestivo.value == "") {
 
@@ -208,4 +200,4 @@ function enviarFormulario() {
 
     return false;
 
-}
+}*/
