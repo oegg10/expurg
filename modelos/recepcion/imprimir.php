@@ -49,21 +49,21 @@ if (!isset($_SESSION['idusuario'])) {
                         <table class="table table-striped table-bordered table-condensed table-hover" style="border-collapse: collapse; width: 100%; height: 36px; margin-bottom: 0px;" border="1">
                             <tbody>
                                 <tr style="height: 36px;">
-                                    <td style="width: 39%; text-align: center; height: 36px;"><strong> Nombre</strong></td>
-                                    <td style="width: 20%; text-align: center; height: 36px;"><strong>CURP</strong></td>
+                                    <td style="width: 37%; text-align: center; height: 36px;"><strong> Nombre</strong></td>
+                                    <td style="width: 22%; text-align: center; height: 36px;"><strong>CURP</strong></td>
                                     <td style="width: 10%; text-align: center; height: 36px;"><strong>Fecha Nac.</strong></td>
-                                    <td style="width: 21%; text-align: center; height: 36px;"><strong>Entidad Nacimiento</strong></td>
-                                    <td style="width: 5%; text-align: center; height: 36px;"><strong>Edad</strong></td>
-                                    <td style="width: 5%; text-align: center; height: 36px;"><strong>Sexo</strong></td>
+                                    <td style="width: 23%; text-align: center; height: 36px;"><strong>Entidad Nacimiento</strong></td>
+                                    <td style="width: 4%; text-align: center; height: 36px;"><strong>Edad</strong></td>
+                                    <td style="width: 4%; text-align: center; height: 36px;"><strong>Sexo</strong></td>
                                 </tr>
                                 <!--DATOS-->
                                 <tr style="height: 18px;">
-                                    <td style="width: 39%; height: 18px;"><?php echo $fila['np']; ?></td>
-                                    <td style="width: 20%; height: 18px;"><?php echo $fila['curp']; ?></td>
-                                    <td style="width: 10%; height: 18px;"><?php echo $fnac; ?></td>
-                                    <td style="width: 21%; height: 18px;"><?php echo $fila['entidadnac']; ?></td>
-                                    <td style="width: 5%; height: 18px;"><?php echo $fila['edad']; ?></td>
-                                    <td style="width: 5%; height: 18px;">
+                                    <td style="width: 37%; padding: 0; height: 18px; font-size: 22px"><strong><?php echo $fila['np']; ?></strong></td>
+                                    <td style="width: 22%; padding: 0; height: 18px; font-size: 22px; text-align:center;"><strong><?php echo $fila['curp']; ?></strong></td>
+                                    <td style="width: 10%; padding: 0; height: 18px; font-size: 22px; text-align:center;"><?php echo $fnac; ?></td>
+                                    <td style="width: 23%; padding: 0; height: 18px; font-size: 22px"><?php echo $fila['entidadnac']; ?></td>
+                                    <td style="width: 4%; padding: 0; height: 18px; font-size: 22px; text-align:center;"><?php echo $fila['edad']; ?></td>
+                                    <td style="width: 4%; padding: 0; height: 18px; font-size: 22px; text-align:center;">
                                         <?php
                                         //CONDICION PARA IMPRIMIR F o M SEGUN EL GENERO o SEXO
                                         if ($fila['sexo'] == 'Femenino') {
@@ -87,11 +87,11 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS-->
                                 <tr style="height: 36px;">
-                                    <td style="width: 10%; height: 36px;"><?php echo $fila['afiliacion']; ?></td>
-                                    <td style="width: 10%; height: 36px;"><?php echo $fila['numafiliacion']; ?></td>
-                                    <td style="width: 40%; height: 36px;"><?php echo $fila['domicilio']; ?></td>
-                                    <td style="width: 35%; height: 36px;"><?php echo $fila['colonia']; ?></td>
-                                    <td style="width: 5%; height: 36px;"><?php echo $fila['cp']; ?></td>
+                                    <td style="width: 10%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['afiliacion']; ?></td>
+                                    <td style="width: 10%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['numafiliacion']; ?></td>
+                                    <td style="width: 40%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['domicilio']; ?></td>
+                                    <td style="width: 35%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['colonia']; ?></td>
+                                    <td style="width: 5%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['cp']; ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -108,12 +108,12 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS-->
                                 <tr style="height: 36px;">
-                                    <td style="width: 21%; height: 36px;"><?php echo $fila['entidaddom']; ?></td>
-                                    <td style="width: 19%; height: 36px;"><?php echo $fila['municipio']; ?></td>
-                                    <td style="width: 29%; height: 36px;"><?php echo $fila['localidad']; ?></td>
-                                    <td style="width: 10%; height: 36px;"><?php echo $fila['telefono']; ?></td>
-                                    <td style="width: 16%; height: 36px;"><strong><?php echo  date("d-m-Y H:i", strtotime($fila['fechahorarecep'])); ?></strong></td>
-                                    <td style="width: 5%; height: 36px;">
+                                    <td style="width: 21%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['entidaddom']; ?></td>
+                                    <td style="width: 19%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['municipio']; ?></td>
+                                    <td style="width: 29%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['localidad']; ?></td>
+                                    <td style="width: 10%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['telefono']; ?></td>
+                                    <td style="width: 16%; padding: 0; font-size: 22px; height: 36px;"><strong><?php echo  date("d-m-Y H:i", strtotime($fila['fechahorarecep'])); ?></strong></td>
+                                    <td style="width: 5%; padding: 0; font-size: 22px; height: 36px; text-align: center;">
                                         <?php
                                         //CONDICION PARA IMPRIMIR SI ESTA EMBARAZADA SI ES FEMENINO
                                         if ($fila['sexo'] == 'Femenino') {
@@ -138,7 +138,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tr>
                                 <!--DATOS-->
                                 <tr style="height: 36px;">
-                                    <td style="width: 5%; height: 36px;">
+                                    <td style="width: 5%; padding: 0; font-size: 22px; height: 36px;">
                                         <?php
                                         //CONDICION PARA IMPRIMIR LAS SDG SI ES FEMENINO
                                         if ($fila['sexo'] == 'Femenino' && $fila['embarazo'] == 'SI') {
@@ -146,7 +146,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         } else {
                                             echo "";
                                         } ?></td>
-                                    <td style="width: 5%; height: 36px;">
+                                    <td style="width: 5%; padding: 0; font-size: 22px; height: 36px;">
                                         <?php
                                         //CONDICION PARA IMPRIMIR EL NUMERO DE GESTA SI ES FEMENINO
                                         if ($fila['sexo'] == 'Femenino' && $fila['embarazo'] == 'SI') {
@@ -155,9 +155,9 @@ if (!isset($_SESSION['idusuario'])) {
                                             echo "";
                                         }
                                         ?></td>
-                                    <td style="width: 15%; height: 36px;"><?php echo $fila['medico']; ?></td>
-                                    <td style="width: 50%; height: 36px;"><?php echo $fila['mtvoconsulta']; ?></td>
-                                    <td style="width: 25%; height: 36px;"><?php echo $fila['sala']; ?></td>
+                                    <td style="width: 15%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['medico']; ?></td>
+                                    <td style="width: 50%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['mtvoconsulta']; ?></td>
+                                    <td style="width: 25%; padding: 0; font-size: 22px; height: 36px;"><?php echo $fila['sala']; ?></td>
 
                                 </tr>
                             </tbody>

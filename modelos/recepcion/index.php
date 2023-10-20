@@ -12,7 +12,7 @@ if (!isset($_SESSION['idusuario'])) {
         header("Location:../../index.php");
     }
 
-    $recepciones = "SELECT r.idrecepcion, r.idpaciente,p.nombre, p.curp, p.sexo, r.fechahorarecep, r.edad, r.mtvoconsulta, r.embarazo, r.semgesta, r.sala, r.referencia, r.observaciones, r.condicion, r.idusuario FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente WHERE r.condicion = 1 ORDER BY r.idrecepcion ASC";
+    $recepciones = "SELECT r.idrecepcion, r.idpaciente,p.nombre, p.curp, p.sexo, r.fechahorarecep, r.edad, r.mtvoconsulta, r.embarazo, r.semgesta, r.sala, r.referencia, r.tipoconsulta, r.observaciones, r.condicion, r.idusuario FROM recepciones r INNER JOIN pacientes p ON r.idpaciente = p.idpaciente WHERE r.condicion = 1 ORDER BY r.idrecepcion ASC";
 
     $resultado = $con->query($recepciones);
 
@@ -41,6 +41,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <th>SDG</th>
                                         <th>Motivo consulta</th>
                                         <th>Sala</th>
+                                        <th>Tipo consulta</th>
                                         <th>Observaciones</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -75,6 +76,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <td>" . $reg['semgesta'] . "</td>
                                 <td>" . $reg['mtvoconsulta'] . "</td>
                                 <td>" . $reg['sala'] . "</td>
+                                <td>" . $reg['tipoconsulta'] . "</td>
                                 <td>" . $reg['observaciones'] . "</td>
                                 <td class='btn-group'>
                                     <a href='pasaconsulta.php?id=" . $reg['idrecepcion'] . "&sala=" . $reg['sala'] . "' type='button' class='btn btn-success' title='Pasar a consulta'><i class='fa fa-stethoscope'></i></a>";
@@ -103,6 +105,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>SDG</th>
                                     <th>Motivo consulta</th>
                                     <th>Sala</th>
+                                    <th>Tipo consulta</th>
                                     <th>Observaciones</th>
                                     <th>Opciones</th>
                                 </tfoot>

@@ -31,7 +31,7 @@ if (!isset($_SESSION['idusuario'])) {
                         <h5>Recepción a Consulta</h5>
                     </div>
                     <div class="card-body">
-                        <form action="ins_recepcion.php" method="POST" autocomplete="off" onsubmit="return validar();">
+                        <form action="ins_recepcion.php" method="POST" autocomplete="off">
                             <div class="row">
 
                                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -66,7 +66,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     echo "
                                     <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
                                         <label>Semanas de Gestación:</label>
-                                        <input type='text' class='form-control' name='semgesta' id='semgesta' disabled maxlength='2' placeholder='Semanas gesta' pattern='[0-9]{1-2}'>
+                                        <input type='text' class='form-control' name='semgesta' id='semgesta' disabled maxlength='2' placeholder='Semanas gesta' pattern='[0-9]{1,2}'>
                                     </div>";
 
                                     echo "
@@ -103,13 +103,25 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <!-- 12 -->
 
+                                <p>PREGUNTARLE AL PACIENTE SI ES LA PRIMERA VEZ QUE VIENE CON LA AFECCIÓN O ES SUBSECUENTE</p>
+                                <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                    <label style="color: red;">Nuevo: Primera vez o subsecuente (*):</label>
+                                    <select class="form-control" name="tipoconsulta" id="tipoconsulta" required>
+                                        <option value="" disabled selected>Elija una opción</option>
+                                        <option value="PRIMERA VEZ">PRIMERA VEZ</option>
+                                        <option value="SUBSECUENTE">SUBSECUENTE</option>
+                                    </select>
+                                </div>
+
+                                <!-- 12 -->
+
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label>Observaciones:</label>
                                     <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="250" placeholder="Observaciones" onblur="may(this.value, this.id)">
                                 </div>
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" type="submit" id="Guardar"><i class="fa fa-save"> Guardar</i></button>
+                                    <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" id="Guardar"><i class="fa fa-save"> Guardar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
@@ -117,6 +129,9 @@ if (!isset($_SESSION['idusuario'])) {
 
                         </form>
                     </div>
+
+                    <div id="error"></div>
+
                 </div>
 
             </div>
@@ -139,9 +154,69 @@ if (!isset($_SESSION['idusuario'])) {
             }
 
         }
-    </script>
 
-    <script src="../validaciones/validarecepcion.js"></script>
+        //variables para almacenar los datos que se ingresan en los campos
+        let mtvoconsulta, sala, semgesta, medico, referencia, tipoConsulta, observaciones;
+        //Guardar el dato en las variables
+        mtvoconsulta = document.getElementById("mtvoconsulta");
+        semgesta = document.getElementById("semgesta");
+        sala = document.getElementById("sala");
+        medico = document.getElementById("medico");
+        referencia = document.getElementById("referencia");
+        tipoConsulta = document.getElementById("tipoconsulta");
+        observaciones = document.getElementById("observaciones");
+
+        let error = document.getElementById("error");
+        error.style.color = "red";
+
+        function enviarFormulario() {
+
+            let mensajesError = [];
+
+            if (mtvoconsulta.value === "" || mtvoconsulta.value === null || mtvoconsulta.length > 100) {
+                mensajesError.push("El campo motivo de la consulta está vacío");
+            }
+            
+            if (sala.value === null || sala.value === "") {
+
+                mensajesError.push("Seleccione una opción para el campo SALA");
+            }
+            
+            if (medico.value === "") {
+                mensajesError.push("El campo medico está vacío");
+            }
+            
+            if (semgesta.value > 43) {
+                mensajesError.push("Semanas de gestación muy altas");
+            }
+            
+            /*if (referencia.length > 200) {
+                mensajesError.push("La referencia es muy larga");
+            }*/
+
+            if (tipoConsulta.value === null || tipoConsulta.value === "") {
+
+                mensajesError.push("Se debe elegir la opción de primera vez o subsecuente");
+
+            }
+
+            /*if (tipoConsulta.value === "OTRO" && observaciones.value === "") {
+
+                mensajesError.push("Si el tipo de consulta es OTRO especifique en observaciones");
+                
+            }*/
+
+            if (observaciones.length > 250) {
+                mensajesError.push("Las observaciones debe ser menor a 250 caracteres");
+            }
+
+            error.innerHTML = mensajesError.join(", ");
+
+            return false;
+
+        }
+
+    </script>
 
     </body>
 

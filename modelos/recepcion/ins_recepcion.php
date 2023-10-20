@@ -29,21 +29,16 @@ if (!isset($_SESSION['idusuario'])) {
         $sala = isset($_POST["sala"]) ? mysqli_real_escape_string($con, $_POST['sala']) : "";
         $medico = isset($_POST["medico"]) ? mysqli_real_escape_string($con, $_POST['medico']) : "";
         $referencia = isset($_POST["referencia"]) ? mysqli_real_escape_string($con, $_POST['referencia']) : "";
+        $tipoconsulta = isset($_POST["tipoconsulta"]) ? mysqli_real_escape_string($con, $_POST['tipoconsulta']) : "";
         $observaciones = isset($_POST["observaciones"]) ? mysqli_real_escape_string($con, $_POST['observaciones']) : "";
 
         $idusuario = $_SESSION['idusuario'];
 
-        if (
-            $sala == "" || $sala != "CONSULTA GENERAL DE URGENCIAS" ||
-            $sala != "GINECOLOGIA" ||
-            $sala != "URGENCIAS|ENCAMADOS" ||
-            $sala != "CONTROL TERMICO" ||
-            $sala != "TRIAGE"
-        ) {
+        /*if ($sala == "" || $sala != "CONSULTA GENERAL DE URGENCIAS" || $sala != "GINECOLOGIA" || $sala != "URGENCIAS|ENCAMADOS" || $sala != "CONTROL TERMICO" || $sala != "TRIAGE") {
 
             //array_push($campos, "Elija una opción para la sala, o no cumple con las especificaciones");
             header('location:../extend/alerta.php?msj=Error al registrar la recepcion, indique la sala correctamente&c=rec&p=in&t=error');
-        }
+        }*/
 
         //Si vienen vacíos los campos de embarazo, sem gesta y num gesta
         if (empty($embarazo) && empty($semgesta) && empty($numgesta)) {
@@ -55,7 +50,7 @@ if (!isset($_SESSION['idusuario'])) {
             $numgesta = 0;
         }
 
-        $sql = "INSERT INTO recepciones(idpaciente,edad,mtvoconsulta,embarazo,semgesta,numgesta,sala,medico,referencia,observaciones,condicion,idusuario,fechamod) VALUES ('$idpaciente','$edad','$mtvoconsulta','$embarazo','$semgesta','$numgesta','$sala','$medico','$referencia','$observaciones', '1', '$idusuario', NOW())";
+        $sql = "INSERT INTO recepciones(idpaciente,edad,mtvoconsulta,embarazo,semgesta,numgesta,sala,medico,referencia,tipoconsulta,observaciones,condicion,idusuario,fechamod) VALUES ('$idpaciente','$edad','$mtvoconsulta','$embarazo','$semgesta','$numgesta','$sala','$medico','$referencia','$tipoconsulta','$observaciones', '1', '$idusuario', NOW())";
 
         $resultado = $con->query($sql);
 
