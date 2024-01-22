@@ -73,13 +73,10 @@ if (!isset($_SESSION['idusuario'])) {
         $medicamento3 = isset($_POST["medicamento3"]) ? mysqli_real_escape_string($con, $_POST['medicamento3']) : "";
         $lesion_es = isset($_POST["lesion_es"]) ? mysqli_real_escape_string($con, $_POST['lesion_es']) : "";
         $lesiones = isset($_POST["lesiones"]) ? mysqli_real_escape_string($con, $_POST['lesiones']) : "";
-        
+
 
         $notaingresourg = trim($notaingresourg);
         $idusuario = $_SESSION['idusuario'];
-
-        //echo $lesion_es . "<br>";
-        //echo $lesiones . "<br>";
 
         //VALIDAR QUE LESIONES NO VENGA VACIO ===================
         if ($lesion_es === "" || $lesion_es == NULL) {
@@ -90,7 +87,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
         if ($lesion_es === "NO HAY LESION" || $lesion_es === "SUBSECUENTE") {
             $lesiones = "NO";
-        }else {
+        } else {
             $lesion_es = $lesion_es;
             $lesiones = $lesiones;
         }
@@ -98,48 +95,26 @@ if (!isset($_SESSION['idusuario'])) {
         //VALIDAR MINISTERIO PUBLICO ===================
         if ($ministeriopublico === "") {
             $ministeriopublico = "NO";
-        }else{
+        } else {
             $ministeriopublico = $ministeriopublico;
         }
 
         //VALIDAR MUJER EN EDAD FERTIL =================
         if ($fila['sexo'] === "Femenino" && $mujeredadfertil === "") {
             $mujeredadfertil = "No estaba embarazada ni en el puerperio";
-        }elseif ($fila['sexo'] === "Masculino") {
+        } elseif ($fila['sexo'] === "Masculino") {
             $mujeredadfertil = "";
-        }else{
+        } else {
             $mujeredadfertil = $mujeredadfertil;
         }
 
-        //CAPTURA DE DATOS ==========================================================================
+        //Realizamos la inserción de los datos
+        $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
 
-        if ($altapor === 'Observación') {
+        $resins = $con->query($sql);
 
-            /*
-            LISTA DE CONDICION
-            1 CONSULTADO
-            2 EN OBSERVACION
-            */
-
-        //Realizamos la inserción de los datos si el tipo de cama es Observación
-        $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', NOW(), '2', '$idusuario')";
-
-            $resins = $con->query($sql);
-
-            $recepcion = "UPDATE recepciones SET condicion = 2 WHERE idrecepcion = '$id'";
-            $consultado = $con->query($recepcion);
-            
-        } else {
-
-            //Realizamos la inserción de los datos
-            $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
-
-            $resins = $con->query($sql);
-
-            $recepcion = "UPDATE recepciones SET condicion = 2 WHERE idrecepcion = '$id'";
-            $consultado = $con->query($recepcion);
-            
-        }
+        $recepcion = "UPDATE recepciones SET condicion = 2 WHERE idrecepcion = '$idrecepcion'";
+        $consultado = $con->query($recepcion);
 
 
         if ($resins > 0 && $consultado > 0) {
@@ -150,18 +125,17 @@ if (!isset($_SESSION['idusuario'])) {
             </script>";
             $con->close();
             $recepcion = null;
-
         } else {
 
             echo "<script>
                 alert('Error al guardar la consulta');
                 window.location = 'index.php';
             </script>";
-        
         }
 
         $con->close();
         $recepcion = null;
+        
     }
 
 ?>
@@ -175,7 +149,8 @@ if (!isset($_SESSION['idusuario'])) {
                         <h5>CONSULTA DE URGENCIAS</h5>
                         <hr>
                         <div style="color: red;">
-                            <h3>Favor de capturar la fecha y hora de ingreso y la fecha y hora de alta, en formato de 24 horas y en la parte de abajo si se realiza hoja de LESIONES. Gracias.</h3>
+                            <h5>Favor de capturar la fecha y hora de ingreso y la fecha y hora de alta, en formato de 24 horas y en la parte de abajo si se realiza hoja de LESIONES. Gracias.</h5>
+                            <h5>En caso de que el paciente sea referido a "OBSERVACION" o "CONTROL TERMICO", favor de capturar en la fecha y hora de alta, la salida de turno del médico tratante. Gracias.</h5>
                         </div>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" id="formConsulta" autocomplete="off">
@@ -231,13 +206,13 @@ if (!isset($_SESSION['idusuario'])) {
                                     <!-- ============= FECHA Y HORA ======================== -->
                                     <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                         <label for="fechaingreso" style="color: red;">Fecha y hora de inicio de la consulta*: </label>
-                                        <input type="datetime-local" id="fechaingreso" name="fechaingreso" min="2023-06-01T00:00" value="<?php if (!empty($_POST['fechaingreso'])){echo $fechaingreso;} else {echo '';} ?>" required>
+                                        <input type="datetime-local" id="fechaingreso" name="fechaingreso" min="2023-06-01T00:00" value="<?php if (!empty($_POST['fechaingreso'])) { echo $fechaingreso; } else { echo ''; } ?>" required>
                                         <span></span>
                                     </div>
 
                                     <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                         <label for="fechaalta" style="color: red;">Fecha y hora de alta*: </label>
-                                        <input type="datetime-local" id="fechaalta" name="fechaalta" min="2023-06-01T00:00" value="<?php if (!empty($_POST['fechaalta'])){echo $fechaalta;} else {echo '';} ?>" required>
+                                        <input type="datetime-local" id="fechaalta" name="fechaalta" min="2023-06-01T00:00" value="<?php if (!empty($_POST['fechaalta'])) { echo $fechaalta; } else { echo ''; } ?>" required>
                                         <span></span>
                                     </div>
                                     <!-- ============= FECHA Y HORA ======================== -->
@@ -247,47 +222,47 @@ if (!isset($_SESSION['idusuario'])) {
                                     <!-- ========== NOTA MEDICA DE LA CONSULTA DE URGENCIAS ==========-->
                                     <div class="form-group col-lg-1 col-md-1 col-sm-1">
                                         <label>FC: lpm</label>
-                                        <input type="text" class="form-control" name="fc" id="fc" maxlength="10" placeholder="FC" value="<?php if (!empty($_POST['fc'])){echo $fc;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="fc" id="fc" maxlength="10" placeholder="FC" value="<?php if (!empty($_POST['fc'])) { echo $fc; } else { echo ''; } ?>">
                                     </div>
 
                                     <div class="form-group col-lg-1 col-md-1 col-sm-1">
                                         <label>FR: rpm</label>
-                                        <input type="text" class="form-control" name="fr" id="fr" maxlength="10" placeholder="FR" value="<?php if (!empty($_POST['fr'])){echo $fr;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="fr" id="fr" maxlength="10" placeholder="FR" value="<?php if (!empty($_POST['fr'])) { echo $fr; } else { echo ''; } ?>">
                                     </div>
 
                                     <div class="form-group col-lg-1 col-md-1 col-sm-1">
                                         <label>TA: mm/Hg</label>
-                                        <input type="text" class="form-control" name="ta" id="ta" maxlength="10" placeholder="TA" value="<?php if (!empty($_POST['ta'])){echo $ta;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="ta" id="ta" maxlength="10" placeholder="TA" value="<?php if (!empty($_POST['ta'])) { echo $ta; } else { echo ''; } ?>">
                                     </div>
 
                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                         <label>Temperatura: °C</label>
-                                        <input type="text" class="form-control" name="temperatura" id="temperatura" maxlength="10" placeholder="Temp" value="<?php if (!empty($_POST['temperatura'])){echo $temperatura;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="temperatura" id="temperatura" maxlength="10" placeholder="Temp" value="<?php if (!empty($_POST['temperatura'])) { echo $temperatura; } else { echo ''; } ?>">
                                     </div>
 
                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                         <label>Glucosa: mg/dl</label>
-                                        <input type="text" class="form-control" name="glucosa" id="glucosa" maxlength="10" placeholder="Glucosa" value="<?php if (!empty($_POST['glucosa'])){echo $glucosa;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="glucosa" id="glucosa" maxlength="10" placeholder="Glucosa" value="<?php if (!empty($_POST['glucosa'])) { echo $glucosa; } else { echo ''; } ?>">
                                     </div>
 
                                     <div class="form-group col-lg-1 col-md-1 col-sm-1">
                                         <label>Talla:</label>
-                                        <input type="text" class="form-control" name="talla" id="talla" maxlength="10" placeholder="Talla" value="<?php if (!empty($_POST['talla'])){echo $talla;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="talla" id="talla" maxlength="10" placeholder="Talla" value="<?php if (!empty($_POST['talla'])) { echo $talla; } else { echo ''; } ?>">
                                     </div>
 
                                     <div class="form-group col-lg-1 col-md-1 col-sm-1">
                                         <label>Peso:</label>
-                                        <input type="text" class="form-control" name="peso" id="peso" maxlength="10" placeholder="Peso" value="<?php if (!empty($_POST['peso'])){echo $peso;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="peso" id="peso" maxlength="10" placeholder="Peso" value="<?php if (!empty($_POST['peso'])) { echo $peso; } else { echo ''; } ?>">
                                     </div>
 
                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                         <label>P. Abdominal:</label>
-                                        <input type="text" class="form-control" name="pabdominal" id="pabdominal" maxlength="10" placeholder="P. Abdominal" value="<?php if (!empty($_POST['pabdominal'])){echo $pabdominal;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="pabdominal" id="pabdominal" maxlength="10" placeholder="P. Abdominal" value="<?php if (!empty($_POST['pabdominal'])) { echo $pabdominal; } else { echo ''; } ?>">
                                     </div>
 
                                     <div class="form-group col-lg-1 col-md-1 col-sm-1">
                                         <label>IMC:</label>
-                                        <input type="text" class="form-control" name="imc" id="imc" maxlength="10" placeholder="IMC" value="<?php if (!empty($_POST['imc'])){echo $imc;} else {echo '';} ?>">
+                                        <input type="text" class="form-control" name="imc" id="imc" maxlength="10" placeholder="IMC" value="<?php if (!empty($_POST['imc'])) { echo $imc; } else { echo ''; } ?>">
                                     </div>
 
                                     <!-- 12 -->
@@ -394,7 +369,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                         <label>Nombre de la unidad:</label>
-                                        <input type="text" class="form-control" name="otraunidad" id="otraunidad" maxlength="50" placeholder="Unidad de traslado" value="<?php if (!empty($_POST['otraunidad'])){echo $otraunidad;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="otraunidad" id="otraunidad" maxlength="50" placeholder="Unidad de traslado" value="<?php if (!empty($_POST['otraunidad'])) { echo $otraunidad; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
@@ -417,8 +392,7 @@ if (!isset($_SESSION['idusuario'])) {
                                             <option value=""></option>
                                         </select>
                                     </div>';
-                                    
-                                    }else{
+                                    } else {
 
                                         echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                         <label id="fertil">MUJER EN EDAD FERTIL:</label>
@@ -429,9 +403,8 @@ if (!isset($_SESSION['idusuario'])) {
                                             <option value="Puerperio (de 0 a 42 días después del parto)">Puerperio (de 0 a 42 días después del parto)</option>
                                         </select>
                                     </div>';
-
                                     }
-                                    
+
                                     ?>
 
                                     <!-- 12 -->
@@ -439,26 +412,26 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                         <hr>
                                         <h6><label>AFECCIÓN PRINCIPAL:</label></h6>
-                                        <input type="text" class="form-control" name="afecprincipal" id="afecprincipal" maxlength="100" placeholder="Afección principal (REQUERIDO), favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['afecprincipal'])){echo $afecprincipal;} else {echo '';} ?>" onblur="may(this.value, this.id)" required>
+                                        <input type="text" class="form-control" name="afecprincipal" id="afecprincipal" maxlength="100" placeholder="Afección principal (REQUERIDO), favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['afecprincipal'])) { echo $afecprincipal; } else { echo ''; } ?>" onblur="may(this.value, this.id)" required>
                                         <span></span>
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="comorbilidad1" id="comorbilidad1" maxlength="100" placeholder="Diagnostico 1, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad1'])){echo $comorbilidad1;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="comorbilidad1" id="comorbilidad1" maxlength="100" placeholder="Diagnostico 1, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad1'])) { echo $comorbilidad1; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="comorbilidad2" id="comorbilidad2" maxlength="100" placeholder="Diagnostico 2, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad2'])){echo $comorbilidad2;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="comorbilidad2" id="comorbilidad2" maxlength="100" placeholder="Diagnostico 2, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad2'])) { echo $comorbilidad2; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="comorbilidad3" id="comorbilidad3" maxlength="100" placeholder="Diagnostico 3, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad3'])){echo $comorbilidad3;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="comorbilidad3" id="comorbilidad3" maxlength="100" placeholder="Diagnostico 3, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad3'])) { echo $comorbilidad3; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
@@ -466,19 +439,19 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                         <hr>
                                         <h6><label>ESPECIALIDAD O INTERCONSULTAS:</label></h6>
-                                        <input type="text" class="form-control" name="interconsulta1" id="interconsulta1" maxlength="50" placeholder="Especialidad" value="<?php if (!empty($_POST['interconsulta1'])){echo $interconsulta1;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="interconsulta1" id="interconsulta1" maxlength="50" placeholder="Especialidad" value="<?php if (!empty($_POST['interconsulta1'])) { echo $interconsulta1; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="interconsulta2" id="interconsulta2" maxlength="50" placeholder="Especialidad" value="<?php if (!empty($_POST['interconsulta2'])){echo $interconsulta2;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="interconsulta2" id="interconsulta2" maxlength="50" placeholder="Especialidad" value="<?php if (!empty($_POST['interconsulta2'])) { echo $interconsulta2; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="interconsulta3" id="interconsulta3" maxlength="50" placeholder="Especialidad" value="<?php if (!empty($_POST['interconsulta3'])){echo $interconsulta3;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="interconsulta3" id="interconsulta3" maxlength="50" placeholder="Especialidad" value="<?php if (!empty($_POST['interconsulta3'])) { echo $interconsulta3; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
@@ -486,31 +459,31 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                         <hr>
                                         <h6><label>PROCEDIMIENTOS:</label></h6>
-                                        <input type="text" class="form-control" name="procedim1" id="procedim1" maxlength="70" placeholder="Procedimiento 1, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim1'])){echo $procedim1;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="procedim1" id="procedim1" maxlength="70" placeholder="Procedimiento 1, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim1'])) { echo $procedim1; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="procedim2" id="procedim2" maxlength="70" placeholder="Procedimiento 2, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim2'])){echo $procedim2;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="procedim2" id="procedim2" maxlength="70" placeholder="Procedimiento 2, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim2'])) { echo $procedim2; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="procedim3" id="procedim3" maxlength="70" placeholder="Procedimiento 3, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim3'])){echo $procedim3;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="procedim3" id="procedim3" maxlength="70" placeholder="Procedimiento 3, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim3'])) { echo $procedim3; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="procedim4" id="procedim4" maxlength="70" placeholder="Procedimiento 4, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim4'])){echo $procedim4;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="procedim4" id="procedim4" maxlength="70" placeholder="Procedimiento 4, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim4'])) { echo $procedim4; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="procedim5" id="procedim5" maxlength="70" placeholder="Procedimiento 5, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim5'])){echo $procedim5;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="procedim5" id="procedim5" maxlength="70" placeholder="Procedimiento 5, favor de agregar solamente un procedimiento" value="<?php if (!empty($_POST['procedim5'])) { echo $procedim5; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
@@ -518,19 +491,19 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                         <hr>
                                         <h6><label>MEDICAMENTOS Y PRESENTACIÓN:</label></h6>
-                                        <input type="text" class="form-control" name="medicamento1" id="medicamento1" maxlength="40" placeholder="Medicamento 1" value="<?php if (!empty($_POST['medicamento1'])){echo $medicamento1;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="medicamento1" id="medicamento1" maxlength="40" placeholder="Medicamento 1" value="<?php if (!empty($_POST['medicamento1'])) { echo $medicamento1; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="medicamento2" id="medicamento2" maxlength="40" placeholder="Medicamento 2" value="<?php if (!empty($_POST['medicamento2'])){echo $medicamento2;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="medicamento2" id="medicamento2" maxlength="40" placeholder="Medicamento 2" value="<?php if (!empty($_POST['medicamento2'])) { echo $medicamento2; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="medicamento3" id="medicamento3" maxlength="40" placeholder="Medicamento 3" value="<?php if (!empty($_POST['medicamento3'])){echo $medicamento3;} else {echo '';} ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="medicamento3" id="medicamento3" maxlength="40" placeholder="Medicamento 3" value="<?php if (!empty($_POST['medicamento3'])) { echo $medicamento3; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
@@ -582,7 +555,6 @@ if (!isset($_SESSION['idusuario'])) {
     <?php include "../extend/footer.php"; ?>
 
     <script>
-
         document.getElementById("notaingresourg").value = "";
 
         let formulario = document.getElementById("formConsulta");
@@ -611,13 +583,13 @@ if (!isset($_SESSION['idusuario'])) {
                 //console.log(fechaR);
                 //console.log(fechaI);
 
-            }else if (fechaA <= fechaI) {
+            } else if (fechaA <= fechaI) {
 
                 document.getElementById("fechaalta").style.backgroundColor = "red";
                 document.getElementById("fechaingreso").style.backgroundColor = "red";
                 document.getElementById("fechaalta").focus();
 
-            }else{
+            } else {
 
                 document.getElementById("fechaingreso").style.backgroundColor = "white";
                 document.getElementById("fecharecepcion").style.backgroundColor = "black";
@@ -625,28 +597,44 @@ if (!isset($_SESSION['idusuario'])) {
             }
 
         }
-        
+
         if (document.getElementById("sexo").value == "Femenino") {
             document.getElementById("fertil").style.color = "red";
-        }else {
+        } else {
             document.getElementById("fertil").style.color = "black";
-            document.getElementById("mujeredadfertil").disabled=true;
+            document.getElementById("mujeredadfertil").disabled = true;
         }
 
+        //Cambios en tipo de cama y alta por:
+        $("#tipocama").change(function() {
+
+            if (document.getElementById("tipocama").value == "Observación") {
+
+                $("#altapor").val("Observación");
+                $('#altapor option:not(:selected)').attr('disabled', true);
+
+            } else if (document.getElementById("tipocama").value != "Observación") {
+                $('#altapor option:not(:selected)').attr('disabled', false);
+                document.getElementById("altapor").focus();
+            }
+
+        });
+
+        //Cambios en lesiones
         $("#lesion_es").change(function() {
 
             if (document.getElementById("lesion_es").value == "SUBSECUENTE" || document.getElementById("lesion_es").value == "NO HAY LESION") {
 
                 $("#lesiones").val("NO");
-                $('#lesiones option:not(:selected)').attr('disabled',true);
-            
-            }else if(document.getElementById("lesion_es").value == "PRIMERA VEZ"){
+                $('#lesiones option:not(:selected)').attr('disabled', true);
+
+            } else if (document.getElementById("lesion_es").value == "PRIMERA VEZ") {
                 $("#lesiones").val("");
-                $('#lesiones option:not(:selected)').attr('disabled',false);
+                $('#lesiones option:not(:selected)').attr('disabled', false);
                 //document.getElementById("lesiones").disabled=false;
                 document.getElementById("lesiones").focus();
             }
-            
+
         });
 
         //https://www.youtube.com/watch?v=h_nl7mHCL5c
@@ -677,7 +665,7 @@ if (!isset($_SESSION['idusuario'])) {
                 campo.classList.add("invalido");
                 campo.nextElementSibling.classList.add("errorSpan");
                 campo.nextElementSibling.innerText = "Este campo es requerido";
-            }else{
+            } else {
                 campo.classList.add("valido");
                 campo.nextElementSibling.classList.remove("errorSpan");
                 campo.nextElementSibling.innerText = "";
@@ -810,29 +798,51 @@ if (!isset($_SESSION['idusuario'])) {
 
             error.innerHTML = mensajesError.join(", ");
 
-            //VALORES DE VARIABLES
-            /*console.log("Sexo: " +sexo.value);
-            console.log("Mujer edad: " +mujeredadfertil.value);
-            console.log("Nota: " +notaingresourg.value);
-            console.log("Atencion: " +atnprehosp.value);
-            console.log("Tipo urg: " +tipourgencia.value);
-            console.log("Traslado: " +trastrans.value);
-            console.log("Motivo: " +motivoatencion.value);
-            console.log("Tipo cama: " +tipocama.value);
-            console.log("Alta por: " +altapor.value);
-            console.log("Ministerio: " +ministeriopublico.value);
-            console.log("Afeccion: " +afecprincipal.value);
-            console.log("lesion: " +lesion_es.value);
-            console.log("Hoja lesion: " +lesiones.value);*/
-
             return false;
 
         }
-
     </script>
 
+    <!-- <script>
 
-    <!--<script src="validacionConsulta.js"></script>-->
+        document.getElementById("notaingresourg").value = "";
+
+        let formulario = document.getElementById("formConsulta");
+        /*let fecharecepcion = document.getElementById("fecharecepcion");
+        let fechaingreso = document.getElementById("fechaingreso");
+        let fechaalta = document.getElementById("fechaalta");*/
+
+        //Objeto consulta
+        let consulta = {
+
+            fecharecepcion : document.getElementById("fecharecepcion").value,
+            fechaingreso : document.getElementById("fechaingreso").value,
+            fechaalta : document.getElementById("fechaalta").value,
+            sexo : document.getElementById("sexo").value,
+            mujeredadfertil : document.getElementById("mujeredadfertil").value,
+            notaingresourg : document.getElementById("notaingresourg").value,
+            atnprehosp : document.getElementById("atnprehosp").value,
+            tipourgencia : document.getElementById("tipourgencia").value,
+            trastrans : document.getElementById("trastrans").value,
+            motivoatencion : document.getElementById("motivoatencion").value,
+            tipocama : document.getElementById("tipocama").value,
+            altapor : document.getElementById("altapor").value,
+            ministeriopublico : document.getElementById("ministeriopublico").value,
+            afecprincipal : document.getElementById("afecprincipal").value,
+            lesion_es : document.getElementById("lesion_es").value,
+            lesiones : document.getElementById("lesiones").value,
+
+            //Metodo
+            validarFechas(){
+
+                
+
+            }
+
+        } //FIN DEL OBJETO
+
+    </script> -->
+    
     </body>
 
     </html>

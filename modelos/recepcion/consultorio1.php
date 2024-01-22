@@ -18,12 +18,6 @@ if (!isset($_SESSION['idusuario'])) {
 
     $resultado = $con->query($recepciones);
 
-
-    //Consulta a la tabla de consultas
-    $consultas = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, p.nombre, r.edad, r.mtvoconsulta, c.altapor, c.condicion FROM consultas c INNER JOIN recepciones r ON c.idrecepcion = r.idrecepcion INNER JOIN pacientes p ON r.idpaciente = p.idpaciente WHERE c.altapor = 'Observación' AND c.condicion = 2";
-
-    $sqlconsulta = $con->query($consultas);
-
 ?>
 
     <!-- PACIENTES QUE SE VAN A CONSULTAR -->
@@ -80,58 +74,12 @@ if (!isset($_SESSION['idusuario'])) {
                             </table>
                         </div>
                     </div>
-
-
-                    <!-- PACIENTES QUE SE ENCUENTRAN EN TRIAGE -->
-                    <h5>Aquí aparecen los pacientes en observación</h5>
-
-                    <div class="card-body">
-
-                        <div class="table-responsive" id="listadoregistros">
-                            <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
-                                <thead style="background-color: #757579; color: white;">
-                                    <tr>
-                                        <th>Fecha ingreso</th>
-                                        <th>Nombre</th>
-                                        <th>Edad</th>
-                                        <th>Motivo consulta</th>
-                                        <th>Estatus</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <?php
-                                    while ($fila = $sqlconsulta->fetch_array(MYSQLI_BOTH)) {
-                                        echo "<tr>
-                            <td>" . date("H:i:s - d-m-Y", strtotime($fila['fechaingreso'])) . "</td>
-                            <td>" . $fila['nombre'] . "</td>
-                            <td>" . $fila['edad'] . "</td>
-                            <td>" . $fila['mtvoconsulta'] . "</td>
-                            <td>" . $fila['altapor'] . "</td>
-                            </tr>";
-                                    }
-                                    ?>
-
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Fecha ingreso</th>
-                                        <th>Nombre</th>
-                                        <th>Edad</th>
-                                        <th>Motivo consulta</th>
-                                        <th>Estatus</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
+                    
                     <?php include "../extend/footer.php"; ?>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 <?php
 }

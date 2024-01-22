@@ -46,7 +46,8 @@ if (!empty($_POST)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ingresar Expediente Urgencias</title>
+    <title>Sistema HGS</title>
+    <link rel="icon" href="public/img/logohgs.jpg">
 
     <!--CSS-->
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
@@ -60,7 +61,7 @@ if (!empty($_POST)) {
 <body>
     <center>
         <div style="padding-top: 50px;">
-            <img class="mb-4" src="public/img/logos.jpg" alt="" width="260" height="130">
+            <img class="mb-4" src="public/img/logos.jpg" alt="" width="460" height="130">
             <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                 <div class="form-group col-3">
@@ -77,7 +78,7 @@ if (!empty($_POST)) {
                     <button class="btn btn-lg btn-primary btn-block" type="submit" name="ingresar" value="Ingresar">Ingresar</button>
                 </div>
             </form>
-            <p class="mt-5 mb-3 text-muted">&copy; ver: 3.0.1 - Estadística H.G.S. 2019 - 2023</p>
+            <p class="mt-5 mb-3 text-muted">&copy; ver: 3.2.2 - Estadística H.G.S. 2019 - 2024</p>
 
         </div>
     </center>

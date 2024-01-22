@@ -114,7 +114,6 @@ if (!isset($_SESSION['idusuario'])) {
              * update pacientes join exparchivo on pacientes.curp=exparchivo.curp set pacientes.expediente=exparchivo.idexpediente;
              */
             $verpaciente = "SELECT idpaciente, curp FROM pacientes WHERE curp LIKE '$curp'";
-
             $existepaciente = $con->query($verpaciente);
             $fila = $existepaciente->num_rows;
 

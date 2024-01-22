@@ -70,8 +70,6 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-archive"> Recargar tabla con fechas seleccionadas</i></button>
 
-                                    <!-- <a href="repRecep_excel.php" class="btn btn-success" type="button"><i class="fa fa-file-excel-o"> Reporte en Excel</i></a> -->
-
                                 </div>
 
                             </div>
@@ -110,7 +108,7 @@ if (!isset($_SESSION['idusuario'])) {
                                             <!-- <a href='imprimirConsulta.php?idc=" . $reg['idconsulta'] . "' type='button' class='btn btn-primary' title='Imprimir hoja de consulta'><i class='fa fa-print'></i></a> -->
                                             <a href='imprimeObs.php?id=" . $reg['idconsulta'] . "&idr=" . $reg['idrecepcion'] . "' type='button' class='btn btn-black' title='Imprimir nota medica'><i class='fa fa-print'></i></a>
 
-                                            <a href='editarConsultaObs.php?idc=" . $reg['idconsulta'] . "&idr=" . $reg['idrecepcion'] . "' type='button' class='btn btn-warning' title='Editar'><i class='fa fa-pencil-square-o'></i></a>
+                                            <a href='editarConsultaCons1.php?idc=" . $reg['idconsulta'] . "&idr=" . $reg['idrecepcion'] . "' type='button' class='btn btn-warning' title='Editar'><i class='fa fa-pencil-square-o'></i></a>
                                         </td>
                                         </tr>";
                                     }

@@ -1,0 +1,10 @@
+SELECT r.idrecepcion,r.fechahorarecep,DATE_FORMAT(r.fechahorarecep, '%Y-%m-%d') FechaStr,DATE_FORMAT(r.fechahorarecep,'%H:%i:%s') HoraStr,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta,r.sala FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE r.condicion = 2 AND DATE(r.fechahorarecep) >= '2023-01-01' AND DATE(r.fechahorarecep) <= '2023-12-31' ORDER BY r.fechahorarecep ASC
+
+
+SELECT r.fechahorarecep,  p.nombre, r.edad, p.sexo, r.mtvoconsulta, r.idrecepcion, p.idpaciente, DATE_FORMAT(r.fechahorarecep, '%Y-%m-%d') FechaStr, DATE_FORMAT(r.fechahorarecep,'%H:%i:%s') HoraStr, r.sala FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE YEAR(r.fechahorarecep) = 2023 AND r.condicion = 2 ORDER BY r.fechahorarecep ASC
+
+/*************** CAMBIAR CONDICION DE RECEPCIONES ************************/
+UPDATE recepciones SET condicion = 3, fechamod= NOW() WHERE condicion = 9
+
+/*************** CAMBIAR FECHA DE CONSULTA ************************/
+SELECT * FROM consultas WHERE YEAR(fechaingreso) = YEAR(curdate())

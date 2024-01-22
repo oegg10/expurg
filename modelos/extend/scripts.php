@@ -1,6 +1,7 @@
 <!--CSS-->
 <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../public/css/bootstrap.min.css.map">
+<link rel="stylesheet" href="../../public/css/jquery-ui.min.css">
 <link rel="stylesheet" href="../../public/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="../../public/css/font-awesome.min.css">
 <link rel="stylesheet" href="../../public/css/bootstrap-select.min.css">

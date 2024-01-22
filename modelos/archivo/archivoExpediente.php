@@ -126,7 +126,7 @@ if (!isset($_SESSION['idusuario'])) {
                             <div class="row">
 
                                 <div class="form-group col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                                    <label>Nombre (*):</label>
+                                    <label>Nombre (*) | <small><strong style="color: red;">Evitar comas y puntos</strong></small></label>
                                     <input type="text" class="form-control" name="nombrep" id="nombrep" autofocus placeholder="Nombre del paciente" required onblur="may(this.value, this.id)">
                                 </div>
 
@@ -158,7 +158,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 </div>
 
                                 <div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                    <label>Observaciones:</label>
+                                    <label>Observaciones | <small><strong style="color: red;">Evitar comas y puntos</strong></small></label>
                                     <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="250" placeholder="Observaciones" onblur="may(this.value, this.id)">
                                 </div>
 

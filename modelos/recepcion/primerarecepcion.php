@@ -47,7 +47,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         //Realizamos la inserción de los datos
-        $sqlins = "INSERT INTO recepciones (idpaciente,edad,mtvoconsulta,embarazo,semgesta,numgesta,sala,medico,referencia,observaciones,condicion,idusuario,fechamod) VALUES ('$idpaciente','$edad','$mtvoconsulta','$embarazo','$semgesta','$numgesta','$sala','$medico','$referencia','$observaciones', '1', '$idusuario',NOW())";
+        $sqlins = "INSERT INTO recepciones (idpaciente,edad,mtvoconsulta,embarazo,semgesta,numgesta,sala,medico,referencia,tipoconsulta,observaciones,condicion,idusuario,fechamod) VALUES ('$idpaciente','$edad','$mtvoconsulta','$embarazo','$semgesta','$numgesta','$sala','$medico','$referencia','PRIMERA VEZ','$observaciones', '1', '$idusuario',NOW())";
 
         $resins = $con->query($sqlins);
 

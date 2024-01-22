@@ -85,94 +85,6 @@ if (!isset($_SESSION['idusuario'])) {
 
         /* VALIDACION DE DATOS */
 
-        /*$error = array();
-
-        if ($escolaridad=="") {
-            $error[0]= "La escolaridad no debe ir vacía";
-        }
-
-        if ($leerescribir=="") {
-            $error[1]= "Leer y escribir no debe ir vacío";
-        }
-
-        if ($discapacidad=="") {
-            $error[2]= "La discapacidad no debe ir vacía";
-        }
-
-        if ($referidopor=="") {
-            $error[3]= "Referido por no debe ir vacío";
-        }
-
-        if ($fecha_ocurrencia=="") {
-            $error[4]= "La fecha de ocurrencia no debe ir vacía";
-        }
-
-        if ($fecha_ocurrencia >= $fechaingreso) {
-            $error[5]= "La fecha de ocurrencia no debe ser mayor a la fecha de inicio de la consulta";
-        }
-
-        if ($diafestivo=="") {
-            $error[6]= "El día festivo no debe de ir vacío";
-        }
-
-        if ($sitio_ocurrencia=="") {
-            $error[7]= "El sitio de ocurrencia no debe ir vacío";
-        }
-
-        if ($lesion_entidad=="") {
-            $error[8]= "La entidad no debe ir vacía";
-        }
-
-        if ($lesion_municipio=="") {
-            $error[9]= "El municipio no debe ir vacío";
-        }
-
-        if ($lesion_localidad=="") {
-            $error[10]= "La localidad no debe ir vacía";
-        }
-
-        if ($lesion_domicilio=="") {
-            $error[11]= "El domicilio no debe ir vacío";
-        }
-
-        if ($lesion_colonia=="") {
-            $error[12]= "La colonia no debe ir vacía";
-        }
-
-        if ($intensionalidad=="") {
-            $error[13]= "La intensionalidad no debe ir vacía";
-        }
-
-        if ($agente_lesion=="") {
-            $error[14]= "El agente de la lesión no debe ir vacío";
-        }
-
-        if ($toxicomanias=="") {
-            $error[15]= "La sospecha que el paciente bajo efectos de: no puede estar vacía";
-        }
-
-        if ($servicio=="") {
-            $error[16]= "El servicio no debe ir vacío";
-        }
-
-        if ($tipoatencion=="") {
-            $error[17]= "El tipo de atención no debe ir vacío";
-        }
-
-        if ($areaanatomica=="") {
-            $error[18]= "El área anatómica no puede estar vacía";
-        }
-
-        if ($consec_resultante=="") {
-            $error[19]= "La consecuencia resultante no puede estar vacía";
-        }
-
-        if ($causaexterna=="") {
-            $error[20]= "La causa externa no debe ir vacía";
-        }
-
-        if (count($error)==0) {*/
-
             //======= Realizamos la inserción de los datos =========
             $sql_lesiones = "INSERT INTO lesiones (idconsulta, escolaridad, leerescribir, discapacidad, referidopor, nombre_unidad, fecha_ocurrencia, diafestivo, sitio_ocurrencia, sitio_ocurrencia_otro, lesion_entidad, lesion_municipio, lesion_localidad, lesion_cp, lesion_domicilio, lesion_colonia, intensionalidad, agente_lesion, agente_otro, toxicomanias, otras_toxicomanias, lesionad_es, equipo_seguridad, que_eq_seguridad, otro_eq_seguridad, tipo_violencia, num_agresores, parentesco_afectado, sexo_agresor, edad_agresor, bajoefectos_agresor, evento_autoinflingido, servicio, otro_servicio, tipoatencion, otro_tipoatencion, areaanatomica, consec_resultante, causaexterna, condicion, idusuario) VALUES ('$idconsulta', '$escolaridad', '$leerescribir', '$discapacidad', '$referidopor', '$nombre_unidad', '$fecha_ocurrencia', '$diafestivo', '$sitio_ocurrencia', '$sitio_ocurrencia_otro', '$lesion_entidad', '$lesion_municipio', '$lesion_localidad', '$lesion_cp', '$lesion_domicilio', '$lesion_colonia', '$intensionalidad', '$agente_lesion', '$agente_otro', '$toxicomanias', '$otras_toxicomanias', '$lesionad_es', '$equipo_seguridad', '$que_eq_seguridad', '$otro_eq_seguridad', '$tipo_violencia', '$num_agresores', '$parentesco_afectado', '$sexo_agresor', '$edad_agresor', '$bajoefectos_agresor', '$evento_autoinflingido', '$servicio', '$otro_servicio', '$tipoatencion', '$otro_tipoatencion', '$areaanatomica', '$consec_resultante', '$causaexterna', '1', '$idusuario')";
 
@@ -191,19 +103,17 @@ if (!isset($_SESSION['idusuario'])) {
                 echo "<script>
                 alert('La captura de lesiones se guardo con exito');
                 window.location = '../consultas/index.php';
-            </script>";
+                    </script>";
             } else {
 
                 echo "<script>
                 alert('Error al guardar la captura de lesiones');
                 window.location = '../consultas/index.php';
-            </script>";
+                    </script>";
             }
 
             $insLesiones->close();
             $con->close();
-
-        //}
         
     }
 
@@ -221,7 +131,7 @@ if (!isset($_SESSION['idusuario'])) {
                             <h5>Este apartado de lesiones está aún en fase de prueba, favor de reportar cualquier "anomalía" al dr. Iván o al departamento de estadística. Gracias</h5>
                         </div>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
+                            <form id="formLesion" action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
 
                                 <div class="row">
 
@@ -673,11 +583,11 @@ if (!isset($_SESSION['idusuario'])) {
                                             </select>
                                         </div>
 
-                                        <!-- 12 -->
+                                        <!-- 12 value="<?php //echo isset($leerescribir)?$leerescribir:""; ?>"-->
 
                                         <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                             <label>Edad del/la agresor(a):</label>
-                                            <input type="text" class="form-control" name="edad_agresor" id="edad_agresor" maxlength="3" value="<?php echo isset($leerescribir)?$leerescribir:""; ?>" placeholder="Edad" pattern="[0-9]{1,3}">
+                                            <input type="text" class="form-control" name="edad_agresor" id="edad_agresor" maxlength="3" placeholder="Edad agresor" pattern="[0-9]{1,3}">
                                         </div>
 
                                         <div class="form-group col-lg-4 col-md-4 col-sm-4">
@@ -843,9 +753,12 @@ if (!isset($_SESSION['idusuario'])) {
 
     <script>
 
+        let formulario = document.getElementById("formLesion");
         //======== VALIDA FECHAS ====================
         let fechainicio = document.getElementById("fechainicio");
         let fecha_ocurrencia = document.getElementById("fecha_ocurrencia");
+
+        //formulario.addEventListener("blur", rojoValidaEdadAgresor, true);
         
         fecha_ocurrencia.addEventListener("blur", function () {
             
@@ -871,6 +784,7 @@ if (!isset($_SESSION['idusuario'])) {
 
         });
         //========= FIN VALIDA FECHAS ===============
+
         //========= VARIABLES DE DOMICILIO ==========
         let l_entidaddom = '<?php echo $var_entidaddom; ?>';
         let l_municipio = '<?php echo $var_municipio; ?>';
@@ -989,6 +903,8 @@ if (!isset($_SESSION['idusuario'])) {
         let intensionalidad = document.getElementById("intensionalidad");
         let agente_lesion = document.getElementById("agente_lesion");
         let toxicomanias = document.getElementById("toxicomanias");
+        let num_agresores = document.getElementById("num_agresores");
+        let edad_agresor = document.getElementById("edad_agresor");
         let servicio = document.getElementById("servicio");
         let tipoatencion = document.getElementById("tipoatencion");
         let areaanatomica = document.getElementById("areaanatomica");
@@ -1009,6 +925,49 @@ if (!isset($_SESSION['idusuario'])) {
                 campo.classList.add("valido");
                 campo.nextElementSibling.classList.remove("errorSpan");
                 campo.nextElementSibling.innerText = "";
+            }
+
+        }
+
+        //VALIDACION DE DATOS DEL AGRESOR
+        formulario.addEventListener("blur", rojoValidaEdadAgresor, true);
+        
+        function rojoValidaEdadAgresor(){
+
+            if (num_agresores.value == "UNICA(O)") {
+
+                if (parentesco_afectado.value === "") {
+                    document.getElementById("parentesco_afectado").style.border = "solid 1px red";
+                    document.getElementById("parentesco_afectado").style.boxShadow = "0 0 10px red";
+                }else{
+                    document.getElementById("parentesco_afectado").style.border = "solid 1px greenyellow";
+                    document.getElementById("parentesco_afectado").style.boxShadow = "0 0 10px greenyellow";
+                }
+
+                if (sexo_agresor.value === "") {
+                    document.getElementById("sexo_agresor").style.border = "solid 1px red";
+                    document.getElementById("sexo_agresor").style.boxShadow = "0 0 10px red";
+                }else{
+                    document.getElementById("sexo_agresor").style.border = "solid 1px greenyellow";
+                    document.getElementById("sexo_agresor").style.boxShadow = "0 0 10px greenyellow";
+                }
+
+                if (edad_agresor.value === "") {
+                    document.getElementById("edad_agresor").style.border = "solid 1px red";
+                    document.getElementById("edad_agresor").style.boxShadow = "0 0 10px red";
+                }else{
+                    document.getElementById("edad_agresor").style.border = "solid 1px greenyellow";
+                    document.getElementById("edad_agresor").style.boxShadow = "0 0 10px greenyellow";
+                }
+
+                if (bajoefectos_agresor.value === "") {
+                    document.getElementById("bajoefectos_agresor").style.border = "solid 1px red";
+                    document.getElementById("bajoefectos_agresor").style.boxShadow = "0 0 10px red";
+                }else{
+                    document.getElementById("bajoefectos_agresor").style.border = "solid 1px greenyellow";
+                    document.getElementById("bajoefectos_agresor").style.boxShadow = "0 0 10px greenyellow";
+                }
+                
             }
 
         }
@@ -1034,6 +993,8 @@ if (!isset($_SESSION['idusuario'])) {
         areaanatomica.addEventListener("blur", validarCamposVacios);
         consec_resultante.addEventListener("blur", validarCamposVacios);
         causaexterna.addEventListener("blur", validarCamposVacios);
+
+        
 
         //causaexterna = $.trim(causaexterna);
 
@@ -1133,9 +1094,15 @@ if (!isset($_SESSION['idusuario'])) {
 
             }
 
+            if (num_agresores.value === "UNICA(O)" && edad_agresor.value ==="") {
+
+                mensajesError.push("La edad del agresor no puede estar vacía");
+
+            }
+
             if (servicio.value === "") {
 
-                mensajesError.push("El servicio no puede estar vacía");
+                mensajesError.push("El servicio no puede estar vacío");
 
             }
 

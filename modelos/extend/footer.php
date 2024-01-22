@@ -2,11 +2,12 @@
     <h5 style="text-align: center;">Secretaría de Salud de Coahuila, Hospital General de Saltillo.</h5>
 </strong>
 <h6 style="text-align: center;">
-    Desarrollo: oegg - Todos los derechos reservados &copy; 2019-2023 - ver: 3.0.1
+    Desarrollo: oegg - Todos los derechos reservados &copy; 2019-2024 - ver: 3.2.2
 </h6>
 
 <!--DataTable-->
 <script src="../../public/js/jquery-3.6.3.min.js"></script>
+<script src="../../public/js/jquery-ui.min.js"></script>
 <script src="../../public/js/popper.min.js"></script>
 <script src="../../public/js/bootstrap.min.js"></script>
 <script src="../../public/js/jquery.dataTables.min.js"></script>

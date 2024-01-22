@@ -3,6 +3,7 @@
 ob_start();
 
 include "../extend/header.php";
+include_once "funcionesConsulta.php";
 
 if (!isset($_SESSION['idusuario'])) {
     header("Location:../../index.php");
@@ -15,9 +16,147 @@ if (!isset($_SESSION['idusuario'])) {
     $id = $_GET['idc'];
     $idr = $_GET['idr'];
 
-    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre, r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE idconsulta = '$id' AND r.idrecepcion = '$idr'";
+    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.lesion_es, c.lesiones, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE idconsulta = '$id' AND r.idrecepcion = '$idr'";
+
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
+
+    //echo $fila["mujeredadfertil"];
+
+    if (!empty($_POST)) {
+
+        //https://www.php.net/manual/es/function.preg-replace.php
+        $idconsulta = isset($_POST["idconsulta"]) ? mysqli_real_escape_string($con, $_POST['idconsulta']) : "";
+
+        //NOTA DE INGRESO DE URGENCIAS
+        $fc = isset($_POST["fc"]) ? mysqli_real_escape_string($con, $_POST['fc']) : "";
+        $fr = isset($_POST["fr"]) ? mysqli_real_escape_string($con, $_POST['fr']) : "";
+        $ta = isset($_POST["ta"]) ? mysqli_real_escape_string($con, $_POST['ta']) : "";
+        $temperatura = isset($_POST["temperatura"]) ? mysqli_real_escape_string($con, $_POST['temperatura']) : "";
+        $glucosa = isset($_POST["glucosa"]) ? mysqli_real_escape_string($con, $_POST['glucosa']) : "";
+        $talla = isset($_POST["talla"]) ? mysqli_real_escape_string($con, $_POST['talla']) : "";
+        $peso = isset($_POST["peso"]) ? mysqli_real_escape_string($con, $_POST['peso']) : "";
+        $pabdominal = isset($_POST["pabdominal"]) ? mysqli_real_escape_string($con, $_POST['pabdominal']) : "";
+        $imc = isset($_POST["imc"]) ? mysqli_real_escape_string($con, $_POST['imc']) : "";
+        $notaingresourg = isset($_POST["notaingresourg"]) ? mysqli_real_escape_string($con, $_POST['notaingresourg']) : "";
+
+        //HOJA DE URGENCIAS
+        $atnprehosp = isset($_POST["atnprehosp"]) ? mysqli_real_escape_string($con, $_POST['atnprehosp']) : "";
+        $tipourgencia = isset($_POST["tipourgencia"]) ? mysqli_real_escape_string($con, $_POST['tipourgencia']) : "";
+        $tiempotraslado = isset($_POST["tiempotraslado"]) ? mysqli_real_escape_string($con, $_POST['tiempotraslado']) : "";
+        $nombreunidad = isset($_POST["nombreunidad"]) ? mysqli_real_escape_string($con, $_POST['nombreunidad']) : "";
+        $trastrans = isset($_POST["trastrans"]) ? mysqli_real_escape_string($con, $_POST['trastrans']) : "";
+        $motivoatencion = isset($_POST["motivoatencion"]) ? mysqli_real_escape_string($con, $_POST['motivoatencion']) : "";
+        $tipocama = isset($_POST["tipocama"]) ? mysqli_real_escape_string($con, $_POST['tipocama']) : "";
+        $altapor = isset($_POST["altapor"]) ? mysqli_real_escape_string($con, $_POST['altapor']) : "";
+        $otraunidad = isset($_POST["otraunidad"]) ? mysqli_real_escape_string($con, $_POST['otraunidad']) : "";
+        $ministeriopublico = isset($_POST["ministeriopublico"]) ? mysqli_real_escape_string($con, $_POST['ministeriopublico']) : "";
+        $mujeredadfertil = isset($_POST["mujeredadfertil"]) ? mysqli_real_escape_string($con, $_POST['mujeredadfertil']) : "";
+        $afecprincipal = isset($_POST["afecprincipal"]) ? mysqli_real_escape_string($con, $_POST['afecprincipal']) : "";
+        $comorbilidad1 = isset($_POST["comorbilidad1"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad1']) : "";
+        $comorbilidad2 = isset($_POST["comorbilidad2"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad2']) : "";
+        $comorbilidad3 = isset($_POST["comorbilidad3"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad3']) : "";
+        $interconsulta1 = isset($_POST["interconsulta1"]) ? mysqli_real_escape_string($con, $_POST['interconsulta1']) : "";
+        $interconsulta2 = isset($_POST["interconsulta2"]) ? mysqli_real_escape_string($con, $_POST['interconsulta2']) : "";
+        $interconsulta3 = isset($_POST["interconsulta3"]) ? mysqli_real_escape_string($con, $_POST['interconsulta3']) : "";
+        $procedim1 = isset($_POST["procedim1"]) ? mysqli_real_escape_string($con, $_POST['procedim1']) : "";
+        $procedim2 = isset($_POST["procedim2"]) ? mysqli_real_escape_string($con, $_POST['procedim2']) : "";
+        $procedim3 = isset($_POST["procedim3"]) ? mysqli_real_escape_string($con, $_POST['procedim3']) : "";
+        $procedim4 = isset($_POST["procedim4"]) ? mysqli_real_escape_string($con, $_POST['procedim4']) : "";
+        $procedim5 = isset($_POST["procedim5"]) ? mysqli_real_escape_string($con, $_POST['procedim5']) : "";
+        $medicamento1 = isset($_POST["medicamento1"]) ? mysqli_real_escape_string($con, $_POST['medicamento1']) : "";
+        $medicamento2 = isset($_POST["medicamento2"]) ? mysqli_real_escape_string($con, $_POST['medicamento2']) : "";
+        $medicamento3 = isset($_POST["medicamento3"]) ? mysqli_real_escape_string($con, $_POST['medicamento3']) : "";
+        $lesion_es = isset($_POST["lesion_es"]) ? mysqli_real_escape_string($con, $_POST['lesion_es']) : "";
+        $lesiones = isset($_POST["lesiones"]) ? mysqli_real_escape_string($con, $_POST['lesiones']) : "";
+
+        $notaingresourg = trim($notaingresourg);
+
+        $idusuario = $_SESSION['idusuario'];
+
+        //VALIDAR MINISTERIO PUBLICO ===================
+        if ($ministeriopublico === "") {
+            $ministeriopublico = "NO";
+        }else{
+            $ministeriopublico = $ministeriopublico;
+        }
+
+        //VALIDAR MUJER EN EDAD FERTIL =================
+        if ($fila['sexo'] === "Femenino" && $mujeredadfertil === "") {
+            $mujeredadfertil = "No estaba embarazada ni en el puerperio";
+        }elseif ($fila['sexo'] === "Masculino") {
+            $mujeredadfertil = "";
+        }else{
+            $mujeredadfertil = $mujeredadfertil;
+        }
+
+        //VALIDAR QUE LESIONES NO VENGA VACIO ===================
+        if ($lesion_es === "" || $lesion_es == NULL) {
+            $lesion_es = "NO HAY LESION";
+        }
+        if ($lesiones === "" || $lesiones == NULL) {
+            $lesiones = "NO";
+        }
+        if ($lesion_es === "NO HAY LESION" || $lesion_es === "SUBSECUENTE") {
+            $lesiones = "NO";
+        }else {
+            $lesion_es = $lesion_es;
+            $lesiones = $lesiones;
+        }
+
+        //EDICION DE DATOS ==========================================================================
+        $editarC1 = "UPDATE consultas SET fc='$fc',
+                                    fr='$fr',
+                                    ta='$ta',
+                                    temperatura='$temperatura',
+                                    glucosa='$glucosa',
+                                    talla='$talla',
+                                    peso='$peso',
+                                    pabdominal='$pabdominal',
+                                    imc='$imc',
+                                    notaingresourg='$notaingresourg',
+                                    atnprehosp='$atnprehosp',
+                                    tipourgencia='$tipourgencia',
+                                    tiempotraslado='$tiempotraslado',
+                                    nombreunidad='$nombreunidad',
+                                    trastrans='$trastrans',
+                                    motivoatencion='$motivoatencion',
+                                    tipocama='$tipocama',
+                                    altapor='$altapor',
+                                    otraunidad='$otraunidad',
+                                    ministeriopublico='$ministeriopublico',
+                                    mujeredadfertil='$mujeredadfertil',
+                                    afecprincipal='$afecprincipal',
+                                    comorbilidad1='$comorbilidad1',
+                                    comorbilidad2='$comorbilidad2',
+                                    comorbilidad3='$comorbilidad3',
+                                    interconsulta1='$interconsulta1',
+                                    interconsulta2='$interconsulta2',
+                                    interconsulta3='$interconsulta3',
+                                    procedim1='$procedim1',
+                                    procedim2='$procedim2',
+                                    procedim3='$procedim3',
+                                    procedim4='$procedim4',
+                                    procedim5='$procedim5',
+                                    medicamento1='$medicamento1',
+                                    medicamento2='$medicamento2',
+                                    medicamento3='$medicamento3',
+                                    condicion='1',
+                                    idusuario='$idusuario' WHERE idconsulta = '$idconsulta'";
+
+        $editadoC1 = $con->query($editarC1);
+
+        if ($editadoC1 > 0) {
+            header('location:../extend/alerta.php?msj=Consulta actualizada&c=pac&p=in&t=success');
+            $con->close();
+        } else {
+
+            header('location:../extend/alerta.php?msj=Error al actualizar consulta&c=pac&p=in&t=error');
+        }
+
+        $con->close();
+
+    }
 
 ?>
 
@@ -30,7 +169,7 @@ if (!isset($_SESSION['idusuario'])) {
                     </div>
                     <div class="card-body">
 
-                        <form action="editarConsulta.php" method="POST" autocomplete="off">
+                        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                             <div class="row">
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
@@ -208,13 +347,13 @@ if (!isset($_SESSION['idusuario'])) {
                                 </div>
 
                                 <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
-                                    <label>Alta por (*):</label>
-                                    <select class='form-control border-danger' name='altapor' id='altapor' required>
-                                        <option value=''></option>
+                                    <label style="color: red;">Alta por (*):</label>
+                                    <select class='form-control border-danger' name='altapor' id='altapor'>
+                                        <option value='<?php echo $fila['altapor']; ?>'><?php echo $fila['altapor']; ?></option>
                                         <option value='Domicilio'>Domicilio</option>
                                         <option value='Hospitalización'>Hospitalización</option>
                                         <option value='Consulta Externa'>Consulta Externa</option>
-                                        <!-- <option value='Observación'>Observación</option> -->
+                                        <option value='Observación'>Observación</option>
                                         <option value='Traslado a otra unidad'>Traslado a otra unidad</option>
                                         <option value='Fuga'>Fuga</option>
                                         <option value='Defunción'>Defunción</option>
@@ -235,15 +374,31 @@ if (!isset($_SESSION['idusuario'])) {
                                     </select>
                                 </div>
 
-                                <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
-                                    <label>MUJER EN EDAD FERTIL:</label>
-                                    <select class='form-control' name='mujeredadfertil' id='mujeredadfertil'>
-                                        <option value="<?php echo $fila['mujeredadfertil']; ?>"><?php echo $fila['mujeredadfertil']; ?></option>
-                                        <option value='No estaba embarazada ni en el puerperio'>No estaba embarazada ni en el puerperio</option>
-                                        <option value='Embarazo'>Embarazo</option>
-                                        <option value='Puerperio (de 0 a 42 días después del parto)'>Puerperio (de 0 a 42 días después del parto)</option>
-                                    </select>
-                                </div>
+                                <?php
+
+                                if ($fila['sexo'] === "Masculino") {
+
+                                    echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <label>MUJER EN EDAD FERTIL:</label>
+                                            <select class="form-control" name="mujeredadfertil" id="mujeredadfertil" disabled="true">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>';
+                                } else {
+
+                                    echo '<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <label>MUJER EN EDAD FERTIL:</label>
+                                            <select class="form-control" name="mujeredadfertil" id="mujeredadfertil">
+                                                <!--<option value="<?php echo $fila["mujeredadfertil"]; ?>"><?php echo $fila["mujeredadfertil"]; ?></option>-->
+                                                <option value="No estaba embarazada ni en el puerperio">No estaba embarazada ni en el puerperio</option>
+                                                <option value="Embarazo">Embarazo</option>
+                                                <option value="Puerperio (de 0 a 42 días después del parto)">Puerperio (de 0 a 42 días después del parto)</option>
+                                            </select>
+                                        </div>';
+                                }
+
+                                ?>
+
 
                                 <!-- 12 -->
 
@@ -328,7 +483,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <hr>
                                     <h6><label>MEDICAMENTOS Y PRESENTACIÓN:</label></h6>
-                                    <input type="text" class="form-control" name="medicamento1" id="medicamento1" maxlength="40" placeholder="Medicamento 1" value="<?php echo $fila['medicamento1']; ?>" onblur="may(this.value, this.id)" required>
+                                    <input type="text" class="form-control" name="medicamento1" id="medicamento1" maxlength="40" placeholder="Medicamento 1" value="<?php echo $fila['medicamento1']; ?>" onblur="may(this.value, this.id)">
                                 </div>
 
                                 <!-- 12 -->
@@ -343,33 +498,83 @@ if (!isset($_SESSION['idusuario'])) {
                                     <input type="text" class="form-control" name="medicamento3" id="medicamento3" maxlength="40" placeholder="Medicamento 3" value="<?php echo $fila['medicamento3']; ?>" onblur="may(this.value, this.id)">
                                 </div>
 
+                                <!-- 12 -->
+
+                                <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
+                                    <label style="color: red;">Hay lesión, es 1ra vez o subsecuente?:</label>
+                                    <select class='form-control' name='lesion_es' id='lesion_es' required>
+                                        <option value="<?php echo $fila['lesion_es']; ?>" selected><?php echo $fila['lesion_es']; ?></option>
+                                        <option value='NO HAY LESION'>NO HAY LESION</option>
+                                        <option value='PRIMERA VEZ'>PRIMERA VEZ</option>
+                                        <option value='SUBSECUENTE'>SUBSECUENTE</option>
+                                    </select>
+                                    <span></span>
+                                </div>
+
+                                <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
+                                    <label style="color: red;">Se realiza hoja de lesiones(*)?:</label>
+                                    <select class='form-control' name='lesiones' id='lesiones' required>
+                                        <option value="<?php echo $fila['lesiones']; ?>" selected><?php echo $fila['lesiones']; ?></option>
+                                        <option value='NO'>NO</option>
+                                        <option value='SI'>SI</option>
+                                    </select>
+                                    <span></span>
+                                </div>
+
                             </div>
-
-
 
                             <!-- 12 -->
 
                             <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" name="Alta" id="Alta"><i class="fa fa-save"> Alta</i></button>
+                                <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" name="Actualizar" id="Actualizar"><i class="fa fa-save"> Actualizar</i></button>
                                 <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
-
-                                <?php
-                                echo "<a href='imprimeObs.php?id=" . $fila['idconsulta'] . "&idr=" . $fila['idrecepcion'] . "' type='button' class='btn btn-warning'><i class='fa fa-print' title='Imprimir nota medica'> Imprimir Notas</i></a>"
-                                ?>
 
                             </div>
 
                         </form>
-
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-    </div>
 
     <?php include "../extend/footer.php"; ?>
+
+    <script>
+
+        //Cambios en tipo de cama y alta por:
+        $("#tipocama").change(function() {
+
+            if (document.getElementById("tipocama").value == "Observación") {
+
+                $("#altapor").val("Observación");
+                $('#altapor option:not(:selected)').attr('disabled', true);
+
+            } else if (document.getElementById("tipocama").value != "Observación") {
+                $('#altapor option:not(:selected)').attr('disabled', false);
+                document.getElementById("altapor").focus();
+            }
+
+        });
+
+        //Cambios en lesiones
+        $("#lesion_es").change(function() {
+
+            if (document.getElementById("lesion_es").value == "SUBSECUENTE" || document.getElementById("lesion_es").value == "NO HAY LESION") {
+
+                $("#lesiones").val("NO");
+                $('#lesiones option:not(:selected)').attr('disabled', true);
+
+            } else if (document.getElementById("lesion_es").value == "PRIMERA VEZ") {
+                $("#lesiones").val("");
+                $('#lesiones option:not(:selected)').attr('disabled', false);
+                document.getElementById("lesiones").focus();
+            }
+
+        });
+        
+    </script>
 
     </body>
 

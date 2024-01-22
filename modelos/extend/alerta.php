@@ -41,6 +41,18 @@ include_once '../../conexion/conexion.php';
         case 'exp':
             $carpeta = '../archivo/';
             break;
+
+        case 'servicios':
+            $carpeta = '../servicios/';
+            break;
+
+        case 'medicos':
+            $carpeta = '../medicos/';
+            break;
+
+        case 'citasCE':
+            $carpeta = '../citasCE/';
+            break;
             
     }
 
@@ -58,8 +70,8 @@ include_once '../../conexion/conexion.php';
             $con->close();
             //Abrimos la pagina de recepcion y le mandamos el idpaciente
             $pagina = 'primerarecepcion.php?id='.$id[0];
-
             break;
+
     }
 
     $dir = $carpeta . $pagina;

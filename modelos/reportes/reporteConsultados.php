@@ -42,29 +42,68 @@ if (!isset($_SESSION['idusuario'])) {
                         <h5>Reporte por fecha(s)</h5>
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST" class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <div class="row">
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                        <label>Fecha inicio (*):</label>
+                                        <input type="date" class="form-control" name="fechai" id="fechai" min="2019-09-30" value="<?php echo $fechai; ?>" required>
+                                    </div>
 
-                        <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST">
-                            <div class="row">
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <label>Fecha inicio (*):</label>
-                                    <input type="date" class="form-control" name="fechai" id="fechai" min="2019-09-30" value="<?php echo $fechai; ?>" required>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                        <label>Fecha final (*):</label>
+                                        <input type="date" class="form-control" name="fechaf" id="fechaf" min="2019-09-30" value="<?php echo $fechaf; ?>" required>
+                                    </div>
+
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                        <button class="btn btn-primary" type="submit"><i class="fa fa-archive"> Recargar tabla con fechas seleccionadas</i></button>
+                                    </div>
                                 </div>
 
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <label>Fecha final (*):</label>
-                                    <input type="date" class="form-control" name="fechaf" id="fechaf" min="2019-09-30" value="<?php echo $fechaf; ?>" required>
+                            </form>
+
+                            <form action="ConsultasAnioExcel.php" method="get" class="form-group col-lg-3 col-md-3 col-sm-3" id="formConsulta">
+
+                                <!-- CONSULTAS POR AÑO -->
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <label>Consultas por Año (*):</label>
+                                    <select name="anioConsultas" id="anioConsultas" onchange='abilitaBtnConsultas(this.value);'>
+                                        <option value="">Selecione el año</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                    </select>
+
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                        <button class="btn btn-danger" type="submit" onclick="enviarFormConsultas()" id="btnConsultasExcel"><i class="fa fa-archive"> Exportar Consultas Excel</i></button>
+                                    </div>
+                                </div>
+                                
+
+                            </form>
+
+
+                            <form action="LesionesAnioExcel.php" method="get" class="form-group col-lg-3 col-md-3 col-sm-3" id="formLesion">
+
+                                <!-- LESIONES CONSULTORIO 1 POR AÑO -->
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <label>Lesiones por Año (*):</label>
+                                    <select name="anioLesiones" id="anioLesiones" onchange='abilitaBtnLesiones(this.value);'>
+                                        <option value="">Selecione el año</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                        <button class="btn btn-danger" type="submit" onclick="enviarFormLesiones()" id="btnLesionesExcel"><i class="fa fa-archive"> Exportar Lesiones Excel</i></button>
+                                    </div>
                                 </div>
 
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            </form>
 
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-archive"> Recargar tabla con fechas seleccionadas</i></button>
-
-                                    <!-- <a href="repRecep_excel.php" class="btn btn-success" type="button"><i class="fa fa-file-excel-o"> Reporte en Excel</i></a> -->
-
-                                </div>
-
-                            </div>
-                        </form>
+                        </div>
 
                         <hr>
 
@@ -191,9 +230,6 @@ if (!isset($_SESSION['idusuario'])) {
                             </table>
                         </div>
 
-
-
-
                     </div>
 
                 </div>
@@ -202,6 +238,79 @@ if (!isset($_SESSION['idusuario'])) {
     </div>
 
     <?php include "../extend/footer.php"; ?>
+
+    <script>
+
+        let formConsulta = document.getElementById("formConsulta");
+        let formLesion = document.getElementById("formLesion");
+
+        let anioConsultas = document.getElementById("anioConsultas");
+        let anioLesiones = document.getElementById("anioLesiones");
+        
+        //Se deshabilita el boton de exportar las consultas por año a excel
+        let btnConsultasExcel = document.getElementById('btnConsultasExcel');
+        btnConsultasExcel.disabled = true;
+
+         //Se deshabilita el boton de exportar las lesiones por año a excel
+         let btnLesionesExcel = document.getElementById('btnLesionesExcel');
+        btnLesionesExcel.disabled = true;
+
+        //Se habilita el boton de exportar las consultas por año a excel
+        function abilitaBtnConsultas(){
+            if (anioConsultas.value != "") {
+                btnConsultasExcel.disabled = false;
+            }else{
+                btnConsultasExcel.disabled = true;
+            }
+        }
+
+        //Se habilita el boton de exportar las consultas por año a excel
+        function abilitaBtnLesiones(){
+            if (anioLesiones.value != "") {
+                btnLesionesExcel.disabled = false;
+            }else{
+                btnLesionesExcel.disabled = true;
+            }
+        }
+
+        function enviarFormConsultas() {
+
+            let mensajesError = [];
+
+            if (anioConsultas.value == null || anioConsultas.value == "") {
+                document.getElementById("anioConsultas").style.backgroundColor = "red";
+                document.getElementById("anioConsultas").style.color = "white";
+                document.getElementById("anioConsultas").focus();
+                //mensajesError.push("Seleccione un año");
+                return false;
+            }
+
+            //errorConsultas.innerHTML = mensajesError.join(", ");
+
+            return false;
+
+        }
+
+        function enviarFormLesiones() {
+
+            let mensajesError = [];
+
+            if (anioLesiones.value == null || anioLesiones.value == "") {
+                document.getElementById("anioLesiones").style.backgroundColor = "red";
+                document.getElementById("anioLesiones").style.color = "white";
+                document.getElementById("anioLesiones").focus();
+                //mensajesError.push("Seleccione un año");
+                return false;
+            }
+
+            //errorConsultas.innerHTML = mensajesError.join(", ");
+
+            return false;
+
+        }
+
+
+    </script>
 
     </body>
 

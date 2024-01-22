@@ -108,18 +108,6 @@ if (!isset($_SESSION['idusuario'])) {
                                             echo "<td><span class='text-danger'><strong>Desactivado</strong></span></td>";
                                         }
                                         
-                                        //=============ESTADO DEL EXPEDIENTE=========================
-                                        /*if ($reg['estado'] == 'Activo') {
-                                            echo "<td><span class='text-primary'><strong>Activo</strong></span></td>";
-                                        } elseif ($reg['estado'] == 'Depurado') {
-                                            echo "<td><span class='text-info'><strong>Depurado</strong></span></td>";
-                                        } elseif ($reg['estado'] == 'Defunción') {
-                                            echo "<td><span class='text-danger'><strong>Defunción</strong></span></td>";
-                                        } elseif ($reg['estado'] == 'Depurado y nvo. número') {
-                                            echo "<td><span class='text-warning'><strong>Depurado y nvo. número</strong></span></td>";
-                                        }*/
-
-                                        //<td>" . $reg['estado'] . "</td>
                                         echo "<td>" . $reg['fechaalta'] . "</td>
                                                 <td>" . $reg['usuario'] . "</td>
                                                 

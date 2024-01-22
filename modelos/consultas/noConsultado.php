@@ -14,7 +14,7 @@ if (!isset($_SESSION['idusuario'])) {
 
     $id = $_GET['idrecepcion'];
 
-    $bloqueo = "UPDATE recepciones SET condicion = 9, fechamod = NOW() WHERE idrecepcion = '$id'";
+    $bloqueo = "UPDATE recepciones SET condicion = 3, fechamod = NOW() WHERE idrecepcion = '$id'";
     $bloqueado = $con->query($bloqueo);
 
     if ($bloqueado > 0) {

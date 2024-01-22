@@ -56,6 +56,9 @@ if (!isset($_SESSION['idusuario'])) {
                             </div>
 
                             <div class="col-sm-4">
+                                <a href="respaldoExpedientesCSV.php" class="btn btn-danger">
+                                    Respaldo de números de expediente <span class="fa fa-archive"></span>
+                                </a>
                             </div>
 
                             <div class="col-sm-4">
@@ -82,16 +85,11 @@ if (!isset($_SESSION['idusuario'])) {
                                         <th>Nombre</th>
                                         <th>CURP</th>
                                         <th>Tipo pac.</th>
-                                        <th>Realizo ant.</th>
-                                        <th>Otros</th>
                                         <th>Estado</th>
                                         <th>Observaciones</th>
-                                        <th>Obs1 ant</th>
-                                        <th>Obs2 ant</th>
-                                        <th>Obs3 ant</th>
                                         <th>Registró/Modificó</th>
                                         <th>Fecha alta</th>
-                                        <th>Editar</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,29 +107,24 @@ if (!isset($_SESSION['idusuario'])) {
                                                     echo "<td><span class='text-success'><strong>".$reg['tipopaciente']."</strong></span></td>";
                                                 }
 
-                                                //<td>" . $reg['tipopaciente'] . "</td>
-                                                echo "<td>" . $reg['nombretrabajador'] . "</td>
-                                                <td>" . $reg['otros'] . "</td>";
-
-                                        if ($reg['estado'] == 'ACTIVO' || $reg['estado'] == '') {
-                                            echo "<td><span class='text-primary'><strong>ACTIVO</strong></span></td>";
-                                        } elseif ($reg['estado'] == 'DEPURADO') {
-                                            echo "<td><span class='text-info'><strong>DEPURADO</strong></span></td>";
-                                        } elseif ($reg['estado'] == 'DEFUNCION') {
-                                            echo "<td><span class='text-danger'><strong>DEFUNCION</strong></span></td>";
-                                        } elseif ($reg['estado'] == 'DEPURADO Y NVO. NUMERO') {
-                                            echo "<td><span class='text-warning'><strong>DEPURADO Y NVO. NUMERO</strong></span></td>";
-                                        }
+                                                if ($reg['estado'] == 'ACTIVO' || $reg['estado'] == '') {
+                                                    echo "<td><span class='text-primary'><strong>ACTIVO</strong></span></td>";
+                                                } elseif ($reg['estado'] == 'DEPURADO') {
+                                                    echo "<td><span class='text-info'><strong>DEPURADO</strong></span></td>";
+                                                } elseif ($reg['estado'] == 'DEFUNCION') {
+                                                    echo "<td><span class='text-danger'><strong>DEFUNCION</strong></span></td>";
+                                                } elseif ($reg['estado'] == 'DEPURADO Y NVO. NUMERO') {
+                                                    echo "<td><span class='text-warning'><strong>DEPURADO Y NVO. NUMERO</strong></span></td>";
+                                                }
 
                                         echo "<td>" . $reg['observaciones'] . "</td>
-                                                <td>" . $reg['obs1'] . "</td>
-                                                <td>" . $reg['obs2'] . "</td>
-                                                <td>" . $reg['obs3'] . "</td>
                                                 <td>" . $reg['usuario'] . "</td>
                                                 <td>" . $reg['fechaalta'] . "</td>
                                                 
                                                 <td class='btn-group'>
                                                     <a href='../archivo/editExpediente.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-warning' title='Editar paciente'><i class='fa fa-pencil'></i></a>
+
+                                                    <!--<a href='../citasCE/insCitaCE.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-success' title='Crear cita CE'><i class='fa fa-check'></i></a>-->
                                                 </td>
                                             </tr>";
                                     }
@@ -143,16 +136,11 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Nombre</th>
                                     <th>CURP</th>
                                     <th>Tipo pac.</th>
-                                    <th>Realizo ant.</th>
-                                    <th>Otros</th>
                                     <th>Estado</th>
                                     <th>Observaciones</th>
-                                    <th>Obs1 ant</th>
-                                    <th>Obs2 ant</th>
-                                    <th>Obs3 ant</th>
                                     <th>Registró/Modificó</th>
                                     <th>Fecha alta</th>
-                                    <th>Editar</th>
+                                    <th>Opciones</th>
                                 </tfoot>
                             </table>
                         </div>

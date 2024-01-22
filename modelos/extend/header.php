@@ -17,9 +17,9 @@ if (!isset($_SESSION['idusuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Urgencias</title>
+    <title>Sistema HGS</title>
 
-    <link rel="icon" href="../../public/img/SSC.jpg">
+    <link rel="icon" href="../../public/img/logohgs.jpg">
 
     <?php require_once "scripts.php"; ?>
 
@@ -49,7 +49,7 @@ if (!isset($_SESSION['idusuario'])) {
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="../../public/img/SSC.jpg" alt="logos" width="25px" height="25px"> Urgencias</a>
+        <a class="navbar-brand" href="#"><img src="../../public/img/logohgs.jpg" alt="logos" width="50px" height="35px"> Sistema HGS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -85,10 +85,10 @@ if (!isset($_SESSION['idusuario'])) {
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="../reportes/productividad.php">Productividad</a>
                             <a class="dropdown-item" href="../reportes/reporteRecepcion.php">Reporte por Recepcionista</a>
-                            <a class="dropdown-item" href="../reportes/reporteConsultados.php">Consultas</a>
+                            <a class="dropdown-item" href="../reportes/reporteConsultados.php">Reportes de Consultas y lesiones</a>
                             <a class="dropdown-item" href="../reportes/reporteNSP.php">Pacientes N.S.P.</a>
                             <a class="dropdown-item" href="../reportes/triageReporte.php">Triages</a>
-                            <a class="dropdown-item" href="../reportes/repCons1.php">Consultas</a>
+                            <a class="dropdown-item" href="../reportes/repCons1.php">Consultorio 1</a>
 
                         </div>
                     </li>
@@ -214,6 +214,18 @@ if (!isset($_SESSION['idusuario'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="../archivo/index.php">Expedientes</a>
                     </li>
+
+
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="../citasCE/index.php">Citas C.E.</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../medicos/index.php">Medicos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../servicios/index.php">Servicios</a>
+                    </li>-->
+
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.curp-gratis.com.mx/consulta-curp" target="_blank">CURP</a>

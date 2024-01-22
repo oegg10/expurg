@@ -189,22 +189,12 @@ if (!isset($_SESSION['idusuario'])) {
             if (semgesta.value > 43) {
                 mensajesError.push("Semanas de gestación muy altas");
             }
-            
-            /*if (referencia.length > 200) {
-                mensajesError.push("La referencia es muy larga");
-            }*/
 
             if (tipoConsulta.value === null || tipoConsulta.value === "") {
 
                 mensajesError.push("Se debe elegir la opción de primera vez o subsecuente");
 
             }
-
-            /*if (tipoConsulta.value === "OTRO" && observaciones.value === "") {
-
-                mensajesError.push("Si el tipo de consulta es OTRO especifique en observaciones");
-                
-            }*/
 
             if (observaciones.length > 250) {
                 mensajesError.push("Las observaciones debe ser menor a 250 caracteres");
