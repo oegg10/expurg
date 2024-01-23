@@ -79,17 +79,17 @@ if (!isset($_SESSION['idusuario'])) {
     $nspMes = $con->query($nosepresentoMes);
     /*==============================================================================*/
 
-    /*======== RECEPCIONES POR AÑO =========================================================*/
+    /*======== RECEPCIONES POR AÑO =================================================*/
     $rPa = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
     $recepcionesPorAnio = $con->query($rPa);
     /*==============================================================================*/
 
-    /*======== RECEPCIONES POR AÑO GINECOLOGIA =========================================================*/
+    /*======== RECEPCIONES POR AÑO GINECOLOGIA ======================================*/
     $rPaE = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones WHERE sala='GINECOLOGIA' GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
     $recepcionesPorAnioEmbarazo = $con->query($rPaE);
     /*==============================================================================*/
 
-    /*======== RECEPCIONES POR AÑO URGENCIAS =========================================================*/
+    /*======== RECEPCIONES POR AÑO URGENCIAS ========================================*/
     $rPaU = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones WHERE sala<>'GINECOLOGIA' AND sala<>'CLINICA DE HERIDAS' GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
     $recepcionesPorAnioUrgencias = $con->query($rPaU);
     /*==============================================================================*/
@@ -97,6 +97,11 @@ if (!isset($_SESSION['idusuario'])) {
     /*======== CLINICA DE HERIDAS POR AÑO ==========================================*/
     $rPaCHeridas = "SELECT YEAR(fechahorarecep) AS anio, count(*) AS total FROM recepciones WHERE sala='CLINICA DE HERIDAS' GROUP BY anio ORDER BY YEAR(fechahorarecep) DESC";
     $recepcionesPorAnioCHeridas = $con->query($rPaCHeridas);
+    /*==============================================================================*/
+
+    /*======== LESIONES POR AÑO ==========================================*/
+    $rPaLesiones = "SELECT YEAR(c.fechaingreso) AS anio, count(*) AS total FROM lesiones l INNER JOIN consultas c ON l.idconsulta = c.idconsulta GROUP BY anio ORDER BY YEAR(c.fechaingreso) DESC";
+    $lesionesPa = $con->query($rPaLesiones);
     /*==============================================================================*/
 
     /*======== N.S.P. POR AÑO ==========================================*/
@@ -113,7 +118,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Inicio</h5>
+                        <h5>Inicio | <strong>Sistema de Urgencias y Archivo HGS.</strong></h5>
                     </div>
                     <div class="card-body">
 
@@ -541,7 +546,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                         <div class="row">
                             <!--======== RECEPCIONES POR AÑO CLINICA DE HERIDAS ============-->
-                            <div class="table-responsive col-lg-4 col-md-4 col-sm-4">
+                            <div class="table-responsive col-lg-3 col-md-3 col-sm-3">
                                 <h5>Clínica heridas por año</h5>
                                 <table class="table table-striped table-bordered table-condensed table-hover">
                                     <thead style="background-color: #757579; color: white;">
@@ -573,9 +578,41 @@ if (!isset($_SESSION['idusuario'])) {
                                 <span style="color: red;">La división de clínica de heridas empezó a finales de 2023</span>
                             </div>
 
+                            <!--======== LESIONES POR AÑO ============-->
+                            <div class="table-responsive col-lg-3 col-md-3 col-sm-3">
+                                <h5>Lesiones por año</h5>
+                                <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <thead style="background-color: #757579; color: white;">
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+                                        while ($reg = $lesionesPa->fetch_array(MYSQLI_BOTH)) {
+                                            //setlocale (LC_ALL, "es_MX");
+                                            echo "<tr>
+                                        <td>"  . $reg['anio'] . "</td>
+                                        <td>"  . $reg['total'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <span style="color: red;">Lesiones capturadas en este sistema</span>
+                            </div>
 
                             <!--================ N.S.P. POR AÑO ====================-->
-                            <div class="table-responsive col-lg-4 col-md-4 col-sm-4">
+                            <div class="table-responsive col-lg-3 col-md-3 col-sm-3">
                                 <h5>N.S.P. por año</h5>
                                 <table class="table table-striped table-bordered table-condensed table-hover">
                                     <thead style="background-color: #757579; color: white;">

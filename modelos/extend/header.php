@@ -17,7 +17,7 @@ if (!isset($_SESSION['idusuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sistema HGS</title>
+    <title>Urgencias y Archivo HGS</title>
 
     <link rel="icon" href="../../public/img/logohgs.jpg">
 
@@ -49,7 +49,7 @@ if (!isset($_SESSION['idusuario'])) {
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="../../public/img/logohgs.jpg" alt="logos" width="50px" height="35px"> Sistema HGS</a>
+        <a class="navbar-brand" href="#"><img src="../../public/img/logohgs.jpg" alt="logos" width="50px" height="35px"> Sis UA HGS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
