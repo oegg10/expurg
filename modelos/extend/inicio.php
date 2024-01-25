@@ -50,17 +50,26 @@ if (!isset($_SESSION['idusuario'])) {
     /*==============================================================================*/
 
     /*========GINECOLOGIA POR MES=========================================================*/
-    $embarazoMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala='GINECOLOGIA' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+    $embarazoMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala='GINECOLOGIA' AND YEAR(fechahorarecep) = YEAR(curdate()) AND condicion = 2 GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+
+    //$embarazoMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala='GINECOLOGIA' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+
     $embMes = $con->query($embarazoMes);
     /*==============================================================================*/
 
     /*======== CONSULTORIO 1========================================================*/
-    $consultorio1Mes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala='CONSULTA GENERAL DE URGENCIAS' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+    $consultorio1Mes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala='CONSULTA GENERAL DE URGENCIAS' AND YEAR(fechahorarecep) = YEAR(curdate()) AND condicion = 2 GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+
+    //$consultorio1Mes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala='CONSULTA GENERAL DE URGENCIAS' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+
     $cons1Mes = $con->query($consultorio1Mes);
     /*==============================================================================*/
 
     /*======== CONTROL TERMICO Y ENCAMADOS =========================================*/
-    $control_encamadosMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala<>'CONSULTA GENERAL DE URGENCIAS' AND sala<>'GINECOLOGIA' AND sala<>'CLINICA DE HERIDAS' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+    $control_encamadosMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala<>'CONSULTA GENERAL DE URGENCIAS' AND sala<>'GINECOLOGIA' AND sala<>'CLINICA DE HERIDAS' AND YEAR(fechahorarecep) = YEAR(curdate()) AND condicion = 2 GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+
+    //$control_encamadosMes = "SELECT MonthName(fechahorarecep) AS mes, YEAR(fechahorarecep) AS anio, count(*) AS emb FROM recepciones WHERE sala<>'CONSULTA GENERAL DE URGENCIAS' AND sala<>'GINECOLOGIA' AND sala<>'CLINICA DE HERIDAS' AND YEAR(fechahorarecep) = YEAR(curdate()) GROUP BY mes ORDER BY YEAR(fechahorarecep) DESC, MONTH(fechahorarecep) DESC";
+
     $otrosMes = $con->query($control_encamadosMes);
     /*==============================================================================*/
 
