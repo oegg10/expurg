@@ -20,7 +20,7 @@ if (!isset($_SESSION['idusuario'])) {
     <title>Urgencias y Archivo HGS</title>
 
     <link rel="icon" href="../../public/img/logohgs.jpg">
-
+    
     <?php require_once "scripts.php"; ?>
 
     <style>
@@ -43,6 +43,8 @@ if (!isset($_SESSION['idusuario'])) {
             display: block;
         }
     </style>
+
+    <script src="../../public/js/jquery.min.js"></script>
 
 </head>
 
@@ -216,7 +218,7 @@ if (!isset($_SESSION['idusuario'])) {
                     </li>
 
 
-                    <!--<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="../citasCE/index.php">Citas C.E.</a>
                     </li>
                     <li class="nav-item">
@@ -224,7 +226,7 @@ if (!isset($_SESSION['idusuario'])) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../servicios/index.php">Servicios</a>
-                    </li>-->
+                    </li>
 
 
                     <li class="nav-item">

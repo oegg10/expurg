@@ -94,6 +94,8 @@ if (!isset($_SESSION['idusuario'])) {
                                                 
                                                 <td class='btn-group'>
                                                     <a href='../archivo/editExpediente.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-warning' title='Editar paciente'><i class='fa fa-pencil'></i></a>
+
+                                                    <a href='../citasCE/insCitaCE.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-success' title='Crear cita CE'><i class='fa fa-check'></i></a>
                                                 </td>
                                             </tr>";
                                     }

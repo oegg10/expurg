@@ -35,47 +35,14 @@ if (!isset($_SESSION['idusuario'])) {
 
         $idusuario = $_SESSION['idusuario'];
 
-        //Conteo de numero de pacientes en la fecha de la cita
-        //SELECT COUNT(*) AS pacientes FROM citas_ce WHERE fechacita = "2024-01-15" GROUP BY fechacita
-        $npacientes = "SELECT COUNT(*) AS pacientes FROM citas_ce WHERE fechacita = '$fechacita' GROUP BY fechacita";
-        $resPacientes = $con->query($npacientes);
-        $numeroDePacientes = $resPacientes->fetch_assoc();
-        //Variable de pacientes citados en la fecha asignada
-        $VpCfA = $numeroDePacientes['pacientes'];
-
-        /*if ($numeroDePacientes == NULL || $numeroDePacientes == "") {
-            $VpCfA = 0;
-        }else{
-            $VpCfA = $numeroDePacientes['pacientes'];
-        }*/
-        
-        //echo 'Número de total de registros: ' . $numeroDePacientes['pacientes'] . '<br>';
-
-        //Consulta de numero de pacientes del medico asignado y servicio
-        $medicoid = "SELECT numpacientes FROM medicos WHERE idmedico = '$idmedico'";
-        $resMedId = $con->query($medicoid);
-        $pacXdia = $resMedId->fetch_assoc();
-        //Variable de pacientes que Faltan para cubrir la Fecha
-        $VpFcF = $pacXdia['numpacientes'];
-        //echo 'Número de pacientes que atiende el medico: ' . $pacXdia['numpacientes'] . '<br>';
-        $np = $VpFcF -  $VpCfA;
-        //echo $np;
-
-        /*echo $idexpediente . "<br>";
-        echo $idmedico . "<br>";
-        echo $idservicio . "<br>";
-        echo $fechacita . "<br>";
-        echo $consultorio . "<br>";
-        echo $observaciones . "<br>";*/
-
         //===================================================================================
 
         //Realizamos la inserción de los datos en la tabla de medicos
-        /*$insSql = "INSERT INTO citas_ce(idexpediente, idmedico, fechacita, consultorio, observaciones, idusuario ) VALUES ('$idexpediente','$idmedico', '$fechacita', '$consultorio','$observaciones', '$idusuario')";
+        $insSql = "INSERT INTO citas_ce(idexpediente, idmedico, fechacita, consultorio, observaciones, idusuario) VALUES ('$idexpediente','$idmedico', '$fechacita', '$consultorio','$observaciones', '$idusuario')";
 
-        $insertarCitaCE = $con->query($insSql);*/
+        $insertarCitaCE = $con->query($insSql);
 
-        /*if ($insertarCitaCE > 0) {
+        if ($insertarCitaCE > 0) {
 
             header('location:../extend/alerta.php?msj=La cita a sido registrada&c=citasCE&p=in&t=success');
             $con->close();
@@ -86,7 +53,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         $con->close();
-        $con = null;*/
+        $con = null;
 
     }
 
@@ -97,7 +64,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Registrar Médico</h5>
+                        <h5>Registrar Cita a consulta externa</h5>
                     </div>
 
                     <div class="card-body">
@@ -125,7 +92,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- ====== SELECT MEDICOS ====== -->
                                 <div class="form-group col-lg-7 col-md-7 col-sm-7">
                                     <label>Nombre del Médico (*):</label>
-                                    <select class="form-control" name="idmedico" id="idmedico" required>
+                                    <select class="form-control" name="idmedico" id="idmedico" onchange="diasConsultaMed()" required>
                                     <option value="" disabled selected>Seleccione Opción</option> 
                                         <?php
                                             while ($medico = $resultMedico->fetch_array(MYSQLI_BOTH)) {
@@ -143,16 +110,10 @@ if (!isset($_SESSION['idusuario'])) {
                                     </select>
                                 </div>
 
-                                <div class="form-group col-lg-2 col-md-2 col-sm-2">
-                                    <button class="btn btn-danger" id="botonConsultar" onclick="citasDisponibles()"><i class="fa fa-save"> Consultar</i></button>
-                                </div>
-                                
-
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                    <span id="diasCita" style="color: red;"></span>
-                                    <label>Fecha cita (*):</label>
+                                <div class="form-group col-lg-5 col-md-5 col-sm-5">
+                                    <label>Fecha cita (*):</label><span id="diasCita" style="color: red;"></span>
                                     <input type="date" class="form-control" name="fechacita" id="fechacita" min="2024-01-01">
-                                    <span id="citas" style="color: red;"></span>
+                                    <span id="citados" style="color: red;"></span>
                                 </div>
 
                                 <!-- 12 -->
@@ -196,13 +157,36 @@ if (!isset($_SESSION['idusuario'])) {
     </div>
 
     <script>
-
+        //VARIABLES
         let formulario = document.getElementById("formCitaCE");
-
-        let idmedico = document.getElementById("idmedico");
         let fechacita = document.getElementById("fechacita");
+        let idmedico = document.getElementById("idmedico");
         let consultorio = document.getElementById("consultorio");
 
+        //FUNCIONES
+        function diasConsultaMed() {
+            $.ajax({
+                url: "buscarDiasMedico.php",
+                type: "post",
+                data: $("#formCitaCE").serialize(),
+                success: function(resultado) {
+                    $("#diasCita").html(resultado);
+                }
+            });
+        };
+
+        function pacientesRegistrados() {
+            $.ajax({
+                url: "pacisentesFechaReg.php",
+                type: "post",
+                data: $("#formCitaCE").serialize(),
+                success: function(resultado) {
+                    $("#citados").html(resultado);
+                }
+            });
+        };
+
+        fechacita.addEventListener("blur", pacientesRegistrados);
         formulario.addEventListener("blur", rojoValidaFechas, true);
 
         //VALIDAR FECHA RECEPCION Y FECHA DE INICIO DE LA CONSULTA
@@ -230,12 +214,14 @@ if (!isset($_SESSION['idusuario'])) {
 
                 document.getElementById("fechacita").style.backgroundColor = "red";
                 document.getElementById("fechacita").focus();
+                document.getElementById("btnGuardar").disabled = true;
                 //console.log(fechaC);
                 //console.log(fechaA);
 
             } else {
 
                 document.getElementById("fechacita").style.backgroundColor = "white";
+                document.getElementById("btnGuardar").disabled = false;
             }
 
         }
@@ -262,24 +248,6 @@ if (!isset($_SESSION['idusuario'])) {
         fechacita.addEventListener("blur", validarCamposVacios);
         consultorio.addEventListener("blur", validarCamposVacios);
 
-        function citasDisponibles() {
-
-            //https://www.youtube.com/watch?v=_0iZ3W2u_Bo
-            let medico = idmedico.value;
-
-            $.ajax({
-                url: "funcionesMedico/buscarPorMedico.php",
-                method: "POST",
-                data: { peticion:medico },
-            }).done(function(res){
-                let result = JSON.parse(res);
-                console.log(result);
-            });
-
-            //console.log(idmedico.value);
-            
-        }
-
         function enviarFormulario() {
 
             let mensajesError = [];
@@ -301,6 +269,8 @@ if (!isset($_SESSION['idusuario'])) {
             return false;
 
         }
+
+        //https://www.youtube.com/watch?v=_0iZ3W2u_Bo
 
     </script>
 

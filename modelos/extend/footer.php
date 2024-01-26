@@ -6,7 +6,7 @@
 </h6>
 
 <!--DataTable-->
-<script src="../../public/js/jquery-3.6.3.min.js"></script>
+<!--<script src="../../public/js/jquery-3.6.3.min.js"></script>-->
 <script src="../../public/js/jquery-ui.min.js"></script>
 <script src="../../public/js/popper.min.js"></script>
 <script src="../../public/js/bootstrap.min.js"></script>

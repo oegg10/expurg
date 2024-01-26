@@ -53,7 +53,8 @@ if (!empty($_POST)) {
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/font-awesome.min.css">
 
-    <script src="public/js/jquery-3.4.1.min.js"></script>
+    <!--<script src="public/js/jquery-3.4.1.min.js"></script>-->
+    <script src="public/js/jquery.min.js"></script>
     <script src="public/js/bootstrap.bundle.min.js"></script>
 
 </head>
