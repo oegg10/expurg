@@ -206,13 +206,13 @@ if (!isset($_SESSION['idusuario'])) {
                                     <!-- ============= FECHA Y HORA ======================== -->
                                     <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                         <label for="fechaingreso" style="color: red;">Fecha y hora de inicio de la consulta*: </label>
-                                        <input type="datetime-local" id="fechaingreso" name="fechaingreso" min="2023-06-01T00:00" value="<?php if (!empty($_POST['fechaingreso'])) { echo $fechaingreso; } else { echo ''; } ?>" required>
+                                        <input type="datetime-local" id="fechaingreso" name="fechaingreso" min="2024-01-20T00:00" value="<?php if (!empty($_POST['fechaingreso'])) { echo $fechaingreso; } else { echo ''; } ?>" required>
                                         <span></span>
                                     </div>
 
                                     <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                         <label for="fechaalta" style="color: red;">Fecha y hora de alta*: </label>
-                                        <input type="datetime-local" id="fechaalta" name="fechaalta" min="2023-06-01T00:00" value="<?php if (!empty($_POST['fechaalta'])) { echo $fechaalta; } else { echo ''; } ?>" required>
+                                        <input type="datetime-local" id="fechaalta" name="fechaalta" min="2024-01-20T00:00" value="<?php if (!empty($_POST['fechaalta'])) { echo $fechaalta; } else { echo ''; } ?>" required>
                                         <span></span>
                                     </div>
                                     <!-- ============= FECHA Y HORA ======================== -->
@@ -801,47 +801,28 @@ if (!isset($_SESSION['idusuario'])) {
             return false;
 
         }
+
+        //=========== BLOQUEO DE DIAS PASADOS A LA FECHA ACTUAL =======================
+        let fecha = new Date();
+        let anio = fecha.getFullYear();
+        let dia = fecha.getDate();
+        let _mes = fecha.getMonth(); //viene con valores de 0 al 11
+        _mes = _mes + 1; //ahora lo tienes de 1 al 12
+        let mes;
+        if (_mes < 10){ //ahora le agregas un 0 para el formato date
+            mes = "0" + _mes;
+            } else {
+            mes = _mes.toString;
+        }
+
+        let fecha_minimo = anio + '-' + mes + '-' + dia + 'T00:00'; // Nueva variable
+
+        document.getElementById("fechaingreso").setAttribute('min',fecha_minimo);
+        document.getElementById("fechaalta").setAttribute('min',fecha_minimo);
+        //==============================================================================
+
+
     </script>
-
-    <!-- <script>
-
-        document.getElementById("notaingresourg").value = "";
-
-        let formulario = document.getElementById("formConsulta");
-        /*let fecharecepcion = document.getElementById("fecharecepcion");
-        let fechaingreso = document.getElementById("fechaingreso");
-        let fechaalta = document.getElementById("fechaalta");*/
-
-        //Objeto consulta
-        let consulta = {
-
-            fecharecepcion : document.getElementById("fecharecepcion").value,
-            fechaingreso : document.getElementById("fechaingreso").value,
-            fechaalta : document.getElementById("fechaalta").value,
-            sexo : document.getElementById("sexo").value,
-            mujeredadfertil : document.getElementById("mujeredadfertil").value,
-            notaingresourg : document.getElementById("notaingresourg").value,
-            atnprehosp : document.getElementById("atnprehosp").value,
-            tipourgencia : document.getElementById("tipourgencia").value,
-            trastrans : document.getElementById("trastrans").value,
-            motivoatencion : document.getElementById("motivoatencion").value,
-            tipocama : document.getElementById("tipocama").value,
-            altapor : document.getElementById("altapor").value,
-            ministeriopublico : document.getElementById("ministeriopublico").value,
-            afecprincipal : document.getElementById("afecprincipal").value,
-            lesion_es : document.getElementById("lesion_es").value,
-            lesiones : document.getElementById("lesiones").value,
-
-            //Metodo
-            validarFechas(){
-
-                
-
-            }
-
-        } //FIN DEL OBJETO
-
-    </script> -->
     
     </body>
 

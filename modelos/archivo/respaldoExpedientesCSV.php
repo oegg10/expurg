@@ -9,18 +9,18 @@ $resultado = $con->query($respaldoExpedientes);
 
 if ($resultado) {
     while ($r = $resultado->fetch_object()) {
-        echo $r->idexpediente.",";
-        echo $r->nombrep.",";
-        echo $r->curp.",";
-        echo $r->tipopaciente.",";
-        echo $r->nombretrabajador.",";
-        echo $r->otros.",";
-        echo $r->observaciones.",";
-        echo $r->obs1.",";
-        echo $r->obs2.",";
-        echo $r->obs3.",";
-        echo $r->estado.",";
-        echo $r->idusuario.",";
+        echo $r->idexpediente."|";
+        echo $r->nombrep."|";
+        echo $r->curp."|";
+        echo $r->tipopaciente."|";
+        echo $r->nombretrabajador."|";
+        echo $r->otros."|";
+        echo $r->observaciones."|";
+        echo $r->obs1."|";
+        echo $r->obs2."|";
+        echo $r->obs3."|";
+        echo $r->estado."|";
+        echo $r->idusuario."|";
         echo $r->fechaalta."\n";
     }
 }

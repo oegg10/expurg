@@ -62,7 +62,7 @@ if (!isset($_SESSION['idusuario'])) {
                                             <td>" . date("H:i:s - d-m-Y", strtotime($reg['fechacaptura'])) . "</td>
                                             <td>" . $reg['usuario'] . "</td>";
 
-                                            echo "<td><a href='editarCitaCE.php?id=" . $reg['idcita'] . "' type='button' class='btn btn-warning'><i class='fa fa-pencil'></i></a></td>";
+                                            echo "<td><a href='editarCitaCE.php?idcita=" . $reg['idcita'] . "' type='button' class='btn btn-warning'><i class='fa fa-pencil'></i></a></td>";
 
                                         echo "</tr>";
                                     }

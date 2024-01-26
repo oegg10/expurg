@@ -15,8 +15,8 @@ if (!isset($_SESSION['idusuario'])) {
     $id = $_GET['id'];
 
     //Consulta de paciente
-    $citaSql = "SELECT idexpediente, nombrep, curp FROM exparchivo WHERE idexpediente = '$id'";
-    $resultado = $con->query($citaSql);
+    $expedienteSql = "SELECT idexpediente, nombrep, curp FROM exparchivo WHERE idexpediente = '$id'";
+    $resultado = $con->query($expedienteSql);
     $fila = $resultado->fetch_assoc();
 
     //Consulta de medicos
@@ -109,6 +109,12 @@ if (!isset($_SESSION['idusuario'])) {
                                         
                                     </select>
                                 </div>
+
+                                <!--<div class="form-group col-lg-5 col-md-5 col-sm-5">
+                                    <label>Fecha cita (*):</label><span id="diasCita" style="color: red;"></span>
+                                    <input type="text" class="form-control" name="fechacita" id="fechacita" min="2024-01-01">
+                                    <span id="citados" style="color: red;"></span>
+                                </div>-->
 
                                 <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                     <label>Fecha cita (*):</label><span id="diasCita" style="color: red;"></span>
@@ -270,7 +276,38 @@ if (!isset($_SESSION['idusuario'])) {
 
         }
 
-        //https://www.youtube.com/watch?v=_0iZ3W2u_Bo
+        //=========== BLOQUEO DE DIAS PASADOS A LA FECHA ACTUAL =======================
+        let fecha = new Date();
+        let anio = fecha.getFullYear();
+        let dia = fecha.getDate();
+        let _mes = fecha.getMonth(); //viene con valores de 0 al 11
+        _mes = _mes + 1; //ahora lo tienes de 1 al 12
+        let mes;
+        if (_mes < 10){ //ahora le agregas un 0 para el formato date
+            mes = "0" + _mes;
+            } else {
+            mes = _mes.toString;
+        }
+
+        let fecha_minimo = anio + '-' + mes + '-' + dia; // Nueva variable
+
+        document.getElementById("fechacita").setAttribute('min',fecha_minimo);
+
+
+        //https://www.forosdelweb.com/f127/desactivar-dias-concretos-con-datepicker-985765/
+        /* ============================  DATEPICKER =======================================
+        //funcion que bloquea todos lo dias expecto los que queremos habilitar para la seleccion
+        function noConsulta(date){
+        let day = date.getDay();
+        // aqui indicamos el numero correspondiente a los dias que ha de bloquearse (el 0 es Domingo, 1 Lunes, etc...) en el ejemplo bloqueo todos menos los lunes y jueves.
+        return [(day != 0 && day != 2 && day != 3 && day != 5 && day != 6), ''];
+        };
+
+        //Crear el datepicker
+        $("#fechacita").datepicker({
+        beforeShowDay: noConsulta,
+        });
+        ==================================================================================*/
 
     </script>
 
