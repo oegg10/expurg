@@ -109,7 +109,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         //Realizamos la inserción de los datos
-        /*$sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
+        $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
 
         $resins = $con->query($sql);
 
@@ -134,7 +134,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         $con->close();
-        $recepcion = null;*/
+        $recepcion = null;
         
     }
 
@@ -150,7 +150,7 @@ if (!isset($_SESSION['idusuario'])) {
                         <hr>
                         <div style="color: red;">
                             <h5>Favor de capturar la fecha y hora de ingreso y la fecha y hora de alta, en formato de 24 horas y en la parte de abajo si se realiza hoja de LESIONES. Gracias.</h5>
-                            <h5>En caso de que el paciente sea referido a "OBSERVACION" o "CONTROL TERMICO", favor de capturar en la fecha y hora de alta, la salida de turno del médico tratante. Gracias.</h5>
+                            <h5>En caso de que el paciente sea referido a "OBSERVACION" o "CONTROL TERMICO", favor de capturar en la fecha y hora de alta, la salida del consultorio. Gracias.</h5>
                         </div>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" id="formConsulta" autocomplete="off">
@@ -780,8 +780,6 @@ if (!isset($_SESSION['idusuario'])) {
 
             if (sexo.value == "Femenino") {
 
-                //console.log("El campo dice Femenino");
-
                 if (mujeredadfertil.value === null || mujeredadfertil.value === "") {
 
                     mensajesError.push("El campo Mujer en edad fertil no puede estar vacío");
@@ -832,7 +830,6 @@ if (!isset($_SESSION['idusuario'])) {
         document.getElementById("fechaingreso").setAttribute('min',fecha_minimo);
         document.getElementById("fechaalta").setAttribute('min',fecha_minimo);
         //==============================================================================
-
 
     </script>
     

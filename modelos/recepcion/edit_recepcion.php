@@ -20,7 +20,6 @@ if (!isset($_SESSION['idusuario'])) {
     $fila = $resultado->fetch_assoc();
 
     $let_sexo = $fila["sexo"];
-    //echo $let_sexo;
 
 ?>
 
@@ -80,7 +79,11 @@ if (!isset($_SESSION['idusuario'])) {
                                     <select class="form-control" name="sala" id="sala" required>
                                         <option value="<?php echo $fila['sala']; ?>"><?php echo $fila['sala']; ?></option>
                                         <option value="CONSULTA GENERAL DE URGENCIAS">CONSULTA GENERAL DE URGENCIAS</option>
-                                        <option value="GINECOLOGIA">GINECOLOGIA</option>
+                                        <?php
+                                            if ($fila['sexo'] == "Femenino") {
+                                                echo '<option value="GINECOLOGIA">GINECOLOGIA</option>';
+                                            }
+                                        ?>
                                         <option value="URGENCIAS | ENCAMADOS">URGENCIAS | ENCAMADOS</option>
                                         <option value="CONTROL TERMICO">CONTROL TERMICO</option>
                                         <option value="TRIAGE">TRIAGE</option>

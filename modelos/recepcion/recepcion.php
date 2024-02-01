@@ -14,12 +14,14 @@ if (!isset($_SESSION['idusuario'])) {
 
     $id = $_GET['id'];
 
-    $sql = "SELECT idpaciente,nombre,DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(fechanac)), '%Y')+0 AS edad,sexo FROM pacientes WHERE idpaciente = '$id'";
+    $sql = "SELECT idpaciente,nombre,DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(fechanac)), '%Y')+0 AS edad, sexo FROM pacientes WHERE idpaciente = '$id'";
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
 
     //======================================================================================
     $idusuario = $_SESSION['idusuario'];
+
+    $js_sexo = $fila['sexo'];
 
 ?>
 
@@ -83,7 +85,11 @@ if (!isset($_SESSION['idusuario'])) {
                                     <select class="form-control" name="sala" id="sala" required>
                                         <option value="" disabled selected>Sala</option>
                                         <option value="CONSULTA GENERAL DE URGENCIAS">CONSULTA GENERAL DE URGENCIAS</option>
-                                        <option value="GINECOLOGIA">GINECOLOGIA</option>
+                                        <?php
+                                            if ($fila['sexo'] == "Femenino") {
+                                                echo '<option value="GINECOLOGIA">GINECOLOGIA</option>';
+                                            }
+                                        ?>
                                         <option value="URGENCIAS | ENCAMADOS">URGENCIAS | ENCAMADOS</option>
                                         <option value="CONTROL TERMICO">CONTROL TERMICO</option>
                                         <option value="CLINICA DE HERIDAS">CLINICA DE HERIDAS</option>
@@ -157,6 +163,8 @@ if (!isset($_SESSION['idusuario'])) {
 
         //variables para almacenar los datos que se ingresan en los campos
         let mtvoconsulta, sala, semgesta, medico, referencia, tipoConsulta, observaciones;
+        let sexo = '<?php echo $js_sexo; ?>';
+
         //Guardar el dato en las variables
         mtvoconsulta = document.getElementById("mtvoconsulta");
         semgesta = document.getElementById("semgesta");
@@ -176,10 +184,21 @@ if (!isset($_SESSION['idusuario'])) {
             if (mtvoconsulta.value === "" || mtvoconsulta.value === null || mtvoconsulta.length > 100) {
                 mensajesError.push("El campo motivo de la consulta está vacío");
             }
+
+            if (tipoConsulta.value === null || tipoConsulta.value === "") {
+
+                mensajesError.push("Se debe elegir la opción de primera vez o subsecuente");
+
+            }
             
             if (sala.value === null || sala.value === "") {
 
                 mensajesError.push("Seleccione una opción para el campo SALA");
+            }
+
+            if (sexo === "Masculino" && sala.value === "GINECOLOGIA") {
+
+                mensajesError.push("El tipo de paciente no corresponde a esta sala");
             }
             
             if (medico.value === "") {
@@ -199,6 +218,7 @@ if (!isset($_SESSION['idusuario'])) {
             if (observaciones.length > 250) {
                 mensajesError.push("Las observaciones debe ser menor a 250 caracteres");
             }
+
 
             error.innerHTML = mensajesError.join(", ");
 
