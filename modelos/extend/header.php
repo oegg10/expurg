@@ -218,7 +218,7 @@ if (!isset($_SESSION['idusuario'])) {
                     </li>
 
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="../citasCE/index.php">Citas C.E.</a>
                     </li>
                     <li class="nav-item">
@@ -226,7 +226,7 @@ if (!isset($_SESSION['idusuario'])) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../servicios/index.php">Servicios</a>
-                    </li>
+                    </li> -->
 
 
                     <li class="nav-item">

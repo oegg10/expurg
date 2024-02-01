@@ -109,7 +109,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         //Realizamos la inserción de los datos
-        $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
+        /*$sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
 
         $resins = $con->query($sql);
 
@@ -134,7 +134,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         $con->close();
-        $recepcion = null;
+        $recepcion = null;*/
         
     }
 
@@ -199,27 +199,28 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <!-- 12 -->
 
-                                    <div class="form-group col-lg-2 col-md-2 col-sm-2">
-                                        <h6>Signos vitales:</h6>
-                                    </div>
-
                                     <!-- ============= FECHA Y HORA ======================== -->
-                                    <div class="form-group col-lg-5 col-md-5 col-sm-5">
-                                        <label for="fechaingreso" style="color: red;">Fecha y hora de inicio de la consulta*: </label>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                        <p>(No debe de pasar de 5 horas depués de la fecha y hora de recepción o se pondrá en rojo)</p>
+                                        <label for="fechaingreso" style="color: red;">Fecha y hora de inicio de la consulta *: </label>
                                         <input type="datetime-local" id="fechaingreso" name="fechaingreso" min="2024-01-20T00:00" value="<?php if (!empty($_POST['fechaingreso'])) { echo $fechaingreso; } else { echo ''; } ?>" required>
-                                        <span></span>
+                                        <p></p>
                                     </div>
 
-                                    <div class="form-group col-lg-5 col-md-5 col-sm-5">
-                                        <label for="fechaalta" style="color: red;">Fecha y hora de alta*: </label>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                        <p>(No debe de pasar de 24 horas después de la fecha y hora de inicio de la consulta o se pondrá en rojo)</p>
+                                        <label for="fechaalta" style="color: red;">Fecha y hora de alta *: </label>
                                         <input type="datetime-local" id="fechaalta" name="fechaalta" min="2024-01-20T00:00" value="<?php if (!empty($_POST['fechaalta'])) { echo $fechaalta; } else { echo ''; } ?>" required>
-                                        <span></span>
+                                        <p></p>
                                     </div>
                                     <!-- ============= FECHA Y HORA ======================== -->
-
                                     <!-- 12 -->
 
-                                    <!-- ========== NOTA MEDICA DE LA CONSULTA DE URGENCIAS ==========-->
+                                    <!-- ======= NOTA MEDICA DE LA CONSULTA DE URGENCIAS ========-->
+                                    <!--<div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                        <h6 style="text-align: center;"><strong>Signos vitales:</strong></h6>
+                                    </div>-->
+                                    
                                     <div class="form-group col-lg-1 col-md-1 col-sm-1">
                                         <label>FC: lpm</label>
                                         <input type="text" class="form-control" name="fc" id="fc" maxlength="10" placeholder="FC" value="<?php if (!empty($_POST['fc'])) { echo $fc; } else { echo ''; } ?>">
@@ -566,6 +567,7 @@ if (!isset($_SESSION['idusuario'])) {
 
         //VALIDAR FECHA RECEPCION Y FECHA DE INICIO DE LA CONSULTA
         function rojoValidaFechas() {
+
             let fecharecepcion1 = new Date(fecharecepcion.value);
             let fechaR = fecharecepcion1.getTime();
 
@@ -575,15 +577,25 @@ if (!isset($_SESSION['idusuario'])) {
             let fechaalta1 = new Date(fechaalta.value);
             let fechaA = fechaalta1.getTime();
 
-            if (fechaI <= fechaR) {
+            let fechaR_5 = fecharecepcion1.setHours(fecharecepcion1.getHours() + 5);
+            let fechaI_24 = fechaingreso1.setHours(fechaingreso1.getHours() + 24);
+
+            /*console.log("Fecha recepcion: " + fechaR);
+            console.log("Fecha recepcion + 5 horas: " + fechaR_5);
+            console.log("Fecha ingreso: " + fechaI);
+            console.log("Fecha alta: " + fechaA);
+            console.log("Fecha ingreso + 24 horas: " + fechaI_24);*/
+
+            if (fechaI <= fechaR || fechaI > fechaR_5) {
 
                 document.getElementById("fechaingreso").style.backgroundColor = "red";
                 document.getElementById("fecharecepcion").style.backgroundColor = "red";
                 document.getElementById("fechaingreso").focus();
-                //console.log(fechaR);
-                //console.log(fechaI);
 
-            } else if (fechaA <= fechaI) {
+                //document.getElementById("fechaInicioConsulta").textContent = "La fecha de inicio no debe ser menor a la fecha de recepción o la fecha de inicio no debe de pasar de 5 horas a la fecha de recepción";
+                    
+
+            } else if (fechaA <= fechaI || fechaA > fechaI_24) {
 
                 document.getElementById("fechaalta").style.backgroundColor = "red";
                 document.getElementById("fechaingreso").style.backgroundColor = "red";
