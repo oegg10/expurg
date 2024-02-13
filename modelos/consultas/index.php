@@ -50,6 +50,7 @@ if (!isset($_SESSION['idusuario'])) {
                 <div class="card text-left">
                     <div class="card-header">
                         <h5>Aquí aparecen los pacientes por consultar (Sala de espera)</h5>
+                        <h5 style="color: red;"><strong>Si el paciente ya no se encuentra en sala de espera o no se le va a realizar la consulta, favor de oprimir el <a href='#' class='btn btn-danger' title='No consultado'><i class='fa fa-times'></i></a> Evitar entrar a la consulta y poner (. - sin diagnóstico, etc.), gracias</strong></h5>
                     </div>
                     <div class="card-body">
 
@@ -111,6 +112,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                     <!-- PACIENTES CON LESIONES -->
                     <h5>Aquí aparecen los pacientes a los que se les realizará hoja de lesiones</h5>
+                    <h5 style="color: red;"><strong>Favor de no dejar lesiones sin capturar y especificar en la causa externa cómo fue que ocurrió la lesión, gracias</strong></h5>
 
                     <div class="card-body">
 
@@ -160,10 +162,6 @@ if (!isset($_SESSION['idusuario'])) {
                         </div>
                     </div><!-- FIN TABLA DE PACIENTES CON LESIONES -->
 
-                    <div style="color: red;">
-                        <!-- OBSERVACION -->
-                        <h3>AVISO: YA NO EXISTE EL APARTADO DE "OBSERVACION", cualquier duda o comentario, favor de hacérselo saber al Dr. Ivan. Saludos.</h3>
-                    </div>
                     <br><br>
 
                     <?php include "../extend/footer.php"; ?>
