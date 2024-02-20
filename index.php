@@ -65,17 +65,17 @@ if (!empty($_POST)) {
             <img class="mb-4" src="public/img/logos.jpg" alt="" width="460" height="130">
             <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
-                <div class="form-group col-3">
+                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <label for="user" class="sr-only">Usuario</label>
                     <input type="text" name="user" class="form-control" placeholder="Usuario" required autofocus>
                 </div>
 
-                <div class="form-group col-3">
+                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <label for="pass" class="sr-only">Contraseña</label>
                     <input type="password" name="pass" class="form-control" placeholder="Contraseña" required>
                 </div>
 
-                <div class="col-3">
+                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <button class="btn btn-lg btn-primary btn-block" type="submit" name="ingresar" value="Ingresar">Ingresar</button>
                 </div>
             </form>

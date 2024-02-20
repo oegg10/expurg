@@ -113,6 +113,9 @@ if (!isset($_SESSION['idusuario'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="../consultas/consultadosXmedico.php">Consultados</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../consultas/noConsultados.php">No Consultados</a>
+                    </li>
                 </ul>
             </div>
             <!-- FIN MENU MEDICO -->
