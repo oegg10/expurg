@@ -413,26 +413,26 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                         <hr>
                                         <h6><label>AFECCIÓN PRINCIPAL:</label></h6>
-                                        <input type="text" class="form-control" name="afecprincipal" id="afecprincipal" maxlength="100" placeholder="Afección principal (REQUERIDO), favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['afecprincipal'])) { echo $afecprincipal; } else { echo ''; } ?>" onblur="may(this.value, this.id)" required>
+                                        <input type="text" class="form-control" name="afecprincipal" id="afecprincipal" onkeypress="return check(event)" maxlength="100" placeholder="Afección principal (REQUERIDO), favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['afecprincipal'])) { echo $afecprincipal; } else { echo ''; } ?>" onblur="may(this.value, this.id)" required>
                                         <span></span>
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="comorbilidad1" id="comorbilidad1" maxlength="100" placeholder="Diagnostico 1, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad1'])) { echo $comorbilidad1; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="comorbilidad1" id="comorbilidad1" onkeypress="return check(event)" maxlength="100" placeholder="Diagnostico 1, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad1'])) { echo $comorbilidad1; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="comorbilidad2" id="comorbilidad2" maxlength="100" placeholder="Diagnostico 2, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad2'])) { echo $comorbilidad2; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="comorbilidad2" id="comorbilidad2" onkeypress="return check(event)" maxlength="100" placeholder="Diagnostico 2, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad2'])) { echo $comorbilidad2; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <input type="text" class="form-control" name="comorbilidad3" id="comorbilidad3" maxlength="100" placeholder="Diagnostico 3, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad3'])) { echo $comorbilidad3; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="comorbilidad3" id="comorbilidad3" onkeypress="return check(event)" maxlength="100" placeholder="Diagnostico 3, favor de agregar solamente un diagnostico" value="<?php if (!empty($_POST['comorbilidad3'])) { echo $comorbilidad3; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
 
                                     <!-- 12 -->
@@ -565,6 +565,22 @@ if (!isset($_SESSION['idusuario'])) {
 
         formulario.addEventListener("blur", rojoValidaFechas, true);
 
+        function check(e) {
+            //https://es.stackoverflow.com/questions/117469/como-puedo-validar-que-un-input-text-no-acepte-caracteres-especiales
+            
+            tecla = (document.all) ? e.keyCode : e.which;
+
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8) {
+                return true;
+            }
+
+            // Patrón de entrada, en este caso solo acepta numeros y letras
+            patron = /[A-Za-z0-9 ]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
+
         //VALIDAR FECHA RECEPCION Y FECHA DE INICIO DE LA CONSULTA
         function rojoValidaFechas() {
 
@@ -580,20 +596,11 @@ if (!isset($_SESSION['idusuario'])) {
             let fechaR_5 = fecharecepcion1.setHours(fecharecepcion1.getHours() + 5);
             let fechaI_24 = fechaingreso1.setHours(fechaingreso1.getHours() + 24);
 
-            /*console.log("Fecha recepcion: " + fechaR);
-            console.log("Fecha recepcion + 5 horas: " + fechaR_5);
-            console.log("Fecha ingreso: " + fechaI);
-            console.log("Fecha alta: " + fechaA);
-            console.log("Fecha ingreso + 24 horas: " + fechaI_24);*/
-
             if (fechaI <= fechaR || fechaI > fechaR_5) {
 
                 document.getElementById("fechaingreso").style.backgroundColor = "red";
                 document.getElementById("fecharecepcion").style.backgroundColor = "red";
                 document.getElementById("fechaingreso").focus();
-
-                //document.getElementById("fechaInicioConsulta").textContent = "La fecha de inicio no debe ser menor a la fecha de recepción o la fecha de inicio no debe de pasar de 5 horas a la fecha de recepción";
-                    
 
             } else if (fechaA <= fechaI || fechaA > fechaI_24) {
 

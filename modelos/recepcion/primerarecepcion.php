@@ -124,7 +124,11 @@ if (!isset($_SESSION['idusuario'])) {
                                     <select class="form-control" name="sala" id="sala" required>
                                         <option value="" disabled selected>Sala</option>
                                         <option value="CONSULTA GENERAL DE URGENCIAS">CONSULTA GENERAL DE URGENCIAS</option>
-                                        <option value="GINECOLOGIA">GINECOLOGIA</option>
+                                        <?php
+                                            if ($fila['sexo'] == "Femenino") {
+                                                echo '<option value="GINECOLOGIA">GINECOLOGIA</option>';
+                                            }
+                                        ?>
                                         <option value="URGENCIAS | ENCAMADOS">URGENCIAS | ENCAMADOS</option>
                                         <option value="CONTROL TERMICO">CONTROL TERMICO</option>
                                         <option value="TRIAGE">TRIAGE</option>

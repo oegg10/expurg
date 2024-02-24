@@ -28,7 +28,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Editar Usuario</h5>
+                        <h5>Editar Recepción</h5>
                     </div>
                     <div class="card-body">
 

@@ -67,7 +67,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- CONSULTAS POR AÑO -->
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <label>Consultas por Año (*):</label>
-                                    <select name="anioConsultas" id="anioConsultas" onchange='abilitaBtnConsultas(this.value);'>
+                                    <select name="anioConsultas" id="anioConsultas" onchange='habilitaBtnConsultas(this.value);'>
                                         <option value="">Selecione el año</option>
                                         <option value="2024">2024</option>
                                         <option value="2023">2023</option>
@@ -90,7 +90,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- LESIONES CONSULTORIO 1 POR AÑO -->
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <label>Lesiones por Año (*):</label>
-                                    <select name="anioLesiones" id="anioLesiones" onchange='abilitaBtnLesiones(this.value);'>
+                                    <select name="anioLesiones" id="anioLesiones" onchange='habilitaBtnLesiones(this.value);'>
                                         <option value="">Selecione el año</option>
                                         <option value="2024">2024</option>
                                         <option value="2023">2023</option>
@@ -256,7 +256,7 @@ if (!isset($_SESSION['idusuario'])) {
         btnLesionesExcel.disabled = true;
 
         //Se habilita el boton de exportar las consultas por año a excel
-        function abilitaBtnConsultas(){
+        function habilitaBtnConsultas(){
             if (anioConsultas.value != "") {
                 btnConsultasExcel.disabled = false;
             }else{
@@ -265,7 +265,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         //Se habilita el boton de exportar las consultas por año a excel
-        function abilitaBtnLesiones(){
+        function habilitaBtnLesiones(){
             if (anioLesiones.value != "") {
                 btnLesionesExcel.disabled = false;
             }else{

@@ -57,6 +57,8 @@ if (!isset($_SESSION['idusuario'])) {
         if ($resultado > 0) {
 
             header('location:../extend/alerta.php?msj=La recepcion fue exitosa&c=rec&p=in&t=success');
+            $con->close();
+            exit();
         } else {
 
             header('location:../extend/alerta.php?msj=Error al registrar la recepcion&c=rec&p=in&t=error');
@@ -70,10 +72,10 @@ if (!isset($_SESSION['idusuario'])) {
         2 Consultado
         3 NSP
         4 Pasa a CONSULTA GENERAL DE URGENCIAS
-        6 
+        6 ELIMINADO
         7 
         8
-        9 NO REALIZO LA CAPTURA DE CONSULTA
+        9 
         
         */
 

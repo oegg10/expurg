@@ -26,7 +26,17 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Editar Paciente</h5>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <img src="../../public/img/logohgs.jpg" alt="logohgs" width="90px" height="63px" style="margin-top: 25px;">
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-8" style="padding-top: 40px;">
+                                <h6>CONSULTA DE URGENCIAS</h6>
+                            </div>
+                            
+                        </div>
+                        
                     </div>
                     <div class="card-body">
 
@@ -58,7 +68,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <label>Motivo de la consulta:</label>
+                                    <label>Motivo de la consulta: (Síntomas que el paciente otorga en admisión de urgencias)</label>
                                     <input type="text" class="form-control" value="<?php echo $fila['mtvoconsulta']; ?>" readonly name="mtvoconsulta" id="mtvoconsulta">
                                 </div>
 
@@ -130,10 +140,8 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <!-- 12 -->
 
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <textarea name="notaingresourg" id="notaingresourg" rows="10" cols="150" placeholder="Agregar la nota medica del servicio de urgencias" readonly>
-                                            <?php echo $fila['notaingresourg']; ?>
-                                        </textarea>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12" style="text-align: justify;">
+                                    <?php echo $fila['notaingresourg']; ?>
                                 </div>
 
                                 <!-- 12 -->
@@ -146,82 +154,69 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- ======= HOJA DE URGENCIAS =============-->
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                     <label>Fecha Ingreso:</label>
-                                    <input type="datetime" class="form-control" name="fechaingreso" id="fechaingreso" value="<?php echo date("d-m-Y H:i:s", strtotime($fila['fechaingreso'])); ?>" readonly>
+                                    <h6><?php echo date("d-m-Y H:i:s", strtotime($fila['fechaingreso'])); ?></h6>
 
                                     <label>Atención prehospitalaria (*):</label>
-                                    <select class='form-control' name='atnprehosp' id='atnprehosp' disabled>
-                                        <option value="<?php echo $fila['atnprehosp']; ?>"><?php echo $fila['atnprehosp']; ?></option>
-                                    </select>
+                                    <br><?php echo $fila['atnprehosp']; ?>
                                 </div>
 
                                 <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
 
                                     <label>Fecha Alta:</label>
-                                    <input type="datetime" class="form-control" name="fechaalta" id="fechaalta" value="<?php echo date("d-m-Y H:i:s", strtotime($fila['fechaalta'])); ?>" readonly>
+                                    <h6><?php echo date("d-m-Y H:i:s", strtotime($fila['fechaalta'])); ?></h6>
 
                                     <label>Tipo de Urgencia:</label>
-                                    <select class='form-control' name='tipourgencia' id='tipourgencia' disabled>
-                                        <option value="<?php echo $fila['tipourgencia']; ?>"><?php echo $fila['tipourgencia']; ?></option>
-                                    </select>
+                                    <br><?php echo $fila['tipourgencia']; ?>
+
                                 </div>
 
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                     <label>Tiempo de traslado:</label>
-                                    <input type="text" class="form-control" name="tiempotraslado" id="tiempotraslado" maxlength="50" placeholder="Tiempo traslado" value="<?php echo $fila['tiempotraslado']; ?>" readonly>
+                                    <br><?php echo $fila['tiempotraslado']; ?>
                                 </div>
 
                                 <div class="form-group col-lg-4 col-md-4 col-sm-4">
                                     <label>Nombre de la unidad:</label>
-                                    <input type="text" class="form-control" name="nombreunidad" id="nombreunidad" maxlength="50" placeholder="Nombre de la unidad" value="<?php echo $fila['nombreunidad']; ?>" readonly>
+                                    <br><?php echo $fila['nombreunidad']; ?>
                                 </div>
 
                                 <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
                                     <label>Traslado transitorio:</label>
-                                    <select class='form-control' name='trastrans' id='trastrans' disabled>
-                                        <option value="<?php echo $fila['trastrans']; ?>"><?php echo $fila['trastrans']; ?></option>
-                                    </select>
+                                    <br><?php echo $fila['trastrans']; ?>
                                 </div>
 
                                 <!-- 12 -->
 
                                 <div class='form-group col-lg-3 col-md-3 col-sm-3 col-xs-12'>
                                     <label>Motivo de atención (*):</label>
-                                    <select class='form-control' name='motivoatencion' id='motivoatencion' disabled>
-                                        <option value="<?php echo $fila['motivoatencion']; ?>"><?php echo $fila['motivoatencion']; ?></option>
-                                    </select>
+                                    <br><?php echo $fila['motivoatencion']; ?>
                                 </div>
 
                                 <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
                                     <label>Tipo de cama (*):</label>
-                                    <select class='form-control' name='tipocama' id='tipocama' disabled>
-                                        <option value="<?php echo $fila['tipocama']; ?>"><?php echo $fila['tipocama']; ?></option>
-                                    </select>
+                                    <br><?php echo $fila['tipocama']; ?>
                                 </div>
 
                                 <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
                                     <label>Alta por (*):</label>
-                                    <select class='form-control' name='altapor' id='altapor' disabled>
-                                        <option value="<?php echo $fila['altapor']; ?>"><?php echo $fila['altapor']; ?></option>
-                                    </select>
+                                    <br><?php echo $fila['altapor']; ?>
                                 </div>
 
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                     <label>Nombre de la unidad:</label>
-                                    <input type="text" class="form-control" name="otraunidad" id="otraunidad" maxlength="50" value="<?php echo $fila['otraunidad']; ?>" disabled>
+                                    <br><?php echo $fila['otraunidad']; ?>
                                 </div>
 
                                 <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
                                     <label>MUJER EN EDAD FERTIL:</label>
-                                    <select class='form-control' name='mujeredadfertil' id='mujeredadfertil' disabled>
-                                        <option value="<?php echo $fila['mujeredadfertil']; ?>"><?php echo $fila['mujeredadfertil']; ?></option>
-                                    </select>
+                                    <br><?php echo $fila['mujeredadfertil']; ?>
                                 </div>
 
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <hr>
-                                    <h6><label>AFECCIÓN PRINCIPAL:</label></h6>
+                                    <h6><label>AFECCIONES:</label></h6>
                                     <input type="text" class="form-control" name="afecprincipal" id="afecprincipal" value="<?php echo $fila['afecprincipal']; ?>" disabled>
                                 </div>
 
@@ -247,7 +242,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <hr>
-                                    <h6><label>ESPECIALIDAD:</label></h6>
+                                    <h6><label>INTERCONSULTAS:</label></h6>
                                     <input type="text" class="form-control" name="interconsulta1" id="interconsulta1" value="<?php echo $fila['interconsulta1']; ?>" disabled>
                                 </div>
 
@@ -317,7 +312,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <input type="text" class="form-control" name="nombreMedico" id="nombreMedico" value="<?php echo $fila['nombreMedico']."-CURP: ".$fila['curpMedico']."-Cedula: ".$fila['cedula']."-Turno: ".$fila['turno']; ?>" disabled>
+                                    <h6><?php echo $fila['nombreMedico']." | CURP: ".$fila['curpMedico']." | Cedula: ".$fila['cedula']." | Turno: ".$fila['turno']; ?></h6>
                                 </div>
 
                             </div>
