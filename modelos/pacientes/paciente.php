@@ -41,8 +41,8 @@ if (!isset($_SESSION['idusuario'])) {
                                 </div>
 
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <label>Fecha nacimiento (*):</label>
-                                    <input type="date" class="form-control" name="fechanac" id="fechanac" min="1925-01-01">
+                                    <label>Fecha nacimiento:</label>
+                                    <input type="date" class="form-control" name="fechanac" id="fechanac" readonly>
                                 </div>
 
                                 <!-- 12 -->
@@ -250,7 +250,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- FIN -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"> Guardar</i></button>
+                                    <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save" onclick="enviarFormulario()"> Guardar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
@@ -258,6 +258,9 @@ if (!isset($_SESSION['idusuario'])) {
 
                         </form>
                     </div>
+
+                    <div id="error"></div>
+                    
                 </div>
                 <?php include "../extend/footer.php"; ?>
             </div>
@@ -272,6 +275,8 @@ if (!isset($_SESSION['idusuario'])) {
             
             const estadoNacimiento = curp.substring(13,11);
             const sexoCurp = curp.substring(10,11);
+
+            //=============== EXTRAE LA ENTIDAD DE NACIMIENTO DE LA CURP =================
 
             switch (estadoNacimiento) {
                 case "AS":
@@ -414,6 +419,8 @@ if (!isset($_SESSION['idusuario'])) {
                 
             }
 
+            //=============== EXTRAE EL SEXO DE LA CURP =================
+
             if (sexoCurp == "H") {
                 document.getElementById("sexo").value = "Masculino";
                 document.getElementById("sexo").style.color = "black";
@@ -425,9 +432,108 @@ if (!isset($_SESSION['idusuario'])) {
                 document.getElementById("sexo").style.color = "red";
             }
 
+            //=============== EXTRAE LA FECHA DE NACIMIENTO DE LA CURP =================
+            
+            var fechaNacimiento = curp.substring(4, 10); // Extraer yymmdd
+            
+            var año = parseInt(fechaNacimiento.substring(0, 2));
+            var mes = parseInt(fechaNacimiento.substring(2, 4)) - 1; // Meses en JavaScript son de 0 a 11
+            var dia = parseInt(fechaNacimiento.substring(4, 6));
+            
+            var digitoGeneracion = curp.charAt(16); // Dígito que indica la generación (siglo XX o XXI)
+            
+            if (digitoGeneracion === '0' || digitoGeneracion === '1') {
+                año += 1900; // Siglo XX
+            } else {
+                año += 2000; // Siglo XXI
+            }
+            
+            var fecha = new Date(año, mes, dia);
+            
+            // Formatear la fecha al formato "yyyy-mm-dd"
+            var fechaFormateada = fecha.toISOString().substring(0, 10);
+            
+            document.getElementById("fechanac").value = fechaFormateada;
+            //============== FIN EXTRAE LA FECHA DE NACIMIENTO DE LA CURP ================
+
+
         }
 
         curp.addEventListener("blur", entidadNac);
+
+        //=========== VALIDACION DE CAMPOS =======================
+        function enviarFormulario() {
+
+            //VARIABLES A VALIDAR ================================
+            let curp = document.getElementById("curp").value;
+            let nombre = document.getElementById("nombre").value;
+            let fechanac = document.getElementById("fechanac").value;
+            let entidadnac = document.getElementById("entidadnac").value;
+            let sexo = document.getElementById("sexo").value;
+            let edocivil = document.getElementById("edocivil").value;
+            let afiliacion = document.getElementById("afiliacion").value;
+            let domicilio = document.getElementById("domicilio").value;
+            let colonia = document.getElementById("colonia").value;
+            let municipio = document.getElementById("municipio").value;
+            let localidad = document.getElementById("localidad").value;
+            let entidaddom = document.getElementById("entidaddom").value;
+
+            let mensajesError = [];
+
+            if (curp.length < 18) {
+                alert("La CURP debe tener al menos 18 caracteres");
+                return;
+            }
+
+            if (nombre === "" || nombre === NULL) {
+                mensajesError.push("El nombre no debe estar vacío");
+            }
+
+            if (fechanac === "" || fechanac === NULL) {
+                mensajesError.push("La fecha de nacimiento no debe estar vacía");
+            }
+
+            if (entidadnac === "" || entidadnac === NULL || entidadnac === "FAVOR DE VERIFICAR LA CURP") {
+                mensajesError.push("La entidad de nacimiento no debe estar vacía");
+            }
+
+            if (sexo === "" || sexo === NULL || sexo === "FAVOR DE VERIFICAR LA CURP") {
+                mensajesError.push("El campo sexo no debe estar vacío");
+            }
+
+            if (edocivil === "" || edocivil === NULL) {
+                mensajesError.push("El estado civil no debe estar vacío");
+            }
+
+            if (afiliacion === "" || afiliacion === NULL) {
+                mensajesError.push("La afiliación no debe estar vacía");
+            }
+
+            if (domicilio === "" || domicilio === NULL) {
+                mensajesError.push("El domicilio no debe estar vacío");
+            }
+
+            if (colonia === "" || colonia === NULL) {
+                mensajesError.push("La colonia no debe estar vacía");
+            }
+
+            if (municipio === "" || municipio === NULL) {
+                mensajesError.push("El municipio no debe estar vacío");
+            }
+
+            if (localidad === "" || localidad === NULL) {
+                mensajesError.push("La localidad no debe estar vacía");
+            }
+
+            if (entidaddom === "" || entidaddom === NULL) {
+                mensajesError.push("La entidad de domicilio no debe estar vacía");
+            }
+
+            error.innerHTML = mensajesError.join(", ");
+
+            return false;
+
+        }
 
     </script>
 
