@@ -57,6 +57,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <select class="form-control" name="mtvocancelo" id="mtvocancelo" onchange='habilitaBtn(this.value);' required>
                                         <option value="">Elija una opción</option>
                                         <option value="REGISTRO DUPLICADO">REGISTRO DUPLICADO</option>
+                                        <option value="PACIENTE CON DERECHOHABIENCIA Y DECIDE RETIRARSE">PACIENTE CON DERECHOHABIENCIA Y DECIDE RETIRARSE</option>
                                         <option value="NO HAY MEDICO">NO HAY MEDICO</option>
                                     </select>
                                 </div>

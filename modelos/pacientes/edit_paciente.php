@@ -56,9 +56,14 @@ if (!isset($_SESSION['idusuario'])) {
                                 </div>
 
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <label>Entidad nacimiento:</label>
+                                    <input type="text" class="form-control" value="<?php echo $fila['entidadnac']; ?>" name="entidadnac" id="entidadnac" readonly>
+                                </div>
+
+                                <!--<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <label>Entidad nacimiento (*):</label>
                                     <select class="form-control" name="entidadnac" id="entidadnac" required>
-                                        <option value="<?php echo $fila['entidadnac']; ?>"><?php echo $fila['entidadnac']; ?></option>
+                                        <option value="<?php //echo $fila['entidadnac']; ?>"><?php //echo $fila['entidadnac']; ?></option>
                                         <option value="AGUASCALIENTES">AGUASCALIENTES</option>
                                         <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
                                         <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
@@ -96,16 +101,21 @@ if (!isset($_SESSION['idusuario'])) {
                                         <option value="OTROS PAISES">OTROS PAISES</option>
                                         <option value="NO ESPECIFICADO">NO ESPECIFICADO</option>
                                     </select>
+                                </div>-->
+
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <label>Sexo:</label>
+                                    <input type="text" class="form-control" value="<?php echo $fila['sexo']; ?>" name="sexo" id="sexo" readonly>
                                 </div>
 
-                                <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <!--<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <label>Sexo (*):</label>
                                     <select class="form-control" name="sexo" id="sexo" required>
-                                        <option value="<?php echo $fila['sexo']; ?>"><?php echo $fila['sexo']; ?></option>
+                                        <option value="<?php //echo $fila['sexo']; ?>"><?php //echo $fila['sexo']; ?></option>
                                         <option value="Masculino">Masculino</option>
                                         <option value="Femenino">Femenino</option>
                                     </select>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <label>Estado conyugal(*):</label>
@@ -258,9 +268,143 @@ if (!isset($_SESSION['idusuario'])) {
 
     <?php include "../extend/footer.php"; ?>
 
-    </body>
+    <script>
 
-    </html>
+        function entidadNac() {
+
+            let curp = document.getElementById("curp").value;
+            
+            const estadoNacimiento = curp.substring(13,11);
+            const sexoCurp = curp.substring(10,11);
+
+            //console.log(sexoCurp);
+
+            switch (estadoNacimiento) {
+                case "AS":
+                    //console.log("AGUASCALIENTES");
+                    document.getElementById("entidadnac").value = "AGUASCALIENTES";
+                    break;
+                case "BC":
+                    document.getElementById("entidadnac").value = "BAJA CALIFORNIA";
+                    break;
+                case "BS":
+                    document.getElementById("entidadnac").value = "BAJA CALIFORNIA SUR";
+                    break;
+                case "CC":
+                    document.getElementById("entidadnac").value = "CAMPECHE";
+                    break;
+                case "CL":
+                    document.getElementById("entidadnac").value = "COAHUILA";
+                    break;
+                case "CM":
+                    document.getElementById("entidadnac").value = "COLIMA";
+                    break;
+                case "CS":
+                    document.getElementById("entidadnac").value = "CHIAPAS";
+                    break;
+                case "CH":
+                    document.getElementById("entidadnac").value = "CHIHUAHUA";
+                    break;
+                case "DF":
+                    document.getElementById("entidadnac").value = "CIUDAD DE MEXICO";
+                    break;
+                case "DG":
+                    document.getElementById("entidadnac").value = "DURANGO";
+                    break;
+                case "GT":
+                    document.getElementById("entidadnac").value = "GUANAJUATO";
+                    break;
+                case "GR":
+                    document.getElementById("entidadnac").value = "GUERRERO";
+                    break;
+                case "HG":
+                    document.getElementById("entidadnac").value = "HIDALGO";
+                    break;
+                case "JC":
+                    document.getElementById("entidadnac").value = "JALISCO";
+                    break;
+                case "MC":
+                    document.getElementById("entidadnac").value = "MEXICO";
+                    break;
+                case "MN":
+                    document.getElementById("entidadnac").value = "MICHOACAN";
+                    break;
+                case "MS":
+                    document.getElementById("entidadnac").value = "MORELOS";
+                    break;
+                case "NT":
+                    document.getElementById("entidadnac").value = "NAYARIT";
+                    break;
+                case "NL":
+                    document.getElementById("entidadnac").value = "NUEVO LEON";
+                    break;
+                case "OC":
+                    document.getElementById("entidadnac").value = "OAXACA";
+                    break;
+                case "PL":
+                    document.getElementById("entidadnac").value = "PUEBLA";
+                    break;
+                case "QT":
+                    document.getElementById("entidadnac").value = "QUERETARO";
+                    break;
+                case "QR":
+                    document.getElementById("entidadnac").value = "QUINTANA ROO";
+                    break;
+                case "SP":
+                    document.getElementById("entidadnac").value = "SAN LUIS POTOSI";
+                    break;
+                case "SL":
+                    document.getElementById("entidadnac").value = "SINALOA";
+                    break;
+                case "SR":
+                    document.getElementById("entidadnac").value = "SONORA";
+                    break;
+                case "TC":
+                    document.getElementById("entidadnac").value = "TABASCO";
+                    break;
+                case "TS":
+                    document.getElementById("entidadnac").value = "TAMAULIPAS";
+                    break;
+                case "TL":
+                    document.getElementById("entidadnac").value = "TLAXCALA";
+                    break;
+                case "VZ":
+                    document.getElementById("entidadnac").value = "VERACRUZ";
+                    break;
+                case "YN":
+                    document.getElementById("entidadnac").value = "YUCATAN";
+                    break;
+                case "ZS":
+                    document.getElementById("entidadnac").value = "ZACATECAS";
+                    break;
+                case "NE":
+                    document.getElementById("entidadnac").value = "NACIDO EN EL EXTRANJERO";
+                    break;
+
+                default:
+                    document.getElementById("entidadnac").value = "FAVOR DE VERIFICAR LA CURP";
+                    document.getElementById("entidadnac").style.color = "red";
+                
+            }
+
+            if (sexoCurp == "H") {
+                document.getElementById("sexo").value = "Masculino";
+            } else if(sexoCurp == "M") {
+                document.getElementById("sexo").value = "Femenino";
+            }else{
+                document.getElementById("sexo").value = "FAVOR DE VERIFICAR LA CURP";
+                document.getElementById("sexo").style.color = "red";
+            }
+
+        }
+
+        curp.addEventListener("blur", entidadNac);
+
+    </script>
+
+</body>
+
+</html>
 
 <?php
 

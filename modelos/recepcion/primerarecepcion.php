@@ -185,7 +185,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
     </script>
 
-    <script src="../validaciones/validarecepcion.js"></script>
+    <!--<script src="../validaciones/validarecepcion.js"></script>-->
 
 
     </body>

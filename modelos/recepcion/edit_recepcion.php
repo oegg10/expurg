@@ -44,7 +44,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <label>Edad:</label>
-                                    <input type="text" class="form-control" value="<?php echo $fila['edad']; ?>" readonly name="edad" id="edad">
+                                    <input type="text" class="form-control" value="<?php echo $fila['edad']; ?>" disabled>
                                 </div>
 
                                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -65,12 +65,12 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12" id="femenino2">
                                     <label>Semanas de Gestación:</label>
-                                    <input type="text" class="form-control" name="semgesta" id="semgesta" disabled maxlength="2" value="<?php echo $fila['semgesta']; ?>" pattern="[0-9]{1,2}">
+                                    <input type="text" class="form-control" name="semgesta" id="semgesta" maxlength="2" value="<?php echo $fila['semgesta']; ?>" pattern="[0-9]{1,2}">
                                 </div>
 
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12" id="femenino3">
                                     <label>No. de Gestación:</label>
-                                    <input type="text" class="form-control" name="numgesta" id="numgesta" disabled maxlength="2" value="<?php echo $fila['semgesta']; ?>" pattern='[0-9]{1}'>
+                                    <input type="text" class="form-control" name="numgesta" id="numgesta" maxlength="2" value="<?php echo $fila['numgesta']; ?>" pattern='[0-9]{1}'>
                                 </div>
                                 <!-- FIN SI EL PACIENTE ES MUJER -->
 
@@ -156,25 +156,24 @@ if (!isset($_SESSION['idusuario'])) {
 <?php
 
     //editar
-    if (isset($_POST["editar"])) {
+    if (!empty($_POST)) {
     
-        $mtvoconsulta = $_POST["mtvoconsulta"];
-        $embarazo = $_POST["embarazo"];
+        $mtvoconsulta = mysqli_real_escape_string($con, $_POST['mtvoconsulta']);
+        $embarazo = mysqli_real_escape_string($con, $_POST['embarazo']);
+        $semgesta = mysqli_real_escape_string($con, $_POST['semgesta']);
+        $numgesta = mysqli_real_escape_string($con, $_POST['numgesta']);
+        $sala = mysqli_real_escape_string($con, $_POST['sala']);
+        $medico = mysqli_real_escape_string($con, $_POST['medico']);
+        $referencia = mysqli_real_escape_string($con, $_POST['referencia']);
+        $observaciones = mysqli_real_escape_string($con, $_POST['observaciones']);
         
-        if ($embarazo === "NO") {
+        if ($embarazo == "NO") {
             $semgesta = 0;
             $numgesta = 0;
-        }else{
-            $semgesta = $_POST["semgesta"];
-            $numgesta = $_POST["numgesta"];
         }
-        
-        $sala = $_POST["sala"];
-        $medico = $_POST["medico"];
-        $referencia = $_POST["referencia"];
-        $observaciones= $_POST["observaciones"];
 
         $idrecepcion = $_POST["idrecepcion"];
+        $idusuario = $_SESSION['idusuario'];
 
         $editar = "UPDATE recepciones SET mtvoconsulta='$mtvoconsulta',
                                         embarazo='$embarazo',
@@ -185,15 +184,18 @@ if (!isset($_SESSION['idusuario'])) {
                                         referencia='$referencia',
                                         observaciones='$observaciones',
                                         condicion='1',
+                                        idusuario='$idusuario',
                                         fechamod=NOW() WHERE idrecepcion = '$idrecepcion'";
 
         $editado = $con->query($editar);
 
         if ($editado > 0) {
-            header('location:../extend/alerta.php?msj=La recepcion fue actualizado&c=pac&p=in&t=success');
+            header('location:../extend/alerta.php?msj=La recepcion fue actualizada&c=rec&p=in&t=success');
+            $con->close();
+            exit();
         } else {
 
-            header('location:../extend/alerta.php?msj=Error al actualizar&c=pac&p=in&t=error');
+            header('location:../extend/alerta.php?msj=Error al actualizar&c=rec&p=in&t=error');
         }
     }
 

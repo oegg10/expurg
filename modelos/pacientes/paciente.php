@@ -52,6 +52,11 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <label>Entidad nacimiento:</label>
+                                    <input type="text" class="form-control" name="entidadnac" id="entidadnac" readonly>
+                                </div>
+
+                                <!--<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <label>Entidad nacimiento (*):</label>
                                     <select class="form-control" name="entidadnac" id="entidadnac" required>
                                         <option value="" disabled selected>Entidad Nacimiento</option>
@@ -101,6 +106,11 @@ if (!isset($_SESSION['idusuario'])) {
                                         <option value="Masculino">Masculino</option>
                                         <option value="Femenino">Femenino</option>
                                     </select>
+                                </div>-->
+
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <label>Sexo:</label>
+                                    <input type="text" class="form-control" name="sexo" id="sexo" readonly>
                                 </div>
 
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -254,8 +264,174 @@ if (!isset($_SESSION['idusuario'])) {
         </div>
     </div>
 
+    <script>
+
+        function entidadNac() {
+
+            let curp = document.getElementById("curp").value;
+            
+            const estadoNacimiento = curp.substring(13,11);
+            const sexoCurp = curp.substring(10,11);
+
+            switch (estadoNacimiento) {
+                case "AS":
+                    //console.log("AGUASCALIENTES");
+                    document.getElementById("entidadnac").value = "AGUASCALIENTES";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "BC":
+                    document.getElementById("entidadnac").value = "BAJA CALIFORNIA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "BS":
+                    document.getElementById("entidadnac").value = "BAJA CALIFORNIA SUR";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "CC":
+                    document.getElementById("entidadnac").value = "CAMPECHE";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "CL":
+                    document.getElementById("entidadnac").value = "COAHUILA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "CM":
+                    document.getElementById("entidadnac").value = "COLIMA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "CS":
+                    document.getElementById("entidadnac").value = "CHIAPAS";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "CH":
+                    document.getElementById("entidadnac").value = "CHIHUAHUA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "DF":
+                    document.getElementById("entidadnac").value = "CIUDAD DE MEXICO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "DG":
+                    document.getElementById("entidadnac").value = "DURANGO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "GT":
+                    document.getElementById("entidadnac").value = "GUANAJUATO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "GR":
+                    document.getElementById("entidadnac").value = "GUERRERO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "HG":
+                    document.getElementById("entidadnac").value = "HIDALGO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "JC":
+                    document.getElementById("entidadnac").value = "JALISCO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "MC":
+                    document.getElementById("entidadnac").value = "MEXICO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "MN":
+                    document.getElementById("entidadnac").value = "MICHOACAN";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "MS":
+                    document.getElementById("entidadnac").value = "MORELOS";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "NT":
+                    document.getElementById("entidadnac").value = "NAYARIT";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "NL":
+                    document.getElementById("entidadnac").value = "NUEVO LEON";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "OC":
+                    document.getElementById("entidadnac").value = "OAXACA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "PL":
+                    document.getElementById("entidadnac").value = "PUEBLA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "QT":
+                    document.getElementById("entidadnac").value = "QUERETARO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "QR":
+                    document.getElementById("entidadnac").value = "QUINTANA ROO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "SP":
+                    document.getElementById("entidadnac").value = "SAN LUIS POTOSI";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "SL":
+                    document.getElementById("entidadnac").value = "SINALOA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "SR":
+                    document.getElementById("entidadnac").value = "SONORA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "TC":
+                    document.getElementById("entidadnac").value = "TABASCO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "TS":
+                    document.getElementById("entidadnac").value = "TAMAULIPAS";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "TL":
+                    document.getElementById("entidadnac").value = "TLAXCALA";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "VZ":
+                    document.getElementById("entidadnac").value = "VERACRUZ";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "YN":
+                    document.getElementById("entidadnac").value = "YUCATAN";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "ZS":
+                    document.getElementById("entidadnac").value = "ZACATECAS";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+                case "NE":
+                    document.getElementById("entidadnac").value = "NACIDO EN EL EXTRANJERO";
+                    document.getElementById("entidadnac").style.color = "black";
+                    break;
+
+                default:
+                    document.getElementById("entidadnac").value = "FAVOR DE VERIFICAR LA CURP";
+                    document.getElementById("entidadnac").style.color = "red";
+                
+            }
+
+            if (sexoCurp == "H") {
+                document.getElementById("sexo").value = "Masculino";
+                document.getElementById("sexo").style.color = "black";
+            } else if(sexoCurp == "M") {
+                document.getElementById("sexo").value = "Femenino";
+                document.getElementById("sexo").style.color = "black";
+            }else{
+                document.getElementById("sexo").value = "FAVOR DE VERIFICAR LA CURP";
+                document.getElementById("sexo").style.color = "red";
+            }
+
+        }
+
+        curp.addEventListener("blur", entidadNac);
+
+    </script>
+
     <script src="validaCurp/funcion.js"></script>
-    <!-- <script src="validaCurp/validaPaciente.js"></script> -->
 
 
     </body>
