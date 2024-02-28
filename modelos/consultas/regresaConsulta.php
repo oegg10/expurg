@@ -19,10 +19,10 @@ if (!isset($_SESSION['idusuario'])) {
 
     if ($regresado > 0) {
 
-        header('location:../extend/alerta.php?msj=La consulta fue regresada&c=rec&p=in&t=success');
+        header('location:../extend/alerta.php?msj=La consulta fue regresada&c=cons1&p=in&t=success');
     } else {
 
-        header('location:../extend/alerta.php?msj=La accion no se pudo realizar&c=rec&p=in&t=error');
+        header('location:../extend/alerta.php?msj=La accion no se pudo realizar&c=cons1&p=in&t=error');
     }
 
     $con->close();

@@ -60,6 +60,7 @@ if (!isset($_SESSION['idusuario'])) {
         $comorbilidad1 = isset($_POST["comorbilidad1"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad1']) : "";
         $comorbilidad2 = isset($_POST["comorbilidad2"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad2']) : "";
         $comorbilidad3 = isset($_POST["comorbilidad3"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad3']) : "";
+        $causaext = isset($_POST["causaext"]) ? mysqli_real_escape_string($con, $_POST['causaext']) : "";
         $interconsulta1 = isset($_POST["interconsulta1"]) ? mysqli_real_escape_string($con, $_POST['interconsulta1']) : "";
         $interconsulta2 = isset($_POST["interconsulta2"]) ? mysqli_real_escape_string($con, $_POST['interconsulta2']) : "";
         $interconsulta3 = isset($_POST["interconsulta3"]) ? mysqli_real_escape_string($con, $_POST['interconsulta3']) : "";
@@ -109,7 +110,7 @@ if (!isset($_SESSION['idusuario'])) {
         }
 
         //Realizamos la inserción de los datos
-        $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
+        $sql = "INSERT INTO consultas (idrecepcion, fechaingreso, fc, fr, ta, temperatura, glucosa, talla, peso, pabdominal, imc, notaingresourg, atnprehosp, tipourgencia, tiempotraslado, nombreunidad, trastrans, motivoatencion, tipocama, altapor, otraunidad, ministeriopublico, mujeredadfertil, afecprincipal, causaext, comorbilidad1, comorbilidad2, comorbilidad3, interconsulta1, interconsulta2, interconsulta3, procedim1, procedim2, procedim3, procedim4, procedim5, medicamento1, medicamento2, medicamento3, lesion_es, lesiones, cap_lesion, fechaalta, condicion, idusuario) VALUES ('$idrecepcion', '$fechaingreso', '$fc', '$fr', '$ta', '$temperatura', '$glucosa', '$talla', '$peso', '$pabdominal', '$imc', '$notaingresourg', '$atnprehosp', '$tipourgencia', '$tiempotraslado', '$nombreunidad', '$trastrans', '$motivoatencion', '$tipocama', '$altapor', '$otraunidad', '$ministeriopublico', '$mujeredadfertil', '$afecprincipal', '$causaext', '$comorbilidad1', '$comorbilidad2', '$comorbilidad3', '$interconsulta1', '$interconsulta2', '$interconsulta3', '$procedim1', '$procedim2', '$procedim3', '$procedim4', '$procedim5', '$medicamento1', '$medicamento2', '$medicamento3', '$lesion_es', '$lesiones', '2', '$fechaalta', '1', '$idusuario')";
 
         $resins = $con->query($sql);
 
@@ -215,11 +216,6 @@ if (!isset($_SESSION['idusuario'])) {
                                     </div>
                                     <!-- ============= FECHA Y HORA ======================== -->
                                     <!-- 12 -->
-
-                                    <!-- ======= NOTA MEDICA DE LA CONSULTA DE URGENCIAS ========-->
-                                    <!--<div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <h6 style="text-align: center;"><strong>Signos vitales:</strong></h6>
-                                    </div>-->
                                     
                                     <div class="form-group col-lg-1 col-md-1 col-sm-1">
                                         <label>FC: lpm</label>
@@ -277,7 +273,6 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                         <textarea name="notaingresourg" id="notaingresourg" rows="10" cols="150" placeholder="Agregar la nota medica del servicio de urgencias" onblur="may(this.value, this.id)" required>
                                         </textarea>
-                                        <span></span>
                                     </div>
 
                                     <!-- 12 -->
@@ -291,7 +286,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <div class="form-group col-lg-2 col-md-2 col-sm-2">
                                         <label>Atención prehospitalaria (*):</label>
                                         <select class='form-control' name='atnprehosp' id='atnprehosp' required>
-                                            <option value="" disabled selected>Opciones</option>
+                                            <option value="" selected>Elija una opción</option>
                                             <option value='NO'>NO</option>
                                             <option value='SI'>SI</option>
                                         </select>
@@ -436,9 +431,16 @@ if (!isset($_SESSION['idusuario'])) {
                                     </div>
 
                                     <!-- 12 -->
+                                    <hr>
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                        <p class="form-group col-lg-12 col-md-12 col-sm-12" style="text-align: left; background-color: red; color: white"><label>CAUSA EXTERNA (Especifique los acontecimientos, circunstancias y condiciones que causan la lesión. Ejemplo: "ATROPELLAMIENTO", "AGRESION POR PAREJA", ETC. Si no hay LESION poner "---"):</label></p>
+                                        <input type="text" class="form-control" name="causaext" id="causaext" maxlength="250" minlength="3" placeholder="Si se hace hoja de lesiones, lo que se escriba aquí se pasará a la hoja de lesiones y NO se podrá modificar." value="<?php if (!empty($_POST['causaext'])) { echo $causaext; } else { echo ''; } ?>" onblur="may(this.value, this.id)" required>
+                                        <span></span>
+                                    </div>
+
+                                    <!-- 12 -->
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <hr>
                                         <h6><label>ESPECIALIDAD O INTERCONSULTAS:</label></h6>
                                         <input type="text" class="form-control" name="interconsulta1" id="interconsulta1" maxlength="50" placeholder="Especialidad" value="<?php if (!empty($_POST['interconsulta1'])) { echo $interconsulta1; } else { echo ''; } ?>" onblur="may(this.value, this.id)">
                                     </div>
@@ -537,7 +539,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" name="Guardar" id="Guardar"><i class="fa fa-save"> Guardar</i></button>
+                                    <button class="btn btn-primary" type="submit" name="Guardar" id="Guardar"><i class="fa fa-save" onclick="enviarFormulario()"> Guardar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
@@ -669,6 +671,7 @@ if (!isset($_SESSION['idusuario'])) {
         let altapor = document.getElementById("altapor");
         let ministeriopublico = document.getElementById("ministeriopublico");
         let afecprincipal = document.getElementById("afecprincipal");
+        let causaext = document.getElementById("causaext");
         let lesion_es = document.getElementById("lesion_es");
         let lesiones = document.getElementById("lesiones");
 
@@ -705,6 +708,7 @@ if (!isset($_SESSION['idusuario'])) {
         altapor.addEventListener("blur", validarCamposVacios);
         ministeriopublico.addEventListener("blur", validarCamposVacios);
         afecprincipal.addEventListener("blur", validarCamposVacios);
+        causaext.addEventListener("blur", validarCamposVacios);
         lesion_es.addEventListener("blur", validarCamposVacios);
         lesiones.addEventListener("blur", validarCamposVacios);
 
@@ -717,7 +721,7 @@ if (!isset($_SESSION['idusuario'])) {
         function enviarFormulario() {
 
             let mensajesError = [];
-
+        
             let fecharecepcion1 = new Date(fecharecepcion.value);
             let fechaR = fecharecepcion1.getTime();
             let fechaingreso1 = new Date(fechaingreso.value);
@@ -798,6 +802,12 @@ if (!isset($_SESSION['idusuario'])) {
             if (afecprincipal.value === null || afecprincipal.value === "") {
 
                 mensajesError.push("La afección principal no puede estar vacía");
+
+            }
+
+            if (causaext.value === null || causaext.value === "") {
+
+                mensajesError.push("La causa externa no puede estar vacía");
 
             }
 

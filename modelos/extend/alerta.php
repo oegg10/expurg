@@ -53,6 +53,10 @@ include_once '../../conexion/conexion.php';
         case 'citasCE':
             $carpeta = '../citasCE/';
             break;
+
+        case 'cons1':
+            $carpeta = '../consultas/';
+            break;
             
     }
 

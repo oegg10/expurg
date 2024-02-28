@@ -26,10 +26,10 @@ if (!isset($_SESSION['idusuario'])) {
     $editado = $con->query($editar);
 
     if ($editado > 0) {
-        header('location:../extend/alerta.php?msj=Consulta actualizada&c=pac&p=in&t=success');
+        header('location:../extend/alerta.php?msj=Consulta actualizada&c=cons1&p=in&t=success');
     } else {
 
-        header('location:../extend/alerta.php?msj=Error al actualizar consulta&c=pac&p=in&t=error');
+        header('location:../extend/alerta.php?msj=Error al actualizar consulta&c=cons1&p=in&t=error');
     }
 
     $con->close();

@@ -147,11 +147,11 @@ if (!isset($_SESSION['idusuario'])) {
         $editadoC1 = $con->query($editarC1);
 
         if ($editadoC1 > 0) {
-            header('location:../extend/alerta.php?msj=Consulta actualizada&c=pac&p=in&t=success');
+            header('location:../extend/alerta.php?msj=Consulta actualizada&c=cons1&p=in&t=success');
             $con->close();
         } else {
 
-            header('location:../extend/alerta.php?msj=Error al actualizar consulta&c=pac&p=in&t=error');
+            header('location:../extend/alerta.php?msj=Error al actualizar consulta&c=cons1&p=in&t=error');
         }
 
         $con->close();
@@ -526,7 +526,7 @@ if (!isset($_SESSION['idusuario'])) {
                             <!-- 12 -->
 
                             <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" name="Actualizar" id="Actualizar"><i class="fa fa-save"> Actualizar</i></button>
+                                <button class="btn btn-primary" type="submit" onclick="return enviarFormulario()" name="Actualizar" id="Actualizar"><i class="fa fa-save"> Actualizar</i></button>
                                 <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
 
                             </div>

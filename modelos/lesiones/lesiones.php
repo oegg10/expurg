@@ -12,7 +12,7 @@ if (!isset($_SESSION['idusuario'])) {
 
     $id = $_GET['idc'];
 
-    $sql = "SELECT r.idrecepcion, p.idpaciente, p.nombre, p.entidaddom, p.municipio, p.localidad, p.domicilio, p.colonia, p.cp, r.edad, p.sexo, r.mtvoconsulta, c.fechaingreso, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3 FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE c.idconsulta = '$id'";
+    $sql = "SELECT r.idrecepcion, p.idpaciente, p.nombre, p.entidaddom, p.municipio, p.localidad, p.domicilio, p.colonia, p.cp, r.edad, p.sexo, r.mtvoconsulta, c.fechaingreso, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.causaext FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE c.idconsulta = '$id'";
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
 
@@ -720,7 +720,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <label>Descripción de la afección de causa externa(*):</label>
-                                        <input type="text" class="form-control" name="causaexterna" id="causaexterna" maxlength="200" placeholder="Ejemplo: Caída de su propia altura o Agresión por pareja" required onblur="may(this.value, this.id)">
+                                        <input type="text" class="form-control" name="causaexterna" id="causaexterna" value="<?php echo $fila['causaext']; ?>" readonly>
                                         <span></span>
                                     </div>
 
@@ -733,7 +733,7 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" name="Guardar" id="Guardar"><i class="fa fa-save"> Guardar</i></button>
-                                    <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
+                                    <a href="../consultas/index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
                         </div>
 
@@ -1121,12 +1121,6 @@ if (!isset($_SESSION['idusuario'])) {
             if (consec_resultante.value === "") {
 
                 mensajesError.push("La consecuencia resultante no puede estar vacía");
-
-            }
-
-            if (causaexterna.value === "") {
-
-                mensajesError.push("La causa externa no puede estar vacía");
 
             }
             
