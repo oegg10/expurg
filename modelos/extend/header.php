@@ -137,6 +137,9 @@ if (!isset($_SESSION['idusuario'])) {
                         <a class="nav-link" href="../recepcion/index.php">Recepción</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="../desconocidos/index.php">Desconocidos</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="../reportes/reporteConsultados.php">Consultados</a>
                     </li>
                     <li class="nav-item">

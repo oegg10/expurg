@@ -154,7 +154,7 @@ if (!isset($_SESSION['idusuario'])) {
                             <h5>En caso de que el paciente sea referido a "OBSERVACION" o "CONTROL TERMICO", favor de capturar en la fecha y hora de alta, la salida del consultorio. Gracias.</h5>
                         </div>
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" id="formConsulta" autocomplete="off">
+                            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" id="formConsulta" autocomplete="off" onsubmit="return enviarFormulario()">
 
                                 <div class="row">
 
@@ -539,7 +539,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <button class="btn btn-primary" type="submit" name="Guardar" id="Guardar"><i class="fa fa-save" onclick="enviarFormulario()"> Guardar</i></button>
+                                    <button class="btn btn-primary" type="submit" name="Guardar" id="Guardar"><i class="fa fa-save"> Guardar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
@@ -731,61 +731,70 @@ if (!isset($_SESSION['idusuario'])) {
 
             if (fechaingreso.value == null || fechaingreso.value == "") {
                 mensajesError.push("La fecha de inicio no debe estar vacía");
+                return false;
             }
 
             if (fechaI <= fechaR) {
                 mensajesError.push("La fecha de inicio es menor o igual a la de recepción");
-                //console.log(fechaR);
-                //console.log(fechaI);
+                return false;
             }
 
             if (fechaalta.value === null || fechaalta.value === "") {
                 mensajesError.push("La fecha de alta no debe estar vacía");
+                return false;
             }
 
             if (fechaA <= fechaI) {
                 mensajesError.push("La fecha de alta es menor o igual a la de inicio");
+                return false;
             }
 
             if (notaingresourg.value === null || notaingresourg.value === "" || notaingresourg.value === "                                        ") {
 
                 mensajesError.push("La nota de urgencias no puede estar vacía");
+                return false;
 
             }
 
             if (atnprehosp.value === null || atnprehosp.value === "") {
 
                 mensajesError.push("La atención pre-hospitalaria no puede estar vacía");
+                return false;
 
             }
 
             if (tipourgencia.value === null || tipourgencia.value === "") {
 
                 mensajesError.push("El tipo de urgencia no puede estar vacío");
+                return false;
 
             }
 
             if (motivoatencion.value === null || motivoatencion.value === "") {
 
                 mensajesError.push("El motivo de atención no puede estar vacío");
+                return false;
 
             }
 
             if (tipocama.value === null || tipocama.value === "") {
 
                 mensajesError.push("El tipo de cama no puede estar vacío");
+                return false;
 
             }
 
             if (altapor.value === null || altapor.value === "") {
 
                 mensajesError.push("Alta por: no puede estar vacío");
+                return false;
 
             }
 
             if (ministeriopublico.value === null || ministeriopublico.value === "") {
 
                 mensajesError.push("Ministerio público no puede ir vacío");
+                return false;
 
             }
 
@@ -794,6 +803,7 @@ if (!isset($_SESSION['idusuario'])) {
                 if (mujeredadfertil.value === null || mujeredadfertil.value === "") {
 
                     mensajesError.push("El campo Mujer en edad fertil no puede estar vacío");
+                    return false;
 
                 }
 
@@ -802,30 +812,34 @@ if (!isset($_SESSION['idusuario'])) {
             if (afecprincipal.value === null || afecprincipal.value === "") {
 
                 mensajesError.push("La afección principal no puede estar vacía");
+                return false;
 
             }
 
             if (causaext.value === null || causaext.value === "") {
 
                 mensajesError.push("La causa externa no puede estar vacía");
+                return false;
 
             }
 
             if (lesion_es.value === null || lesion_es.value === "") {
 
                 mensajesError.push("Se debe elegir la opción de si hay lesión");
+                return false;
 
             }
 
             if (lesiones.value === null || lesiones.value === "") {
 
                 mensajesError.push("Se debe elegir la opción de lesiones");
+                return false;
 
             }
 
             error.innerHTML = mensajesError.join(", ");
 
-            return false;
+            return true;
 
         }
 
