@@ -60,12 +60,12 @@ if (!isset($_SESSION['idusuario'])) {
             */
 
             //EDICION DE DATOS =======================================================
-            $acreditar = "UPDATE desconocidos SET curp='$curp',
+            $identificar = "UPDATE desconocidos SET dcurp='$curp',
                         condicion= 2,
                         fechamodif= NOW(),
                         idusuario='$idusuario' WHERE iddesconocido = '$id'";
 
-            $resultado = $con->query($acreditar);
+            $resultado = $con->query($identificar);
 
             if ($resultado > 0) {
 
@@ -90,7 +90,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5 style="color: red;">Acreditar desconocido</h5>
+                        <h5 style="color: red;">Identificar desconocido | Antes de identificar, favor de registrar al paciente "normalmente", después copiar la CURP y pegarla aquí, saludos</h5>
                     </div>
 
                     <div class="card-body">
@@ -145,7 +145,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- FIN -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" type="submit" id="btnAcreditar"><i class="fa fa-save"> Acreditar</i></button>
+                                    <button class="btn btn-primary" type="submit" id="btnIdentificar"><i class="fa fa-save"> Identificar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
