@@ -188,17 +188,17 @@ if (!isset($_SESSION['idusuario'])) {
 
                                     <!-- 12 -->
 
-                                    <div class="form-group col-lg-7 col-md-7 col-sm-7">
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                         <h6>NOTA MEDICA DE INGRESO A URGENCIAS:</h6>
                                     </div>
 
+                                    <!-- 12 -->
+
                                     <!-- FECHA Y HORA DE RECEPCION DE URGENCIAS -->
-                                    <div class="form-group col-lg-5 col-md-5 col-sm-5">
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                         <label for="fechahorarecep" style="color: blue;">Fecha y hora de recepción urgencias: </label>
                                         <input type="datetime-local" style="background-color: black; color:white;" name="fecharecepcion" id="fecharecepcion" value="<?php echo date("Y-m-d H:i:s", strtotime($fila['fechahorarecep'])); ?>" readonly>
                                     </div>
-
-                                    <!-- 12 -->
 
                                     <!-- ============= FECHA Y HORA ======================== -->
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6">
@@ -208,12 +208,6 @@ if (!isset($_SESSION['idusuario'])) {
                                         <p></p>
                                     </div>
 
-                                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                        <p>(No debe de pasar de 24 horas después de la fecha y hora de inicio de la consulta o se pondrá en rojo)</p>
-                                        <label for="fechaalta" style="color: red;">Fecha y hora de alta *: </label>
-                                        <input type="datetime-local" id="fechaalta" name="fechaalta" min="2024-01-20T00:00" value="<?php if (!empty($_POST['fechaalta'])) { echo $fechaalta; } else { echo ''; } ?>" required>
-                                        <p></p>
-                                    </div>
                                     <!-- ============= FECHA Y HORA ======================== -->
                                     <!-- 12 -->
                                     
@@ -531,6 +525,15 @@ if (!isset($_SESSION['idusuario'])) {
                                         </select>
                                         <span></span>
                                     </div>
+
+                                    <!-- ============= FECHA Y HORA DE ALTA ===================== -->
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                        <p>(No debe de pasar de 24 horas después de la fecha y hora de inicio de la consulta o se pondrá en rojo)</p>
+                                        <label for="fechaalta" style="color: red;">Fecha y hora de alta *: </label>
+                                        <input type="datetime-local" id="fechaalta" name="fechaalta" min="2024-01-20T00:00" value="<?php if (!empty($_POST['fechaalta'])) { echo $fechaalta; } else { echo ''; } ?>" required>
+                                        <p></p>
+                                    </div>
+                                    <!-- ========== FIN DE FECHA Y HORA DE ALTA ================== -->
 
                                     <!-- 12 -->
 

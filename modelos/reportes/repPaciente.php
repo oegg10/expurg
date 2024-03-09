@@ -16,9 +16,13 @@ if (!isset($_SESSION['idusuario'])) {
 
     $id = $_GET['id'];
 
+    /*===== CONSULTAS EN URGENCIAS =====*/
     $consulta = "SELECT p.idpaciente,p.nombre,p.sexo,r.idrecepcion,r.fechahorarecep,r.edad,r.mtvoconsulta,r.embarazo,r.semgesta,r.referencia,r.observaciones,r.sala,r.condicion FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE p.idpaciente = '$id' ORDER BY r.fechahorarecep DESC";
-
     $resultado = $con->query($consulta);
+
+    /*===== CONSULTA PARA DESAPARECIDOS =====*/
+    $sqlDesaparecido = "SELECT p.idpaciente, p.nombre, p.curp, d.fechaalta, d.mtvoingreso, d.rasgos, d.encontrado, d.trasladado, d.dcurp, d.fechamodif FROM pacientes p INNER JOIN desconocidos d ON p.curp = d.dcurp WHERE p.idpaciente = '$id'";
+    $resDesaparecido = $con->query($sqlDesaparecido);
 
     ?>
 
@@ -30,6 +34,7 @@ if (!isset($_SESSION['idusuario'])) {
                         <h5>Historial Paciente: </h5>
                     </div>
                     <div class="card-body">
+                        <h3>Consultas en urgencias</h3>
                         <div class="table-responsive" id="listadoregistros">
                             <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
                                 <thead style="background-color: #757579; color: white;">
@@ -99,8 +104,55 @@ if (!isset($_SESSION['idusuario'])) {
                                 </tfoot>
                             </table>
                         </div>
+
+                        <h3>Reportado como desconocido</h3>
+                        <div class="table-responsive">
+                            <table id="tabla" class="table table-striped table-bordered table-condensed table-hover">
+                                <thead style="background-color: #757579; color: white;">
+                                    <th>Fecha</th>
+                                    <th>Nombre</th>
+                                    <th>CURP</th>
+                                    <th>Motivo ingreso</th>
+                                    <th>Rasgos</th>
+                                    <th>Encontrado</th>
+                                    <th>Lo trajo</th>
+                                    <th>Fecha identificado</th>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    while ($desap = $resDesaparecido->fetch_array(MYSQLI_BOTH)) {
+
+                                        echo "<tr>
+                                        <td>" . date("d-m-Y H:i:s", strtotime($desap['fechaalta'])) . "</td>
+                                        <td>" . $desap['nombre'] . "</td>
+                                        <td>" . $desap['curp'] . "</td>
+                                        <td>" . $desap['mtvoingreso'] . "</td>
+                                        <td>" . $desap['rasgos'] . "</td>
+                                        <td>" . $desap['encontrado'] . "</td>
+                                        <td>" . $desap['trasladado'] . "</td>
+                                        <td>" . date("d-m-Y H:i:s", strtotime($desap['fechamodif'])) . "</td>";
+
+                                    }
+                                    ?>
+                                </tbody>
+                                <tfoot>
+                                    <th>Fecha</th>
+                                    <th>Nombre</th>
+                                    <th>CURP</th>
+                                    <th>Motivo ingreso</th>
+                                    <th>Rasgos</th>
+                                    <th>Encontrado</th>
+                                    <th>Lo trajo</th>
+                                    <th>Fecha identificado</th>
+                                </tfoot>
+                            </table>
+                        </div>
+
+
+
+
+
                     </div>
-                    
                 </div>
             </div>
         </div>
