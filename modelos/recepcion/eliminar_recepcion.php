@@ -57,8 +57,8 @@ if (!isset($_SESSION['idusuario'])) {
                                     <select class="form-control" name="mtvocancelo" id="mtvocancelo" onchange='habilitaBtn(this.value);' required>
                                         <option value="">Elija una opción</option>
                                         <option value="REGISTRO DUPLICADO">REGISTRO DUPLICADO</option>
-                                        <option value="PACIENTE CON DERECHOHABIENCIA Y DECIDE RETIRARSE">PACIENTE CON DERECHOHABIENCIA Y DECIDE RETIRARSE</option>
                                         <option value="NO HAY MEDICO">NO HAY MEDICO</option>
+                                        <option value="FALTA DE PERSONAL, INSUMOS Y AREA">FALTA DE PERSONAL, INSUMOS Y AREA</option>
                                     </select>
                                 </div>
 
@@ -104,19 +104,11 @@ if (!isset($_SESSION['idusuario'])) {
 
             let mensajesError = [];
 
-            //if (mtvocancelo.value === null || mtvocancelo.value === "") {
-
-                /*SI SE CUMPLEN LAS CONDICIONES */
-                /*mensajesError.push("El motivo de eliminación no puede estar vacío");
-                document.getElementById("mtvocancelo").focus();
-                eliminar.disabled = true;
-
-            }*/
-
             if (mtvocancelo.value === null || 
                 mtvocancelo.value === "" ||
                 mtvocancelo.value != "REGISTRO DUPLICADO" &&
-                mtvocancelo.value != "NO HAY MEDICO") {
+                mtvocancelo.value != "NO HAY MEDICO" &&
+                mtvocancelo.value != "FALTA DE PERSONAL, INSUMOS Y AREA") {
 
                 /*SI SE CUMPLEN LAS CONDICIONES */
                 mensajesError.push("El motivo de eliminación no puede estar vacío o hay valores incorrectos");
@@ -171,12 +163,12 @@ if (!isset($_SESSION['idusuario'])) {
             $elimina = $con->query($eliminarSQL);
 
             if ($elimina > 0) {
-                header('location:../extend/alerta.php?msj=La recepcion fue eliminada&c=pac&p=in&t=success');
+                header('location:../extend/alerta.php?msj=La recepcion fue eliminada&c=rec&p=in&t=success');
                 $con->close();
                 exit();
             } else {
 
-                header('location:../extend/alerta.php?msj=Error al eliminar&c=pac&p=in&t=error');
+                header('location:../extend/alerta.php?msj=Error al eliminar&c=rec&p=in&t=error');
             }
             
         }

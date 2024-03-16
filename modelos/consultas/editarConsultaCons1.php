@@ -16,7 +16,7 @@ if (!isset($_SESSION['idusuario'])) {
     $id = $_GET['idc'];
     $idr = $_GET['idr'];
 
-    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.lesion_es, c.lesiones, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE idconsulta = '$id' AND r.idrecepcion = '$idr'";
+    $sql = "SELECT c.idconsulta, c.idrecepcion, c.fechaingreso, c.fc, c.fr, c.ta, c.temperatura, c.glucosa, c.talla, c.peso, c.pabdominal, c.imc, c.notaingresourg, c.tipourgencia, c.atnprehosp, c.trastrans, c.nombreunidad, c.tiempotraslado, c.motivoatencion, c.tipocama, c.ministeriopublico, c.mujeredadfertil, c.afecprincipal, c.comorbilidad1, c.comorbilidad2, c.comorbilidad3, causaext, c.interconsulta1, c.interconsulta2, c.interconsulta3, c.procedim1, c.procedim2, c.procedim3, c.procedim4, c.procedim5, c.medicamento1, c.medicamento2, c.medicamento3, c.fechaalta, c.altapor, c.otraunidad, c.lesion_es, c.lesiones, c.condicion, c.idusuario, r.idrecepcion,p.idpaciente,p.nombre,r.edad,p.sexo,r.mtvoconsulta FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente INNER JOIN consultas c ON c.idrecepcion = r.idrecepcion WHERE idconsulta = '$id' AND r.idrecepcion = '$idr'";
 
     $resultado = $con->query($sql);
     $fila = $resultado->fetch_assoc();
@@ -56,6 +56,7 @@ if (!isset($_SESSION['idusuario'])) {
         $comorbilidad1 = isset($_POST["comorbilidad1"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad1']) : "";
         $comorbilidad2 = isset($_POST["comorbilidad2"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad2']) : "";
         $comorbilidad3 = isset($_POST["comorbilidad3"]) ? mysqli_real_escape_string($con, $_POST['comorbilidad3']) : "";
+        $causaext = isset($_POST["causaext"]) ? mysqli_real_escape_string($con, $_POST['causaext']) : "";      
         $interconsulta1 = isset($_POST["interconsulta1"]) ? mysqli_real_escape_string($con, $_POST['interconsulta1']) : "";
         $interconsulta2 = isset($_POST["interconsulta2"]) ? mysqli_real_escape_string($con, $_POST['interconsulta2']) : "";
         $interconsulta3 = isset($_POST["interconsulta3"]) ? mysqli_real_escape_string($con, $_POST['interconsulta3']) : "";
@@ -130,6 +131,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     comorbilidad1='$comorbilidad1',
                                     comorbilidad2='$comorbilidad2',
                                     comorbilidad3='$comorbilidad3',
+                                    causaext='$causaext',
                                     interconsulta1='$interconsulta1',
                                     interconsulta2='$interconsulta2',
                                     interconsulta3='$interconsulta3',
@@ -427,6 +429,15 @@ if (!isset($_SESSION['idusuario'])) {
                                 </div>
 
                                 <!-- 12 -->
+
+                                <hr>
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                        <p class="form-group col-lg-12 col-md-12 col-sm-12" style="text-align: left; background-color: red; color: white"><label>CAUSA EXTERNA (Especifique los acontecimientos, circunstancias y condiciones que causan la lesión. Ejemplo: "ATROPELLAMIENTO", "AGRESION POR PAREJA", ETC. Si no hay LESION poner "---"):</label></p>
+                                        <input type="text" class="form-control" name="causaext" id="causaext" maxlength="250" minlength="3" placeholder="Si se hace hoja de lesiones, lo que se escriba aquí se pasará a la hoja de lesiones y NO se podrá modificar." value="<?php echo $fila['causaext']; ?>" onblur="may(this.value, this.id)" required>
+                                        <span></span>
+                                    </div>
+
+                                    <!-- 12 -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <hr>
