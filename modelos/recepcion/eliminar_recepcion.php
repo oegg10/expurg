@@ -104,15 +104,6 @@ if (!isset($_SESSION['idusuario'])) {
 
             let mensajesError = [];
 
-            //if (mtvocancelo.value === null || mtvocancelo.value === "") {
-
-                /*SI SE CUMPLEN LAS CONDICIONES */
-                /*mensajesError.push("El motivo de eliminación no puede estar vacío");
-                document.getElementById("mtvocancelo").focus();
-                eliminar.disabled = true;
-
-            }*/
-
             if (mtvocancelo.value === null || 
                 mtvocancelo.value === "" ||
                 mtvocancelo.value != "REGISTRO DUPLICADO" &&
