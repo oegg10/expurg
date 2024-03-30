@@ -12,41 +12,36 @@ if (!isset($_SESSION['idusuario'])) {
         header("Location:../../index.php");
     }
 
-    $idcita = $_GET['idcita'];
+    $idcita = $_GET['idpx'];
 
     //CONSULTA DE CITA
-    $citaSql = "SELECT c.idexpediente, e.nombrep, e.curp, c.idmedico, m.nombremedico, c.fechacita, c.evento, c.observaciones FROM citas_ce c INNER JOIN exparchivo e ON c.idexpediente = e.idexpediente INNER JOIN medicos m ON c.idmedico = m.idmedico INNER JOIN usuarios u ON c.idusuario = u.idusuario WHERE c.idcita = '$idcita'";
+    $citaSql = "SELECT pn.idpxnvo, pn.nombrenvo, m.idmedico, m.nombremedico, s.nombreservicio, pn.fechacita, pn.observaciones, pn.fechacaptura FROM citascenvo pn INNER JOIN medicos m ON pn.idmedico = m.idmedico INNER JOIN servicios s ON m.idservicio = s.idservicio WHERE pn.idpxnvo = '$idcita'";
     $resultCita = $con->query($citaSql);
     $cita = $resultCita->fetch_assoc();
 
     //Consulta de medicos
-    $citaSql = "SELECT m.idmedico, m.nombremedico, m.idservicio, m.diasconsulta, m.condicion, s.nombreservicio FROM medicos m INNER JOIN servicios s ON m.idservicio = s.idservicio WHERE m.condicion = 1 ORDER BY m.nombremedico";
-    $resultMedico = $con->query($citaSql);
+    $medicoSql = "SELECT m.idmedico, m.nombremedico, m.idservicio, m.diasconsulta, m.condicion, s.nombreservicio FROM medicos m INNER JOIN servicios s ON m.idservicio = s.idservicio WHERE m.condicion = 1 ORDER BY m.nombremedico";
+    $resultMedico = $con->query($medicoSql);
 
     if (!empty($_POST)) {
 
         //https://www.php.net/manual/es/function.preg-replace.php
-        $idcita = mysqli_real_escape_string($con, $_POST['idcita']);
-        //$idexpediente = mysqli_real_escape_string($con, $_POST['idexpediente']);
+        $nombrenvo = mysqli_real_escape_string($con, $_POST['nombrenvo']);
         $idmedico = mysqli_real_escape_string($con, $_POST['idmedico']);
         $fechacita = mysqli_real_escape_string($con, $_POST['fechacita']);
-        //$evento = mysqli_real_escape_string($con, $_POST['evento']);
-        if (isset($_POST["evento"])) {
-            $evento = $_POST["evento"];
-        }else{
-            $evento = "";
-        }
         $observaciones = mysqli_real_escape_string($con, $_POST['observaciones']);
 
         $idusuario = $_SESSION['idusuario'];
+
+        //===================================================================================
 
         //VALIDACIONES ==========
 
         $errores = [];
 
          // Validar expediente
-        if (empty($idexpediente)) {
-            $errores[] = 'Por favor, ingresa el número de expediente del paciente.';
+        if (empty($nombrenvo)) {
+            $errores[] = 'Por favor, ingresa el nombre del paciente.';
         }
 
          // Validar medico
@@ -57,11 +52,6 @@ if (!isset($_SESSION['idusuario'])) {
          // Validar fecha cita
          if (empty($fechacita)) {
             $errores[] = 'Por favor, ingresa la fecha de la cita.';
-        }
-
-        // Validar evento
-        if (empty($evento)) {
-            $errores[] = 'Por favor, ingresa primera vez o subsecuente.';
         }
 
 /*============= FIN DE VALIDACIONES ========================================*/
@@ -75,14 +65,13 @@ if (!isset($_SESSION['idusuario'])) {
             }
             echo '</ul>';
 
-        }else{
+        } else {
 
             //Realizamos la modificación de los datos
-            $editar = "UPDATE citas_ce SET idmedico='$idmedico',
+            $editar = "UPDATE citascenvo SET nombrenvo='$nombrenvo',
+                            idmedico='$idmedico',
                             fechacita='$fechacita',
-                            evento='$evento',
-                            observaciones='$observaciones',
-                            idusuario='$idusuario' WHERE idcita = '$idcita'";
+                            observaciones='$observaciones' WHERE idcita = '$idcita'";
 
             $editado = $con->query($editar);
 
@@ -98,8 +87,8 @@ if (!isset($_SESSION['idusuario'])) {
 
             $con->close();
             $con = null;
-        }
 
+        }
     }
 
 ?>
@@ -109,7 +98,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Registrar Cita a consulta externa</h5>
+                        <h5>Registrar nuevo paciente a cita de consulta externa</h5>
                     </div>
 
                     <div class="card-body">
@@ -118,27 +107,16 @@ if (!isset($_SESSION['idusuario'])) {
                             <div class="row">
 
                                 <!-- DATOS DEL PACIENTE -->
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                    <label>Expediente:</label>
-                                    <input type="hidden" name="idcita" value="<?php echo $idcita; ?>">
-                                    <input type="text" class="form-control" style="font-weight: bold;" value="<?php echo $cita['idexpediente']; ?>" readonly name="idexpediente" id="idexpediente">
-                                </div>
-
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                    <label>Nombre Paciente:</label>
-                                    <input type="text" class="form-control" style="font-weight: bold;" value="<?php echo $cita['nombrep']; ?>" readonly>
-                                </div>
-
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                    <label>CURP:</label>
-                                    <input type="text" class="form-control" style="font-weight: bold;" value="<?php echo $cita['curp']; ?>" readonly>
+                                <div class="form-group col-lg-5 col-md-5 col-sm-5">
+                                    <label>Nombre del paciente:</label>
+                                    <input type="text" class="form-control" value="<?php echo $cita['nombrenvo']; ?>" name="nombrenvo" id="nombrenvo" maxlength="150" required>
                                 </div>
 
                                 <!-- 12 -->
                                 <!-- ====== SELECT MEDICOS ====== -->
                                 <div class="form-group col-lg-7 col-md-7 col-sm-7">
                                     <label>Nombre del Médico (*):</label>
-                                    <select class="select2 form-control" name="idmedico" id="idmedico" required>
+                                    <select class="select2 form-control" name="idmedico" id="idmedico" onchange="diasConsultaMed()" required>
                                         <option value="<?php echo $cita['idmedico']; ?>" selected><?php echo $cita['nombremedico']; ?></option>
 
                                         <?php
@@ -182,21 +160,15 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                     <label>Fecha cita (*):</label><span id="diasCita" style="color: red;"></span>
-                                    <input type="text" class="form-control" name="fechacita" id="fechacita" value="<?php echo $cita['fechacita']; ?>" required>
-                                    <span id="citados" style="color: red;"></span>
+                                    <input type="text" class="form-control" value="<?php echo $cita['fechacita']; ?>" name="fechacita" id="fechacita" required>
+                                    <span id="resultadoConteo" style="color: red;"></span>
                                 </div>
 
                                 <!-- 12 -->
 
-                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                    <label>Evento (*):</label><br>
-                                    <input type="radio" name="evento" value="PRIMERA VEZ" <?php if($cita['evento'] == "PRIMERA VEZ") echo "checked"; ?>> PRIMERA VEZ<br>
-                                    <input type="radio" name="evento" value="SUBSECUENTE" <?php if($cita['evento'] == "SUBSECUENTE") echo "checked"; ?>> SUBSECUENTE<br>
-                                </div>
-
                                 <div class="form-group col-lg-9 col-md-9 col-sm-9">
                                     <label>Observaciones:</label>
-                                    <input type="text" class="form-control" name="observaciones" id="observaciones" value="<?php echo $cita['observaciones']; ?>" maxlength="250" placeholder="Observaciones" onblur="may(this.value, this.id)">
+                                    <input type="text" class="form-control" value="<?php echo $cita['observaciones']; ?>" name="observaciones" id="observaciones" maxlength="250" placeholder="Observaciones" onblur="may(this.value, this.id)">
                                 </div>
 
                                 <!-- FIN -->
@@ -275,19 +247,33 @@ if (!isset($_SESSION['idusuario'])) {
 
         });
 
+        function diasConsultaMed() {
+
+            //console.log(diasLaborables);
+
+            $.ajax({
+                url: "buscarDiasMedico.php",
+                type: "post",
+                data: $("#formCitaCE").serialize(),
+                success: function(resultado) {
+                    $("#diasCita").html(resultado);
+                }
+            });
+        };
+
         function validarFormulario() {
 
-            let idexpediente = document.getElementById('idexpediente').value;
+            let nombrenvo = document.getElementById('nombrenvo').value;
             let idmedico = document.getElementById('idmedico').value;
             let fechacita = document.getElementById('fechacita').value;
             //let evento = document.getElementById('evento').value;
-
+            
             let errorMensaje = "";
 
-            if (idexpediente == "") {
-                errorMensaje += "Por favor, ingresa el número de expediente.\n";
+            if (nombrenvo == "") {
+                errorMensaje += "Por favor, ingresa el nombre del paciente.\n";
             }
-
+            
             if (idmedico == "") {
                 errorMensaje += "Por favor, ingresa el medico.\n";
             }
@@ -295,10 +281,6 @@ if (!isset($_SESSION['idusuario'])) {
             if (fechacita == "") {
                 errorMensaje += "Por favor, ingresa la fecha de la cita.\n";
             }
-
-            /* if (evento == "") {
-                errorMensaje += "Por favor, ingresa primera vez o subsecuente.\n";
-            } */
 
             if (errorMensaje !== "") {
                 alert(errorMensaje);

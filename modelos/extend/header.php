@@ -223,8 +223,8 @@ if (!isset($_SESSION['idusuario'])) {
                         <a class="nav-link" href="../archivo/index.php">Expedientes</a>
                     </li>
 
-
-                    <!-- <li class="nav-item">
+                    <!-- Menu Consulta Externa -->
+                    <li class="nav-item">
                         <a class="nav-link" href="../citasCE/index.php">Citas C.E.</a>
                     </li>
                     <li class="nav-item">
@@ -232,7 +232,8 @@ if (!isset($_SESSION['idusuario'])) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../servicios/index.php">Servicios</a>
-                    </li> -->
+                    </li>
+                    <!-- FIN Menu Consulta Externa -->
 
 
                     <li class="nav-item">

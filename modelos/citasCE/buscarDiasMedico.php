@@ -8,4 +8,4 @@ $citaSql = "SELECT idmedico, diasconsulta, numpacientes FROM medicos WHERE idmed
 $resultado = $con->query($citaSql);
 $fila = $resultado->fetch_assoc();
 
-echo " Consulta los dias: ". $fila["diasconsulta"] . " - atiende " . $fila["numpacientes"] . " pacientes";
+echo " Consulta los dias: ". $fila["diasconsulta"] . " - atiende " . $fila["numpacientes"] . " pacientes x día";

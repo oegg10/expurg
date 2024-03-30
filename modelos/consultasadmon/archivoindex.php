@@ -81,6 +81,7 @@ if (!isset($_SESSION['idusuario'])) {
                                         <th>Tipo pac.</th>
                                         <th>Estado</th>
                                         <th>Observaciones</th>
+                                        <th>Historial</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -105,6 +106,12 @@ if (!isset($_SESSION['idusuario'])) {
 
                                         echo "<td>" . $reg['observaciones'] . "</td>
 
+                                            <td class='btn-group'>
+
+                                                <a href='../archivo/repPacienteCe.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-secundary' title='Historial del paciente'><i class='fa fa-address-book-o'></i></a>
+
+                                            </td>
+
                                             </tr>";
                                     }
                                     ?>
@@ -117,6 +124,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Tipo pac.</th>
                                     <th>Estado</th>
                                     <th>Observaciones</th>
+                                    <th>Historial</th>
                                 </tfoot>
                             </table>
                         </div>

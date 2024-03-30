@@ -23,31 +23,79 @@ if (!isset($_SESSION['idusuario'])) {
         $curp = mysqli_real_escape_string($con, $_POST['curp']);
         $cedula = mysqli_real_escape_string($con, $_POST['cedula']);
         $idservicio = mysqli_real_escape_string($con, $_POST['idservicio']);
-        $diasconsulta = implode(", ", $_POST['diasconsulta']);
+        $diasconsulta = implode(",", $_POST['diasconsulta']);
         $numpacientes = mysqli_real_escape_string($con, $_POST['numpacientes']);
 
         //===================================================================================
+        //VALIDACIONES ==========
 
-        //Realizamos la inserción de los datos en la tabla de medicos
-        $insSql = "INSERT INTO medicos(nombremedico, curp, cedula, diasconsulta, numpacientes, condicion) VALUES ('$nombremedico','$curp','$cedula', '$idservicio', '$diasconsulta', '$numpacientes', '1')";
+        $errores = [];
 
-        $resultado = $con->query($insSql);
-
-        //===================================================================================
-        //MENSAJES DESBLOQUEAR AQUI==========================================================
-
-        if ($resultado > 0) {
-
-            header('location:../extend/alerta.php?msj=EL Medico a sido registrado&c=medicos&p=in&t=success');
-            $con->close();
-            $con = null;
-        } else {
-
-            header('location:../extend/alerta.php?msj=Error al registrar al Medico&c=medicos&p=in&t=error');
+         // Validar nombre medico
+        if (empty($nombremedico)) {
+            $errores[] = 'Por favor, introduce el nombre del médico.';
         }
 
-        $con->close();
-        $con = null;
+         // Validar curp medico
+         if (empty($curp)) {
+            $errores[] = 'Por favor, introduce la curp del médico.';
+        }
+
+         // Validar cedula medico
+         if (empty($cedula)) {
+            $errores[] = 'Por favor, introduce la cédula del médico.';
+        }
+
+        // Validar servicio
+        if (empty($idservicio)) {
+            $errores[] = 'Por favor, introduce el servicio.';
+        }
+
+        // Validar dias consulta
+        if (empty($diasconsulta)) {
+            $errores[] = 'Por favor, introduce los días de consulta.';
+        }
+
+        // Validar número de pacientes
+        if (empty($numpacientes)) {
+            $errores[] = 'Por favor, introduce el número de pacientes.';
+        }
+
+        /*============= FIN DE VALIDACIONES ========================================*/
+
+        // Mostrar errores si los hay
+        if (!empty($errores)) {
+            echo '<h2 style="color: red;">Errores:</h2>';
+            echo '<ul>';
+            foreach ($errores as $error) {
+                echo '<li style="color: red;">' . $error . '</li>';
+            }
+            echo '</ul>';
+
+        } else {
+
+            //Realizamos la inserción de los datos en la tabla de medicos
+            $insSql = "INSERT INTO medicos(nombremedico, curp, cedula, diasconsulta, numpacientes, condicion) VALUES ('$nombremedico','$curp','$cedula', '$idservicio', '$diasconsulta', '$numpacientes', '1')";
+
+            $resultado = $con->query($insSql);
+
+            //===================================================================================
+            //MENSAJES DESBLOQUEAR AQUI==========================================================
+
+            if ($resultado > 0) {
+
+                header('location:../extend/alerta.php?msj=EL Medico a sido registrado&c=medicos&p=in&t=success');
+                $con->close();
+                $con = null;
+            } else {
+
+                header('location:../extend/alerta.php?msj=Error al registrar al Medico&c=medicos&p=in&t=error');
+            }
+
+            $con->close();
+            $con = null;
+
+        }
 
     }
 
@@ -105,13 +153,14 @@ if (!isset($_SESSION['idusuario'])) {
 
                                 <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                     <label for="diasconsulta">Días de consulta (*)</label><br>
-                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="Lunes"> Lunes
-                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="Martes"> Martes
-                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="Miercoles"> Miercoles
-                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="Jueves"> Jueves
-                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="Viernes"> Viernes
-                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="Sábado"> Sábado
-                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="Domingo"> Domingo
+                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="LUN"> Lunes
+                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="MAR"> Martes
+                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="MIE"> Miercoles
+                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="JUE"> Jueves
+                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="VIE"> Viernes
+                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="SAB"> Sábado
+                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="DOM"> Domingo
+                                    <input type="checkbox" name="diasconsulta[]" id="diasconsulta" value="DFE"> Días festivos
                                 </div>
 
                                 <div class="form-group col-lg-2 col-md-2 col-sm-2">
@@ -122,7 +171,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- FIN -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" id="btnGuardar"><i class="fa fa-save"> Guardar</i></button>
+                                    <button class="btn btn-primary" type="submit" onclick="validarFormulario()" id="btnGuardar"><i class="fa fa-save"> Guardar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
@@ -171,38 +220,36 @@ if (!isset($_SESSION['idusuario'])) {
         idservicio.addEventListener("blur", validarCamposVacios);
         numpacientes.addEventListener("blur", validarCamposVacios);
 
-        function enviarFormulario() {
+        function validarFormulario() {
 
-            let mensajesError = [];
+            let errorMensaje = "";
 
-            if (nombremedico.value == null || nombremedico.value == "") {
-                mensajesError.push("El nombre del médico no debe estar vacío");
+            if (nombremedico.value == "") {
+                errorMensaje += "Por favor, ingresa el nombre del medico.\n";
             }
 
-            if (curp.value == null || curp.value == "") {
-                mensajesError.push("La curp no debe estar vacía");
+            if (curp.value == "") {
+                errorMensaje += "Por favor, ingresa la curp del medico.\n";
             }
 
-            if (cedula.value == null || cedula.value == "") {
-                mensajesError.push("La cédula del médico no debe estar vacía");
+            if (cedula.value == "") {
+                errorMensaje += "Por favor, ingresa la cédula del medico.\n";
             }
 
-            if (idservicio.value == null || idservicio.value == "") {
-                mensajesError.push("El servicio no debe estar vacío");
+            if (idservicio.value == "") {
+                errorMensaje += "Por favor, ingresa el servicio.\n";
             }
 
-            if (numpacientes.value == null || numpacientes.value == "") {
-                mensajesError.push("El número de pacientes no debe estar vacío");
+            if (numpacientes.value == "" || numpacientes.value > 20) {
+                errorMensaje += "Por favor, ingresa correctamente el número de pacientes.\n";
             }
 
-            if (numpacientes.value > 20) {
-                mensajesError.push("El número de pacientes no debe exceder el limite de 20");
+            if (errorMensaje !== "") {
+                alert(errorMensaje);
+                return false;
+            } else {
+                return true;
             }
-
-            error.innerHTML = mensajesError.join(", ");
-
-            return false;
-
         }
 
     </script>

@@ -19,10 +19,10 @@ if (!isset($_SESSION['idusuario'])) {
 
     if ($bloqueado > 0) {
 
-        header('location:../extend/alerta.php?msj=EL Médico a sido desbloqueado&c=medicos&p=in&t=success');
+        header('location:../extend/alerta.php?msj=EL Medico a sido desbloqueado&c=medicos&p=in&t=success');
     } else {
 
-        header('location:../extend/alerta.php?msj=EL Médico NO ha podido ser desbloqueado&c=medicos&p=in&t=error');
+        header('location:../extend/alerta.php?msj=EL Medico NO ha podido ser desbloqueado&c=medicos&p=in&t=error');
     }
 
     $bloqueado->close();

@@ -14,11 +14,7 @@ if (!isset($_SESSION['idusuario'])) {
 
     if (!empty($_POST)) {
 
-        //https://www.php.net/manual/es/function.preg-replace.php
-        //$nombreservicio = preg_replace('/\s\s+/', ' ', mysqli_real_escape_string($con, $_POST['nombreservicio']));
         $nombreservicio = isset($_POST["nombreservicio"]) ? mysqli_real_escape_string($con, $_POST['nombreservicio']) : "";
-
-        //echo $nombreservicio;
 
         /* VALIDACION DE DATOS */
         $validacion = array();
@@ -89,7 +85,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- FIN -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" id="btnGuardar"><i class="fa fa-save"> Guardar</i></button>
+                                    <button class="btn btn-primary" type="submit" id="btnGuardar" onclick="validarFormulario()"><i class="fa fa-save"> Guardar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
@@ -111,39 +107,21 @@ if (!isset($_SESSION['idusuario'])) {
 
         let nombreservicio = document.getElementById("nombreservicio");
 
-        //VALIDACION CAMPOS VACIOS
-        const validarCamposVacios = (e) => {
+        function validarFormulario() {
 
-            let campo = e.target;
-            let valorcampo = e.target.value;
+            let errorMensaje = "";
 
-            if (valorcampo.trim().length == 0) {
-                campo.classList.add("invalido");
-                campo.nextElementSibling.classList.add("errorSpan");
-                campo.nextElementSibling.innerText = "Este campo es requerido";
+            if (nombreservicio.value == "") {
+                errorMensaje += "Por favor, ingresa el nombre del servicio.\n";
+            }
+
+            if (errorMensaje !== "") {
+                alert(errorMensaje);
+                return false;
             } else {
-                campo.classList.add("valido");
-                campo.nextElementSibling.classList.remove("errorSpan");
-                campo.nextElementSibling.innerText = "";
+                return true;
             }
-
         }
-
-        nombreservicio.addEventListener("blur", validarCamposVacios);
-
-        function enviarFormulario() {
-
-            let mensajesError = [];
-
-            if (nombreservicio.value == null || nombreservicio.value == "") {
-                mensajesError.push("El nombre del servicio no debe estar vacío");
-            }
-
-            error.innerHTML = mensajesError.join(", ");
-
-            return false;
-
-            }
 
     </script>
 

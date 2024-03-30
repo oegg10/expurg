@@ -20,41 +20,83 @@ if (!isset($_SESSION['idusuario'])) {
     $fila = $resultado->fetch_assoc();
 
     //Consulta de medicos
-    $medicoSql = "SELECT m.idmedico, m.nombremedico, m.idservicio, m.condicion, s.nombreservicio FROM medicos m INNER JOIN servicios s ON m.idservicio = s.idservicio WHERE m.condicion = 1 ORDER BY m.nombremedico";
+    $medicoSql = "SELECT m.idmedico, m.nombremedico, m.idservicio, m.diasconsulta, m.condicion, s.nombreservicio FROM medicos m INNER JOIN servicios s ON m.idservicio = s.idservicio WHERE m.condicion = 1 ORDER BY m.nombremedico";
     $resultMedico = $con->query($medicoSql);
 
     if (!empty($_POST)) {
 
         //https://www.php.net/manual/es/function.preg-replace.php
-        //$idexpediente = preg_replace('/\s\s+/', ' ', mysqli_real_escape_string($con, $_POST['idexpediente']));
         $idexpediente = mysqli_real_escape_string($con, $_POST['idexpediente']);
         $idmedico = mysqli_real_escape_string($con, $_POST['idmedico']);
         $fechacita = mysqli_real_escape_string($con, $_POST['fechacita']);
-        $consultorio = mysqli_real_escape_string($con, $_POST['consultorio']);
+        //$evento = $_POST['evento'];
+        if (isset($_POST["evento"])) {
+            $evento = $_POST["evento"];
+        }else{
+            $evento = "";
+        }
         $observaciones = mysqli_real_escape_string($con, $_POST['observaciones']);
 
         $idusuario = $_SESSION['idusuario'];
 
         //===================================================================================
 
-        //Realizamos la inserción de los datos en la tabla de medicos
-        $insSql = "INSERT INTO citas_ce(idexpediente, idmedico, fechacita, consultorio, observaciones, idusuario) VALUES ('$idexpediente','$idmedico', '$fechacita', '$consultorio','$observaciones', '$idusuario')";
+        //VALIDACIONES ==========
 
-        $insertarCitaCE = $con->query($insSql);
+        $errores = [];
 
-        if ($insertarCitaCE > 0) {
-
-            header('location:../extend/alerta.php?msj=La cita a sido registrada&c=citasCE&p=in&t=success');
-            $con->close();
-            $con = null;
-        } else {
-
-            header('location:../extend/alerta.php?msj=Error al registrar la cita&c=citasCE&p=in&t=error');
+         // Validar expediente
+        if (empty($idexpediente)) {
+            $errores[] = 'Por favor, ingresa el número de expediente del paciente.';
         }
 
-        $con->close();
-        $con = null;
+         // Validar medico
+         if (empty($idmedico)) {
+            $errores[] = 'Por favor, ingresa el medico.';
+        }
 
+         // Validar fecha cita
+         if (empty($fechacita)) {
+            $errores[] = 'Por favor, ingresa la fecha de la cita.';
+        }
+
+        // Validar evento
+        if (empty($evento)) {
+            $errores[] = 'Por favor, ingresa primera vez o subsecuente.';
+        }
+
+/*============= FIN DE VALIDACIONES ========================================*/
+
+        // Mostrar errores si los hay
+        if (!empty($errores)) {
+            echo '<h2 style="color: red;">Errores:</h2>';
+            echo '<ul>';
+            foreach ($errores as $error) {
+                echo '<li style="color: red;">' . $error . '</li>';
+            }
+            echo '</ul>';
+
+        } else {
+
+            //Realizamos la inserción de los datos en la tabla de citas
+            $insSql = "INSERT INTO citas_ce(idexpediente, idmedico, fechacita, evento, observaciones, idusuario) VALUES ('$idexpediente','$idmedico', '$fechacita', '$evento','$observaciones', '$idusuario')";
+
+            $insertarCitaCE = $con->query($insSql);
+
+            if ($insertarCitaCE > 0) {
+
+                header('location:../extend/alerta.php?msj=La cita a sido registrada&c=citasCE&p=in&t=success');
+                $con->close();
+                $con = null;
+            } else {
+
+                header('location:../extend/alerta.php?msj=Error al registrar la cita&c=citasCE&p=in&t=error');
+            }
+
+            $con->close();
+            $con = null;
+
+        }
     }
 
 ?>
@@ -92,49 +134,65 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- ====== SELECT MEDICOS ====== -->
                                 <div class="form-group col-lg-7 col-md-7 col-sm-7">
                                     <label>Nombre del Médico (*):</label>
-                                    <select class="form-control" name="idmedico" id="idmedico" onchange="diasConsultaMed()" required>
-                                    <option value="" disabled selected>Seleccione Opción</option> 
-                                        <?php
-                                            while ($medico = $resultMedico->fetch_array(MYSQLI_BOTH)) {
-                                                $idmedico = $medico['idmedico'];
-                                                $nombremedico = $medico['nombremedico'];
-                                                $nombreservicio = $medico['nombreservicio'];
-
-                                        ?>
-                                            <option value="<?php echo $idmedico; ?>"><?php echo $nombremedico . " => " . $nombreservicio; ?></option>
+                                    <select class="select2 form-control" name="idmedico" id="idmedico" onchange="diasConsultaMed()" required>
+                                        <option value="" disabled selected>Seleccione un médico...</option>
 
                                         <?php
+                                            
+                                            $medicos = array();
+
+                                            while ($fila = $resultMedico->fetch_assoc()) {
+                                                $medicos[] = $fila;
                                             }
+
+                                            /* $medicos = [
+                                                ['idmedico' => '1', 'nombremedico' => 'Dr. Juan Pérez', 'nombreservicio' => 'Pediatría', 'diasLaborables' => 'LUN,MAR,MIER'],
+                                                ['idmedico' => '2', 'nombremedico' => 'Dra. Ana Gómez', 'nombreservicio' => 'Cardiología', 'diasLaborables' => 'JUE,VIE']
+                                            ]; */
+
+                                            function convertirDiasANumeros($diasTexto){
+                                                $diasMapa = [
+                                                    'DOM' => 0,
+                                                    'LUN' => 1,
+                                                    'MAR' => 2,
+                                                    'MIE' => 3,
+                                                    'JUE' => 4,
+                                                    'VIE' => 5,
+                                                    'SAB' => 6,
+                                                ];
+
+                                                $diasNumeros = array_map(function ($dia) use ($diasMapa) {
+                                                    return $diasMapa[$dia] ?? null;
+                                                }, explode(',', $diasTexto));
+
+                                                return implode(',', array_filter($diasNumeros, function ($dia) {
+                                                    return $dia !== null;
+                                                }));
+                                            }
+
+                                            foreach ($medicos as $medico) {
+                                                // Conversión de los días laborables del texto a números
+                                                $diasLaborablesNumeros = convertirDiasANumeros($medico['diasconsulta']);
+                                                echo '<option value="' . $medico['idmedico'] . '" data-dias-laborables="' . $diasLaborablesNumeros . '">' . $medico['nombremedico'] . ' - ' . $medico['nombreservicio'] . '</option>';
+                                            }
+
                                         ?>
-                                        
+
                                     </select>
                                 </div>
 
-                                <!--<div class="form-group col-lg-5 col-md-5 col-sm-5">
-                                    <label>Fecha cita (*):</label><span id="diasCita" style="color: red;"></span>
-                                    <input type="text" class="form-control" name="fechacita" id="fechacita" min="2024-01-01">
-                                    <span id="citados" style="color: red;"></span>
-                                </div>-->
-
                                 <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                     <label>Fecha cita (*):</label><span id="diasCita" style="color: red;"></span>
-                                    <input type="date" class="form-control" name="fechacita" id="fechacita" min="2024-01-01">
-                                    <span id="citados" style="color: red;"></span>
+                                    <input type="text" class="form-control" name="fechacita" id="fechacita" required>
+                                    <span id="resultadoConteo" style="color: red;"></span>
                                 </div>
 
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                    <label>Consultorio (*):</label>
-                                    <select class="form-control" name="consultorio" id="consultorio" required>
-                                        <option value="" disabled selected>Seleccione Opción</option>
-                                        <option value="C01">C01</option>
-                                        <option value="C02">C02</option>
-                                        <option value="C03">C03</option>
-                                        <option value="C04">C04</option>
-                                        <option value="C05">C05</option>
-                                        <option value="C06">C06</option>
-                                    </select>
+                                    <label>Evento (*):</label><br>
+                                    <input type="radio" name="evento" value="PRIMERA VEZ"> PRIMERA VEZ<br>
+                                    <input type="radio" name="evento" value="SUBSECUENTE"> SUBSECUENTE<br>
                                 </div>
 
                                 <div class="form-group col-lg-9 col-md-9 col-sm-9">
@@ -145,7 +203,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- FIN -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" type="submit" onclick="enviarFormulario()" id="btnGuardar"><i class="fa fa-save"> Guardar</i></button>
+                                    <button class="btn btn-primary" type="submit" id="btnGuardar" onclick="return validarFormulario()"><i class="fa fa-save"> Guardar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
@@ -163,14 +221,65 @@ if (!isset($_SESSION['idusuario'])) {
     </div>
 
     <script>
-        //VARIABLES
-        let formulario = document.getElementById("formCitaCE");
-        let fechacita = document.getElementById("fechacita");
-        let idmedico = document.getElementById("idmedico");
-        let consultorio = document.getElementById("consultorio");
 
-        //FUNCIONES
+        $(document).ready(function() {
+            //SELECT2
+            $('#idmedico').select2({
+                allowclear: true,
+                language: {
+                    noResults: function(){
+                        return "No hay resultados";
+                    },
+                    searching: function(){
+                        return "Buscando...";
+                    }
+                }
+            });
+
+            // Inicialización del datepicker
+            $('#fechacita').datepicker({
+                dateFormat: 'yy-mm-dd', // Formato de día de la semana completo (lunes, martes, etc.)
+                minDate: 0, // Evita seleccionar fechas anteriores a hoy
+                beforeShowDay: function() {
+                    return [false];
+                }
+            });
+
+            $('#idmedico').change(function() {
+                var diasLaborables = $(this).find('option:selected').data('dias-laborables').toString().split(',').map(Number);
+                $('#fechacita').datepicker('option', 'beforeShowDay', function(date) {
+                    var day = date.getDay();
+                    return [diasLaborables.includes(day)];
+                });
+            });
+            // FIN DATEPICKER ====================
+
+            //FECHA CITA =====
+            $('#fechacita').on('change', function() {
+                let fechacita = $(this).val();
+                let idmedico = document.getElementById("idmedico").value;
+        
+                // Enviar solicitud AJAX al servidor
+                $.ajax({
+                    url: 'pacientesFechaReg.php', // Ruta al script PHP que realizará la búsqueda en la base de datos
+                    method: 'POST',
+                    data: { fechacita: fechacita, 
+                            idmedico: idmedico 
+                          }, // Enviar la fecha y el idMedico seleccionados al servidor
+                    success: function(response) {
+                        // Actualizar el contenido del elemento con el id "resultadoConteo" con la respuesta del servidor
+                        $('#resultadoConteo').html(response);
+                    }
+                });
+            });
+            //FIN FECHA CITA =====
+
+        });
+
         function diasConsultaMed() {
+
+            //console.log(diasLaborables);
+
             $.ajax({
                 url: "buscarDiasMedico.php",
                 type: "post",
@@ -181,133 +290,38 @@ if (!isset($_SESSION['idusuario'])) {
             });
         };
 
-        function pacientesRegistrados() {
-            $.ajax({
-                url: "pacisentesFechaReg.php",
-                type: "post",
-                data: $("#formCitaCE").serialize(),
-                success: function(resultado) {
-                    $("#citados").html(resultado);
-                }
-            });
-        };
+        function validarFormulario() {
 
-        fechacita.addEventListener("blur", pacientesRegistrados);
-        formulario.addEventListener("blur", rojoValidaFechas, true);
+            let idexpediente = document.getElementById('idexpediente').value;
+            let idmedico = document.getElementById('idmedico').value;
+            let fechacita = document.getElementById('fechacita').value;
+            //let evento = document.getElementById('evento').value;
+            
+            let errorMensaje = "";
 
-        //VALIDAR FECHA RECEPCION Y FECHA DE INICIO DE LA CONSULTA
-        function rojoValidaFechas() {
+            if (idexpediente == "") {
+                errorMensaje += "Por favor, ingresa el número de expediente.\n";
+            }
+            
+            if (idmedico == "") {
+                errorMensaje += "Por favor, ingresa el medico.\n";
+            }
 
-            //https://www.techiedelight.com/es/find-difference-between-two-dates-javascript/
-            // Two date strings
-            const fechaA = Date.now();
-            const fechaCita = new Date(fechacita.value);
+            if (fechacita == "") {
+                errorMensaje += "Por favor, ingresa la fecha de la cita.\n";
+            }
 
-            // Create two Date objects with the dates to compare
-            const x = new Date(fechaA);
-            const y = new Date(fechaCita);
+            /* if (evento == "") {
+                errorMensaje += "Por favor, ingresa primera vez o subsecuente.\n";
+            } */
 
-            // Get the difference in milliseconds
-            const diff = x - y;
-
-            // Convert the difference to days
-            const days = diff / (1000 * 60 * 60 * 24);
-
-            // Print the result
-            //console.log(days + " days");	// 10 days
-
-            if (days > 1) {
-
-                document.getElementById("fechacita").style.backgroundColor = "red";
-                document.getElementById("fechacita").focus();
-                document.getElementById("btnGuardar").disabled = true;
-                //console.log(fechaC);
-                //console.log(fechaA);
-
+            if (errorMensaje !== "") {
+                alert(errorMensaje);
+                return false;
             } else {
-
-                document.getElementById("fechacita").style.backgroundColor = "white";
-                document.getElementById("btnGuardar").disabled = false;
+                return true;
             }
-
         }
-
-        //VALIDACION CAMPOS VACIOS
-        const validarCamposVacios = (e) => {
-
-            let campo = e.target;
-            let valorcampo = e.target.value;
-
-            if (valorcampo.trim().length == 0) {
-                campo.classList.add("invalido");
-                campo.nextElementSibling.classList.add("errorSpan");
-                campo.nextElementSibling.innerText = "Este campo es requerido";
-            } else {
-                campo.classList.add("valido");
-                campo.nextElementSibling.classList.remove("errorSpan");
-                campo.nextElementSibling.innerText = "";
-            }
-
-        }
-
-        idmedico.addEventListener("blur", validarCamposVacios);
-        fechacita.addEventListener("blur", validarCamposVacios);
-        consultorio.addEventListener("blur", validarCamposVacios);
-
-        function enviarFormulario() {
-
-            let mensajesError = [];
-
-            if (idmedico.value == null || idmedico.value == "") {
-                mensajesError.push("El nombre del médico no debe estar vacío");
-            }
-
-            if (fechacita.value == null || fechacita.value == "") {
-                mensajesError.push("La fecha de la cita no debe estar vacía");
-            }
-
-            if (consultorio.value == null || consultorio.value == "") {
-                mensajesError.push("Consultorio no debe estar vacío");
-            }
-
-            error.innerHTML = mensajesError.join(", ");
-
-            return false;
-
-        }
-
-        //=========== BLOQUEO DE DIAS PASADOS A LA FECHA ACTUAL =======================
-        let fecha = new Date();
-        let anio = fecha.getFullYear();
-        let dia = fecha.getDate();
-        let _mes = fecha.getMonth(); //viene con valores de 0 al 11
-        _mes = _mes + 1; //ahora lo tienes de 1 al 12
-        let mes;
-        if (_mes < 10){ //ahora le agregas un 0 para el formato date
-            mes = "0" + _mes;
-            } else {
-            mes = _mes.toString;
-        }
-
-        let fecha_minimo = anio + '-' + mes + '-' + dia; // Nueva variable
-
-        document.getElementById("fechacita").setAttribute('min',fecha_minimo);
-
-
-        //https://www.forosdelweb.com/f127/desactivar-dias-concretos-con-datepicker-985765/
-        /* ============================  DATEPICKER =======================================
-        //funcion que bloquea todos lo dias expecto los que queremos habilitar para la seleccion
-        function noConsulta(date){
-        let day = date.getDay();
-        // aqui indicamos el numero correspondiente a los dias que ha de bloquearse (el 0 es Domingo, 1 Lunes, etc...) en el ejemplo bloqueo todos menos los lunes y jueves.
-        return [(day != 0 && day != 2 && day != 3 && day != 5 && day != 6), ''];
-        };
-
-        //Crear el datepicker
-        $("#fechacita").datepicker({
-        beforeShowDay: noConsulta,
-        });
-        ==================================================================================*/
 
     </script>
 

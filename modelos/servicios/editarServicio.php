@@ -82,7 +82,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- 12 -->
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button class="btn btn-primary" type="submit" name="editar"><i class="fa fa-pencil"> Editar</i></button>
+                                    <button class="btn btn-primary" type="submit" name="editar" onclick="validarFormulario()"><i class="fa fa-pencil"> Editar</i></button>
                                     <a href="index.php" type="button" class="btn btn-danger"><i class="fa fa-arrow-circle-left"> Cancelar</i></a>
                                 </div>
 
@@ -97,6 +97,28 @@ if (!isset($_SESSION['idusuario'])) {
     </div>
 
     <?php include "../extend/footer.php"; ?>
+
+    <script>
+
+        let nombreservicio = document.getElementById("nombreservicio");
+
+        function validarFormulario() {
+
+            let errorMensaje = "";
+
+            if (nombreservicio.value == "") {
+                errorMensaje += "Por favor, ingresa el nombre del servicio.\n";
+            }
+
+            if (errorMensaje !== "") {
+                alert(errorMensaje);
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+    </script>
 
     </body>
 

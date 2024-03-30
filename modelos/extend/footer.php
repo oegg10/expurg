@@ -8,6 +8,7 @@
 <!--DataTable-->
 <!--<script src="../../public/js/jquery-3.6.3.min.js"></script>-->
 <script src="../../public/js/jquery-ui.min.js"></script>
+<script src="../../public/js/jquery.ui.datepicker-es.js"></script>
 <script src="../../public/js/popper.min.js"></script>
 <script src="../../public/js/bootstrap.min.js"></script>
 <script src="../../public/js/jquery.dataTables.min.js"></script>
@@ -23,6 +24,7 @@
 <script src="../../public/js/bootstrap.bundle.min.js"></script>
 <script src="../../public/js/bootbox.min.js"></script>
 <script src="../../public/js/Chart.min.js"></script>
+<script src="../../public/js/select2.min.js"></script>
 
 <!--script para mayusculas-->
 <script>

@@ -45,14 +45,15 @@ if (!isset($_SESSION['idusuario'])) {
                                     <?php
                                     while ($reg = $resultado->fetch_array(MYSQLI_BOTH)) {
                                         echo "<tr>
-                            <td>" . $reg['nombreservicio'] . "</td>";
+                                        <td>" . $reg['nombreservicio'] . "</td>";
                                         if ($reg['condicion']) {
                                             echo "<td><span class='text-success'>Activo</span></td>";
                                         } else {
                                             echo "<td><span class='text-danger'>Bloqueado</span></td>";
                                         }
 
-                                        echo "<td><a href='editarServicio.php?id=" . $reg['idservicio'] . "' type='button' class='btn btn-warning'><i class='fa fa-pencil'></i></a></td>";
+                                        echo "<td>
+                                            <a href='editarServicio.php?id=" . $reg['idservicio'] . "' type='button' class='btn btn-warning'><i class='fa fa-pencil'></i></a></td>";
                                         if ($reg['condicion']) {
                                             echo "<td><a href='bloqServicio.php?id=" . $reg['idservicio'] . "' type='button' class='btn btn-danger'><i class='fa fa-times'></i></a></td>";
                                         } else {

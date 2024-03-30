@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../../public/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="../../public/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="../../public/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="../../public/css/select2.min.css">
 <link rel="stylesheet" href="../../public/css/estilos.css">
 
 
