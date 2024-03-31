@@ -227,18 +227,22 @@ if (!isset($_SESSION['idusuario'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="../citasCE/index.php">Citas C.E.</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../medicos/index.php">Medicos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../servicios/index.php">Servicios</a>
-                    </li>
                     <!-- FIN Menu Consulta Externa -->
-
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.curp-gratis.com.mx/consulta-curp" target="_blank">CURP</a>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Otros
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="../medicos/index.php">Medicos</a>
+                            <a class="dropdown-item" href="../servicios/index.php">Servicios</a>
+                        </div>
+                    </li>
+                    
                 </ul>
             </div>
             <!-- FIN MENU ARCHIVO -->

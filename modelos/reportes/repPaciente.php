@@ -17,7 +17,7 @@ if (!isset($_SESSION['idusuario'])) {
     $id = $_GET['id'];
 
     /*===== CONSULTAS EN URGENCIAS =====*/
-    $consulta = "SELECT p.idpaciente,p.nombre,p.sexo,r.idrecepcion,r.fechahorarecep,r.edad,r.mtvoconsulta,r.embarazo,r.semgesta,r.referencia,r.observaciones,r.sala,r.condicion FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE p.idpaciente = '$id' ORDER BY r.fechahorarecep DESC";
+    $consulta = "SELECT p.idpaciente,p.nombre,p.sexo,r.idrecepcion,r.fechahorarecep,r.edad,r.mtvoconsulta,r.embarazo,r.semgesta,r.referencia, r.tipoconsulta, r.observaciones,r.sala,r.condicion FROM pacientes p INNER JOIN recepciones r ON p.idpaciente = r.idpaciente WHERE p.idpaciente = '$id' ORDER BY r.fechahorarecep DESC";
     $resultado = $con->query($consulta);
 
     /*===== CONSULTA PARA DESAPARECIDOS =====*/
@@ -47,6 +47,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Referencia</th>
                                     <th>Sala</th>
                                     <th>Observaciones</th>
+                                    <th>Evento</th>
                                     <th>Estado</th>
                                 </thead>
                                 <tbody>
@@ -80,6 +81,13 @@ if (!isset($_SESSION['idusuario'])) {
                                         <td>" . $reg['sala'] . "</td>
                                         <td>" . $reg['observaciones'] . "</td>";
 
+                                        if ($reg['tipoconsulta'] == "PRIMERA VEZ") {
+                                            echo "<td><span class='badge badge-primary text-white'>PRIMERA VEZ</span></td>";
+                                        }else{
+                                            echo "<td><span class='badge badge-success text-white'>SUBSECUENTE</span></td>";
+                                        }
+
+
                                         if ($reg['condicion'] == 1) {
                                             echo "<td><span class='badge badge-primary text-white'>En sala</span></td>";
                                         }elseif($reg['condicion'] == 2){
@@ -100,6 +108,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Referencia</th>
                                     <th>Sala</th>
                                     <th>Observaciones</th>
+                                    <th>Evento</th>
                                     <th>Estado</th>
                                 </tfoot>
                             </table>

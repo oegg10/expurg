@@ -32,7 +32,7 @@ if (!isset($_SESSION['idusuario'])) {
 
         $errores = [];
 
-         // Validar expediente
+         // Validar nombre
         if (empty($nombrenvo)) {
             $errores[] = 'Por favor, ingresa el nombre del paciente.';
         }
@@ -99,7 +99,7 @@ if (!isset($_SESSION['idusuario'])) {
                                 <!-- DATOS DEL PACIENTE -->
                                 <div class="form-group col-lg-5 col-md-5 col-sm-5">
                                     <label>Nombre del paciente:</label>
-                                    <input type="text" class="form-control" style="font-weight: bold;" name="nombrenvo" id="nombrenvo" maxlength="150" required>
+                                    <input type="text" class="form-control" style="font-weight: bold;" name="nombrenvo" id="nombrenvo" maxlength="150" onblur="may(this.value, this.id)" required>
                                 </div>
 
                                 <!-- 12 -->

@@ -31,7 +31,7 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="col-sm-12">
                 <div class="card text-left">
                     <div class="card-header">
-                        <h5>Historial Paciente: </h5>
+                        <h5>Historial Paciente No. expediente: <?php echo $id; ?></h5>
                     </div>
                     <div class="card-body">
                         <h3>Consulta Externa</h3>
@@ -44,6 +44,7 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Médico que atendio</th>
                                     <th>Servicio</th>
                                     <th>Observaciones</th>
+                                    <th>Evento</th>
                                     <th>Condición</th>
                                 </thead>
                                 <tbody>
@@ -56,7 +57,8 @@ if (!isset($_SESSION['idusuario'])) {
                                         <td>" . $reg['idexpediente'] . "</td>
                                         <td>" . $reg['nombremedico'] . "</td>
                                         <td>" . $reg['nombreservicio'] . "</td>
-                                        <td>" . $reg['observaciones'] . "</td>";
+                                        <td>" . $reg['observaciones'] . "</td>
+                                        <td>" . $reg['evento'] . "</td>";
 
                                         if ($reg['condicion'] = 1) {
                                             echo "<td style='color: green;'>Consultado</td>";
@@ -76,6 +78,8 @@ if (!isset($_SESSION['idusuario'])) {
                                     <th>Médico que atendio</th>
                                     <th>Servicio</th>
                                     <th>Observaciones</th>
+                                    <th>Evento</th>
+                                    <th>Condición</th>
                                 </tfoot>
                             </table>
                         </div>

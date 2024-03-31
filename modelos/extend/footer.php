@@ -2,7 +2,7 @@
     <h5 style="text-align: center;">Secretaría de Salud de Coahuila, Hospital General de Saltillo.</h5>
 </strong>
 <h6 style="text-align: center;">
-    Desarrollo: oegg - Todos los derechos reservados &copy; 2019-2024 - ver: 3.2.2
+    Desarrollo: oegg - Todos los derechos reservados &copy; 2019-2024 - ver: 3.5.0
 </h6>
 
 <!--DataTable-->

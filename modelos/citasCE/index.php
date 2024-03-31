@@ -18,7 +18,7 @@ if (!isset($_SESSION['idusuario'])) {
     $resultado = $con->query($citas_ce );
 
     //Consulta tabla citascenvo
-    $citascenvo  = "SELECT pn.idpxnvo, pn.nombrenvo, m.idmedico, m.nombremedico, s.nombreservicio, pn.fechacita, pn.observaciones, pn.fechacaptura, pn.condicion, u.idusuario, u.nombre AS usuario FROM citascenvo pn INNER JOIN medicos m ON pn.idmedico = m.idmedico INNER JOIN servicios s ON m.idservicio = s.idservicio INNER JOIN usuarios u ON pn.idusuario = u.idusuario";
+    $citascenvo  = "SELECT pn.idpxnvo, pn.nombrenvo, m.idmedico, m.nombremedico, s.nombreservicio, pn.fechacita, pn.observaciones, pn.fechacaptura, pn.condicion, u.idusuario, u.nombre AS usuario FROM citascenvo pn INNER JOIN medicos m ON pn.idmedico = m.idmedico INNER JOIN servicios s ON m.idservicio = s.idservicio INNER JOIN usuarios u ON pn.idusuario = u.idusuario WHERE pn.condicion = 1";
 
     $result = $con->query($citascenvo );
 

@@ -49,10 +49,8 @@ if (!isset($_SESSION['idusuario'])) {
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-4">
-                            </div>
-
-                            <div class="col-sm-4">
+                            <div class="col-sm-8">
+                                <h5 style="color: red;">El historial del paciante en consulta externa empezó en abril de 2024, antes de esa fecha no hay registros</h5>
                             </div>
 
                             <div class="col-sm-4">

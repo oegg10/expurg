@@ -121,13 +121,23 @@ if (!isset($_SESSION['idusuario'])) {
                                                 <td>" . $reg['usuario'] . "</td>
                                                 <td>" . $reg['fechaalta'] . "</td>
                                                 
-                                                <td class='btn-group'>
-                                                    <a href='../archivo/editExpediente.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-warning' title='Editar paciente'><i class='fa fa-pencil'></i></a>
+                                                <td class='btn-group'>";
+                                            //Si el estado es ACTIVO se muestran los 3 botones
+                                                if ($reg['estado'] == 'ACTIVO') {
+                                                    echo "<a href='../archivo/editExpediente.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-warning' title='Editar paciente'><i class='fa fa-pencil'></i></a>
 
                                                     <a href='repPacienteCe.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-secundary' title='Historial del paciente'><i class='fa fa-address-book-o'></i></a>
 
-                                                    <a href='../citasCE/insCitaCE.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-success' title='Crear cita CE'><i class='fa fa-check'></i></a>
-                                                </td>
+                                                    <a href='../citasCE/insCitaCE.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-success' title='Crear cita CE'><i class='fa fa-check'></i></a>";
+                                                }else{
+                                            //En caso de que no este ACTIVO o sea DEFUNCION no se mestra el botón de agregar cita de CE
+                                                    echo "<a href='../archivo/editExpediente.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-warning' title='Editar paciente'><i class='fa fa-pencil'></i></a>
+
+                                                    <a href='repPacienteCe.php?id=" . $reg['idexpediente'] . "' type='button' class='btn btn-secundary' title='Historial del paciente'><i class='fa fa-address-book-o'></i></a>";
+
+                                                }
+                                                    
+                                                echo "</td>
                                             </tr>";
                                     }
                                     ?>

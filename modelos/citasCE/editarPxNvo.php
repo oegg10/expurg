@@ -39,7 +39,7 @@ if (!isset($_SESSION['idusuario'])) {
 
         $errores = [];
 
-         // Validar expediente
+         // Validar nombre
         if (empty($nombrenvo)) {
             $errores[] = 'Por favor, ingresa el nombre del paciente.';
         }
@@ -71,7 +71,7 @@ if (!isset($_SESSION['idusuario'])) {
             $editar = "UPDATE citascenvo SET nombrenvo='$nombrenvo',
                             idmedico='$idmedico',
                             fechacita='$fechacita',
-                            observaciones='$observaciones' WHERE idcita = '$idcita'";
+                            observaciones='$observaciones' WHERE idpxnvo = '$idcita'";
 
             $editado = $con->query($editar);
 
