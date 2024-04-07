@@ -39,6 +39,12 @@ if (!isset($_SESSION['idusuario'])) {
                                     Regresar <span class="fa fa-plus-circle"></span>
                                 </a>
                             </div>
+
+                            <div class="col-sm-4">
+                                <a href="../citasCE/citaPacNuevo.php" class="btn btn-danger">
+                                    Registrar Paciente sin expediente <span class="fa fa-plus-circle"></span>
+                                </a>
+                            </div>
                         </div>
 
 

@@ -79,7 +79,7 @@ if (!empty($_POST)) {
                     <button class="btn btn-lg btn-primary btn-block" type="submit" name="ingresar" value="Ingresar">Ingresar</button>
                 </div>
             </form>
-            <p class="mt-5 mb-3 text-muted">&copy; ver: 3.5.0 - Estadística H.G.S. 2019 - 2024</p>
+            <p class="mt-5 mb-3 text-muted">&copy; ver: 4.0.0 - Estadística H.G.S. 2019 - 2024</p>
 
         </div>
     </center>

@@ -229,6 +229,12 @@ if (!isset($_SESSION['idusuario'])) {
                     </li>
                     <!-- FIN Menu Consulta Externa -->
 
+                    <!-- Citas por fecha -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="../citasCE/citasXFecha.php">Citas fecha</a>
+                    </li>
+                    <!-- FIN Citas por fecha -->
+
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.curp-gratis.com.mx/consulta-curp" target="_blank">CURP</a>
                     </li>

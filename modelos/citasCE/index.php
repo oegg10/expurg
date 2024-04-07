@@ -13,7 +13,7 @@ if (!isset($_SESSION['idusuario'])) {
     }
 
     //Consulta tabla citas_ce
-    $citas_ce  = "SELECT ce.idcita, e.idexpediente, e.nombrep, e.curp, m.idmedico, m.nombremedico, s.nombreservicio, ce.fechacita, ce.evento, ce.observaciones, ce.fechacaptura, u.idusuario, u.nombre AS usuario FROM citas_ce ce INNER JOIN exparchivo e ON ce.idexpediente = e.idexpediente INNER JOIN medicos m ON ce.idmedico = m.idmedico INNER JOIN servicios s ON m.idservicio = s.idservicio INNER JOIN usuarios u ON ce.idusuario = u.idusuario";
+    $citas_ce  = "SELECT ce.idcita, e.idexpediente, e.nombrep, e.curp, m.idmedico, m.nombremedico, s.nombreservicio, ce.fechacita, ce.evento, ce.observaciones, ce.fechacaptura, u.idusuario, u.nombre AS usuario FROM citas_ce ce INNER JOIN exparchivo e ON ce.idexpediente = e.idexpediente INNER JOIN medicos m ON ce.idmedico = m.idmedico INNER JOIN servicios s ON m.idservicio = s.idservicio INNER JOIN usuarios u ON ce.idusuario = u.idusuario WHERE ce.fechacita = CURDATE()";
 
     $resultado = $con->query($citas_ce );
 
